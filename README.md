@@ -1,1 +1,3 @@
-# Programming-exercises-algorithms
+# Algorithms:
+
+- Insertion Sort
