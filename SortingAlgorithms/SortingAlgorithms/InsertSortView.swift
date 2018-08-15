@@ -12,9 +12,8 @@ class InsertSortView: NSView {
     
     // MARK: - Properties
     
-    var sortingArray: [Int] = []
-    
-    let nodeWidth = 20
+    private var sortingArray: [Int] = []
+    private var graphView: GraphView!
     
     // MARK: - Lifecycle functions
     
@@ -23,32 +22,13 @@ class InsertSortView: NSView {
 
         self.sortingArray = sortingArray
         
-        setupSortingView()
-
+        graphView = GraphView(array: sortingArray)
+        self.addSubview(graphView)
+        graphView.constraints(edgesTo: self)
+        
         let sortButton = NSButton(title: "SORT", target: self, action: #selector(sortArrayAction(_:)))
         sortButton.frame.origin = CGPoint(x: 500, y: 30)
         addSubview(sortButton)
-    }
-    
-    // MARK: - Setup sorting view
-    
-    private func setupSortingView() {
-        for (index, number) in sortingArray.enumerated() {
-            
-            let rect = NSRect(x: Double(index * nodeWidth) * 1.2 + 30.0,
-                              y: 30.0,
-                              width: Double(nodeWidth),
-                              height: 10 * Double(number))
-            
-            let node = Node(frame: rect)
-            node.id = index
-            
-            node.wantsLayer = true
-            node.layer?.backgroundColor = NSColor.white.cgColor
-            node.layer?.borderColor = NSColor.blue.cgColor
-            
-            self.addSubview(node)
-        }
     }
     
     // MARK: - Actions
@@ -67,11 +47,15 @@ class InsertSortView: NSView {
                 sortingArray.swapAt(previousIndex, previousIndex + 1)
 
                 if animated {
-                    animateSwapingElements(previousIndex, j: previousIndex + 1)
+                    graphView.swapAt(previousIndex, j: previousIndex + 1)
                 }
                 
                 previousIndex -= 1
             }
+        }
+
+        if animated {
+            graphView.performAnimation()
         }
     }
     
@@ -81,36 +65,4 @@ class InsertSortView: NSView {
         }
         return 0
     }
-    
-    private func animateSwapingElements(_ i: Int, j: Int) {
-        let iElement = self.subviews.first { view -> Bool in
-            if let node = view as? Node, node.id == i {
-                return true
-            }
-            return false
-        }
-        
-        let jElement = self.subviews.first { view -> Bool in
-            if let node = view as? Node, node.id == j {
-                return true
-            }
-            return false
-        }
-        
-        guard let iNode = iElement, let jNode = jElement else { return }
-        let delta = iNode.frame.origin.x - jNode.frame.origin.x // negative value
-        
-        NSAnimationContext.runAnimationGroup({ context in
-            context.duration = 0.5
-        
-            iNode.frame.origin.x -= delta
-            jNode.frame.origin.x += delta
-            
-        }, completionHandler: nil)
-    }
-}
-
-class Node: NSView {
-    
-    var id: Int?
 }
