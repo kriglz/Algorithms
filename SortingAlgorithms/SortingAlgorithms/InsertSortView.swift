@@ -22,27 +22,14 @@ class InsertSortView: NSView {
         self.init(frame: .zero)
 
         self.sortingArray = sortingArray
-    }
-    
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
-    }
-    
-    required init?(coder decoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewWillMove(toSuperview newSuperview: NSView?) {
-        super.viewWillMove(toSuperview: newSuperview)
         
-        guard let newSuperview = newSuperview else { return }
-        setupSortingView(newSuperview: newSuperview)
+        setupSortingView()
         sortArray()
     }
     
     // MARK: - Setup sorting view
     
-    private func setupSortingView(newSuperview: NSView) {
+    private func setupSortingView() {
         for (index, number) in sortingArray.enumerated() {
             
             let rect = NSRect(x: Double(index * nodeWidth) * 1.2 + 30.0,
