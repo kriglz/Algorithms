@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9321238E5500FA1E75 /* AppDelegate.swift */; };
-		8950EE9621238E5500FA1E75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9521238E5500FA1E75 /* ViewController.swift */; };
+		8950EE9621238E5500FA1E75 /* InsertSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9521238E5500FA1E75 /* InsertSortView.swift */; };
 		8950EE9821238E5600FA1E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8950EE9721238E5600FA1E75 /* Assets.xcassets */; };
 		8950EE9B21238E5600FA1E75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8950EE9921238E5600FA1E75 /* Main.storyboard */; };
 		8950EEA9212391D900FA1E75 /* WindowsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EEA8212391D900FA1E75 /* WindowsController.swift */; };
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		8950EE9021238E5500FA1E75 /* SortingAlgorithms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortingAlgorithms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8950EE9321238E5500FA1E75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8950EE9521238E5500FA1E75 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8950EE9521238E5500FA1E75 /* InsertSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertSortView.swift; sourceTree = "<group>"; };
 		8950EE9721238E5600FA1E75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8950EE9A21238E5600FA1E75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8950EE9C21238E5600FA1E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 			children = (
 				8950EE9321238E5500FA1E75 /* AppDelegate.swift */,
 				8950EEA8212391D900FA1E75 /* WindowsController.swift */,
-				8950EE9521238E5500FA1E75 /* ViewController.swift */,
+				8950EE9521238E5500FA1E75 /* InsertSortView.swift */,
 				8950EE9C21238E5600FA1E75 /* Info.plist */,
 				8950EE9D21238E5600FA1E75 /* SortingAlgorithms.entitlements */,
 				8950EEA321238E6A00FA1E75 /* Supporting Files */,
@@ -144,7 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8950EE9621238E5500FA1E75 /* ViewController.swift in Sources */,
+				8950EE9621238E5500FA1E75 /* InsertSortView.swift in Sources */,
 				8950EEA9212391D900FA1E75 /* WindowsController.swift in Sources */,
 				8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */,
 			);

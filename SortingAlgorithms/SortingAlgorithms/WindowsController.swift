@@ -10,6 +10,8 @@ import Cocoa
 
 class WindowsController: NSWindowController {
     
+    let sortingArray = [15, 09, 08, 01, 04, 11, 07, 12, 13, 06, 05, 03, 16, 02, 10, 14]
+    
     // MARK: - Properties
     
     let toolbar = NSToolbar()
@@ -22,7 +24,7 @@ class WindowsController: NSWindowController {
         
         item.label = "Insert"
         item.target = self
-        item.action = #selector(openInsertSortingViewController)
+        item.action = #selector(showInsertSortingViewController)
 
         item.image = NSImage(named: NSImage.Name(rawValue: "icon"))
         
@@ -41,11 +43,16 @@ class WindowsController: NSWindowController {
         
         return item
     }()
-    
+
     // MARK: - Lifecycle funcions
     
     override func windowDidLoad() {
         super.windowDidLoad()
+        
+        let contentView = NSView()
+        contentView.wantsLayer = true
+        contentView.layer?.backgroundColor = NSColor.red.cgColor
+        self.contentViewController?.view.addSubview(contentView)
         
         toolbar.delegate = self
         toolbar.autosavesConfiguration = true
@@ -56,12 +63,18 @@ class WindowsController: NSWindowController {
     
     // MARK: - Actions
 
-    @objc private func openInsertSortingViewController() {
-        print("insert")
+    @objc private func showInsertSortingViewController() {
+        guard let contentViewController = self.contentViewController else { return }
+        
+        let insertSortView = InsertSortView(sortingArray: sortingArray)
+        
+        contentViewController.view.subviews.removeAll()
+        contentViewController.view.addSubview(insertSortView)
+        
+        insertSortView.constraints(edgesTo: contentViewController.view)
     }
     
     @objc private func openMedianSortingViewController() {
-        print("median")
     }
 }
 
@@ -110,5 +123,21 @@ extension NSToolbar {
             }
         }
         return nil
+    }
+}
+
+extension NSView {
+    
+    func constraints(edgesTo view: NSView, constant: CGFloat = 0) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraints = [NSLayoutConstraint]()
+        
+        constraints.append(self.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant))
+        constraints.append(self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant))
+        constraints.append(self.topAnchor.constraint(equalTo: view.topAnchor, constant: constant))
+        constraints.append(self.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -constant))
+        
+        NSLayoutConstraint.activate(constraints)
     }
 }
