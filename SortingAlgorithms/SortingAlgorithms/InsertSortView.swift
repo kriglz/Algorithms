@@ -24,7 +24,10 @@ class InsertSortView: NSView {
         self.sortingArray = sortingArray
         
         setupSortingView()
-        sortArray()
+
+        let sortButton = NSButton(title: "SORT", target: self, action: #selector(sortArrayAction(_:)))
+        sortButton.frame.origin = CGPoint(x: 500, y: 30)
+        addSubview(sortButton)
     }
     
     // MARK: - Setup sorting view
@@ -48,6 +51,12 @@ class InsertSortView: NSView {
         }
     }
     
+    // MARK: - Actions
+
+    @objc private func sortArrayAction(_ sende: NSButton) {
+        sortArray(animated: true)
+    }
+    
     // MARK: - Sorting
     
     private func sortArray(animated: Bool = false) {
@@ -58,7 +67,7 @@ class InsertSortView: NSView {
                 sortingArray.swapAt(previousIndex, previousIndex + 1)
 
                 if animated {
-                    
+                    animateSwapingElements(previousIndex, j: previousIndex + 1)
                 }
                 
                 previousIndex -= 1
@@ -73,8 +82,31 @@ class InsertSortView: NSView {
         return 0
     }
     
-    private func animateSwaping() {
+    private func animateSwapingElements(_ i: Int, j: Int) {
+        let iElement = self.subviews.first { view -> Bool in
+            if let node = view as? Node, node.id == i {
+                return true
+            }
+            return false
+        }
+        
+        let jElement = self.subviews.first { view -> Bool in
+            if let node = view as? Node, node.id == j {
+                return true
+            }
+            return false
+        }
+        
+        guard let iNode = iElement, let jNode = jElement else { return }
+        let delta = iNode.frame.origin.x - jNode.frame.origin.x // negative value
+        
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = 0.5
+        
+            iNode.frame.origin.x -= delta
+            jNode.frame.origin.x += delta
             
+        }, completionHandler: nil)
     }
 }
 
