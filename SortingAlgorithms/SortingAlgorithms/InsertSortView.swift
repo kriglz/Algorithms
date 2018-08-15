@@ -14,20 +14,14 @@ class InsertSortView: NSView {
     
     var sortingArray: [Int] = []
     
+    let nodeWidth = 20
+    
     // MARK: - Lifecycle functions
     
     convenience init(sortingArray: [Int]) {
         self.init(frame: .zero)
 
         self.sortingArray = sortingArray
-        
-        self.wantsLayer = true
-        self.layer?.backgroundColor = NSColor.brown.cgColor
-        
-        let node = NSView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        addSubview(node)
-        
-        sortArray()
     }
     
     override init(frame frameRect: NSRect) {
@@ -38,14 +32,47 @@ class InsertSortView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillMove(toSuperview newSuperview: NSView?) {
+        super.viewWillMove(toSuperview: newSuperview)
+        
+        guard let newSuperview = newSuperview else { return }
+        setupSortingView(newSuperview: newSuperview)
+        sortArray()
+    }
+    
+    // MARK: - Setup sorting view
+    
+    private func setupSortingView(newSuperview: NSView) {
+        for (index, number) in sortingArray.enumerated() {
+            
+            let rect = NSRect(x: Double(index * nodeWidth) * 1.2 + 30.0,
+                              y: 30.0,
+                              width: Double(nodeWidth),
+                              height: 10 * Double(number))
+            
+            let node = Node(frame: rect)
+            node.id = index
+            
+            node.wantsLayer = true
+            node.layer?.backgroundColor = NSColor.white.cgColor
+            node.layer?.borderColor = NSColor.blue.cgColor
+            
+            self.addSubview(node)
+        }
+    }
+    
     // MARK: - Sorting
     
-    private func sortArray() {
+    private func sortArray(animated: Bool = false) {
         for index in 1..<sortingArray.count {
             var previousIndex = index - 1
             
             while (previousIndex >= 0 && compare(numberA: sortingArray[previousIndex], numberB: sortingArray[previousIndex + 1]) > 0) {
                 sortingArray.swapAt(previousIndex, previousIndex + 1)
+
+                if animated {
+                    
+                }
                 
                 previousIndex -= 1
             }
@@ -59,7 +86,12 @@ class InsertSortView: NSView {
         return 0
     }
     
-    private func animateSorting() {
+    private func animateSwaping() {
             
     }
+}
+
+class Node: NSView {
+    
+    var id: Int?
 }
