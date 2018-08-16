@@ -1,5 +1,5 @@
 //
-//  InsertSortView.swift
+//  SortingView.swift
 //  SortingAlgorithms
 //
 //  Created by Kristina Gelzinyte on 8/14/18.
@@ -8,7 +8,7 @@
 
 import AppKit
 
-class InsertSortView: NSView {
+class SortingView: NSView {
     
     // MARK: - Properties
     
@@ -27,7 +27,7 @@ class InsertSortView: NSView {
         graphView.constraints(edgesTo: self)
         
         let sortButton = NSButton(title: "SORT", target: self, action: #selector(sortArrayAction(_:)))
-        sortButton.frame.origin = CGPoint(x: 500, y: 30)
+        sortButton.frame.origin = CGPoint(x: 800, y: 30)
         addSubview(sortButton)
     }
     
@@ -40,6 +40,8 @@ class InsertSortView: NSView {
     // MARK: - Sorting
     
     private func sortArray(animated: Bool = false) {
+        var actionIndex = 0.0
+        
         for index in 1..<sortingArray.count {
             var previousIndex = index - 1
             
@@ -47,21 +49,17 @@ class InsertSortView: NSView {
                 sortingArray.swapAt(previousIndex, previousIndex + 1)
 
                 if animated {
-                    graphView.swapElements(sortingArray[previousIndex], sortingArray[previousIndex + 1])
+                    graphView.swapElements(sortingArray[previousIndex], sortingArray[previousIndex + 1], actionIndex: actionIndex)
                 }
                 
                 previousIndex -= 1
-                
-                print(sortingArray)
-
+                actionIndex += 1
             }
-            
-//            print(sortingArray)
         }
 
-//        if animated {
-//            graphView.performAnimation()
-//        }
+        if animated {
+            graphView.performAnimation()
+        }
     }
     
     private func compare(numberA: Int, numberB: Int) -> Int {

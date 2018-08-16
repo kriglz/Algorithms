@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8908B6BA2124A96C00E06C3B /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6B92124A96C00E06C3B /* GraphView.swift */; };
+		8908B6BC212507FF00E06C3B /* ActionSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */; };
 		8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9321238E5500FA1E75 /* AppDelegate.swift */; };
-		8950EE9621238E5500FA1E75 /* InsertSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9521238E5500FA1E75 /* InsertSortView.swift */; };
+		8950EE9621238E5500FA1E75 /* SortingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9521238E5500FA1E75 /* SortingView.swift */; };
 		8950EE9821238E5600FA1E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8950EE9721238E5600FA1E75 /* Assets.xcassets */; };
 		8950EE9B21238E5600FA1E75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8950EE9921238E5600FA1E75 /* Main.storyboard */; };
 		8950EEA9212391D900FA1E75 /* WindowsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EEA8212391D900FA1E75 /* WindowsController.swift */; };
@@ -17,9 +18,10 @@
 
 /* Begin PBXFileReference section */
 		8908B6B92124A96C00E06C3B /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSpriteNode.swift; sourceTree = "<group>"; };
 		8950EE9021238E5500FA1E75 /* SortingAlgorithms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortingAlgorithms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8950EE9321238E5500FA1E75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8950EE9521238E5500FA1E75 /* InsertSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertSortView.swift; sourceTree = "<group>"; };
+		8950EE9521238E5500FA1E75 /* SortingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingView.swift; sourceTree = "<group>"; };
 		8950EE9721238E5600FA1E75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8950EE9A21238E5600FA1E75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8950EE9C21238E5600FA1E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,10 +59,10 @@
 		8950EE9221238E5500FA1E75 /* SortingAlgorithms */ = {
 			isa = PBXGroup;
 			children = (
-				8950EE9321238E5500FA1E75 /* AppDelegate.swift */,
 				8950EEA8212391D900FA1E75 /* WindowsController.swift */,
-				8950EE9521238E5500FA1E75 /* InsertSortView.swift */,
+				8950EE9521238E5500FA1E75 /* SortingView.swift */,
 				8908B6B92124A96C00E06C3B /* GraphView.swift */,
+				8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */,
 				8950EE9C21238E5600FA1E75 /* Info.plist */,
 				8950EE9D21238E5600FA1E75 /* SortingAlgorithms.entitlements */,
 				8950EEA321238E6A00FA1E75 /* Supporting Files */,
@@ -71,6 +73,7 @@
 		8950EEA321238E6A00FA1E75 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8950EE9321238E5500FA1E75 /* AppDelegate.swift */,
 				8950EE9721238E5600FA1E75 /* Assets.xcassets */,
 				8950EE9921238E5600FA1E75 /* Main.storyboard */,
 			);
@@ -147,7 +150,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8950EE9621238E5500FA1E75 /* InsertSortView.swift in Sources */,
+				8908B6BC212507FF00E06C3B /* ActionSpriteNode.swift in Sources */,
+				8950EE9621238E5500FA1E75 /* SortingView.swift in Sources */,
 				8950EEA9212391D900FA1E75 /* WindowsController.swift in Sources */,
 				8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */,
 				8908B6BA2124A96C00E06C3B /* GraphView.swift in Sources */,

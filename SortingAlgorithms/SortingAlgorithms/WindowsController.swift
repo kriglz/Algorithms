@@ -10,8 +10,8 @@ import Cocoa
 
 class WindowsController: NSWindowController {
     
-//    let sortingArray = [15, 09, 08, 01, 04, 11, 07, 12, 13, 06, 05, 03, 16, 02, 10, 14]
-    let sortingArray = [15, 02, 11]
+    let sortingArray = [15, 09, 08, 01, 04, 11, 07, 12, 13, 06, 05, 03, 16, 02, 10, 14]
+//    let sortingArray = [15, 02, 11, 09, 1]
 
     // MARK: - Properties
     
@@ -67,7 +67,7 @@ class WindowsController: NSWindowController {
     @objc private func showInsertSortingViewController() {
         guard let contentViewController = self.contentViewController else { return }
         
-        let insertSortView = InsertSortView(sortingArray: sortingArray)
+        let insertSortView = SortingView(sortingArray: sortingArray)
         
         contentViewController.view.subviews.removeAll()
         contentViewController.view.addSubview(insertSortView)
