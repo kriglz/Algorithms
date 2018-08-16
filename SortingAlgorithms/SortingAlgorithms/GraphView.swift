@@ -65,40 +65,22 @@ class GraphView: NSView {
     
     // MARK: - Animation
     
-    func swapElements(_ i: Int, _ j: Int) {
+    func swapElements(_ i: Int, _ j: Int, actionIndex: Double) {
         guard let iNode = scene.childNode(withName: "\(i)") as? ActionSpriteNode,
             let jNode = scene.childNode(withName: "\(j)") as? ActionSpriteNode else { return }
         
-        iNode.run(SKAction.moveBy(x: -6, y: 0, duration: 0.5))
-        jNode.run(SKAction.moveBy(x: 6, y: 0, duration: 0.5))
+        let iNodeAction = SKAction.moveBy(x: -6, y: 0, duration: ActionSpriteNode.duration)
+        let jNodeAction = SKAction.moveBy(x: 6, y: 0, duration: ActionSpriteNode.duration)
         
-        
+        iNode.addAction(action: iNodeAction, actionIndex: actionIndex)
+        jNode.addAction(action: jNodeAction, actionIndex: actionIndex)
     }
     
-//    func performAnimation() {
-//        scene.children.forEach { child in
-//            if let node = child as? ActionSpriteNode {
-//                node.runActions()
-//            }
-//        }        
-//    }
-}
-
-class ActionSpriteNode: SKSpriteNode {
-    
-    private var actions: SKAction?
-    
-    func addAction(action: SKAction) {
-        if let currentActions = self.actions {
-            let sequence = [currentActions, action]
-            actions = SKAction.sequence(sequence)
-        } else {
-            actions = action
+    func performAnimation() {
+        scene.children.forEach { child in
+            if let node = child as? ActionSpriteNode {
+                node.runActions()
+            }
         }
-    }
-    
-    func runActions() {
-        guard let action = self.actions else { return }
-        self.run(action)
     }
 }
