@@ -15,6 +15,8 @@ class SortingView: NSView {
     private var sortingArray: [Int] = []
     private var graphView: GraphView!
     
+    private let algorithms = Algorithms()
+    
     // MARK: - Lifecycle functions
     
     convenience init(sortingArray: [Int]) {
@@ -34,18 +36,18 @@ class SortingView: NSView {
     // MARK: - Actions
 
     @objc private func sortArrayAction(_ sender: NSButton) {
-        sortArray(animated: true)
+        sortByInsertArray(animated: true)
     }
     
     // MARK: - Sorting
     
-    private func sortArray(animated: Bool = false) {
+    private func sortByInsertArray(animated: Bool = false) {
         var actionIndex = 0.0
         
         for index in 1..<sortingArray.count {
             var previousIndex = index - 1
             
-            while (previousIndex >= 0 && compare(numberA: sortingArray[previousIndex], numberB: sortingArray[previousIndex + 1]) > 0) {
+            while (previousIndex >= 0 && algorithms.compare(numberA: sortingArray[previousIndex], numberB: sortingArray[previousIndex + 1]) > 0) {
                 sortingArray.swapAt(previousIndex, previousIndex + 1)
 
                 if animated {
@@ -60,12 +62,5 @@ class SortingView: NSView {
         if animated {
             graphView.performAnimation()
         }
-    }
-    
-    private func compare(numberA: Int, numberB: Int) -> Int {
-        if numberA > numberB {
-            return 1
-        }
-        return 0
     }
 }
