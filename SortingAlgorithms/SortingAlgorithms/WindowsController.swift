@@ -19,6 +19,8 @@ class WindowsController: NSWindowController {
     
     lazy var toolbarItemIdentifiers = [insertSortToolbarItemID, medianSortToolbarItemID, NSToolbarItem.Identifier.flexibleSpace]
     
+    private var insertSortView: InsertSortingView?
+    
     private let insertSortToolbarItemID = NSToolbarItem.Identifier("insert sort")
     private lazy var insertSortToolbarItem: NSToolbarItem = {
         let item = NSToolbarItem(itemIdentifier: insertSortToolbarItemID)
@@ -26,8 +28,6 @@ class WindowsController: NSWindowController {
         item.label = "Insert"
         item.target = self
         item.action = #selector(showInsertSortingViewController)
-
-        item.image = NSImage(named: NSImage.Name(rawValue: "icon"))
         
         return item
     }()
@@ -39,9 +39,7 @@ class WindowsController: NSWindowController {
         item.label = "Median"
         item.target = self
         item.action = #selector(openMedianSortingViewController)
-        
-        item.image = NSImage(named: NSImage.Name(rawValue: "icon"))
-        
+                
         return item
     }()
 
@@ -67,11 +65,14 @@ class WindowsController: NSWindowController {
     @objc private func showInsertSortingViewController() {
         guard let contentViewController = self.contentViewController else { return }
         
-        let insertSortView = SortingView(sortingArray: sortingArray)
+        if insertSortView == nil {
+            insertSortView = InsertSortingView(sortingArray: sortingArray)
+        }
+        
+        guard let insertSortView = self.insertSortView else { return }
         
         contentViewController.view.subviews.removeAll()
         contentViewController.view.addSubview(insertSortView)
-        
         insertSortView.constraints(edgesTo: contentViewController.view)
     }
     
@@ -82,10 +83,6 @@ class WindowsController: NSWindowController {
 extension WindowsController: NSToolbarDelegate {
     
     // MARK: NSToolbar Delegate
-    
-    override func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
-        return true
-    }
     
     func toolbarItems() -> [NSToolbarItem.Identifier] {
         return toolbarItemIdentifiers
@@ -112,33 +109,5 @@ extension WindowsController: NSToolbarDelegate {
         default:
             return nil
         }
-    }
-}
-
-extension NSToolbar {
-    
-    func item(for identifier: NSToolbarItem.Identifier) -> NSToolbarItem? {
-        for item in self.items {
-            if item.itemIdentifier == identifier {
-                return item
-            }
-        }
-        return nil
-    }
-}
-
-extension NSView {
-    
-    func constraints(edgesTo view: NSView, constant: CGFloat = 0) {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
-        var constraints = [NSLayoutConstraint]()
-        
-        constraints.append(self.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant))
-        constraints.append(self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant))
-        constraints.append(self.topAnchor.constraint(equalTo: view.topAnchor, constant: constant))
-        constraints.append(self.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -constant))
-        
-        NSLayoutConstraint.activate(constraints)
     }
 }

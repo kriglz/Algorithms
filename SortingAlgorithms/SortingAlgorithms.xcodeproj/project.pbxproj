@@ -10,8 +10,10 @@
 		8908B6BA2124A96C00E06C3B /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6B92124A96C00E06C3B /* GraphView.swift */; };
 		8908B6BC212507FF00E06C3B /* ActionSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */; };
 		8908B6BE2125CE8D00E06C3B /* Algorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6BD2125CE8D00E06C3B /* Algorithms.swift */; };
+		894B07442125D957002FB766 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07432125D957002FB766 /* NSView+Extension.swift */; };
+		894B07462125D974002FB766 /* NSToolbar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07452125D974002FB766 /* NSToolbar+Extension.swift */; };
 		8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9321238E5500FA1E75 /* AppDelegate.swift */; };
-		8950EE9621238E5500FA1E75 /* SortingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9521238E5500FA1E75 /* SortingView.swift */; };
+		8950EE9621238E5500FA1E75 /* InsertSortingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9521238E5500FA1E75 /* InsertSortingView.swift */; };
 		8950EE9821238E5600FA1E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8950EE9721238E5600FA1E75 /* Assets.xcassets */; };
 		8950EE9B21238E5600FA1E75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8950EE9921238E5600FA1E75 /* Main.storyboard */; };
 		8950EEA9212391D900FA1E75 /* WindowsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EEA8212391D900FA1E75 /* WindowsController.swift */; };
@@ -21,9 +23,11 @@
 		8908B6B92124A96C00E06C3B /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSpriteNode.swift; sourceTree = "<group>"; };
 		8908B6BD2125CE8D00E06C3B /* Algorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithms.swift; sourceTree = "<group>"; };
+		894B07432125D957002FB766 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
+		894B07452125D974002FB766 /* NSToolbar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbar+Extension.swift"; sourceTree = "<group>"; };
 		8950EE9021238E5500FA1E75 /* SortingAlgorithms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortingAlgorithms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8950EE9321238E5500FA1E75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8950EE9521238E5500FA1E75 /* SortingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingView.swift; sourceTree = "<group>"; };
+		8950EE9521238E5500FA1E75 /* InsertSortingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertSortingView.swift; sourceTree = "<group>"; };
 		8950EE9721238E5600FA1E75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8950EE9A21238E5600FA1E75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8950EE9C21238E5600FA1E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,6 +46,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		894B07472125D985002FB766 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				894B07432125D957002FB766 /* NSView+Extension.swift */,
+				894B07452125D974002FB766 /* NSToolbar+Extension.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		8950EE8721238E5400FA1E75 = {
 			isa = PBXGroup;
 			children = (
@@ -63,9 +76,10 @@
 			children = (
 				8950EEA8212391D900FA1E75 /* WindowsController.swift */,
 				8908B6BD2125CE8D00E06C3B /* Algorithms.swift */,
-				8950EE9521238E5500FA1E75 /* SortingView.swift */,
+				8950EE9521238E5500FA1E75 /* InsertSortingView.swift */,
 				8908B6B92124A96C00E06C3B /* GraphView.swift */,
 				8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */,
+				894B07472125D985002FB766 /* Utilities */,
 				8950EE9C21238E5600FA1E75 /* Info.plist */,
 				8950EE9D21238E5600FA1E75 /* SortingAlgorithms.entitlements */,
 				8950EEA321238E6A00FA1E75 /* Supporting Files */,
@@ -153,8 +167,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				894B07462125D974002FB766 /* NSToolbar+Extension.swift in Sources */,
+				894B07442125D957002FB766 /* NSView+Extension.swift in Sources */,
 				8908B6BC212507FF00E06C3B /* ActionSpriteNode.swift in Sources */,
-				8950EE9621238E5500FA1E75 /* SortingView.swift in Sources */,
+				8950EE9621238E5500FA1E75 /* InsertSortingView.swift in Sources */,
 				8950EEA9212391D900FA1E75 /* WindowsController.swift in Sources */,
 				8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */,
 				8908B6BA2124A96C00E06C3B /* GraphView.swift in Sources */,

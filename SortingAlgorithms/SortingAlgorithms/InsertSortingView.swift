@@ -1,5 +1,5 @@
 //
-//  SortingView.swift
+//  InsertSortingView.swift
 //  SortingAlgorithms
 //
 //  Created by Kristina Gelzinyte on 8/14/18.
@@ -8,7 +8,7 @@
 
 import AppKit
 
-class SortingView: NSView {
+class InsertSortingView: NSView {
     
     // MARK: - Properties
     
@@ -35,7 +35,7 @@ class SortingView: NSView {
     
     // MARK: - Actions
 
-    @objc private func sortArrayAction(_ sender: NSButton) {
+    @objc func sortArrayAction(_ sender: NSButton) {
         sortByInsertArray(animated: true)
     }
     

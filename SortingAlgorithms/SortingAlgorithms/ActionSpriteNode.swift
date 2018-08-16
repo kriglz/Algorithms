@@ -13,7 +13,8 @@ class ActionSpriteNode: SKSpriteNode {
     // MARK: - Properties
     
     static let duration = 0.2
-    
+    static let width = 5.0
+
     private var actions: SKAction?
     private var previousActionIndex = 0.0
     
@@ -36,6 +37,8 @@ class ActionSpriteNode: SKSpriteNode {
     
     func runActions() {
         guard let action = self.actions else { return }
-        self.run(action)
+        self.run(action) {
+            self.actions = nil
+        }
     }
 }

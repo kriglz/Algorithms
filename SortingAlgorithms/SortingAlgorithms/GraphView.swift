@@ -17,9 +17,7 @@ class GraphView: NSView {
  
     private let spriteKitView = SKView()
     private let scene = SKScene()
-    
-    private let nodeWidth = 5
-    
+        
     // MARK: - Initialization
     
     convenience init(array: [Int]) {
@@ -46,9 +44,9 @@ class GraphView: NSView {
     private func setupGraph() {
         for (index, number) in sortingArray.enumerated() {
             
-            let rect = NSRect(x: Double(index * nodeWidth) * 1.2 + 30.0,
+            let rect = NSRect(x: Double(index) * ActionSpriteNode.width * 1.2 + 30.0,
                               y: 30.0,
-                              width: Double(nodeWidth),
+                              width: ActionSpriteNode.width,
                               height: 5 * Double(number))
             
             let node = ActionSpriteNode()
@@ -69,8 +67,8 @@ class GraphView: NSView {
         guard let iNode = scene.childNode(withName: "\(i)") as? ActionSpriteNode,
             let jNode = scene.childNode(withName: "\(j)") as? ActionSpriteNode else { return }
         
-        let iNodeAction = SKAction.moveBy(x: -6, y: 0, duration: ActionSpriteNode.duration)
-        let jNodeAction = SKAction.moveBy(x: 6, y: 0, duration: ActionSpriteNode.duration)
+        let iNodeAction = SKAction.moveBy(x: CGFloat(-ActionSpriteNode.width * 1.2), y: 0, duration: ActionSpriteNode.duration)
+        let jNodeAction = SKAction.moveBy(x: CGFloat(ActionSpriteNode.width * 1.2), y: 0, duration: ActionSpriteNode.duration)
         
         iNode.addAction(action: iNodeAction, actionIndex: actionIndex)
         jNode.addAction(action: jNodeAction, actionIndex: actionIndex)
