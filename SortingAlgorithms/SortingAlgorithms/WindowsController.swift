@@ -10,8 +10,9 @@ import Cocoa
 
 class WindowsController: NSWindowController {
     
-    let sortingArray = [15, 09, 08, 01, 04, 11, 07, 12, 13, 06, 05, 03, 16, 02, 10, 14]
-    
+//    let sortingArray = [15, 09, 08, 01, 04, 11, 07, 12, 13, 06, 05, 03, 16, 02, 10, 14]
+    let sortingArray = [15, 02, 11]
+
     // MARK: - Properties
     
     let toolbar = NSToolbar()

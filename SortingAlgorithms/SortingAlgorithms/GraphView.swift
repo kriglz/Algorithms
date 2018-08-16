@@ -57,7 +57,7 @@ class GraphView: NSView {
             node.position = rect.origin
             node.size = rect.size
             
-            node.name = "\(index)"
+            node.name = "\(number)"
 
             scene.addChild(node)
         }
@@ -65,36 +65,23 @@ class GraphView: NSView {
     
     // MARK: - Animation
     
-    func swapAt(_ i: Int, j: Int) {
-        let iChild = scene.children.first { node in
-            if node.name == "\(i)" {
-                return true
-            }
-            return false
-        }
+    func swapElements(_ i: Int, _ j: Int) {
+        guard let iNode = scene.childNode(withName: "\(i)") as? ActionSpriteNode,
+            let jNode = scene.childNode(withName: "\(j)") as? ActionSpriteNode else { return }
         
-        let jChild = scene.children.first { node in
-            if node.name == "\(j)" {
-                return true
-            }
-            return false
-        }
+        iNode.run(SKAction.moveBy(x: -6, y: 0, duration: 0.5))
+        jNode.run(SKAction.moveBy(x: 6, y: 0, duration: 0.5))
         
-        guard let iNode = iChild as? ActionSpriteNode, let jNode = jChild as? ActionSpriteNode else { return }
         
-        let iNodePosition = iNode.position
-        
-        iNode.addAction(action: SKAction.move(to: jNode.position, duration: 1))
-        jNode.addAction(action: SKAction.move(to: iNodePosition, duration: 1))
     }
     
-    func performAnimation() {
-        scene.children.forEach { child in
-            if let node = child as? ActionSpriteNode {
-                node.runActions()
-            }
-        }
-    }
+//    func performAnimation() {
+//        scene.children.forEach { child in
+//            if let node = child as? ActionSpriteNode {
+//                node.runActions()
+//            }
+//        }        
+//    }
 }
 
 class ActionSpriteNode: SKSpriteNode {

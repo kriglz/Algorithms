@@ -33,7 +33,7 @@ class InsertSortView: NSView {
     
     // MARK: - Actions
 
-    @objc private func sortArrayAction(_ sende: NSButton) {
+    @objc private func sortArrayAction(_ sender: NSButton) {
         sortArray(animated: true)
     }
     
@@ -47,16 +47,21 @@ class InsertSortView: NSView {
                 sortingArray.swapAt(previousIndex, previousIndex + 1)
 
                 if animated {
-                    graphView.swapAt(previousIndex, j: previousIndex + 1)
+                    graphView.swapElements(sortingArray[previousIndex], sortingArray[previousIndex + 1])
                 }
                 
                 previousIndex -= 1
+                
+                print(sortingArray)
+
             }
+            
+//            print(sortingArray)
         }
 
-        if animated {
-            graphView.performAnimation()
-        }
+//        if animated {
+//            graphView.performAnimation()
+//        }
     }
     
     private func compare(numberA: Int, numberB: Int) -> Int {
