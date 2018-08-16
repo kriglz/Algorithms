@@ -17,7 +17,7 @@ class WindowsController: NSWindowController {
     
     let toolbar = NSToolbar()
     
-    lazy var toolbarItemIdentifiers = [insertSortToolbarItemID, medianSortToolbarItemID, NSToolbarItem.Identifier.flexibleSpace]
+    lazy var toolbarItemIdentifiers = [insertSortToolbarItemID, medianSortToolbarItemID]
     
     private var insertSortView: InsertSortingView?
     
@@ -51,14 +51,16 @@ class WindowsController: NSWindowController {
         let contentView = NSView()
         contentView.wantsLayer = true
         contentView.layer?.backgroundColor = NSColor.red.cgColor
-        self.contentViewController?.view.addSubview(contentView)
+        contentViewController?.view.addSubview(contentView)
         
         toolbar.delegate = self
         toolbar.autosavesConfiguration = true
         toolbar.displayMode = .default
         
-        self.window?.toolbar = self.toolbar
+        window?.toolbar = self.toolbar
     }
+
+    
     
     // MARK: - Actions
 
@@ -78,6 +80,8 @@ class WindowsController: NSWindowController {
     
     @objc private func openMedianSortingViewController() {
     }
+    
+    
 }
 
 extension WindowsController: NSToolbarDelegate {

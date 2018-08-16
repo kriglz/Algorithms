@@ -41,7 +41,7 @@ class GraphView: NSView {
     
     // MARK: - SpriteKit setup
     
-    private func setupGraph() {
+    func setupGraph() {
         for (index, number) in sortingArray.enumerated() {
             
             let rect = NSRect(x: Double(index) * ActionSpriteNode.width * 1.2 + 30.0,
@@ -59,6 +59,10 @@ class GraphView: NSView {
 
             scene.addChild(node)
         }
+    }
+    
+    func reset() {
+        scene.children.forEach { $0.removeFromParent() }
     }
     
     // MARK: - Animation
