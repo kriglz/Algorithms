@@ -27,3 +27,8 @@ struct Algorithms {
         return 0
     }
 }
+
+enum SortingAlgorithm {
+    case insert
+    case median
+}

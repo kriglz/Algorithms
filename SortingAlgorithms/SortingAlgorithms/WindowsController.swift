@@ -19,7 +19,7 @@ class WindowsController: NSWindowController {
     
     lazy var toolbarItemIdentifiers = [insertSortToolbarItemID, medianSortToolbarItemID]
     
-    private var insertSortView: InsertSortingView?
+    private var sortingView: SortingView?
     
     private let insertSortToolbarItemID = NSToolbarItem.Identifier("insert sort")
     private lazy var insertSortToolbarItem: NSToolbarItem = {
@@ -59,29 +59,35 @@ class WindowsController: NSWindowController {
         
         window?.toolbar = self.toolbar
     }
-
     
-    
-    // MARK: - Actions
-
-    @objc private func showInsertSortingViewController() {
+    private func setupGraphView(sortingAlgorithm: SortingAlgorithm) {
         guard let contentViewController = self.contentViewController else { return }
         
-        if insertSortView == nil {
-            insertSortView = InsertSortingView(sortingArray: sortingArray)
+        if sortingView != nil {
+            sortingView?.removeFromSuperview()
+            sortingView = nil
         }
         
-        guard let insertSortView = self.insertSortView else { return }
+        if sortingView == nil {
+            sortingView = SortingView(sortingArray: sortingArray, sortingAlgorithm: sortingAlgorithm)
+        }
+        
+        guard let insertSortView = self.sortingView else { return }
         
         contentViewController.view.subviews.removeAll()
         contentViewController.view.addSubview(insertSortView)
         insertSortView.constraints(edgesTo: contentViewController.view)
     }
     
-    @objc private func openMedianSortingViewController() {
+    // MARK: - Actions
+
+    @objc private func showInsertSortingViewController() {
+        setupGraphView(sortingAlgorithm: .insert)
     }
     
-    
+    @objc private func openMedianSortingViewController() {
+        setupGraphView(sortingAlgorithm: .median)        
+    }
 }
 
 extension WindowsController: NSToolbarDelegate {

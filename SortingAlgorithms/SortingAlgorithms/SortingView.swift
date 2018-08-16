@@ -1,5 +1,5 @@
 //
-//  InsertSortingView.swift
+//  SortingView.swift
 //  SortingAlgorithms
 //
 //  Created by Kristina Gelzinyte on 8/14/18.
@@ -8,21 +8,24 @@
 
 import AppKit
 
-class InsertSortingView: NSView {
+class SortingView: NSView {
     
     // MARK: - Properties
     
     private var unsortedSortingArray: [Int] = []
     private var graphView: GraphView!
+    
     private let algorithms = Algorithms()
+    private var sortingAlgorithm: SortingAlgorithm!
     
     // MARK: - Lifecycle functions
     
-    convenience init(sortingArray: [Int]) {
+    convenience init(sortingArray: [Int], sortingAlgorithm: SortingAlgorithm) {
         self.init(frame: .zero)
 
         self.unsortedSortingArray = sortingArray
-
+        self.sortingAlgorithm = sortingAlgorithm
+        
         graphView = GraphView(array: unsortedSortingArray)
         self.addSubview(graphView, positioned: .below, relativeTo: nil)
         graphView.constraints(edgesTo: self)
@@ -45,12 +48,19 @@ class InsertSortingView: NSView {
     }
     
     @objc private func sortArrayAction(_ sender: NSButton) {
-        sortByInsertArray(animated: true)
+        switch sortingAlgorithm {
+        case .insert:
+            sortByInsert(animated: true)
+        case .median:
+            sortByMedian(animated: true)
+        default:
+            return
+        }
     }
     
     // MARK: - Sorting
     
-    private func sortByInsertArray(animated: Bool = false) {
+    private func sortByInsert(animated: Bool = false) {
         var actionIndex = 0.0
         var sortingArray = unsortedSortingArray
         
@@ -72,5 +82,9 @@ class InsertSortingView: NSView {
         if animated {
             graphView.performAnimation()
         }
+    }
+    
+    private func sortByMedian(animated: Bool = false) {
+        
     }
 }
