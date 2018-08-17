@@ -25,7 +25,6 @@ func partition(leftIndex: Int, rightIndex: Int, pivotIndex: Int) -> Int {
     }
 
     sortingArray.swapAt(rightIndex, storeIndex)
-    print("after final partition", sortingArray)
     return storeIndex
 }
 
@@ -51,12 +50,9 @@ func selectKthIndex(kIndex: Int, leftIndex: Int, rightIndex: Int) {
     guard rightIndex >= leftIndex else { return }
 
     let randomPivotIndex = selectPivotIndex(leftIndex: leftIndex, rightIndex: rightIndex)
-    print("random index", randomPivotIndex, "range", leftIndex, rightIndex, "k index", kIndex)
     let pivotIndex = partition(leftIndex: leftIndex, rightIndex: rightIndex, pivotIndex: randomPivotIndex)
     
-    if leftIndex + kIndex + 1 < pivotIndex {
-        return
-    }
+    if leftIndex + kIndex + 1 < pivotIndex { return }
     
     if leftIndex + kIndex - 1 < pivotIndex {
         selectKthIndex(kIndex: kIndex, leftIndex: leftIndex, rightIndex: pivotIndex - 1)
@@ -66,14 +62,9 @@ func selectKthIndex(kIndex: Int, leftIndex: Int, rightIndex: Int) {
 }
 
 func medianSort(leftIndex: Int, rightIndex: Int) {
-    guard rightIndex > leftIndex else {
-        return
-    }
-    print("sort range", leftIndex, rightIndex)
+    guard rightIndex > leftIndex else { return }
 
     let mid = (rightIndex - leftIndex + 1) / 2
-    print("mid number", mid, sortingArray[mid], "\n")
-    
     selectKthIndex(kIndex: mid + 1, leftIndex: leftIndex, rightIndex: rightIndex)
     
     medianSort(leftIndex: leftIndex, rightIndex: leftIndex + mid - 1)
@@ -82,7 +73,7 @@ func medianSort(leftIndex: Int, rightIndex: Int) {
 
 let leftIndex = 0
 let rigthIndex = sortingArray.count - 1
-
 medianSort(leftIndex: leftIndex, rightIndex: rigthIndex)
+print("final", sortingArray)
 
 
