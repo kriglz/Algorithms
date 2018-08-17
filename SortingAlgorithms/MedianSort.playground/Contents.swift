@@ -4,9 +4,6 @@ import UIKit
 
 var sortingArray = [15, 09, 08, 01, 04, 11, 07, 12, 13, 06, 05, 03, 16, 02, 10, 14]
 
-//let rightIndex = sortingArray.count - 1
-//let leftIndex = 0
-
 func compare(numberA: Int, numberB: Int) -> Int {
     if numberA > numberB {
         return 1
@@ -14,7 +11,7 @@ func compare(numberA: Int, numberB: Int) -> Int {
     return 0
 }
 
-func partition(leftIndex: Int, rightIndex: Int, pivotIndex: Int) {
+func partition(leftIndex: Int, rightIndex: Int, pivotIndex: Int) -> Int {
     let pivot = sortingArray[pivotIndex]
     sortingArray.swapAt(pivotIndex, rightIndex)
 
@@ -24,12 +21,12 @@ func partition(leftIndex: Int, rightIndex: Int, pivotIndex: Int) {
         if compare(numberA: sortingArray[index], numberB: pivot) <= 0 {
             sortingArray.swapAt(index, storeIndex)
             storeIndex += 1
-
-            print(sortingArray)
         }
     }
 
     sortingArray.swapAt(rightIndex, storeIndex)
+    print("after final partition", sortingArray)
+    return storeIndex
 }
 
 extension Range {
@@ -44,27 +41,48 @@ extension Range {
     }
 }
 
+/// Return random pivot index of specific range
 func selectPivotIndex(leftIndex: Int, rightIndex: Int) -> Int {
     let range: Range = leftIndex..<rightIndex
     return range.random
 }
 
-func selectKthIndex(kIndex: Int, leftIndex: Int, rightIndex: Int) -> Int {
-    let pivotIndex = selectPivotIndex(leftIndex: leftIndex, rightIndex: rightIndex)
-    
-    partition(leftIndex: leftIndex, rightIndex: rightIndex, pivotIndex: pivotIndex)
+func selectKthIndex(kIndex: Int, leftIndex: Int, rightIndex: Int) {
+    guard rightIndex >= leftIndex else { return }
+
+    let randomPivotIndex = selectPivotIndex(leftIndex: leftIndex, rightIndex: rightIndex)
+    print("random index", randomPivotIndex, "range", leftIndex, rightIndex, "k index", kIndex)
+    let pivotIndex = partition(leftIndex: leftIndex, rightIndex: rightIndex, pivotIndex: randomPivotIndex)
     
     if leftIndex + kIndex + 1 < pivotIndex {
-        return pivotIndex
+        return
     }
     
     if leftIndex + kIndex - 1 < pivotIndex {
-        return selectKthIndex(kIndex: kIndex, leftIndex: leftIndex, rightIndex: pivotIndex - 1)
+        selectKthIndex(kIndex: kIndex, leftIndex: leftIndex, rightIndex: pivotIndex - 1)
     } else {
-        return selectKthIndex(kIndex: kIndex - (pivotIndex - leftIndex + 1), leftIndex: pivotIndex + 1, rightIndex: rightIndex)
+        selectKthIndex(kIndex: kIndex - (pivotIndex - leftIndex + 1), leftIndex: pivotIndex + 1, rightIndex: rightIndex)
     }
 }
 
+func medianSort(leftIndex: Int, rightIndex: Int) {
+    guard rightIndex > leftIndex else {
+        return
+    }
+    print("sort range", leftIndex, rightIndex)
 
+    let mid = (rightIndex - leftIndex + 1) / 2
+    print("mid number", mid, sortingArray[mid], "\n")
+    
+    selectKthIndex(kIndex: mid + 1, leftIndex: leftIndex, rightIndex: rightIndex)
+    
+    medianSort(leftIndex: leftIndex, rightIndex: leftIndex + mid - 1)
+    medianSort(leftIndex: leftIndex + mid + 1, rightIndex: rightIndex)
+}
+
+let leftIndex = 0
+let rigthIndex = sortingArray.count - 1
+
+medianSort(leftIndex: leftIndex, rightIndex: rigthIndex)
 
 
