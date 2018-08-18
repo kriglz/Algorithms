@@ -18,6 +18,7 @@
 		8950EE9821238E5600FA1E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8950EE9721238E5600FA1E75 /* Assets.xcassets */; };
 		8950EE9B21238E5600FA1E75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8950EE9921238E5600FA1E75 /* Main.storyboard */; };
 		8950EEA9212391D900FA1E75 /* WindowsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EEA8212391D900FA1E75 /* WindowsController.swift */; };
+		8985E9FA2127A80C001A763C /* MedianSortingAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8985E9F92127A80C001A763C /* MedianSortingAlgorithm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		8950EE9C21238E5600FA1E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8950EE9D21238E5600FA1E75 /* SortingAlgorithms.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SortingAlgorithms.entitlements; sourceTree = "<group>"; };
 		8950EEA8212391D900FA1E75 /* WindowsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowsController.swift; sourceTree = "<group>"; };
+		8985E9F92127A80C001A763C /* MedianSortingAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedianSortingAlgorithm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				8950EEA8212391D900FA1E75 /* WindowsController.swift */,
 				8950EE9521238E5500FA1E75 /* SortingView.swift */,
 				8908B6BD2125CE8D00E06C3B /* Algorithms.swift */,
+				8985E9F92127A80C001A763C /* MedianSortingAlgorithm.swift */,
 				8908B6B92124A96C00E06C3B /* GraphView.swift */,
 				8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */,
 				894B07472125D985002FB766 /* Utilities */,
@@ -176,6 +179,7 @@
 				8950EE9621238E5500FA1E75 /* SortingView.swift in Sources */,
 				8950EEA9212391D900FA1E75 /* WindowsController.swift in Sources */,
 				8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */,
+				8985E9FA2127A80C001A763C /* MedianSortingAlgorithm.swift in Sources */,
 				8908B6BA2124A96C00E06C3B /* GraphView.swift in Sources */,
 				8908B6BE2125CE8D00E06C3B /* Algorithms.swift in Sources */,
 				892EF99A21278717004816F8 /* Range+Extension.swift in Sources */,

@@ -58,7 +58,7 @@ class SortingView: NSView {
         }
     }
     
-    // MARK: - Sorting
+    // MARK: - Sorting algorithms
     
     private func sortByInsert(animated: Bool = false) {
         var actionIndex = 0.0
@@ -85,6 +85,8 @@ class SortingView: NSView {
     }
     
     private func sortByMedian(animated: Bool = false) {
-        algorithms.medianSort(leftIndex: 0, rightIndex: unsortedSortingArray.count - 1)
+        let mediumSortingAlgorithm = MedianSortingAlgorithm(for: unsortedSortingArray)
+        let sortedArray = mediumSortingAlgorithm.sort()
+        print(sortedArray)
     }
 }
