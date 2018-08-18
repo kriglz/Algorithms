@@ -85,6 +85,6 @@ class SortingView: NSView {
     }
     
     private func sortByMedian(animated: Bool = false) {
-        
+        algorithms.medianSort(leftIndex: 0, rightIndex: unsortedSortingArray.count - 1)
     }
 }

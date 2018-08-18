@@ -10,6 +10,7 @@
 		8908B6BA2124A96C00E06C3B /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6B92124A96C00E06C3B /* GraphView.swift */; };
 		8908B6BC212507FF00E06C3B /* ActionSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */; };
 		8908B6BE2125CE8D00E06C3B /* Algorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6BD2125CE8D00E06C3B /* Algorithms.swift */; };
+		892EF99A21278717004816F8 /* Range+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EF99921278717004816F8 /* Range+Extension.swift */; };
 		894B07442125D957002FB766 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07432125D957002FB766 /* NSView+Extension.swift */; };
 		894B07462125D974002FB766 /* NSToolbar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07452125D974002FB766 /* NSToolbar+Extension.swift */; };
 		8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950EE9321238E5500FA1E75 /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 		8908B6B92124A96C00E06C3B /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSpriteNode.swift; sourceTree = "<group>"; };
 		8908B6BD2125CE8D00E06C3B /* Algorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithms.swift; sourceTree = "<group>"; };
+		892EF99921278717004816F8 /* Range+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extension.swift"; sourceTree = "<group>"; };
 		894B07432125D957002FB766 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
 		894B07452125D974002FB766 /* NSToolbar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbar+Extension.swift"; sourceTree = "<group>"; };
 		8950EE9021238E5500FA1E75 /* SortingAlgorithms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortingAlgorithms.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +53,7 @@
 			children = (
 				894B07432125D957002FB766 /* NSView+Extension.swift */,
 				894B07452125D974002FB766 /* NSToolbar+Extension.swift */,
+				892EF99921278717004816F8 /* Range+Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */,
 				8908B6BA2124A96C00E06C3B /* GraphView.swift in Sources */,
 				8908B6BE2125CE8D00E06C3B /* Algorithms.swift in Sources */,
+				892EF99A21278717004816F8 /* Range+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
