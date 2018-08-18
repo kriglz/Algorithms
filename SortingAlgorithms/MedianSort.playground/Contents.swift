@@ -49,7 +49,7 @@ func selectPivotIndex(leftIndex: Int, rightIndex: Int) -> Int {
     return range.random
 }
 
-/// 
+/// Performs partition in a specific range by using random pivot index.
 func selectKthIndex(kIndex: Int, leftIndex: Int, rightIndex: Int) {
     guard rightIndex >= leftIndex else { return }
 
