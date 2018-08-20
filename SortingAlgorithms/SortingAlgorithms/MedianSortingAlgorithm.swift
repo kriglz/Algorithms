@@ -13,7 +13,10 @@ class MedianSortingAlgorithm: NSObject {
 
     // MARK: - Properties
     
+    weak var delegate: MedianSortingAlgorithmDelegate?
+    
     private var sortingArray: [Int] = []
+    private var actionIndex = 0
     private let algorithms = Algorithms()
     
     // MARK: - Initialization
@@ -34,7 +37,31 @@ class MedianSortingAlgorithm: NSObject {
     /// - Returns: Sorted array by median sorting algorithm.
     func sort() -> [Int] {
         sort(leftIndex: 0, rightIndex: sortingArray.count - 1)
+        
+        delegate?.medianSortingAlgorithmDidFinishSorting(self)
+        resetAlgorithm()
+        
         return sortingArray
+    }
+    
+    /// Resets stored values.
+    private func resetAlgorithm() {
+        actionIndex = 0
+    }
+    
+    /// Performs median sort in specific range.
+    ///
+    /// - Parameters:
+    ///     - leftIndex: Lower bound index of the range.
+    ///     - rightIndex: Upper bound index of the range.
+    private func sort(leftIndex: Int, rightIndex: Int) {
+        guard rightIndex > leftIndex else { return }
+        
+        let mid = (rightIndex - leftIndex + 1) / 2
+        performPartitionForMidKthIndex(kIndex: mid + 1, leftIndex: leftIndex, rightIndex: rightIndex)
+        
+        sort(leftIndex: leftIndex, rightIndex: leftIndex + mid - 1)
+        sort(leftIndex: leftIndex + mid + 1, rightIndex: rightIndex)
     }
     
     /// Performs partition in a specific range by using random pivot index.
@@ -45,7 +72,7 @@ class MedianSortingAlgorithm: NSObject {
     ///     - leftIndex: Lower bound index of the range.
     ///     - rightIndex: Upper bound index of the range.
     private func performPartitionForMidKthIndex(kIndex: Int, leftIndex: Int, rightIndex: Int) {
-        guard rightIndex >= leftIndex else { return }
+        guard rightIndex > leftIndex else { return }
         
         let randomPivotIndex = algorithms.randomIndex(lowerBound: leftIndex, upperBound: rightIndex)
         let pivotIndex = partition(leftIndex: leftIndex, rightIndex: rightIndex, pivotIndex: randomPivotIndex)
@@ -72,36 +99,68 @@ class MedianSortingAlgorithm: NSObject {
         
         // Move pivot index number to the end of the range.
         sortingArray.swapAt(pivotIndex, rightIndex)
-        
+        elementSwapAt(pivotIndex, rightIndex)
+
         var storeIndex = leftIndex
         
         for index in leftIndex..<rightIndex {
             if algorithms.compare(numberA: sortingArray[index], numberB: pivot) <= 0 {
                 
-                // Swap comparable number with the stored value, if the value is bigger.
-                sortingArray.swapAt(index, storeIndex)
+                if index != storeIndex {
+                    // Swap comparable number with the stored value, if the value is bigger.
+                    sortingArray.swapAt(index, storeIndex)
+                    elementSwapAt(index, storeIndex)
+                }
+                
                 storeIndex += 1
             }
         }
         
-        // Swap pivot number with the last stored value.
-        sortingArray.swapAt(rightIndex, storeIndex)
-        
+        if rightIndex != storeIndex {
+            // Swap pivot number with the last stored value.
+            sortingArray.swapAt(rightIndex, storeIndex)
+            elementSwapAt(rightIndex, storeIndex)
+        }
+
         return storeIndex
     }
     
-    /// Performs median sort in specific range.
+    /// Tells the `MedianSortingAlgorithmDelegate` to swap elements at indexes.
     ///
     /// - Parameters:
-    ///     - leftIndex: Lower bound index of the range.
-    ///     - rightIndex: Upper bound index of the range.
-    private func sort(leftIndex: Int, rightIndex: Int) {
-        guard rightIndex > leftIndex else { return }
+    ///     - i: First element to be swaped.
+    ///     - j: Second element to be swaped.
+    private func elementSwapAt(_ i: Int, _ j: Int) {
+        let elementA = sortingArray[i]
+        let elementB = sortingArray[j]
+        let deltaIndex = i.distance(to: j)
         
-        let mid = (rightIndex - leftIndex + 1) / 2
-        performPartitionForMidKthIndex(kIndex: mid + 1, leftIndex: leftIndex, rightIndex: rightIndex)
+        delegate?.medianSortingAlgorithm(self, didSwap: elementA, and: elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
         
-        sort(leftIndex: leftIndex, rightIndex: leftIndex + mid - 1)
-        sort(leftIndex: leftIndex + mid + 1, rightIndex: rightIndex)
+        actionIndex += 1
     }
+}
+
+/// The object that acts as the delegate of the `MedianSortingAlgorithm`.
+///
+/// The delegate must adopt the MedianSortingAlgorithmDelegate protocol.
+///
+/// The delegate object is responsible for managing the element swapping.
+protocol MedianSortingAlgorithmDelegate: class {
+    
+    /// Tells the delegate that elements were swapped.
+    ///
+    /// - Parameters:
+    ///     - algorithm: An object performing median sorting algorithm.
+    ///     - elementA: First element to be swapped.
+    ///     - elementB: Second element to be swapped.
+    ///     - deltaIndex: Index delta between elements.
+    ///     - actionIndex: Index of swapping action execution.
+    func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int)
+    
+    /// Tells the delegate that algorithm did finish sorting.
+    ///
+    /// - Parameters:
+    ///     - algorithm: An object performing median sorting algorithm.
+    func medianSortingAlgorithmDidFinishSorting(_ algorithm: MedianSortingAlgorithm)
 }
