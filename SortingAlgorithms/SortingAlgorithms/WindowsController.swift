@@ -17,17 +17,17 @@ class WindowsController: NSWindowController {
     
     let toolbar = NSToolbar()
     
-    lazy var toolbarItemIdentifiers = [insertSortToolbarItemID, medianSortToolbarItemID]
+    lazy var toolbarItemIdentifiers = [insertionSortToolbarItemID, medianSortToolbarItemID]
     
     private var sortingView: SortingView?
     
-    private let insertSortToolbarItemID = NSToolbarItem.Identifier("insert sort")
-    private lazy var insertSortToolbarItem: NSToolbarItem = {
-        let item = NSToolbarItem(itemIdentifier: insertSortToolbarItemID)
+    private let insertionSortToolbarItemID = NSToolbarItem.Identifier("insertion sort")
+    private lazy var insertionSortToolbarItem: NSToolbarItem = {
+        let item = NSToolbarItem(itemIdentifier: insertionSortToolbarItemID)
         
-        item.label = "Insert"
+        item.label = "Insertion"
         item.target = self
-        item.action = #selector(showInsertSortingViewController)
+        item.action = #selector(showInsertionSortingViewController)
         
         return item
     }()
@@ -72,16 +72,16 @@ class WindowsController: NSWindowController {
             sortingView = SortingView(sortingArray: sortingArray, sortingAlgorithm: sortingAlgorithm)
         }
         
-        guard let insertSortView = self.sortingView else { return }
+        guard let insertionSortView = self.sortingView else { return }
         
         contentViewController.view.subviews.removeAll()
-        contentViewController.view.addSubview(insertSortView)
-        insertSortView.constraints(edgesTo: contentViewController.view)
+        contentViewController.view.addSubview(insertionSortView)
+        insertionSortView.constraints(edgesTo: contentViewController.view)
     }
     
     // MARK: - Actions
 
-    @objc private func showInsertSortingViewController() {
+    @objc private func showInsertionSortingViewController() {
         setupGraphView(sortingAlgorithm: .insert)
     }
     
@@ -112,8 +112,8 @@ extension WindowsController: NSToolbarDelegate {
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         switch itemIdentifier {
-        case insertSortToolbarItemID:
-            return insertSortToolbarItem
+        case insertionSortToolbarItemID:
+            return insertionSortToolbarItem
         case medianSortToolbarItemID:
             return medianSortToolbarItem
         default:

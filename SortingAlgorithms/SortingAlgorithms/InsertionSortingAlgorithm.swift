@@ -1,5 +1,5 @@
 //
-//  InsertSortingAlgorithm.swift
+//  InsertionSortingAlgorithm.swift
 //  SortingAlgorithms
 //
 //  Created by Kristina Gelzinyte on 8/20/18.
@@ -8,19 +8,19 @@
 
 import Cocoa
 
-/// Insert sorting algorithm object for specified array.
-class InsertSortingAlgorithm: NSObject {
+/// Insertion sorting algorithm object for specified array.
+class InsertionSortingAlgorithm: NSObject {
 
     // MARK: - Properties
     
-    weak var delegate: InsertSortingAlgorithmDelegate?
+    weak var delegate: InsertionSortingAlgorithmDelegate?
     
     private var sortingArray: [Int] = []
     private let algorithms = Algorithms()
     
     // MARK: - Initialization
     
-    /// Returns a insert sorting algorithm object for specified array.
+    /// Returns a insertion sorting algorithm object for specified array.
     ///
     /// - Parameters:
     ///     - array: To be sorted array.
@@ -33,14 +33,14 @@ class InsertSortingAlgorithm: NSObject {
     
     /// Sorts the specified array of integers.
     ///
-    /// - Returns: Sorted array by insert sorting algorithm.
+    /// - Returns: Sorted array by insertion sorting algorithm.
     func sort() -> [Int] {
         performSorting()
-        delegate?.insertSortingAlgorithmDidFinishSorting(self)
+        delegate?.insertionSortingAlgorithmDidFinishSorting(self)
         return sortingArray
     }
     
-    /// Performs insert sort for the specified array.
+    /// Performs insertion sort for the specified array.
     private func performSorting() {
         var actionIndex = 0
         
@@ -53,7 +53,7 @@ class InsertSortingAlgorithm: NSObject {
                 let elementA = sortingArray[previousIndex]
                 let elementB = sortingArray[previousIndex + 1]
                 let deltaIndex = 1
-                delegate?.insertSortingAlgorithm(self, didSwap: elementA, and: elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
+                delegate?.insertionSortingAlgorithm(self, didSwap: elementA, and: elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
                 
                 previousIndex -= 1
                 actionIndex += 1
@@ -62,26 +62,26 @@ class InsertSortingAlgorithm: NSObject {
     }
 }
 
-/// The object that acts as the delegate of the `InsertSortingAlgorithm`.
+/// The object that acts as the delegate of the `InsertionSortingAlgorithm`.
 ///
-/// The delegate must adopt the InsertSortingAlgorithmDelegate protocol.
+/// The delegate must adopt the InsertionSortingAlgorithmDelegate protocol.
 ///
 /// The delegate object is responsible for managing the element swapping.
-protocol InsertSortingAlgorithmDelegate: class {
+protocol InsertionSortingAlgorithmDelegate: class {
     
     /// Tells the delegate that elements were swapped.
     ///
     /// - Parameters:
-    ///     - algorithm: An object performing insert sorting algorithm.
+    ///     - algorithm: An object performing insertion sorting algorithm.
     ///     - elementA: First element to be swapped.
     ///     - elementB: Second element to be swapped.
     ///     - deltaIndex: Index delta between elements.
     ///     - actionIndex: Index of swapping action execution.
-    func insertSortingAlgorithm(_ algorithm: InsertSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int)
+    func insertionSortingAlgorithm(_ algorithm: InsertionSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int)
     
     /// Tells the delegate that algorithm did finish sorting.
     ///
     /// - Parameters:
-    ///     - algorithm: An object performing insert sorting algorithm.
-    func insertSortingAlgorithmDidFinishSorting(_ algorithm: InsertSortingAlgorithm)
+    ///     - algorithm: An object performing insertion sorting algorithm.
+    func insertionSortingAlgorithmDidFinishSorting(_ algorithm: InsertionSortingAlgorithm)
 }

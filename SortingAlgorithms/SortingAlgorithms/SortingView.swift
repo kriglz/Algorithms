@@ -61,10 +61,10 @@ class SortingView: NSView {
     // MARK: - Sorting algorithms
     
     private func sortByInsert(animated: Bool = false) {
-        let insertSortingAlgorithm = InsertSortingAlgorithm(for: unsortedSortingArray)
-        insertSortingAlgorithm.delegate = self
-        let sortedArray = insertSortingAlgorithm.sort()
-        NSLog("Insert Sort Algorithm sorted array \(sortedArray)")
+        let insertionSortingAlgorithm = InsertionSortingAlgorithm(for: unsortedSortingArray)
+        insertionSortingAlgorithm.delegate = self
+        let sortedArray = insertionSortingAlgorithm.sort()
+        NSLog("Insertion Sort Algorithm sorted array \(sortedArray)")
     }
     
     private func sortByMedian(animated: Bool = false) {
