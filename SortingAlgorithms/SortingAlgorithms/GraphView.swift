@@ -67,18 +67,18 @@ class GraphView: NSView {
     
     // MARK: - Animation
     
-    func swapElements(_ i: Int, _ j: Int, actionIndex: Double) {
+    func swapElements(_ i: Int, _ j: Int, deltaIndex: Int, actionIndex: Int) {
         guard let iNode = scene.childNode(withName: "\(i)") as? ActionSpriteNode,
             let jNode = scene.childNode(withName: "\(j)") as? ActionSpriteNode else { return }
         
-        let iNodeAction = SKAction.moveBy(x: CGFloat(-ActionSpriteNode.width * 1.2), y: 0, duration: ActionSpriteNode.duration)
-        let jNodeAction = SKAction.moveBy(x: CGFloat(ActionSpriteNode.width * 1.2), y: 0, duration: ActionSpriteNode.duration)
+        let iNodeAction = SKAction.moveBy(x: CGFloat(-ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex), y: 0, duration: ActionSpriteNode.duration)
+        let jNodeAction = SKAction.moveBy(x: CGFloat(ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex), y: 0, duration: ActionSpriteNode.duration)
         
         iNode.addAction(action: iNodeAction, actionIndex: actionIndex)
         jNode.addAction(action: jNodeAction, actionIndex: actionIndex)
     }
     
-    func performAnimation() {
+    func runAnimation() {
         scene.children.forEach { child in
             if let node = child as? ActionSpriteNode {
                 node.runActions()

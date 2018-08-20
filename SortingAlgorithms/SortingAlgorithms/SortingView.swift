@@ -13,7 +13,7 @@ class SortingView: NSView {
     // MARK: - Properties
     
     private var unsortedSortingArray: [Int] = []
-    private var graphView: GraphView!
+    private(set) var graphView: GraphView!
     
     private let algorithms = Algorithms()
     private var sortingAlgorithm: SortingAlgorithm!
@@ -61,7 +61,7 @@ class SortingView: NSView {
     // MARK: - Sorting algorithms
     
     private func sortByInsert(animated: Bool = false) {
-        var actionIndex = 0.0
+        var actionIndex = 0
         var sortingArray = unsortedSortingArray
         
         for index in 1..<sortingArray.count {
@@ -71,7 +71,7 @@ class SortingView: NSView {
                 sortingArray.swapAt(previousIndex, previousIndex + 1)
 
                 if animated {
-                    graphView.swapElements(sortingArray[previousIndex], sortingArray[previousIndex + 1], actionIndex: actionIndex)
+//                    graphView.swapElements(sortingArray[previousIndex], sortingArray[previousIndex + 1], actionIndex: actionIndex)
                 }
                 
                 previousIndex -= 1
@@ -80,12 +80,13 @@ class SortingView: NSView {
         }
 
         if animated {
-            graphView.performAnimation()
+            graphView.runAnimation()
         }
     }
     
     private func sortByMedian(animated: Bool = false) {
         let mediumSortingAlgorithm = MedianSortingAlgorithm(for: unsortedSortingArray)
+        mediumSortingAlgorithm.delegate = self
         let sortedArray = mediumSortingAlgorithm.sort()
         print(sortedArray)
     }

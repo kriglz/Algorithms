@@ -12,23 +12,23 @@ class ActionSpriteNode: SKSpriteNode {
     
     // MARK: - Properties
     
-    static let duration = 0.2
+    static let duration = 0.5
     static let width = 5.0
 
     private var actions: SKAction?
-    private var previousActionIndex = 0.0
+    private var previousActionIndex = 0
     
     // MARK: - Animation
     
-    func addAction(action: SKAction, actionIndex: Double) {
+    func addAction(action: SKAction, actionIndex: Int) {
         let durationIndex = actionIndex - previousActionIndex
         
         if let currentActions = self.actions {
-            let sequence = [currentActions, SKAction.wait(forDuration:  ActionSpriteNode.duration * (durationIndex - 1)), action]
+            let sequence = [currentActions, SKAction.wait(forDuration:  ActionSpriteNode.duration * Double(durationIndex - 1)), action]
             actions = SKAction.sequence(sequence)
             
         } else {
-            let sequence = [SKAction.wait(forDuration:  ActionSpriteNode.duration * durationIndex), action]
+            let sequence = [SKAction.wait(forDuration:  ActionSpriteNode.duration * Double(durationIndex)), action]
             actions = SKAction.sequence(sequence)
         }
         
