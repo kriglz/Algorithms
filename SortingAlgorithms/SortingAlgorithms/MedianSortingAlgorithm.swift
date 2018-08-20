@@ -56,6 +56,9 @@ class MedianSortingAlgorithm: NSObject {
     ///     - rightIndex: Upper bound index of the range.
     private func sort(leftIndex: Int, rightIndex: Int) {
         guard rightIndex > leftIndex else { return }
+
+        let activeArray = Array(sortingArray[leftIndex ... rightIndex])
+        delegate?.medianSortingAlgorithm(self, sortingRangeElements: activeArray, actionIndex: actionIndex)
         
         let mid = (rightIndex - leftIndex + 1) / 2
         performPartitionForMidKthIndex(kIndex: mid + 1, leftIndex: leftIndex, rightIndex: rightIndex)
@@ -157,6 +160,14 @@ protocol MedianSortingAlgorithmDelegate: class {
     ///     - deltaIndex: Index delta between elements.
     ///     - actionIndex: Index of swapping action execution.
     func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int)
+    
+    /// Tells the delegate that specific sorting range elements became active.
+    ///
+    /// - Parameters:
+    ///     - algorithm: An object performing median sorting algorithm.
+    ///     - sortingRangeElements: Active sorting range elements.
+    ///     - actionIndex: Index of swapping action execution.
+    func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, sortingRangeElements: [Int], actionIndex: Int)
     
     /// Tells the delegate that algorithm did finish sorting.
     ///

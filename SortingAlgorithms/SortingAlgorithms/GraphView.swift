@@ -41,6 +41,7 @@ class GraphView: NSView {
     
     // MARK: - SpriteKit setup
     
+    /// Sets up graph view with unsortee childre.
     func setupGraph() {
         for (index, number) in sortingArray.enumerated() {
             
@@ -61,23 +62,39 @@ class GraphView: NSView {
         }
     }
     
+    /// Removes all children from the scene.
     func reset() {
         scene.children.forEach { $0.removeFromParent() }
     }
     
     // MARK: - Animation
     
+    /// Swap specific elements of the array.
     func swapElements(_ i: Int, _ j: Int, deltaIndex: Int, actionIndex: Int) {
         guard let iNode = scene.childNode(withName: "\(i)") as? ActionSpriteNode,
             let jNode = scene.childNode(withName: "\(j)") as? ActionSpriteNode else { return }
         
-        let iNodeAction = SKAction.moveBy(x: CGFloat(-ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex), y: 0, duration: ActionSpriteNode.duration)
-        let jNodeAction = SKAction.moveBy(x: CGFloat(ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex), y: 0, duration: ActionSpriteNode.duration)
+        let iNodeTranslationLength = CGFloat(-ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex)
+        let jNodeTranslationLength = CGFloat(ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex)
         
-        iNode.addAction(action: iNodeAction, actionIndex: actionIndex)
-        jNode.addAction(action: jNodeAction, actionIndex: actionIndex)
+        iNode.addMoveByAction(translationLength: iNodeTranslationLength, actionIndex: actionIndex)
+        jNode.addMoveByAction(translationLength: jNodeTranslationLength, actionIndex: actionIndex)
     }
     
+    /// Color active elements of array.
+    func colorElements(_ elements: [Int], actionIndex: Int) {
+        scene.children.forEach { child in
+            if let node = child as? ActionSpriteNode {
+                if let name = node.name, let nodeName = Int(name), elements.contains(nodeName) {
+                    node.addColorAction(isColorized: true, actionIndex: actionIndex)
+                } else {
+                    node.addColorAction(isColorized: false, actionIndex: actionIndex)
+                }
+            }
+        }
+    }
+    
+    /// Performs the sorting animation.
     func runAnimation() {
         scene.children.forEach { child in
             if let node = child as? ActionSpriteNode {
