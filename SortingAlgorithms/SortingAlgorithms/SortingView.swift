@@ -61,33 +61,16 @@ class SortingView: NSView {
     // MARK: - Sorting algorithms
     
     private func sortByInsert(animated: Bool = false) {
-        var actionIndex = 0
-        var sortingArray = unsortedSortingArray
-        
-        for index in 1..<sortingArray.count {
-            var previousIndex = index - 1
-            
-            while (previousIndex >= 0 && algorithms.compare(numberA: sortingArray[previousIndex], numberB: sortingArray[previousIndex + 1]) > 0) {
-                sortingArray.swapAt(previousIndex, previousIndex + 1)
-
-                if animated {
-//                    graphView.swapElements(sortingArray[previousIndex], sortingArray[previousIndex + 1], actionIndex: actionIndex)
-                }
-                
-                previousIndex -= 1
-                actionIndex += 1
-            }
-        }
-
-        if animated {
-            graphView.runAnimation()
-        }
+        let insertSortingAlgorithm = InsertSortingAlgorithm(for: unsortedSortingArray)
+        insertSortingAlgorithm.delegate = self
+        let sortedArray = insertSortingAlgorithm.sort()
+        NSLog("Insert Sort Algorithm sorted array \(sortedArray)")
     }
     
     private func sortByMedian(animated: Bool = false) {
         let mediumSortingAlgorithm = MedianSortingAlgorithm(for: unsortedSortingArray)
         mediumSortingAlgorithm.delegate = self
         let sortedArray = mediumSortingAlgorithm.sort()
-        print(sortedArray)
+        NSLog("Medium Sort Algorithm sorted array \(sortedArray)")
     }
 }

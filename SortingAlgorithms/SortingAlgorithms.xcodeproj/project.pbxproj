@@ -10,6 +10,8 @@
 		8908B6BA2124A96C00E06C3B /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6B92124A96C00E06C3B /* GraphView.swift */; };
 		8908B6BC212507FF00E06C3B /* ActionSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */; };
 		8908B6BE2125CE8D00E06C3B /* Algorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6BD2125CE8D00E06C3B /* Algorithms.swift */; };
+		891415E6212B5D3400D96FBC /* InsertSortingAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415E5212B5D3400D96FBC /* InsertSortingAlgorithm.swift */; };
+		891415E8212B5FED00D96FBC /* SortingView+InsertSortingAlgorithmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415E7212B5FED00D96FBC /* SortingView+InsertSortingAlgorithmDelegate.swift */; };
 		892EF99A21278717004816F8 /* Range+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EF99921278717004816F8 /* Range+Extension.swift */; };
 		894B07442125D957002FB766 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07432125D957002FB766 /* NSView+Extension.swift */; };
 		894B07462125D974002FB766 /* NSToolbar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07452125D974002FB766 /* NSToolbar+Extension.swift */; };
@@ -26,6 +28,8 @@
 		8908B6B92124A96C00E06C3B /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSpriteNode.swift; sourceTree = "<group>"; };
 		8908B6BD2125CE8D00E06C3B /* Algorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithms.swift; sourceTree = "<group>"; };
+		891415E5212B5D3400D96FBC /* InsertSortingAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertSortingAlgorithm.swift; sourceTree = "<group>"; };
+		891415E7212B5FED00D96FBC /* SortingView+InsertSortingAlgorithmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortingView+InsertSortingAlgorithmDelegate.swift"; sourceTree = "<group>"; };
 		892EF99921278717004816F8 /* Range+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extension.swift"; sourceTree = "<group>"; };
 		894B07432125D957002FB766 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
 		894B07452125D974002FB766 /* NSToolbar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbar+Extension.swift"; sourceTree = "<group>"; };
@@ -83,9 +87,11 @@
 			children = (
 				8950EEA8212391D900FA1E75 /* WindowsController.swift */,
 				8950EE9521238E5500FA1E75 /* SortingView.swift */,
+				891415E7212B5FED00D96FBC /* SortingView+InsertSortingAlgorithmDelegate.swift */,
 				89A31A5B212B468B00436F3D /* SortingView+MedianSortingAlgorithmDelegate.swift */,
 				8908B6BD2125CE8D00E06C3B /* Algorithms.swift */,
 				8985E9F92127A80C001A763C /* MedianSortingAlgorithm.swift */,
+				891415E5212B5D3400D96FBC /* InsertSortingAlgorithm.swift */,
 				8908B6B92124A96C00E06C3B /* GraphView.swift */,
 				8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */,
 				894B07472125D985002FB766 /* Utilities */,
@@ -176,11 +182,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				891415E8212B5FED00D96FBC /* SortingView+InsertSortingAlgorithmDelegate.swift in Sources */,
 				894B07462125D974002FB766 /* NSToolbar+Extension.swift in Sources */,
 				894B07442125D957002FB766 /* NSView+Extension.swift in Sources */,
 				8908B6BC212507FF00E06C3B /* ActionSpriteNode.swift in Sources */,
 				89A31A5C212B468B00436F3D /* SortingView+MedianSortingAlgorithmDelegate.swift in Sources */,
 				8950EE9621238E5500FA1E75 /* SortingView.swift in Sources */,
+				891415E6212B5D3400D96FBC /* InsertSortingAlgorithm.swift in Sources */,
 				8950EEA9212391D900FA1E75 /* WindowsController.swift in Sources */,
 				8950EE9421238E5500FA1E75 /* AppDelegate.swift in Sources */,
 				8985E9FA2127A80C001A763C /* MedianSortingAlgorithm.swift in Sources */,
