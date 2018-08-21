@@ -57,7 +57,7 @@ class HeapSortingAlgorithm: NSObject {
     private func sort(maxIndex: Int) {
         buildAHeap(maxIndex: maxIndex)
         
-        var index = maxIndex - 1
+        var index = maxIndex
         while index >= 0 {
             sortingArray.swapAt(0, index)
             elementSwapAt(0, index)
