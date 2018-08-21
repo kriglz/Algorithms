@@ -17,7 +17,7 @@ class WindowsController: NSWindowController {
     
     let toolbar = NSToolbar()
     
-    lazy var toolbarItemIdentifiers = [insertionSortToolbarItemID, medianSortToolbarItemID, quicksortSortToolbarItemID]
+    lazy var toolbarItemIdentifiers = [insertionSortToolbarItemID, medianSortToolbarItemID, quicksortSortToolbarItemID, heapSortToolbarItemID]
     
     private var sortingView: SortingView?
     
@@ -50,6 +50,17 @@ class WindowsController: NSWindowController {
         item.label = "QUICKSORT"
         item.target = self
         item.action = #selector(openQuicksortSortingViewController)
+        
+        return item
+    }()
+    
+    private let heapSortToolbarItemID = NSToolbarItem.Identifier("Heap sort")
+    private lazy var heapSortToolbarItem: NSToolbarItem = {
+        let item = NSToolbarItem(itemIdentifier: heapSortToolbarItemID)
+        
+        item.label = "Heap"
+        item.target = self
+        item.action = #selector(openHeapSortingViewController)
         
         return item
     }()
@@ -103,6 +114,10 @@ class WindowsController: NSWindowController {
     @objc private func openQuicksortSortingViewController() {
         setupGraphView(sortingAlgorithm: .quicksort)
     }
+    
+    @objc private func openHeapSortingViewController() {
+        setupGraphView(sortingAlgorithm: .heap)
+    }
 }
 
 extension WindowsController: NSToolbarDelegate {
@@ -133,6 +148,8 @@ extension WindowsController: NSToolbarDelegate {
             return medianSortToolbarItem
         case quicksortSortToolbarItemID:
             return quicksortSortToolbarItem
+        case heapSortToolbarItemID:
+            return heapSortToolbarItem
         default:
             return nil
         }

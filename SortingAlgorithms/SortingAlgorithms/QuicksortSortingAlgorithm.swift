@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// QUICKSORT sorting algorithm object for specified array.
 class QuicksortSortingAlgorithm: NSObject {
 
     // MARK: - Properties
@@ -34,7 +35,7 @@ class QuicksortSortingAlgorithm: NSObject {
     
     /// Sorts the specified array of integers.
     ///
-    /// - Returns: Sorted array by insertion sorting algorithm.
+    /// - Returns: Sorted array by quicksort sorting algorithm.
     func sort() -> [Int] {
         quicksort(leftIndex: 0, rightIndex: sortingArray.count - 1)
         

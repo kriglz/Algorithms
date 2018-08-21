@@ -62,6 +62,8 @@ class SortingView: NSView {
             sortByMedian()
         case .quicksort:
             sortByQuicksort()
+        case .heap:
+            sortByHeap()
         default:
             return
         }
@@ -88,5 +90,12 @@ class SortingView: NSView {
         quicksortSortingAlgorithm.delegate = self
         let sortedArray = quicksortSortingAlgorithm.sort()
         NSLog("QUICKSORT Sort Algorithm sorted array \(sortedArray)")
+    }
+    
+    private func sortByHeap() {
+        let heapSortingAlgorithm = HeapSortingAlgorithm(for: unsortedSortingArray)
+//        quicksortSortingAlgorithm.delegate = self
+        let sortedArray = heapSortingAlgorithm.sort()
+        NSLog("Heap Sort Algorithm sorted array \(sortedArray)")
     }
 }
