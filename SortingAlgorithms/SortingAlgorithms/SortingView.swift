@@ -94,7 +94,7 @@ class SortingView: NSView {
     
     private func sortByHeap() {
         let heapSortingAlgorithm = HeapSortingAlgorithm(for: unsortedSortingArray)
-//        quicksortSortingAlgorithm.delegate = self
+        heapSortingAlgorithm.delegate = self
         let sortedArray = heapSortingAlgorithm.sort()
         NSLog("Heap Sort Algorithm sorted array \(sortedArray)")
     }
