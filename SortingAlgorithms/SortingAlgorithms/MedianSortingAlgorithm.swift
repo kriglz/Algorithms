@@ -57,7 +57,7 @@ class MedianSortingAlgorithm: NSObject {
     private func sort(leftIndex: Int, rightIndex: Int) {
         guard rightIndex > leftIndex else { return }
 
-        let activeArray = Array(sortingArray[leftIndex ... rightIndex])
+        let activeArray = Array(sortingArray[leftIndex...rightIndex])
         delegate?.medianSortingAlgorithm(self, sortingRangeElements: activeArray, actionIndex: actionIndex)
         
         let mid = (rightIndex - leftIndex + 1) / 2

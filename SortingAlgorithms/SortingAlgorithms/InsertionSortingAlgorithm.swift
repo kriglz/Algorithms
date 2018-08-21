@@ -35,13 +35,13 @@ class InsertionSortingAlgorithm: NSObject {
     ///
     /// - Returns: Sorted array by insertion sorting algorithm.
     func sort() -> [Int] {
-        performSorting()
+        insertion()
         delegate?.insertionSortingAlgorithmDidFinishSorting(self)
         return sortingArray
     }
     
     /// Performs insertion sort for the specified array.
-    private func performSorting() {
+    private func insertion() {
         var actionIndex = 0
         
         for index in 1..<sortingArray.count {

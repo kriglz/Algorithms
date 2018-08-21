@@ -26,7 +26,7 @@ class Algorithms {
         return 0
     }
     
-    /// Return random pivot index of specified range.
+    /// Returns the random pivot index of specified range.
     ///
     /// - Parameters:
     ///     - lowerBound: Lower bound of the range.
@@ -35,9 +35,24 @@ class Algorithms {
         let range: Range = lowerBound..<upperBound
         return range.random
     }
+    
+    /// Returns the pivot index of specified range by using median value of 3 random indexes.
+    ///
+    /// - Parameters:
+    ///     - lowerBound: Lower bound of the range.
+    ///     - upperBound: Upper bound of the range.
+    func mediumOfThree(lowerBound: Int, upperBound: Int) -> Int {
+        var randomElements: [Int] = []
+        for _ in 0..<3 {
+            randomElements.append(randomIndex(lowerBound: lowerBound, upperBound: upperBound))
+        }
+        randomElements.sort()
+        return randomElements[1]
+    }
 }
 
 enum SortingAlgorithm {
     case insert
     case median
+    case quicksort
 }

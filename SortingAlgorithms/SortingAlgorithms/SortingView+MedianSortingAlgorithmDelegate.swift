@@ -10,7 +10,7 @@ import Cocoa
 
 extension SortingView: MedianSortingAlgorithmDelegate {
     
-    // MARK: - MedianSortingAlgorithmDelegate impementation
+    // MARK: - MedianSortingAlgorithmDelegate implementation
     
     func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int) {
         graphView.swapElements(elementA, elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
