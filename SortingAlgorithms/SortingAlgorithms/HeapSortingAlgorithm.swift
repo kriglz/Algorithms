@@ -63,7 +63,6 @@ class HeapSortingAlgorithm: NSObject {
             elementSwapAt(0, index)
             
             heapify(index: 0, maxIndex: index)
-            
             index -= 1
         }
     }
@@ -73,7 +72,7 @@ class HeapSortingAlgorithm: NSObject {
     /// - Parameters:
     ///     - maxIndex: Upper bound index of the range.
     private func buildAHeap(maxIndex: Int) {
-        var index = maxIndex / 2 - 1
+        var index = Int((Double(maxIndex) / 2.0).rounded()) - 1
         while index >= 0 {
             heapify(index: index, maxIndex: maxIndex)
             index -= 1

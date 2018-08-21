@@ -10,6 +10,7 @@ import Cocoa
 
 class WindowsController: NSWindowController {
     
+//    let sortingArray = [1, 2, 3, 4, 5, 6, 07, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     let sortingArray = [15, 09, 08, 01, 04, 11, 07, 12, 13, 06, 05, 03, 16, 02, 10, 14]
 //    let sortingArray = [15, 02, 11, 09, 1]
 
