@@ -41,7 +41,7 @@ class GraphView: NSView {
     
     // MARK: - SpriteKit setup
     
-    /// Sets up graph view with unsortee childre.
+    /// Sets up graph view with unsorted children.
     func setupGraph() {
         for (index, number) in sortingArray.enumerated() {
             

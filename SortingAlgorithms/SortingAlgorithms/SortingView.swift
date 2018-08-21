@@ -12,11 +12,13 @@ class SortingView: NSView {
     
     // MARK: - Properties
     
+    private var sortingAlgorithm: SortingAlgorithm!
     private var unsortedSortingArray: [Int] = []
+    private var isUnsorted = true
+
     private(set) var graphView: GraphView!
     
     private let algorithms = Algorithms()
-    private var sortingAlgorithm: SortingAlgorithm!
     
     // MARK: - Lifecycle functions
     
@@ -45,9 +47,14 @@ class SortingView: NSView {
         guard let graphView = self.graphView else { return }
         graphView.reset()
         graphView.setupGraph()
+        
+        isUnsorted = true
     }
     
     @objc private func sortArrayAction(_ sender: NSButton) {
+        guard isUnsorted else { return }
+        isUnsorted = false
+
         switch sortingAlgorithm {
         case .insert:
             sortByInsertion()
