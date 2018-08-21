@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Algorithms {
+struct Algorithms {
     
     /// Compares numbers A and B
     ///
@@ -52,6 +52,7 @@ class Algorithms {
 }
 
 enum SortingAlgorithm {
+    
     case insert
     case median
     case quicksort

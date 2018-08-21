@@ -63,12 +63,6 @@ class ActionSpriteNode: SKSpriteNode {
         }
         
         run(actions) { [weak self] in
-            self?.previousMoveActionIndex = 0
-            self?.previousColorActionIndex = 0
-            
-            self?.moveActions = nil
-            self?.colorActions = nil
-            
             self?.color = .white
         }
     }
