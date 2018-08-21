@@ -17,7 +17,7 @@ class WindowsController: NSWindowController {
     
     let toolbar = NSToolbar()
     
-    lazy var toolbarItemIdentifiers = [insertionSortToolbarItemID, medianSortToolbarItemID]
+    lazy var toolbarItemIdentifiers = [insertionSortToolbarItemID, medianSortToolbarItemID, quicksortSortToolbarItemID]
     
     private var sortingView: SortingView?
     
@@ -43,6 +43,17 @@ class WindowsController: NSWindowController {
         return item
     }()
 
+    private let quicksortSortToolbarItemID = NSToolbarItem.Identifier("Quicksort sort")
+    private lazy var quicksortSortToolbarItem: NSToolbarItem = {
+        let item = NSToolbarItem(itemIdentifier: quicksortSortToolbarItemID)
+        
+        item.label = "QUICKSORT"
+        item.target = self
+        item.action = #selector(openQuicksortSortingViewController)
+        
+        return item
+    }()
+    
     // MARK: - Lifecycle funcions
     
     override func windowDidLoad() {
@@ -88,6 +99,10 @@ class WindowsController: NSWindowController {
     @objc private func openMedianSortingViewController() {
         setupGraphView(sortingAlgorithm: .median)        
     }
+    
+    @objc private func openQuicksortSortingViewController() {
+        setupGraphView(sortingAlgorithm: .quicksort)
+    }
 }
 
 extension WindowsController: NSToolbarDelegate {
@@ -116,6 +131,8 @@ extension WindowsController: NSToolbarDelegate {
             return insertionSortToolbarItem
         case medianSortToolbarItemID:
             return medianSortToolbarItem
+        case quicksortSortToolbarItemID:
+            return quicksortSortToolbarItem
         default:
             return nil
         }

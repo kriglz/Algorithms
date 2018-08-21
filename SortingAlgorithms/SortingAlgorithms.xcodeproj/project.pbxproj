@@ -12,6 +12,8 @@
 		8908B6BE2125CE8D00E06C3B /* Algorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908B6BD2125CE8D00E06C3B /* Algorithms.swift */; };
 		891415E6212B5D3400D96FBC /* InsertionSortingAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415E5212B5D3400D96FBC /* InsertionSortingAlgorithm.swift */; };
 		891415E8212B5FED00D96FBC /* SortingView+InsertionSortingAlgorithmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415E7212B5FED00D96FBC /* SortingView+InsertionSortingAlgorithmDelegate.swift */; };
+		891415EA212B8A2900D96FBC /* QuicksortSortingAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415E9212B8A2900D96FBC /* QuicksortSortingAlgorithm.swift */; };
+		891415EC212B93B400D96FBC /* SortingView+QuicksortSortingAlgorithmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415EB212B93B400D96FBC /* SortingView+QuicksortSortingAlgorithmDelegate.swift */; };
 		892EF99A21278717004816F8 /* Range+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EF99921278717004816F8 /* Range+Extension.swift */; };
 		894B07442125D957002FB766 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07432125D957002FB766 /* NSView+Extension.swift */; };
 		894B07462125D974002FB766 /* NSToolbar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07452125D974002FB766 /* NSToolbar+Extension.swift */; };
@@ -30,6 +32,8 @@
 		8908B6BD2125CE8D00E06C3B /* Algorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithms.swift; sourceTree = "<group>"; };
 		891415E5212B5D3400D96FBC /* InsertionSortingAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertionSortingAlgorithm.swift; sourceTree = "<group>"; };
 		891415E7212B5FED00D96FBC /* SortingView+InsertionSortingAlgorithmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortingView+InsertionSortingAlgorithmDelegate.swift"; sourceTree = "<group>"; };
+		891415E9212B8A2900D96FBC /* QuicksortSortingAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuicksortSortingAlgorithm.swift; sourceTree = "<group>"; };
+		891415EB212B93B400D96FBC /* SortingView+QuicksortSortingAlgorithmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortingView+QuicksortSortingAlgorithmDelegate.swift"; sourceTree = "<group>"; };
 		892EF99921278717004816F8 /* Range+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extension.swift"; sourceTree = "<group>"; };
 		894B07432125D957002FB766 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
 		894B07452125D974002FB766 /* NSToolbar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbar+Extension.swift"; sourceTree = "<group>"; };
@@ -89,9 +93,11 @@
 				8950EE9521238E5500FA1E75 /* SortingView.swift */,
 				891415E7212B5FED00D96FBC /* SortingView+InsertionSortingAlgorithmDelegate.swift */,
 				89A31A5B212B468B00436F3D /* SortingView+MedianSortingAlgorithmDelegate.swift */,
+				891415EB212B93B400D96FBC /* SortingView+QuicksortSortingAlgorithmDelegate.swift */,
 				8908B6BD2125CE8D00E06C3B /* Algorithms.swift */,
-				8985E9F92127A80C001A763C /* MedianSortingAlgorithm.swift */,
 				891415E5212B5D3400D96FBC /* InsertionSortingAlgorithm.swift */,
+				8985E9F92127A80C001A763C /* MedianSortingAlgorithm.swift */,
+				891415E9212B8A2900D96FBC /* QuicksortSortingAlgorithm.swift */,
 				8908B6B92124A96C00E06C3B /* GraphView.swift */,
 				8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */,
 				894B07472125D985002FB766 /* Utilities */,
@@ -183,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				891415E8212B5FED00D96FBC /* SortingView+InsertionSortingAlgorithmDelegate.swift in Sources */,
+				891415EC212B93B400D96FBC /* SortingView+QuicksortSortingAlgorithmDelegate.swift in Sources */,
 				894B07462125D974002FB766 /* NSToolbar+Extension.swift in Sources */,
 				894B07442125D957002FB766 /* NSView+Extension.swift in Sources */,
 				8908B6BC212507FF00E06C3B /* ActionSpriteNode.swift in Sources */,
@@ -194,6 +201,7 @@
 				8985E9FA2127A80C001A763C /* MedianSortingAlgorithm.swift in Sources */,
 				8908B6BA2124A96C00E06C3B /* GraphView.swift in Sources */,
 				8908B6BE2125CE8D00E06C3B /* Algorithms.swift in Sources */,
+				891415EA212B8A2900D96FBC /* QuicksortSortingAlgorithm.swift in Sources */,
 				892EF99A21278717004816F8 /* Range+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

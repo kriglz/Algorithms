@@ -2,4 +2,5 @@
 
 - Insertion Sort
 - Median Sort
+- QUICKSORT
 

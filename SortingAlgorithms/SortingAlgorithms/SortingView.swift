@@ -50,9 +50,11 @@ class SortingView: NSView {
     @objc private func sortArrayAction(_ sender: NSButton) {
         switch sortingAlgorithm {
         case .insert:
-            sortByInsert(animated: true)
+            sortByInsertion()
         case .median:
-            sortByMedian(animated: true)
+            sortByMedian()
+        case .quicksort:
+            sortByQuicksort()
         default:
             return
         }
@@ -60,17 +62,24 @@ class SortingView: NSView {
     
     // MARK: - Sorting algorithms
     
-    private func sortByInsert(animated: Bool = false) {
+    private func sortByInsertion() {
         let insertionSortingAlgorithm = InsertionSortingAlgorithm(for: unsortedSortingArray)
         insertionSortingAlgorithm.delegate = self
         let sortedArray = insertionSortingAlgorithm.sort()
         NSLog("Insertion Sort Algorithm sorted array \(sortedArray)")
     }
     
-    private func sortByMedian(animated: Bool = false) {
+    private func sortByMedian() {
         let mediumSortingAlgorithm = MedianSortingAlgorithm(for: unsortedSortingArray)
         mediumSortingAlgorithm.delegate = self
         let sortedArray = mediumSortingAlgorithm.sort()
         NSLog("Medium Sort Algorithm sorted array \(sortedArray)")
+    }
+    
+    private func sortByQuicksort() {
+        let quicksortSortingAlgorithm = QuicksortSortingAlgorithm(for: unsortedSortingArray)
+        quicksortSortingAlgorithm.delegate = self
+        let sortedArray = quicksortSortingAlgorithm.sort()
+        NSLog("QUICKSORT Sort Algorithm sorted array \(sortedArray)")
     }
 }
