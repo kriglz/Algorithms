@@ -64,6 +64,8 @@ class SortingView: NSView {
             sortByQuicksort()
         case .heap:
             sortByHeap()
+        case .bucket:
+            sortByBucket()
         default:
             return
         }
@@ -97,5 +99,13 @@ class SortingView: NSView {
         heapSortingAlgorithm.delegate = self
         let sortedArray = heapSortingAlgorithm.sort()
         NSLog("Heap Sort Algorithm sorted array \(sortedArray)")
+    }
+    
+    private func sortByBucket() {
+        let bucketSortingAlgorithm = BucketSortingAlgorithm(for: unsortedSortingArray)
+//        bucketSortingAlgorithm.delegate = self
+        let sortedArray = bucketSortingAlgorithm.sort()
+        NSLog("Bucket Sort Algorithm sorted array \(unsortedSortingArray)")
+        NSLog("Bucket Sort Algorithm sorted array \(sortedArray)")
     }
 }

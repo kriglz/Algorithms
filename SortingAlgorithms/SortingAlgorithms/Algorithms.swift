@@ -57,4 +57,5 @@ enum SortingAlgorithm {
     case median
     case quicksort
     case heap
+    case bucket
 }

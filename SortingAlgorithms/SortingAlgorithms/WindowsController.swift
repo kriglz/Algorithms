@@ -18,7 +18,13 @@ class WindowsController: NSWindowController {
     
     let toolbar = NSToolbar()
     
-    lazy var toolbarItemIdentifiers = [insertionSortToolbarItemID, medianSortToolbarItemID, quicksortSortToolbarItemID, heapSortToolbarItemID]
+    lazy var toolbarItemIdentifiers = [
+        insertionSortToolbarItemID,
+        medianSortToolbarItemID,
+        quicksortSortToolbarItemID,
+        heapSortToolbarItemID,
+        bucketSortToolbarItemID
+    ]
     
     private var sortingView: SortingView?
     
@@ -62,6 +68,17 @@ class WindowsController: NSWindowController {
         item.label = "Heap"
         item.target = self
         item.action = #selector(openHeapSortingViewController)
+        
+        return item
+    }()
+    
+    private let bucketSortToolbarItemID = NSToolbarItem.Identifier("Bucket sort")
+    private lazy var bucketSortToolbarItem: NSToolbarItem = {
+        let item = NSToolbarItem(itemIdentifier: bucketSortToolbarItemID)
+        
+        item.label = "Bucket"
+        item.target = self
+        item.action = #selector(openBucketSortingViewController)
         
         return item
     }()
@@ -119,6 +136,10 @@ class WindowsController: NSWindowController {
     @objc private func openHeapSortingViewController() {
         setupGraphView(sortingAlgorithm: .heap)
     }
+    
+    @objc private func openBucketSortingViewController() {
+        setupGraphView(sortingAlgorithm: .bucket)
+    }
 }
 
 extension WindowsController: NSToolbarDelegate {
@@ -151,6 +172,8 @@ extension WindowsController: NSToolbarDelegate {
             return quicksortSortToolbarItem
         case heapSortToolbarItemID:
             return heapSortToolbarItem
+        case bucketSortToolbarItemID:
+            return bucketSortToolbarItem
         default:
             return nil
         }
