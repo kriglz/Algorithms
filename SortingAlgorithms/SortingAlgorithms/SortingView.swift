@@ -103,9 +103,8 @@ class SortingView: NSView {
     
     private func sortByBucket() {
         let bucketSortingAlgorithm = BucketSortingAlgorithm(for: unsortedSortingArray)
-//        bucketSortingAlgorithm.delegate = self
+        bucketSortingAlgorithm.delegate = self
         let sortedArray = bucketSortingAlgorithm.sort()
-        NSLog("Bucket Sort Algorithm sorted array \(unsortedSortingArray)")
         NSLog("Bucket Sort Algorithm sorted array \(sortedArray)")
     }
 }

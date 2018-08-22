@@ -13,7 +13,10 @@ class BucketSortingAlgorithm: NSObject {
 
     // MARK: - Properties
     
+    weak var delegate: BucketSortingAlgorithmDelegate?
+    
     private var sortingArray: [Int] = []
+    private var actionIndex = 0
     private let algorithms = Algorithms()
     
     // MARK: - Initialization
@@ -35,6 +38,7 @@ class BucketSortingAlgorithm: NSObject {
     func sort() -> [Int] {
         let maxIndex = sortingArray.count - 1
         sort(maxIndex: maxIndex)
+        delegate?.bucketSortingAlgorithmDidFinishSorting(self)
         return sortingArray
     }
     
@@ -94,7 +98,8 @@ class BucketSortingAlgorithm: NSObject {
             
             // Bucket has one elements. Continue after overwriting `sortingArray` with that element.
             if let bucketHead = buckets[bucketIndex].entry, buckets[bucketIndex].size == 1 {
-                sortingArray[sortingArrayIndex] = bucketHead.element
+                setSortingArray(at: sortingArrayIndex, to: bucketHead.element)
+//                sortingArray[sortingArrayIndex] = bucketHead.element
                 sortingArrayIndex += 1
                 buckets[bucketIndex].entry = nil
                 buckets[bucketIndex].size = 0
@@ -106,7 +111,8 @@ class BucketSortingAlgorithm: NSObject {
             let lowerIndex = sortingArrayIndex
 
             if let bucketHead = buckets[bucketIndex].entry {
-                sortingArray[sortingArrayIndex] = bucketHead.element
+                setSortingArray(at: sortingArrayIndex, to: bucketHead.element)
+//                sortingArray[sortingArrayIndex] = bucketHead.element
                 sortingArrayIndex += 1
                 buckets[bucketIndex].entry = bucketHead.nextEntry
                 buckets[bucketIndex].size -= 1
@@ -116,11 +122,13 @@ class BucketSortingAlgorithm: NSObject {
                 var index = sortingArrayIndex - 1
                 
                 while index >= lowerIndex, algorithms.compare(numberA: sortingArray[index], numberB: bucketHead.element) > 0 {
-                    sortingArray[index + 1] = sortingArray[index]
+//                    sortingArray[index + 1] = sortingArray[index]
+                    setSortingArray(at: index + 1, to: sortingArray[index])
                     index -= 1
                 }
                 
-                sortingArray[index + 1] = bucketHead.element
+//                sortingArray[index + 1] = bucketHead.element
+                setSortingArray(at: index + 1, to: bucketHead.element)
                 buckets[bucketIndex].entry = bucketHead.nextEntry
                 sortingArrayIndex += 1
             }
@@ -128,6 +136,25 @@ class BucketSortingAlgorithm: NSObject {
             buckets[bucketIndex].size = 0
         }
     }
+    
+    /// Sets sorting array value at `index` to new value `value`
+    /// Tells delegate that `sortingArray` value at index has changed to new value.
+    ///
+    /// - Parameters:
+    ///     - index: The index of value to be set.
+    ///     - value: The new value to be set.
+    private func setSortingArray(at index: Int, to value: Int) {
+        delegate?.bucketSortingAlgorithm(self, didUpdate: sortingArray[index], to: value, actionIndex: actionIndex)
+        sortingArray[index] = value
+        actionIndex += 1
+    }
+}
+
+protocol BucketSortingAlgorithmDelegate: class {
+    
+    func bucketSortingAlgorithm(_ algorithm: BucketSortingAlgorithm, didUpdate element: Int, to value: Int, actionIndex: Int)
+    
+    func bucketSortingAlgorithmDidFinishSorting(_ algorithm: BucketSortingAlgorithm)
 }
 
 /// Bucket object, which is used to store elements from sorting array based on hash value.

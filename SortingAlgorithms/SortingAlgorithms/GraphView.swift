@@ -48,7 +48,7 @@ class GraphView: NSView {
             let rect = NSRect(x: Double(index) * ActionSpriteNode.width * 1.2 + 30.0,
                               y: 30.0,
                               width: ActionSpriteNode.width,
-                              height: 5 * Double(number))
+                              height: ActionSpriteNode.heightMultiplicationConstant * Double(number))
             
             let node = ActionSpriteNode()
             node.anchorPoint.y = 0
@@ -92,6 +92,14 @@ class GraphView: NSView {
                 }
             }
         }
+    }
+    
+    /// Update elements value or/and height.
+    func updateElement(_ element: Int, to value: Int, actionIndex: Int) {
+        guard let node = scene.childNode(withName: "\(element)") as? ActionSpriteNode else { return }
+        node.addHeightChangeAction(height: value, actionIndex: actionIndex)
+        
+        print(node.name!, "to new", value)
     }
     
     /// Performs the sorting animation.

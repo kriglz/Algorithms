@@ -14,13 +14,16 @@ class ActionSpriteNode: SKSpriteNode {
     
     static let duration = 0.2
     static let width = 5.0
+    static let heightMultiplicationConstant = 5.0
 
     private var moveActions: SKAction?
     private var colorActions: SKAction?
-    
+    private var heightActions: SKAction?
+
     private var previousMoveActionIndex = 0
     private var previousColorActionIndex = 0
-
+    private var previousHeightActionIndex = 0
+    
     // MARK: - Animation
     
     func addMoveByAction(translationLength: CGFloat, actionIndex: Int) {
@@ -55,14 +58,51 @@ class ActionSpriteNode: SKSpriteNode {
         previousColorActionIndex = actionIndex
     }
     
-    func runActions() {
-        guard var actions = self.moveActions else { return }
+    func addHeightChangeAction(height: Int, actionIndex: Int) {
+        let action = SKAction.resize(toHeight: CGFloat(ActionSpriteNode.heightMultiplicationConstant) * CGFloat(height), duration: ActionSpriteNode.duration)
         
-        if let colorActions = self.colorActions {
-            actions = SKAction.group([actions, colorActions])
+        let durationIndex = actionIndex - previousHeightActionIndex
+
+        if let currentActions = self.heightActions {
+            let sequence = [currentActions, SKAction.wait(forDuration: ActionSpriteNode.duration * Double(durationIndex - 1)), action]
+            colorActions = SKAction.sequence(sequence)
+        } else {
+            let sequence = [SKAction.wait(forDuration: ActionSpriteNode.duration * Double(durationIndex)), action]
+            colorActions = SKAction.sequence(sequence)
         }
         
-        run(actions) { [weak self] in
+        previousHeightActionIndex = actionIndex
+    }
+    
+    func runActions() {
+        var actions: SKAction?
+        
+        if let heightActions = self.heightActions {
+            if let allActions = actions {
+                actions = SKAction.group([allActions, heightActions])
+            } else {
+                actions = heightActions
+            }
+        }
+        
+        if let moveActions = self.moveActions {
+            if let allActions = actions {
+                actions = SKAction.group([allActions, moveActions])
+            } else {
+                actions = moveActions
+            }
+        }
+        
+        if let colorActions = self.colorActions {
+            if let allActions = actions {
+                actions = SKAction.group([allActions, colorActions])
+            } else {
+                actions = colorActions
+            }
+        }
+        
+        guard let allActions = actions else { return }
+        run(allActions) { [weak self] in
             self?.color = .white
         }
     }

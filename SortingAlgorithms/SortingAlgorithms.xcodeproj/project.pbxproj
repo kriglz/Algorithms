@@ -17,6 +17,7 @@
 		891415EE212C8E9600D96FBC /* HeapSortingAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415ED212C8E9600D96FBC /* HeapSortingAlgorithm.swift */; };
 		891415F0212C961800D96FBC /* SortingView+HeapSortingAlgorithmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415EF212C961800D96FBC /* SortingView+HeapSortingAlgorithmDelegate.swift */; };
 		891415F2212CD12800D96FBC /* BucketSortingAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415F1212CD12800D96FBC /* BucketSortingAlgorithm.swift */; };
+		891415F4212DF18300D96FBC /* SortingView+BucketSortingAlgorithmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891415F3212DF18300D96FBC /* SortingView+BucketSortingAlgorithmDelegate.swift */; };
 		892EF99A21278717004816F8 /* Range+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892EF99921278717004816F8 /* Range+Extension.swift */; };
 		894B07442125D957002FB766 /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07432125D957002FB766 /* NSView+Extension.swift */; };
 		894B07462125D974002FB766 /* NSToolbar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B07452125D974002FB766 /* NSToolbar+Extension.swift */; };
@@ -40,6 +41,7 @@
 		891415ED212C8E9600D96FBC /* HeapSortingAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeapSortingAlgorithm.swift; sourceTree = "<group>"; };
 		891415EF212C961800D96FBC /* SortingView+HeapSortingAlgorithmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortingView+HeapSortingAlgorithmDelegate.swift"; sourceTree = "<group>"; };
 		891415F1212CD12800D96FBC /* BucketSortingAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketSortingAlgorithm.swift; sourceTree = "<group>"; };
+		891415F3212DF18300D96FBC /* SortingView+BucketSortingAlgorithmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortingView+BucketSortingAlgorithmDelegate.swift"; sourceTree = "<group>"; };
 		892EF99921278717004816F8 /* Range+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extension.swift"; sourceTree = "<group>"; };
 		894B07432125D957002FB766 /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
 		894B07452125D974002FB766 /* NSToolbar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbar+Extension.swift"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				89A31A5B212B468B00436F3D /* SortingView+MedianSortingAlgorithmDelegate.swift */,
 				891415EB212B93B400D96FBC /* SortingView+QuicksortSortingAlgorithmDelegate.swift */,
 				891415EF212C961800D96FBC /* SortingView+HeapSortingAlgorithmDelegate.swift */,
+				891415F3212DF18300D96FBC /* SortingView+BucketSortingAlgorithmDelegate.swift */,
 				8908B6BD2125CE8D00E06C3B /* Algorithms.swift */,
 				891415E5212B5D3400D96FBC /* InsertionSortingAlgorithm.swift */,
 				8985E9F92127A80C001A763C /* MedianSortingAlgorithm.swift */,
@@ -204,6 +207,7 @@
 				894B07442125D957002FB766 /* NSView+Extension.swift in Sources */,
 				8908B6BC212507FF00E06C3B /* ActionSpriteNode.swift in Sources */,
 				89A31A5C212B468B00436F3D /* SortingView+MedianSortingAlgorithmDelegate.swift in Sources */,
+				891415F4212DF18300D96FBC /* SortingView+BucketSortingAlgorithmDelegate.swift in Sources */,
 				891415F0212C961800D96FBC /* SortingView+HeapSortingAlgorithmDelegate.swift in Sources */,
 				891415F2212CD12800D96FBC /* BucketSortingAlgorithm.swift in Sources */,
 				8950EE9621238E5500FA1E75 /* SortingView.swift in Sources */,
