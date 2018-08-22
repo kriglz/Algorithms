@@ -122,7 +122,7 @@ class WindowsController: NSWindowController {
     // MARK: - Actions
 
     @objc private func showInsertionSortingViewController() {
-        setupGraphView(sortingAlgorithm: .insert)
+        setupGraphView(sortingAlgorithm: .insertion)
     }
     
     @objc private func openMedianSortingViewController() {

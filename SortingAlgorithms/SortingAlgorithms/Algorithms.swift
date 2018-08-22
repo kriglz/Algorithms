@@ -51,9 +51,17 @@ struct Algorithms {
     }
 }
 
+/// Sort algorithm types.
+///
+/// List of possible sort algorithms:
+/// - insertion
+/// - median
+/// - quicksort
+/// - heap
+/// - bucket
 enum SortingAlgorithm {
     
-    case insert
+    case insertion
     case median
     case quicksort
     case heap

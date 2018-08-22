@@ -56,7 +56,7 @@ class SortingView: NSView {
         isUnsorted = false
 
         switch sortingAlgorithm {
-        case .insert:
+        case .insertion:
             sortByInsertion()
         case .median:
             sortByMedian()

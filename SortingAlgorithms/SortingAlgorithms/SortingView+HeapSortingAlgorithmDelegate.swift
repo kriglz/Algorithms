@@ -10,6 +10,8 @@ import Cocoa
 
 extension SortingView: HeapSortingAlgorithmDelegate {
     
+    // MARK: - HeapSortingAlgorithmDelegate implementation
+    
     func heapSortingAlgorithm(_ algorithm: HeapSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int) {
         graphView.swapElements(elementA, elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
     }
