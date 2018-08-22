@@ -4,7 +4,13 @@
 ![](./PreviewGIFs/insertion.gif)
 
 - Median Sort
-- QUICKSORT
-- Heap Sort
-- Bucket Sort
+![](./PreviewGIFs/median.gif)
 
+- QUICKSORT
+![](./PreviewGIFs/quicksort.gif)
+
+- Heap Sort
+![](./PreviewGIFs/heap.gif)
+
+- Bucket Sort
+![](./PreviewGIFs/bucket.gif)
