@@ -79,7 +79,8 @@ class BucketSortingAlgorithm: NSObject {
     ///     - value: Integer number which hash value needs to be calculated.
     /// - Returns: `value / 3`.
     private func hash(of value: Int) -> Int {
-        return value / 3
+        let coefficient = (sortingArray.max() ?? 1) / sortingArray.count
+        return value / ( coefficient > 4 ? coefficient : 4)
     }
     
     /// Overrites `sortingArray` elements based on the bucket elements.
