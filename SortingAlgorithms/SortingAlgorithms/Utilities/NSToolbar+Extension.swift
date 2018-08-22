@@ -10,6 +10,7 @@ import Cocoa
 
 extension NSToolbar {
     
+    /// Returns an item for toolbar item idenfifier.
     func item(for identifier: NSToolbarItem.Identifier) -> NSToolbarItem? {
         for item in self.items {
             if item.itemIdentifier == identifier {

@@ -10,6 +10,7 @@ import Cocoa
 
 extension NSView {
     
+    /// Applies constriants to the specified view edges.
     func constraints(edgesTo view: NSView, constant: CGFloat = 0) {
         self.translatesAutoresizingMaskIntoConstraints = false
         
