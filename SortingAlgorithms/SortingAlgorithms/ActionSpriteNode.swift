@@ -65,10 +65,10 @@ class ActionSpriteNode: SKSpriteNode {
 
         if let currentActions = self.heightActions {
             let sequence = [currentActions, SKAction.wait(forDuration: ActionSpriteNode.duration * Double(durationIndex - 1)), action]
-            colorActions = SKAction.sequence(sequence)
+            heightActions = SKAction.sequence(sequence)
         } else {
             let sequence = [SKAction.wait(forDuration: ActionSpriteNode.duration * Double(durationIndex)), action]
-            colorActions = SKAction.sequence(sequence)
+            heightActions = SKAction.sequence(sequence)
         }
         
         previousHeightActionIndex = actionIndex
