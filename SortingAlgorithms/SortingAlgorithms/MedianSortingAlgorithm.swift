@@ -101,7 +101,6 @@ class MedianSortingAlgorithm: NSObject {
         let pivot = sortingArray[pivotIndex]
         
         // Move pivot index number to the end of the range.
-        sortingArray.swapAt(pivotIndex, rightIndex)
         elementSwapAt(pivotIndex, rightIndex)
 
         var storeIndex = leftIndex
@@ -111,7 +110,6 @@ class MedianSortingAlgorithm: NSObject {
                 
                 if index != storeIndex {
                     // Swap comparable number with the stored value, if the value is bigger.
-                    sortingArray.swapAt(index, storeIndex)
                     elementSwapAt(index, storeIndex)
                 }
                 
@@ -121,7 +119,6 @@ class MedianSortingAlgorithm: NSObject {
         
         if rightIndex != storeIndex {
             // Swap pivot number with the last stored value.
-            sortingArray.swapAt(rightIndex, storeIndex)
             elementSwapAt(rightIndex, storeIndex)
         }
 
@@ -134,12 +131,8 @@ class MedianSortingAlgorithm: NSObject {
     ///     - i: First element to be swaped.
     ///     - j: Second element to be swaped.
     private func elementSwapAt(_ i: Int, _ j: Int) {
-        let elementA = sortingArray[i]
-        let elementB = sortingArray[j]
-        let deltaIndex = i.distance(to: j)
-        
-        delegate?.medianSortingAlgorithm(self, didSwap: elementA, and: elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
-        
+        sortingArray.swapAt(i, j)
+        delegate?.medianSortingAlgorithm(self, didSwap: i, and: j, actionIndex: actionIndex)
         actionIndex += 1
     }
 }
@@ -155,11 +148,10 @@ protocol MedianSortingAlgorithmDelegate: class {
     ///
     /// - Parameters:
     ///     - algorithm: An object performing median sorting algorithm.
-    ///     - elementA: First element to be swapped.
-    ///     - elementB: Second element to be swapped.
-    ///     - deltaIndex: Index delta between elements.
+    ///     - indexA: First element to be swapped.
+    ///     - indexB: Second element to be swapped.
     ///     - actionIndex: Index of swapping action execution.
-    func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int)
+    func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, didSwap indexA: Int, and indexB: Int, actionIndex: Int)
     
     /// Tells the delegate that specific sorting range elements became active.
     ///

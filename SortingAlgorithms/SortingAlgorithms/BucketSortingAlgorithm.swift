@@ -99,7 +99,6 @@ class BucketSortingAlgorithm: NSObject {
             // Bucket has one elements. Continue after overwriting `sortingArray` with that element.
             if let bucketHead = buckets[bucketIndex].entry, buckets[bucketIndex].size == 1 {
                 setSortingArray(at: sortingArrayIndex, to: bucketHead.element)
-//                sortingArray[sortingArrayIndex] = bucketHead.element
                 sortingArrayIndex += 1
                 buckets[bucketIndex].entry = nil
                 buckets[bucketIndex].size = 0
@@ -112,7 +111,6 @@ class BucketSortingAlgorithm: NSObject {
 
             if let bucketHead = buckets[bucketIndex].entry {
                 setSortingArray(at: sortingArrayIndex, to: bucketHead.element)
-//                sortingArray[sortingArrayIndex] = bucketHead.element
                 sortingArrayIndex += 1
                 buckets[bucketIndex].entry = bucketHead.nextEntry
                 buckets[bucketIndex].size -= 1
@@ -122,12 +120,10 @@ class BucketSortingAlgorithm: NSObject {
                 var index = sortingArrayIndex - 1
                 
                 while index >= lowerIndex, algorithms.compare(numberA: sortingArray[index], numberB: bucketHead.element) > 0 {
-//                    sortingArray[index + 1] = sortingArray[index]
                     setSortingArray(at: index + 1, to: sortingArray[index])
                     index -= 1
                 }
                 
-//                sortingArray[index + 1] = bucketHead.element
                 setSortingArray(at: index + 1, to: bucketHead.element)
                 buckets[bucketIndex].entry = bucketHead.nextEntry
                 sortingArrayIndex += 1
@@ -144,16 +140,32 @@ class BucketSortingAlgorithm: NSObject {
     ///     - index: The index of value to be set.
     ///     - value: The new value to be set.
     private func setSortingArray(at index: Int, to value: Int) {
-        delegate?.bucketSortingAlgorithm(self, didUpdate: sortingArray[index], to: value, actionIndex: actionIndex)
+        delegate?.bucketSortingAlgorithm(self, didUpdate: index, to: value, actionIndex: actionIndex)
         sortingArray[index] = value
         actionIndex += 1
     }
 }
 
+/// The object that acts as the delegate of the `BucketSortingAlgorithm`.
+///
+/// The delegate must adopt the BucketSortingAlgorithmDelegate protocol.
+///
+/// The delegate object is responsible for managing the element value changing.
 protocol BucketSortingAlgorithmDelegate: class {
     
-    func bucketSortingAlgorithm(_ algorithm: BucketSortingAlgorithm, didUpdate element: Int, to value: Int, actionIndex: Int)
+    /// Tells the delegate that elements value has changed.
+    ///
+    /// - Parameters:
+    ///     - algorithm: An object performing bucket sorting algorithm.
+    ///     - elementAtIndex: Index of the element, whose value has changed.
+    ///     - value: New element value.
+    ///     - actionIndex: Index of swapping action execution.
+    func bucketSortingAlgorithm(_ algorithm: BucketSortingAlgorithm, didUpdate elementAtIndex: Int, to value: Int, actionIndex: Int)
     
+    /// Tells the delegate that algorithm did finish sorting.
+    ///
+    /// - Parameters:
+    ///     - algorithm: An object performing bucket sorting algorithm.
     func bucketSortingAlgorithmDidFinishSorting(_ algorithm: BucketSortingAlgorithm)
 }
 

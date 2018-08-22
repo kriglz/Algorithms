@@ -12,8 +12,8 @@ extension SortingView: HeapSortingAlgorithmDelegate {
     
     // MARK: - HeapSortingAlgorithmDelegate implementation
     
-    func heapSortingAlgorithm(_ algorithm: HeapSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int) {
-        graphView.swapElements(elementA, elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
+    func heapSortingAlgorithm(_ algorithm: HeapSortingAlgorithm, didSwap indexA: Int, and indexB: Int, actionIndex: Int) {
+        graphView.swapElements(indexA, indexB, actionIndex: actionIndex)
     }
     
     func heapSortingAlgorithmDidFinishSorting(_ algorithm: HeapSortingAlgorithm) {

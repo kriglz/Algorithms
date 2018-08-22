@@ -59,7 +59,6 @@ class HeapSortingAlgorithm: NSObject {
         
         var index = maxIndex
         while index >= 0 {
-            sortingArray.swapAt(0, index)
             elementSwapAt(0, index)
             
             heapify(index: 0, maxIndex: index)
@@ -103,7 +102,6 @@ class HeapSortingAlgorithm: NSObject {
         
         // If largest is not already the parent then swaps and propagates.
         if largestIndex != index {
-            sortingArray.swapAt(index, largestIndex)
             elementSwapAt(index, largestIndex)
             
             heapify(index: largestIndex, maxIndex: maxIndex)
@@ -116,18 +114,13 @@ class HeapSortingAlgorithm: NSObject {
     ///     - i: First element to be swaped.
     ///     - j: Second element to be swaped.
     private func elementSwapAt(_ i: Int, _ j: Int) {
-        let elementA = sortingArray[i]
-        let elementB = sortingArray[j]
-        let deltaIndex = i.distance(to: j)
-        
-        delegate?.heapSortingAlgorithm(self, didSwap: elementA, and: elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
-        
+        sortingArray.swapAt(i, j)
+        delegate?.heapSortingAlgorithm(self, didSwap: i, and: j, actionIndex: actionIndex)
         actionIndex += 1
     }
 }
 
-
-/// The object that acts as the delegate of the `HeapSortingAlgorithmDelegate`.
+/// The object that acts as the delegate of the `HeapSortingAlgorithm`.
 ///
 /// The delegate must adopt the HeapSortingAlgorithmDelegateDelegate protocol.
 ///
@@ -138,11 +131,10 @@ protocol HeapSortingAlgorithmDelegate: class {
     ///
     /// - Parameters:
     ///     - algorithm: An object performing quicksort sorting algorithm.
-    ///     - elementA: First element to be swapped.
-    ///     - elementB: Second element to be swapped.
-    ///     - deltaIndex: Index delta between elements.
+    ///     - indexA: First element to be swapped.
+    ///     - indexB: Second element to be swapped.
     ///     - actionIndex: Index of swapping action execution.
-    func heapSortingAlgorithm(_ algorithm: HeapSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int)
+    func heapSortingAlgorithm(_ algorithm: HeapSortingAlgorithm, didSwap indexA: Int, and indexB: Int, actionIndex: Int)
     
     /// Tells the delegate that algorithm did finish sorting.
     ///

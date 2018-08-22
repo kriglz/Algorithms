@@ -12,8 +12,8 @@ extension SortingView: QuicksortSortingAlgorithmDelegate {
     
     // MARK: - QuicksortSortingAlgorithmDelegate implementation
     
-    func quicksortSortingAlgorithm(_ algorithm: QuicksortSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int) {
-        graphView.swapElements(elementA, elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
+    func quicksortSortingAlgorithm(_ algorithm: QuicksortSortingAlgorithm, didSwap indexA: Int, and indexB: Int, actionIndex: Int) {
+        graphView.swapElements(indexA, indexB, actionIndex: actionIndex)
     }
     
     func quicksortSortingAlgorithm(_ algorithm: QuicksortSortingAlgorithm, sortingRangeElements: [Int], actionIndex: Int) {

@@ -49,11 +49,7 @@ class InsertionSortingAlgorithm: NSObject {
             
             while (previousIndex >= 0 && algorithms.compare(numberA: sortingArray[previousIndex], numberB: sortingArray[previousIndex + 1]) > 0) {
                 sortingArray.swapAt(previousIndex, previousIndex + 1)
-                
-                let elementA = sortingArray[previousIndex]
-                let elementB = sortingArray[previousIndex + 1]
-                let deltaIndex = 1
-                delegate?.insertionSortingAlgorithm(self, didSwap: elementA, and: elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
+                delegate?.insertionSortingAlgorithm(self, didSwap: previousIndex, and: previousIndex + 1, actionIndex: actionIndex)
                 
                 previousIndex -= 1
                 actionIndex += 1
@@ -73,11 +69,10 @@ protocol InsertionSortingAlgorithmDelegate: class {
     ///
     /// - Parameters:
     ///     - algorithm: An object performing insertion sorting algorithm.
-    ///     - elementA: First element to be swapped.
-    ///     - elementB: Second element to be swapped.
-    ///     - deltaIndex: Index delta between elements.
+    ///     - indexA: First element to be swapped.
+    ///     - indexB: Second element to be swapped.
     ///     - actionIndex: Index of swapping action execution.
-    func insertionSortingAlgorithm(_ algorithm: InsertionSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int)
+    func insertionSortingAlgorithm(_ algorithm: InsertionSortingAlgorithm, didSwap indexA: Int, and indexB: Int, actionIndex: Int)
     
     /// Tells the delegate that algorithm did finish sorting.
     ///

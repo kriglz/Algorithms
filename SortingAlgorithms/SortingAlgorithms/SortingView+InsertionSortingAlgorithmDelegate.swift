@@ -12,8 +12,8 @@ extension SortingView: InsertionSortingAlgorithmDelegate {
 
     // MARK: - InsertionSortingAlgorithmDelegate impementation
 
-    func insertionSortingAlgorithm(_ algorithm: InsertionSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int) {
-        graphView.swapElements(elementA, elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
+    func insertionSortingAlgorithm(_ algorithm: InsertionSortingAlgorithm, didSwap indexA: Int, and indexB: Int, actionIndex: Int) {
+        graphView.swapElements(indexA, indexB, actionIndex: actionIndex)
     }
     
     func insertionSortingAlgorithmDidFinishSorting(_ algorithm: InsertionSortingAlgorithm) {

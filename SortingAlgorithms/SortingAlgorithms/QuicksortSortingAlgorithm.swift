@@ -86,7 +86,6 @@ class QuicksortSortingAlgorithm: NSObject {
         let pivot = sortingArray[pivotIndex]
         
         // Move pivot index number to the end of the range.
-        sortingArray.swapAt(pivotIndex, rightIndex)
         elementSwapAt(pivotIndex, rightIndex)
         
         var storeIndex = leftIndex
@@ -96,7 +95,6 @@ class QuicksortSortingAlgorithm: NSObject {
                 
                 if index != storeIndex {
                     // Swap comparable number with the stored value, if the value is bigger.
-                    sortingArray.swapAt(index, storeIndex)
                     elementSwapAt(index, storeIndex)
                 }
                 storeIndex += 1
@@ -105,7 +103,6 @@ class QuicksortSortingAlgorithm: NSObject {
         
         if rightIndex != storeIndex {
             // Swap pivot number with the last stored value.
-            sortingArray.swapAt(rightIndex, storeIndex)
             elementSwapAt(rightIndex, storeIndex)
         }
         
@@ -124,7 +121,6 @@ class QuicksortSortingAlgorithm: NSObject {
             var previousIndex = index - 1
             
             while (previousIndex >= 0 && algorithms.compare(numberA: sortingArray[previousIndex], numberB: sortingArray[previousIndex + 1]) > 0) {
-                sortingArray.swapAt(previousIndex, previousIndex + 1)
                 elementSwapAt(previousIndex, previousIndex + 1)
                 previousIndex -= 1
             }
@@ -137,12 +133,8 @@ class QuicksortSortingAlgorithm: NSObject {
     ///     - i: First element to be swaped.
     ///     - j: Second element to be swaped.
     private func elementSwapAt(_ i: Int, _ j: Int) {
-        let elementA = sortingArray[i]
-        let elementB = sortingArray[j]
-        let deltaIndex = i.distance(to: j)
-        
-        delegate?.quicksortSortingAlgorithm(self, didSwap: elementA, and: elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
-        
+        sortingArray.swapAt(i, j)
+        delegate?.quicksortSortingAlgorithm(self, didSwap: i, and: j, actionIndex: actionIndex)
         actionIndex += 1
     }
     
@@ -157,7 +149,6 @@ class QuicksortSortingAlgorithm: NSObject {
     }
 }
 
-
 /// The object that acts as the delegate of the `QuicksortSortingAlgorithm`.
 ///
 /// The delegate must adopt the QuicksortSortingAlgorithmDelegate protocol.
@@ -169,11 +160,10 @@ protocol QuicksortSortingAlgorithmDelegate: class {
     ///
     /// - Parameters:
     ///     - algorithm: An object performing quicksort sorting algorithm.
-    ///     - elementA: First element to be swapped.
-    ///     - elementB: Second element to be swapped.
-    ///     - deltaIndex: Index delta between elements.
+    ///     - indexA: First element to be swapped.
+    ///     - indexB: Second element to be swapped.
     ///     - actionIndex: Index of swapping action execution.
-    func quicksortSortingAlgorithm(_ algorithm: QuicksortSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int)
+    func quicksortSortingAlgorithm(_ algorithm: QuicksortSortingAlgorithm, didSwap indexA: Int, and indexB: Int, actionIndex: Int)
     
     /// Tells the delegate that specific sorting range elements became active.
     ///

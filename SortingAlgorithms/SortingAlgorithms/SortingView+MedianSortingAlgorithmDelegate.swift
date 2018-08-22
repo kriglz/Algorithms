@@ -12,8 +12,8 @@ extension SortingView: MedianSortingAlgorithmDelegate {
     
     // MARK: - MedianSortingAlgorithmDelegate implementation
     
-    func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, didSwap elementA: Int, and elementB: Int, deltaIndex: Int, actionIndex: Int) {
-        graphView.swapElements(elementA, elementB, deltaIndex: deltaIndex, actionIndex: actionIndex)
+    func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, didSwap indexA: Int, and indexB: Int, actionIndex: Int) {
+        graphView.swapElements(indexA, indexB, actionIndex: actionIndex)
     }
     
     func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, sortingRangeElements: [Int], actionIndex: Int) {
