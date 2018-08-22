@@ -15,6 +15,10 @@ class ActionSpriteNode: SKSpriteNode {
     static let duration = 0.2
     static let width = 5.0
     static let heightMultiplicationConstant = 5.0
+    
+    static let defaultColor = NSColor.white
+    static let activeRangeColor = NSColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+    static let activeItemColor = NSColor.gray
 
     private var moveActions: SKAction?
     private var colorActions: SKAction?
@@ -24,19 +28,27 @@ class ActionSpriteNode: SKSpriteNode {
     private var previousColorActionIndex = 0
     private var previousHeightActionIndex = 0
     
-    private var colorBlinkAction: SKAction {
-        let colorAction = SKAction.colorize(with: .gray, colorBlendFactor: 1, duration: ActionSpriteNode.duration)
+    private var colorBlinkAction: SKAction {        
+        let colorAction = SKAction.colorize(with: ActionSpriteNode.activeItemColor, colorBlendFactor: 1, duration: ActionSpriteNode.duration)
         colorAction.timingMode = .easeOut
-        let colorActionReversed = SKAction.colorize(with: .white, colorBlendFactor: 1, duration: 0)
+        let colorActionReversed = SKAction.colorize(with: ActionSpriteNode.defaultColor, colorBlendFactor: 1, duration: 0)
+        colorActionReversed.timingMode = .easeIn
+        return SKAction.sequence([colorAction, colorActionReversed])
+    }
+    
+    private var colorBlinkActionForRange: SKAction {
+        let colorAction = SKAction.colorize(with: ActionSpriteNode.activeItemColor, colorBlendFactor: 1, duration: ActionSpriteNode.duration)
+        colorAction.timingMode = .easeOut
+        let colorActionReversed = SKAction.colorize(with: ActionSpriteNode.activeRangeColor, colorBlendFactor: 1, duration: 0)
         colorActionReversed.timingMode = .easeIn
         return SKAction.sequence([colorAction, colorActionReversed])
     }
     
     // MARK: - Animation
     
-    func addMoveByAction(translationLength: CGFloat, actionIndex: Int) {
+    func addMoveByAction(translationLength: CGFloat, actionIndex: Int, isInActiveRange: Bool = false) {
         let moveByAction =  SKAction.moveBy(x: translationLength, y: 0, duration: ActionSpriteNode.duration)
-        let action = SKAction.group([moveByAction, colorBlinkAction])
+        let action = SKAction.group([moveByAction, isInActiveRange ? colorBlinkActionForRange : colorBlinkAction])
 
         let durationIndex = actionIndex - previousMoveActionIndex
         
@@ -52,7 +64,7 @@ class ActionSpriteNode: SKSpriteNode {
     }
 
     func addColorAction(isColorized: Bool, actionIndex: Int) {
-        let action = SKAction.colorize(with: isColorized ? .cyan : .white, colorBlendFactor: 1, duration: ActionSpriteNode.duration)
+        let action = SKAction.colorize(with: isColorized ? ActionSpriteNode.activeRangeColor : ActionSpriteNode.defaultColor, colorBlendFactor: 1, duration: ActionSpriteNode.duration)
 
         let durationIndex = actionIndex - previousColorActionIndex
 
@@ -113,7 +125,7 @@ class ActionSpriteNode: SKSpriteNode {
         
         guard let allActions = actions else { return }
         run(allActions) { [weak self] in
-            self?.color = .white
+            self?.color = ActionSpriteNode.defaultColor
         }
     }
 }

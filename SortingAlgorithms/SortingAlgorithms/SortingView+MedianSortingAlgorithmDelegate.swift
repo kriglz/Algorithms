@@ -13,11 +13,11 @@ extension SortingView: MedianSortingAlgorithmDelegate {
     // MARK: - MedianSortingAlgorithmDelegate implementation
     
     func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, didSwap indexA: Int, and indexB: Int, actionIndex: Int) {
-        graphView.swapElements(indexA, indexB, actionIndex: actionIndex)
+        graphView.swapElements(indexA, indexB, actionIndex: actionIndex, isInActiveRange: true)
     }
     
-    func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, sortingRangeElements: [Int], actionIndex: Int) {
-        graphView.colorElements(sortingRangeElements, actionIndex: actionIndex)
+    func medianSortingAlgorithm(_ algorithm: MedianSortingAlgorithm, sortingRangeElementIndexes: [Int], actionIndex: Int) {
+        graphView.colorElements(sortingRangeElementIndexes, actionIndex: actionIndex)
     }
     
     func medianSortingAlgorithmDidFinishSorting(_ algorithm: MedianSortingAlgorithm) {

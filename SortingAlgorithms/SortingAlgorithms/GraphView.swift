@@ -52,7 +52,7 @@ class GraphView: NSView {
             
             let node = ActionSpriteNode()
             node.anchorPoint.y = 0
-            node.color = .white
+            node.color = ActionSpriteNode.defaultColor
             node.position = rect.origin
             node.size = rect.size
             
@@ -70,7 +70,7 @@ class GraphView: NSView {
     // MARK: - Animation
     
     /// Swap specific elements of the array.
-    func swapElements(_ i: Int, _ j: Int, actionIndex: Int) {
+    func swapElements(_ i: Int, _ j: Int, actionIndex: Int, isInActiveRange: Bool = false) {
         guard let iNode = scene.childNode(withName: "\(i)") as? ActionSpriteNode,
             let jNode = scene.childNode(withName: "\(j)") as? ActionSpriteNode else { return }
         
@@ -81,15 +81,15 @@ class GraphView: NSView {
         iNode.name = "\(j)"
         jNode.name = "\(i)"
 
-        iNode.addMoveByAction(translationLength: iNodeTranslationLength, actionIndex: actionIndex)
-        jNode.addMoveByAction(translationLength: jNodeTranslationLength, actionIndex: actionIndex)
+        iNode.addMoveByAction(translationLength: iNodeTranslationLength, actionIndex: actionIndex, isInActiveRange: isInActiveRange)
+        jNode.addMoveByAction(translationLength: jNodeTranslationLength, actionIndex: actionIndex, isInActiveRange: isInActiveRange)
     }
     
     /// Color active elements of array.
-    func colorElements(_ elements: [Int], actionIndex: Int) {
+    func colorElements(_ elementIndexes: [Int], actionIndex: Int) {
         scene.children.forEach { child in
             if let node = child as? ActionSpriteNode {
-                if let name = node.name, let nodeName = Int(name), elements.contains(nodeName) {
+                if let name = node.name, let nodeName = Int(name), elementIndexes.contains(nodeName) {
                     node.addColorAction(isColorized: true, actionIndex: actionIndex)
                 } else {
                     node.addColorAction(isColorized: false, actionIndex: actionIndex)

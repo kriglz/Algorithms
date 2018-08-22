@@ -144,8 +144,11 @@ class QuicksortSortingAlgorithm: NSObject {
     ///     - leftIndex: Lower bound index of the range.
     ///     - rightIndex: Upper bound index of the range.
     private func showActiveRange(leftIndex: Int, rightIndex: Int) {
-        let activeArray = Array(sortingArray[leftIndex...rightIndex])
-        delegate?.quicksortSortingAlgorithm(self, sortingRangeElements: activeArray, actionIndex: actionIndex)
+        var arrayOfIndexes: [Int] = []
+        for index in leftIndex...rightIndex {
+            arrayOfIndexes.append(index)
+        }
+        delegate?.quicksortSortingAlgorithm(self, sortingRangeElementIndexes: arrayOfIndexes, actionIndex: actionIndex)
     }
 }
 
@@ -171,7 +174,7 @@ protocol QuicksortSortingAlgorithmDelegate: class {
     ///     - algorithm: An object performing quicksort sorting algorithm.
     ///     - sortingRangeElements: Active sorting range elements.
     ///     - actionIndex: Index of swapping action execution.
-    func quicksortSortingAlgorithm(_ algorithm: QuicksortSortingAlgorithm, sortingRangeElements: [Int], actionIndex: Int)
+    func quicksortSortingAlgorithm(_ algorithm: QuicksortSortingAlgorithm, sortingRangeElementIndexes: [Int], actionIndex: Int)
     
     /// Tells the delegate that algorithm did finish sorting.
     ///
