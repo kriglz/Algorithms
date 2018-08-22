@@ -24,11 +24,20 @@ class ActionSpriteNode: SKSpriteNode {
     private var previousColorActionIndex = 0
     private var previousHeightActionIndex = 0
     
+    private var colorBlinkAction: SKAction {
+        let colorAction = SKAction.colorize(with: .gray, colorBlendFactor: 1, duration: ActionSpriteNode.duration)
+        colorAction.timingMode = .easeOut
+        let colorActionReversed = SKAction.colorize(with: .white, colorBlendFactor: 1, duration: 0)
+        colorActionReversed.timingMode = .easeIn
+        return SKAction.sequence([colorAction, colorActionReversed])
+    }
+    
     // MARK: - Animation
     
     func addMoveByAction(translationLength: CGFloat, actionIndex: Int) {
-        let action =  SKAction.moveBy(x: translationLength, y: 0, duration: ActionSpriteNode.duration)
-        
+        let moveByAction =  SKAction.moveBy(x: translationLength, y: 0, duration: ActionSpriteNode.duration)
+        let action = SKAction.group([moveByAction, colorBlinkAction])
+
         let durationIndex = actionIndex - previousMoveActionIndex
         
         if let currentActions = self.moveActions {
@@ -43,7 +52,7 @@ class ActionSpriteNode: SKSpriteNode {
     }
 
     func addColorAction(isColorized: Bool, actionIndex: Int) {
-        let action = SKAction.colorize(with: isColorized ? .gray : .white, colorBlendFactor: 1, duration: ActionSpriteNode.duration)
+        let action = SKAction.colorize(with: isColorized ? .cyan : .white, colorBlendFactor: 1, duration: ActionSpriteNode.duration)
 
         let durationIndex = actionIndex - previousColorActionIndex
 
@@ -57,9 +66,10 @@ class ActionSpriteNode: SKSpriteNode {
         
         previousColorActionIndex = actionIndex
     }
-    
+
     func addHeightChangeAction(height: Int, actionIndex: Int) {
-        let action = SKAction.resize(toHeight: CGFloat(ActionSpriteNode.heightMultiplicationConstant) * CGFloat(height), duration: ActionSpriteNode.duration)
+        let resizeAction = SKAction.resize(toHeight: CGFloat(ActionSpriteNode.heightMultiplicationConstant) * CGFloat(height), duration: ActionSpriteNode.duration)
+        let action = SKAction.group([resizeAction, colorBlinkAction])
         
         let durationIndex = actionIndex - previousHeightActionIndex
 
