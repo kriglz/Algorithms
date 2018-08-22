@@ -56,7 +56,7 @@ class GraphView: NSView {
             node.position = rect.origin
             node.size = rect.size
             
-            node.name = "\(number)"
+            node.name = "\(index)"
 
             scene.addChild(node)
         }
@@ -70,13 +70,17 @@ class GraphView: NSView {
     // MARK: - Animation
     
     /// Swap specific elements of the array.
-    func swapElements(_ i: Int, _ j: Int, deltaIndex: Int, actionIndex: Int) {
+    func swapElements(_ i: Int, _ j: Int, actionIndex: Int) {
         guard let iNode = scene.childNode(withName: "\(i)") as? ActionSpriteNode,
             let jNode = scene.childNode(withName: "\(j)") as? ActionSpriteNode else { return }
         
-        let iNodeTranslationLength = CGFloat(-ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex)
-        let jNodeTranslationLength = CGFloat(ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex)
+        let deltaIndex = i.distance(to: j)
+        let iNodeTranslationLength = CGFloat(ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex)
+        let jNodeTranslationLength = -CGFloat(ActionSpriteNode.width * 1.2) * CGFloat(deltaIndex)
         
+        iNode.name = "\(j)"
+        jNode.name = "\(i)"
+
         iNode.addMoveByAction(translationLength: iNodeTranslationLength, actionIndex: actionIndex)
         jNode.addMoveByAction(translationLength: jNodeTranslationLength, actionIndex: actionIndex)
     }
@@ -98,8 +102,6 @@ class GraphView: NSView {
     func updateElement(_ element: Int, to value: Int, actionIndex: Int) {
         guard let node = scene.childNode(withName: "\(element)") as? ActionSpriteNode else { return }
         node.addHeightChangeAction(height: value, actionIndex: actionIndex)
-        
-        print(node.name!, "to new", value)
     }
     
     /// Performs the sorting animation.
