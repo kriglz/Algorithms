@@ -33,7 +33,7 @@ class GraphView: NSView {
     
         scene.scaleMode = .fill
         scene.backgroundColor = .clear
-        scene.size = CGSize(width: 200.0, height: 150.0)
+        scene.size = CGSize(width: 150.0, height: 150.0)
         
         setupGraph()
     }
