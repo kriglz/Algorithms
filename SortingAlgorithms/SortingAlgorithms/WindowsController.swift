@@ -96,6 +96,9 @@ class WindowsController: NSWindowController {
         toolbar.displayMode = .default
         
         window?.toolbar = self.toolbar
+        
+        toolbar.selectedItemIdentifier = insertionSortToolbarItemID
+        showInsertionSortingViewController()
     }
     
     private func setupGraphView(sortingAlgorithm: SortingAlgorithm) {
