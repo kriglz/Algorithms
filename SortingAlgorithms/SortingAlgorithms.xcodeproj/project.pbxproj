@@ -68,6 +68,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		891415F5212E43A000D96FBC /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				8908B6BD2125CE8D00E06C3B /* Algorithms.swift */,
+				891415E5212B5D3400D96FBC /* InsertionSortingAlgorithm.swift */,
+				8985E9F92127A80C001A763C /* MedianSortingAlgorithm.swift */,
+				891415E9212B8A2900D96FBC /* QuicksortSortingAlgorithm.swift */,
+				891415ED212C8E9600D96FBC /* HeapSortingAlgorithm.swift */,
+				891415F1212CD12800D96FBC /* BucketSortingAlgorithm.swift */,
+			);
+			path = Algorithms;
+			sourceTree = "<group>";
+		};
 		894B07472125D985002FB766 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,14 +117,9 @@
 				891415EB212B93B400D96FBC /* SortingView+QuicksortSortingAlgorithmDelegate.swift */,
 				891415EF212C961800D96FBC /* SortingView+HeapSortingAlgorithmDelegate.swift */,
 				891415F3212DF18300D96FBC /* SortingView+BucketSortingAlgorithmDelegate.swift */,
-				8908B6BD2125CE8D00E06C3B /* Algorithms.swift */,
-				891415E5212B5D3400D96FBC /* InsertionSortingAlgorithm.swift */,
-				8985E9F92127A80C001A763C /* MedianSortingAlgorithm.swift */,
-				891415E9212B8A2900D96FBC /* QuicksortSortingAlgorithm.swift */,
-				891415ED212C8E9600D96FBC /* HeapSortingAlgorithm.swift */,
-				891415F1212CD12800D96FBC /* BucketSortingAlgorithm.swift */,
 				8908B6B92124A96C00E06C3B /* GraphView.swift */,
 				8908B6BB212507FF00E06C3B /* ActionSpriteNode.swift */,
+				891415F5212E43A000D96FBC /* Algorithms */,
 				894B07472125D985002FB766 /* Utilities */,
 				8950EE9C21238E5600FA1E75 /* Info.plist */,
 				8950EE9D21238E5600FA1E75 /* SortingAlgorithms.entitlements */,

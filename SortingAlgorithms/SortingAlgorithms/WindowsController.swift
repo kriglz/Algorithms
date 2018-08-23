@@ -17,15 +17,14 @@ class WindowsController: NSWindowController {
     
     let toolbar = NSToolbar()
     
-    lazy var toolbarItemIdentifiers = [
+    private var sortingView: SortingView?
+    private lazy var toolbarItemIdentifiers = [
         insertionSortToolbarItemID,
         medianSortToolbarItemID,
         quicksortSortToolbarItemID,
         heapSortToolbarItemID,
         bucketSortToolbarItemID
     ]
-    
-    private var sortingView: SortingView?
     
     private let insertionSortToolbarItemID = NSToolbarItem.Identifier("insertion sort")
     private lazy var insertionSortToolbarItem: NSToolbarItem = {
