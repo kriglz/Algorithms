@@ -33,12 +33,19 @@ class SortingView: NSView {
         graphView.constraints(edgesTo: self)
 
         let sortButton = NSButton(title: "SORT", target: self, action: #selector(sortArrayAction(_:)))
-        sortButton.frame.origin = CGPoint(x: 800, y: 30)
-        addSubview(sortButton)
-        
         let resetButton = NSButton(title: "RESET", target: self, action: #selector(resetAction(_:)))
-        resetButton.frame.origin = CGPoint(x: 800, y: 80)
+        
+        addSubview(sortButton)
         addSubview(resetButton)
+        
+        sortButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+
+        sortButton.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20).isActive = true
+        sortButton.leadingAnchor.constraint(equalTo: graphView.leadingAnchor, constant: 20).isActive = true
+
+        resetButton.topAnchor.constraint(equalTo: sortButton.bottomAnchor, constant: 20).isActive = true
+        resetButton.leadingAnchor.constraint(equalTo: sortButton.leadingAnchor).isActive = true
     }
     
     // MARK: - Actions

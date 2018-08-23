@@ -31,10 +31,9 @@ class GraphView: NSView {
 
         spriteKitView.presentScene(scene)
     
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .fill
         scene.backgroundColor = .clear
-        
-        scene.size = CGSize(width: 300.0, height: 200.0)
+        scene.size = CGSize(width: 200.0, height: 150.0)
         
         setupGraph()
     }
