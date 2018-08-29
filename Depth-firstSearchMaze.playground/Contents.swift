@@ -14,12 +14,17 @@ enum VertexStateColor {
 
 class Vertex {
     
-    var predecessor: Int = -1
+    var predecessor = -1
     var index: Int
-    var color = VertexStateColor.white
+    var stateColor: VertexStateColor
     
     init(index: Int) {
         self.index = index
+        stateColor = VertexStateColor.white
+    }
+    
+    func updateColor(to color: VertexStateColor) {
+        self.stateColor = color
     }
 }
 
@@ -32,7 +37,7 @@ enum Direction: Int {
     
     /// Returns a random direction of vertex.
     static var random: Direction {
-        let randomInt = (Int(arc4random_uniform(3)) + 1);
+        let randomInt = (Int(arc4random_uniform(4)) + 1);
         return Direction.init(rawValue: randomInt) ?? .up
     }
 }
@@ -69,66 +74,80 @@ class Maze {
     }
     
     private func updateVertex(for index: Int) {
-        guard vertexList[index].color != .black else { return }
+        guard vertexList[index].stateColor == .white else { return }
+        vertexList[index].stateColor = .gray
         
-        if vertexList[index].color == .white {
-            vertexList[index].color == .gray
-        }
-
         var randomDirections = [Direction]()
-
         func randomDirectionVertex() -> Vertex? {
             let direction = Direction.random
-            
+
             if randomDirections.contains(direction) {
                 return randomDirectionVertex()
             }
-            
+
             randomDirections.append(direction)
-            
+
             let newVertex = nextVertex(for: index, towards: direction)
-            if newVertex == nil, randomDirections.count < 4 {
-                return randomDirectionVertex()
-            } else if newVertex != nil, newVertex!.color != .white {
-                return randomDirectionVertex()
-            } else if newVertex == nil, randomDirections.count >= 4 {
+
+            if newVertex == nil, randomDirections.count >= 4 {
                 return nil
             }
-            
-            return newVertex
+
+            if newVertex == nil, randomDirections.count < 4 {
+                return randomDirectionVertex()
+            }
+
+            if newVertex != nil, newVertex!.stateColor != .white, randomDirections.count < 4  {
+                return randomDirectionVertex()
+            }
+
+            if newVertex != nil, newVertex!.stateColor == .white {
+                return newVertex
+            }
+
+            return nil
         }
         
         if let newVertex = randomDirectionVertex() {
             newVertex.predecessor = index
             updateVertex(for: newVertex.index)
         } else {
-            vertexList[index].color == .black
+            vertexList[index].stateColor = .black
         }
-    }    
+    }
     
     private func nextVertex(for currentVertexIndex: Int, towards direction: Direction) -> Vertex? {
-        let index = currentVertexIndex + constant(for: direction)
-        guard index < vertexList.count, index >= 0 else { return nil }
-        return vertexList[index]
-    }
-    
-    private func constant(for direction: Direction) -> Int {
+        var index = currentVertexIndex
+
         switch direction {
         case .left:
-            return -1
+            if currentVertexIndex == 0 || columns % currentVertexIndex == 0 {
+                return nil
+            }
+            index -= 1
         case .right:
-            return 1
+            if currentVertexIndex != 0, columns % (currentVertexIndex + 1) == 0 {
+                return nil
+            }
+            index += 1
         case .up:
-            return rows
+            index += columns
         case .down:
-            return -rows
+            index -= columns
         }
+        
+        guard index < vertexList.count, index >= 0 else { return nil }
+        
+        return vertexList[index]
     }
 }
 
-let maze = Maze(columns: 2, rows: 2)
+let maze = Maze(columns: 4, rows: 1)
 
 for i in maze.vertexList {
-    print(i.color)
+    print(i.index, i.predecessor)
 }
 //print(maze.matrix)
+
+//2 3
+//0 1 2 3
