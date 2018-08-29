@@ -66,6 +66,8 @@ class Maze {
     private func fillUpVertexList() {
         for index in 0..<vertexList.count {
             updateVertex(for: index)
+            // go back to vertex which is not black
+
         }
     }
     
@@ -108,7 +110,8 @@ class Maze {
             newVertex.predecessor = index
             updateVertex(for: newVertex.index)
         } else {
-            vertexList[index].stateColor = .black
+            vertexList[index].stateColor = .black            
+            // go back to vertex which is not black
         }
     }
     
@@ -117,12 +120,12 @@ class Maze {
 
         switch direction {
         case .left:
-            if currentVertexIndex == 0 || columns % currentVertexIndex == 0 {
+            if currentVertexIndex == 0 || currentVertexIndex % columns == 0 {
                 return nil
             }
             index -= 1
         case .right:
-            if currentVertexIndex >= columns, columns % (currentVertexIndex + 1) == 0 {
+            if currentVertexIndex + 1 >= columns, (currentVertexIndex + 1) % columns == 0 {
                 return nil
             }
             index += 1
@@ -138,8 +141,11 @@ class Maze {
     }
 }
 
-let maze = Maze(columns: 4, rows: 1)
+let maze = Maze(columns: 4, rows: 2)
 
 for i in maze.vertexList {
     print(i.index, i.predecessor)
 }
+
+// 4 5 6 7
+// 0 1 2 3
