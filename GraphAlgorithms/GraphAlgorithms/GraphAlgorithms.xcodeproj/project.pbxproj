@@ -63,7 +63,7 @@
 				89F09E9521375487007D1A7A /* MainViewController.swift */,
 				89F09E9321375056007D1A7A /* Maze.swift */,
 				89F09E8F21374FE9007D1A7A /* Vertex.swift */,
-				89F09E912137502D007D1A7A /* CGPath+Extension.swift */,
+				89F09E97213756AB007D1A7A /* Utilities */,
 				89F09E8C21374F2B007D1A7A /* Supporting FIles */,
 				89F09E8621374F17007D1A7A /* Info.plist */,
 			);
@@ -79,6 +79,14 @@
 				89F09E8321374F17007D1A7A /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting FIles";
+			sourceTree = "<group>";
+		};
+		89F09E97213756AB007D1A7A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				89F09E912137502D007D1A7A /* CGPath+Extension.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
