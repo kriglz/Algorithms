@@ -11,6 +11,10 @@
 		89F09E8021374F14007D1A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F09E7E21374F14007D1A7A /* Main.storyboard */; };
 		89F09E8221374F17007D1A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89F09E8121374F17007D1A7A /* Assets.xcassets */; };
 		89F09E8521374F17007D1A7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F09E8321374F17007D1A7A /* LaunchScreen.storyboard */; };
+		89F09E9021374FE9007D1A7A /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E8F21374FE9007D1A7A /* Vertex.swift */; };
+		89F09E922137502D007D1A7A /* CGPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E912137502D007D1A7A /* CGPath+Extension.swift */; };
+		89F09E9421375056007D1A7A /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E9321375056007D1A7A /* Maze.swift */; };
+		89F09E9621375487007D1A7A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E9521375487007D1A7A /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		89F09E8121374F17007D1A7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89F09E8421374F17007D1A7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89F09E8621374F17007D1A7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89F09E8F21374FE9007D1A7A /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		89F09E912137502D007D1A7A /* CGPath+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPath+Extension.swift"; sourceTree = "<group>"; };
+		89F09E9321375056007D1A7A /* Maze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
+		89F09E9521375487007D1A7A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +60,10 @@
 		89F09E7921374F14007D1A7A /* GraphAlgorithms */ = {
 			isa = PBXGroup;
 			children = (
+				89F09E9521375487007D1A7A /* MainViewController.swift */,
+				89F09E9321375056007D1A7A /* Maze.swift */,
+				89F09E8F21374FE9007D1A7A /* Vertex.swift */,
+				89F09E912137502D007D1A7A /* CGPath+Extension.swift */,
 				89F09E8C21374F2B007D1A7A /* Supporting FIles */,
 				89F09E8621374F17007D1A7A /* Info.plist */,
 			);
@@ -141,6 +153,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				89F09E7B21374F14007D1A7A /* AppDelegate.swift in Sources */,
+				89F09E922137502D007D1A7A /* CGPath+Extension.swift in Sources */,
+				89F09E9421375056007D1A7A /* Maze.swift in Sources */,
+				89F09E9021374FE9007D1A7A /* Vertex.swift in Sources */,
+				89F09E9621375487007D1A7A /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
