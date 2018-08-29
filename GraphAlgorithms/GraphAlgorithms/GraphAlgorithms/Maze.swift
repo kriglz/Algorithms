@@ -13,10 +13,10 @@ class Maze {
     
     // MARK: - Properties
     
-    var vertexList = [Vertex]()
+    private(set) var vertexList = [Vertex]()
     
-    private var columns: Int
-    private var rows: Int
+    private(set) var columns: Int
+    private(set) var rows: Int
     
     // MARK: - Initialization
     
@@ -141,23 +141,5 @@ class Maze {
         guard index < vertexList.count, index >= 0 else { return nil }
         
         return vertexList[index]
-    }
-    
-    // MARK: - View of the maze
-    
-    func view(mazeCellSize: Int = 30) -> UIView {
-        let size = CGSize(width: mazeCellSize * columns, height: mazeCellSize * rows)
-        let view = UIView(frame: CGRect(origin: CGPoint.zero, size: size))
-        view.backgroundColor = UIColor.white
-        
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        
-        CGPath.grid(columns: columns, rows: rows, cellSize: mazeCellSize)
-        CGPath.maze(vertexList: vertexList, columns: columns, rows: rows, cellSize: mazeCellSize)
-        
-        view.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
-        UIGraphicsEndImageContext()
-        
-        return view
     }
 }

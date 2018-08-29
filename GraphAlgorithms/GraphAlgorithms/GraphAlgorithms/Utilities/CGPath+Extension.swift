@@ -30,6 +30,7 @@ extension CGPath {
             path.addLine(to: CGPoint(x: cellSize * columns, y: row * cellSize))
         }
         
+        UIColor.red.setStroke()
         path.stroke()
         return path.cgPath
     }
@@ -65,7 +66,7 @@ extension CGPath {
         }
         
         path.lineWidth = 3
-        UIColor.red.setStroke()
+        UIColor.white.setStroke()
         path.stroke()
         return path.cgPath
     }

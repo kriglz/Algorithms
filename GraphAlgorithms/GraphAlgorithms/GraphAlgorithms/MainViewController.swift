@@ -12,7 +12,8 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let maze = Maze(columns: 4, rows: 4)
+    private let maze = Maze(columns: 9, rows: 9)
+    private let graphView = GraphView()
 
     override var prefersStatusBarHidden: Bool {
         return true
@@ -25,6 +26,9 @@ class MainViewController: UIViewController {
         
         view.backgroundColor = .black
         
-        view.addSubview(maze.view())
+        view.addSubview(graphView)
+        graphView.constraints(edgesTo: self.view)
+        
+        graphView.draw(maze: maze)
     }
 }
