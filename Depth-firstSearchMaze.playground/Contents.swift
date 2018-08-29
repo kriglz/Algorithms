@@ -22,10 +22,6 @@ class Vertex {
         self.index = index
         stateColor = VertexStateColor.white
     }
-    
-    func updateColor(to color: VertexStateColor) {
-        self.stateColor = color
-    }
 }
 
 enum Direction: Int {
@@ -126,7 +122,7 @@ class Maze {
             }
             index -= 1
         case .right:
-            if currentVertexIndex != 0, columns % (currentVertexIndex + 1) == 0 {
+            if currentVertexIndex >= columns, columns % (currentVertexIndex + 1) == 0 {
                 return nil
             }
             index += 1
@@ -147,7 +143,3 @@ let maze = Maze(columns: 4, rows: 1)
 for i in maze.vertexList {
     print(i.index, i.predecessor)
 }
-//print(maze.matrix)
-
-//2 3
-//0 1 2 3
