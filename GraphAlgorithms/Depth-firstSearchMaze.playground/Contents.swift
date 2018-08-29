@@ -94,16 +94,12 @@ extension CGPath {
             
             let index = vertex.index
             let predecessorIndex = vertex.predecessorIndex
+                        
+            let cellRow = (Double(index) / Double(columns)).rounded(.down)
+            let cellColumn = Double(index) - cellRow * Double(columns)
             
-            let cellRow = (Double(index) / Double(rows)).rounded(.down)
-            let cellColumn = Double(index % rows) //index.remainder(dividingBy: Double(rows))
-            
-//            print(cellRow, cellColumn, "cell")
-            
-            let predecessorCellRow = (Double(predecessorIndex) / Double(rows)).rounded(.down)
-            let predecessorCellColumn = Double(predecessorIndex % rows)
-            
-//            print(predecessorCellRow, predecessorCellColumn, "pred")
+            let predecessorCellRow = (Double(predecessorIndex) / Double(columns)).rounded(.down)
+            let predecessorCellColumn = Double(predecessorIndex) - predecessorCellRow * Double(columns)
             
             path.move(to: CGPoint(x: Double(cellSize) * ( 0.5 + cellColumn),
                                   y: Double(cellSize) * ( 0.5 + cellRow)))
@@ -273,7 +269,7 @@ class Maze {
     }
 }
 
-let maze = Maze(columns: 10, rows: 8)
+let maze = Maze(columns: 4, rows: 4)
 
 for i in maze.vertexList {
     print(i.index, i.predecessorIndex)
