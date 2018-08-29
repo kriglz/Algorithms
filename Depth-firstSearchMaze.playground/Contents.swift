@@ -99,6 +99,10 @@ class Maze {
     
     // MARK: - Vertex list item management
     
+    /// Udpdates vertex properties based on position in vertex node system.
+    ///
+    /// - Parameters:
+    ///     - index: Index of specified vertex.
     private func updateVertex(for index: Int) {
         guard vertexList[index].stateColor != .black else { return }
         
@@ -150,16 +154,23 @@ class Maze {
         }
     }
     
+    /// Returns next in line vertex node for specified direction.
+    ///
+    /// - Parameters:
+    ///     - currentVertexIndex: Index of current vertex.
+    ///     - direction: Next in line vertex direction.
     private func nextVertex(for currentVertexIndex: Int, towards direction: Direction) -> Vertex? {
         var index = currentVertexIndex
 
         switch direction {
         case .left:
+            // Return nil for left most current vertex.
             if currentVertexIndex == 0 || currentVertexIndex % columns == 0 {
                 return nil
             }
             index -= 1
         case .right:
+            // Return nil for right most current vertex.
             if currentVertexIndex + 1 >= columns, (currentVertexIndex + 1) % columns == 0 {
                 return nil
             }
