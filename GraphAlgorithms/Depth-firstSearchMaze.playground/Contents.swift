@@ -66,7 +66,7 @@ extension CGPath {
         
         for column in 0...columns {
             path.move(to: CGPoint(x: column * cellSize, y: 0))
-            path.addLine(to: CGPoint(x: column * cellSize, y: cellSize * columns))
+            path.addLine(to: CGPoint(x: column * cellSize, y: cellSize * rows))
         }
         
         for row in 0...rows {
@@ -273,7 +273,7 @@ class Maze {
     }
 }
 
-let maze = Maze(columns: 2, rows: 8)
+let maze = Maze(columns: 10, rows: 8)
 
 for i in maze.vertexList {
     print(i.index, i.predecessorIndex)
