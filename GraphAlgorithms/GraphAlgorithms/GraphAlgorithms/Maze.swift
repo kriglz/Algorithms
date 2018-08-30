@@ -15,12 +15,14 @@ class Maze {
     
     weak var delegate: MazeDelegate? = nil
     
+    var actionIndex = 0
+
     private(set) var vertexList = [Vertex]()
     
     private(set) var columns: Int
     private(set) var rows: Int
     
-    private var actionIndex = 0
+    private lazy var depthFirstAlgorithm = DepthFirstSearchAlgorithm(columns: columns, rows: rows)
     
     // MARK: - Initialization
     
@@ -32,6 +34,8 @@ class Maze {
     init(columns: Int, rows: Int) {
         self.columns = columns
         self.rows = rows
+        
+        depthFirstAlgorithm.delegate = self
     }
     
     /// Sets up a new maze.
@@ -66,101 +70,7 @@ class Maze {
     
     /// Runs Depth-first search algorithm to setup Vertex list for maze.
     private func fillUpVertexList() {
-        updateVertex(for: 0)
-    }
-    
-    // MARK: - Vertex list item management
-    
-    /// Udpdates vertex properties based on position in vertex node system.
-    ///
-    /// - Parameters:
-    ///     - index: Index of specified vertex.
-    private func updateVertex(for index: Int) {
-        guard vertexList[index].stateColor != .black else { return }
-        
-        if vertexList[index].stateColor == .white {
-            vertexList[index].stateColor = .gray
-        }
-        
-        var randomDirections = [Direction]()
-        func randomDirectionVertex() -> Vertex? {
-            let direction = Direction.random
-            
-            if randomDirections.contains(direction) {
-                return randomDirectionVertex()
-            }
-            
-            randomDirections.append(direction)
-            
-            let newVertex = nextVertex(for: index, towards: direction)
-            
-            if newVertex == nil, randomDirections.count >= 4 {
-                return nil
-            }
-            
-            if newVertex == nil, randomDirections.count < 4 {
-                return randomDirectionVertex()
-            }
-            
-            if newVertex != nil, newVertex!.stateColor != .white, randomDirections.count < 4  {
-                return randomDirectionVertex()
-            }
-            
-            if newVertex != nil, newVertex!.stateColor == .white {
-                return newVertex
-            }
-            
-            return nil
-        }
-        
-        if let newVertex = randomDirectionVertex() {
-            newVertex.predecessorIndex = index
-            // draw animation
-            
-            delegate?.maze(self, didUpdate: newVertex, actionIndex: actionIndex)
-            actionIndex += 1
-            
-            updateVertex(for: newVertex.index)
-        } else {
-            vertexList[index].stateColor = .black
-            
-            let predecessorIndex = vertexList[index].predecessorIndex
-            if predecessorIndex > -1 {
-                updateVertex(for: predecessorIndex)
-            }
-        }
-    }
-    
-    /// Returns next in line vertex node for specified direction.
-    ///
-    /// - Parameters:
-    ///     - currentVertexIndex: Index of current vertex.
-    ///     - direction: Next in line vertex direction.
-    private func nextVertex(for currentVertexIndex: Int, towards direction: Direction) -> Vertex? {
-        var index = currentVertexIndex
-        
-        switch direction {
-        case .left:
-            // Return nil for left most current vertex.
-            if currentVertexIndex == 0 || currentVertexIndex % columns == 0 {
-                return nil
-            }
-            index -= 1
-        case .right:
-            // Return nil for right most current vertex.
-            if currentVertexIndex + 1 >= columns, (currentVertexIndex + 1) % columns == 0 {
-                return nil
-            }
-            index += 1
-        case .up:
-            index += columns
-        case .down:
-            index -= columns
-        }
-        
-        guard index < vertexList.count, index >= 0 else { return nil }
-        
-        return vertexList[index]
+        vertexList = depthFirstAlgorithm.search(in: vertexList)
     }
 }
 

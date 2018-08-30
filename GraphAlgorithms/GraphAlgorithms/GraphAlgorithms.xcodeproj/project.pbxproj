@@ -17,6 +17,9 @@
 		89F09E9621375487007D1A7A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E9521375487007D1A7A /* MainViewController.swift */; };
 		89F09E9921375843007D1A7A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E9821375843007D1A7A /* GraphView.swift */; };
 		89F09E9B21375A95007D1A7A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E9A21375A95007D1A7A /* UIView+Extension.swift */; };
+		89F09E9D2137853C007D1A7A /* DepthFirstSearchAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E9C2137853C007D1A7A /* DepthFirstSearchAlgorithm.swift */; };
+		89F09E9F21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E9E21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift */; };
+		89F09EA121378B20007D1A7A /* MainViewController+MazeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09EA021378B20007D1A7A /* MainViewController+MazeDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		89F09E9521375487007D1A7A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		89F09E9821375843007D1A7A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		89F09E9A21375A95007D1A7A /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		89F09E9C2137853C007D1A7A /* DepthFirstSearchAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthFirstSearchAlgorithm.swift; sourceTree = "<group>"; };
+		89F09E9E21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maze+DepthFirstSearchAlgorithmDelegate.swift"; sourceTree = "<group>"; };
+		89F09EA021378B20007D1A7A /* MainViewController+MazeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+MazeDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +71,11 @@
 			isa = PBXGroup;
 			children = (
 				89F09E9521375487007D1A7A /* MainViewController.swift */,
+				89F09EA021378B20007D1A7A /* MainViewController+MazeDelegate.swift */,
 				89F09E9821375843007D1A7A /* GraphView.swift */,
 				89F09E9321375056007D1A7A /* Maze.swift */,
-				89F09E8F21374FE9007D1A7A /* Vertex.swift */,
+				89F09E9E21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift */,
+				89F09EA221378B58007D1A7A /* Depth-first Search */,
 				89F09E97213756AB007D1A7A /* Utilities */,
 				89F09E8C21374F2B007D1A7A /* Supporting FIles */,
 				89F09E8621374F17007D1A7A /* Info.plist */,
@@ -93,6 +101,15 @@
 				89F09E9A21375A95007D1A7A /* UIView+Extension.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		89F09EA221378B58007D1A7A /* Depth-first Search */ = {
+			isa = PBXGroup;
+			children = (
+				89F09E9C2137853C007D1A7A /* DepthFirstSearchAlgorithm.swift */,
+				89F09E8F21374FE9007D1A7A /* Vertex.swift */,
+			);
+			path = "Depth-first Search";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,9 +186,12 @@
 				89F09E7B21374F14007D1A7A /* AppDelegate.swift in Sources */,
 				89F09E9B21375A95007D1A7A /* UIView+Extension.swift in Sources */,
 				89F09E922137502D007D1A7A /* CGPath+Extension.swift in Sources */,
+				89F09E9F21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift in Sources */,
 				89F09E9421375056007D1A7A /* Maze.swift in Sources */,
+				89F09E9D2137853C007D1A7A /* DepthFirstSearchAlgorithm.swift in Sources */,
 				89F09E9021374FE9007D1A7A /* Vertex.swift in Sources */,
 				89F09E9621375487007D1A7A /* MainViewController.swift in Sources */,
+				89F09EA121378B20007D1A7A /* MainViewController+MazeDelegate.swift in Sources */,
 				89F09E9921375843007D1A7A /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

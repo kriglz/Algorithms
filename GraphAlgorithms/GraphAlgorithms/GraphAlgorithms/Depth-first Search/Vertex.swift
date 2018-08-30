@@ -58,4 +58,3 @@ enum Direction: Int {
         return Direction.init(rawValue: randomInt) ?? .up
     }
 }
-
