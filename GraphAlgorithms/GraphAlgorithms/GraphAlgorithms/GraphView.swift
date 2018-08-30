@@ -20,6 +20,10 @@ class GraphView: UIView {
         self.isUserInteractionEnabled = false
     }
     
+    func reset() {
+        layer.sublayers?.removeAll()
+    }
+    
     // MARK: - Views to draw
     
     func addVertexLine(vertex: Vertex, in maze: Maze, actionIndex: Int, cellSize: Int = 30) {

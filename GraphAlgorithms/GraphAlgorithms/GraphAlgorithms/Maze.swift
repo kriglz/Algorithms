@@ -35,8 +35,15 @@ class Maze {
     }
     
     func setup() {
+        reset()
+
         setupRawVertexList(columns: columns, rows: rows)
         fillUpVertexList()
+    }
+    
+    private func reset() {
+        vertexList = []
+        actionIndex = 0
     }
     
     // MARK: - Vertex list set up

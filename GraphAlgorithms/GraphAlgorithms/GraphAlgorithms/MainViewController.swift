@@ -45,8 +45,8 @@ class MainViewController: UIViewController {
     // MARK: - Actions
     
     @objc private func startAction(_ sender: UIButton) {
+        graphView.reset()
         maze.setup()
-//        graphView.draw(maze: maze)
     }
 }
 

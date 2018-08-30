@@ -97,8 +97,8 @@ extension CGPath {
         path.addLine(to: CGPoint(x: Double(cellSize) * ( 0.5 + predecessorCellColumn),
                                  y: Double(cellSize) * ( 0.5 + predecessorCellRow)))
         
-        path.lineWidth = 3
-        UIColor.white.setStroke()
+//        path.lineWidth = 3
+//        UIColor.white.setStroke()
         path.stroke()
         return path.cgPath
     }
