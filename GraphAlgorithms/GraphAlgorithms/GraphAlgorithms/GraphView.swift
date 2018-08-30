@@ -36,12 +36,15 @@ class GraphView: UIView {
         lineLayer.strokeColor = UIColor.white.cgColor
         layer.addSublayer(lineLayer)
         
+        lineLayer.strokeStart = 1
+        
         let drawAnimation = CABasicAnimation(keyPath: "strokeStart")
+        drawAnimation.fillMode = kCAFillModeForwards
         drawAnimation.fromValue = 1
         drawAnimation.toValue = 0
         drawAnimation.beginTime = CACurrentMediaTime() + duration * Double(actionIndex)
         drawAnimation.duration = duration
-        drawAnimation.fillMode = kCAFillModeForwards
+        drawAnimation.isRemovedOnCompletion = false
         
         lineLayer.add(drawAnimation, forKey: "Draw")
     }
@@ -77,5 +80,4 @@ class GraphView: UIView {
         
         addSubview(view)
     }
-    
 }

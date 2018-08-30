@@ -34,6 +34,7 @@ class Maze {
         self.rows = rows
     }
     
+    /// Sets up a new maze.
     func setup() {
         reset()
 
@@ -41,6 +42,7 @@ class Maze {
         fillUpVertexList()
     }
     
+    /// Resets existing maze.
     private func reset() {
         vertexList = []
         actionIndex = 0
@@ -162,7 +164,18 @@ class Maze {
     }
 }
 
+/// The object that acts as the delegate of the `Maze`.
+///
+/// The delegate must adopt the MazeDelegate protocol.
+///
+/// The delegate object is responsible for managing the maze vertex update.
 protocol MazeDelegate: class {
     
+    /// Tells the delegate that vertex was updated.
+    ///
+    /// - Parameters:
+    ///     - maze: An object of the maze.
+    ///     - vertex: A vertex node to be updated.
+    ///     - actionIndex: Index of update action in maze setup sequence.
     func maze(_ maze: Maze, didUpdate vertex: Vertex, actionIndex: Int)
 }

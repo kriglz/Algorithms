@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let maze = Maze(columns: 9, rows: 9)
+    private let maze = Maze(columns: 12, rows: 20)
     private let graphView = GraphView()
 
     private let startButton = UIButton(type: UIButtonType.system)
