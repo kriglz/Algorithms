@@ -26,35 +26,3 @@ class Vertex {
         self.index = index
     }
 }
-
-/// Vertex state types defines by color.
-enum VertexStateColor {
-    
-    /// Vertex has not been visited yet.
-    case white
-    /// Vertex has been visited, but it may have adjacent vertex that has been not.
-    case gray
-    /// Vertex has been visited and so all its adjacent vertices.
-    case black
-}
-
-/// Direction type to the new vertex.
-///
-/// List of possible directions:
-/// - up
-/// - down
-/// - left
-/// - right
-enum Direction: Int {
-    
-    case up = 1
-    case down = 2
-    case left = 3
-    case right = 4
-    
-    /// Returns a random direction from all possible directions.
-    static var random: Direction {
-        let randomInt = (Int(arc4random_uniform(4)) + 1);
-        return Direction.init(rawValue: randomInt) ?? .up
-    }
-}
