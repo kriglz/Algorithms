@@ -14,16 +14,7 @@ class DepthFirstSearchAlgorithm {
     // MARK: - Properties
 
     weak var delegate: DepthFirstSearchAlgorithmDelegate? = nil
-    
-    private var columns: Int
-    private var rows: Int
-
-    // MARK: - Initialization
-    
-    init(columns: Int, rows: Int) {
-        self.columns = columns
-        self.rows = rows
-    }
+    private var size = VertexListSize()
     
     // MARK: - Vertex list item management
     
@@ -31,7 +22,8 @@ class DepthFirstSearchAlgorithm {
     ///
     /// - Parameters:
     ///     - vertexList: Vertex list to be searched.
-    func search(in vertexList: [Vertex]) -> [Vertex] {
+    func search(in vertexList: [Vertex], size: VertexListSize) -> [Vertex] {
+        self.size = size
         return updateVertex(at: 0, in: vertexList)
     }
     
@@ -107,20 +99,20 @@ class DepthFirstSearchAlgorithm {
         switch direction {
         case .left:
             // Return nil for left most current vertex.
-            if currentVertexIndex == 0 || currentVertexIndex % columns == 0 {
+            if currentVertexIndex == 0 || currentVertexIndex % size.columns == 0 {
                 return nil
             }
             index -= 1
         case .right:
             // Return nil for right most current vertex.
-            if currentVertexIndex + 1 >= columns, (currentVertexIndex + 1) % columns == 0 {
+            if currentVertexIndex + 1 >= size.columns, (currentVertexIndex + 1) % size.columns == 0 {
                 return nil
             }
             index += 1
         case .up:
-            index += columns
+            index += size.columns
         case .down:
-            index -= columns
+            index -= size.columns
         }
         
         guard index < vertexList.count, index >= 0 else { return nil }

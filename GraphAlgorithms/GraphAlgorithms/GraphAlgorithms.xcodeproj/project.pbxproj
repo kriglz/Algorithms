@@ -22,6 +22,7 @@
 		89F09EA121378B20007D1A7A /* MainViewController+MazeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09EA021378B20007D1A7A /* MainViewController+MazeDelegate.swift */; };
 		89F09EA421378D74007D1A7A /* VertexStateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09EA321378D74007D1A7A /* VertexStateColor.swift */; };
 		89F09EA621378D87007D1A7A /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09EA521378D87007D1A7A /* Direction.swift */; };
+		89F09EA821378E1D007D1A7A /* VertexListSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09EA721378E1D007D1A7A /* VertexListSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		89F09EA021378B20007D1A7A /* MainViewController+MazeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+MazeDelegate.swift"; sourceTree = "<group>"; };
 		89F09EA321378D74007D1A7A /* VertexStateColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexStateColor.swift; sourceTree = "<group>"; };
 		89F09EA521378D87007D1A7A /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		89F09EA721378E1D007D1A7A /* VertexListSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexListSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			children = (
 				89F09E9C2137853C007D1A7A /* DepthFirstSearchAlgorithm.swift */,
 				89F09E8F21374FE9007D1A7A /* Vertex.swift */,
+				89F09EA721378E1D007D1A7A /* VertexListSize.swift */,
 				89F09EA321378D74007D1A7A /* VertexStateColor.swift */,
 				89F09EA521378D87007D1A7A /* Direction.swift */,
 			);
@@ -191,6 +194,7 @@
 			files = (
 				89F09E7B21374F14007D1A7A /* AppDelegate.swift in Sources */,
 				89F09E9B21375A95007D1A7A /* UIView+Extension.swift in Sources */,
+				89F09EA821378E1D007D1A7A /* VertexListSize.swift in Sources */,
 				89F09E922137502D007D1A7A /* CGPath+Extension.swift in Sources */,
 				89F09E9F21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift in Sources */,
 				89F09EA421378D74007D1A7A /* VertexStateColor.swift in Sources */,

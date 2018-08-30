@@ -22,7 +22,7 @@ class Maze {
     private(set) var columns: Int
     private(set) var rows: Int
     
-    private lazy var depthFirstAlgorithm = DepthFirstSearchAlgorithm(columns: columns, rows: rows)
+    private let depthFirstAlgorithm = DepthFirstSearchAlgorithm()
     
     // MARK: - Initialization
     
@@ -70,7 +70,7 @@ class Maze {
     
     /// Runs Depth-first search algorithm to setup Vertex list for maze.
     private func fillUpVertexList() {
-        vertexList = depthFirstAlgorithm.search(in: vertexList)
+        vertexList = depthFirstAlgorithm.search(in: vertexList, size: VertexListSize(columns: columns, rows: rows))
     }
 }
 
