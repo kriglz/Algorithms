@@ -15,6 +15,8 @@ class MainViewController: UIViewController {
     private let maze = Maze(columns: 9, rows: 9)
     private let graphView = GraphView()
 
+    private let startButton = UIButton(type: UIButtonType.system)
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -26,9 +28,33 @@ class MainViewController: UIViewController {
         
         view.backgroundColor = .black
         
+        maze.delegate = self
+        
+        startButton.setTitle("Start", for: .normal)
+        startButton.addTarget(self, action: #selector(startAction(_:)), for: UIControlEvents.touchDown)
+        
+        view.addSubview(startButton)
+        startButton.translatesAutoresizingMaskIntoConstraints = false
+        startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true        
+        
         view.addSubview(graphView)
         graphView.constraints(edgesTo: self.view)
-        
-        graphView.draw(maze: maze)
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func startAction(_ sender: UIButton) {
+        maze.setup()
+//        graphView.draw(maze: maze)
+    }
+}
+
+extension MainViewController: MazeDelegate {
+    
+    // MARK: - MazeDelegate implementation
+    
+    func maze(_ maze: Maze, didUpdate vertex: Vertex, actionIndex: Int) {
+        graphView.addVertexLine(vertex: vertex, in: maze, actionIndex: actionIndex)
     }
 }

@@ -13,10 +13,14 @@ class Maze {
     
     // MARK: - Properties
     
+    weak var delegate: MazeDelegate? = nil
+    
     private(set) var vertexList = [Vertex]()
     
     private(set) var columns: Int
     private(set) var rows: Int
+    
+    private var actionIndex = 0
     
     // MARK: - Initialization
     
@@ -28,7 +32,9 @@ class Maze {
     init(columns: Int, rows: Int) {
         self.columns = columns
         self.rows = rows
-        
+    }
+    
+    func setup() {
         setupRawVertexList(columns: columns, rows: rows)
         fillUpVertexList()
     }
@@ -100,6 +106,11 @@ class Maze {
         
         if let newVertex = randomDirectionVertex() {
             newVertex.predecessorIndex = index
+            // draw animation
+            
+            delegate?.maze(self, didUpdate: newVertex, actionIndex: actionIndex)
+            actionIndex += 1
+            
             updateVertex(for: newVertex.index)
         } else {
             vertexList[index].stateColor = .black
@@ -142,4 +153,9 @@ class Maze {
         
         return vertexList[index]
     }
+}
+
+protocol MazeDelegate: class {
+    
+    func maze(_ maze: Maze, didUpdate vertex: Vertex, actionIndex: Int)
 }
