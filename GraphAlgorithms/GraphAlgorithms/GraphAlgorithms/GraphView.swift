@@ -26,13 +26,14 @@ class GraphView: UIView {
     
     // MARK: - Views to draw
     
-    func addVertexLine(vertex: Vertex, in maze: Maze, actionIndex: Int, cellSize: Int = 30) {
+    func drawVertexLine(vertex: Vertex, in maze: Maze, actionIndex: Int, cellSize: Int = 30) {
         let columns = maze.columns
         let rows = maze.rows
         
         let lineLayer = CAShapeLayer()
         let linePath = CGPath.line(vertex: vertex, columns: columns, rows: rows, cellSize: cellSize)
         lineLayer.path = linePath
+        lineLayer.lineWidth = 3
         lineLayer.strokeColor = UIColor.white.cgColor
         layer.addSublayer(lineLayer)
         
@@ -54,30 +55,19 @@ class GraphView: UIView {
         let columns = maze.columns
         let rows = maze.rows
 
-        let size = CGSize(width: cellSize * columns, height: cellSize * rows)
-        let view = UIView(frame: CGRect(origin: CGPoint.zero, size: size))
-        
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        
-        CGPath.maze(vertexList: vertexList, columns: columns, rows: rows, cellSize: cellSize)
-        
-        view.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
-        UIGraphicsEndImageContext()
-        
-        addSubview(view)
+        let lineLayer = CAShapeLayer()
+        let linePath = CGPath.maze(vertexList: vertexList, columns: columns, rows: rows, cellSize: cellSize)
+        lineLayer.path = linePath
+        lineLayer.lineWidth = 3
+        lineLayer.strokeColor = UIColor.white.cgColor
+        layer.addSublayer(lineLayer)
     }
     
     func drawGrid(columns: Int, rows: Int, cellSize: Int = 30) {
-        let size = CGSize(width: cellSize * columns, height: cellSize * rows)
-        let view = UIView(frame: CGRect(origin: CGPoint.zero, size: size))
-        
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        
-        CGPath.grid(columns: columns, rows: rows, cellSize: cellSize)
-        
-        view.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
-        UIGraphicsEndImageContext()
-        
-        addSubview(view)
+        let lineLayer = CAShapeLayer()
+        let linePath = CGPath.grid(columns: columns, rows: rows, cellSize: cellSize)
+        lineLayer.path = linePath
+        lineLayer.strokeColor = UIColor.red.cgColor
+        layer.addSublayer(lineLayer)
     }
 }
