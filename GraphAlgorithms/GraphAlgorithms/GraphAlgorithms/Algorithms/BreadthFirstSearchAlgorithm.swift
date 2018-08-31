@@ -17,6 +17,20 @@ class BreadthFirstSearchAlgorithm {
     
     private var size = VertexListSize()
     
+    private var randomDirections: [Direction] {
+        var directions = [Direction]()
+        
+        while directions.count < 4 {
+            let direction = Direction.random
+            
+            if !directions.contains(direction) {
+                directions.append(direction)
+            }
+        }
+        
+        return directions
+    }
+    
     // MARK: - Vertex list item management
     
     /// Generates new list or vertex based on Breadth-first search algorithm.
@@ -71,31 +85,36 @@ class BreadthFirstSearchAlgorithm {
     private func availableNeighbourVertexList(for currentVertexIndex: Int, in vertexList: [Vertex]) -> [Vertex] {
         let range = 0...(vertexList.count - 1)
         var neighbourVertexList = [Vertex]()
+        
+        // Randomizing neighbour vertex sequence to create patters.
+        randomDirections.forEach { direciton in
+            switch direciton {
+            case .left:
+                let leftIndex = currentVertexIndex - 1
+                if currentVertexIndex == 0 || currentVertexIndex % size.columns > 0, range.contains(leftIndex), vertexList[leftIndex].stateColor == .white {
+                    neighbourVertexList.append(vertexList[leftIndex])
+                }
+                
+            case .right:
+                let rightIndex = currentVertexIndex + 1
+                if currentVertexIndex + 1 >= size.columns, (currentVertexIndex + 1) % size.columns > 0, range.contains(rightIndex), vertexList[rightIndex].stateColor == .white {
+                    neighbourVertexList.append(vertexList[rightIndex])
+                }
+                
+            case .up:
+                let upIndex = currentVertexIndex + size.columns
+                if range.contains(upIndex), vertexList[upIndex].stateColor == .white {
+                    neighbourVertexList.append(vertexList[upIndex])
+                }
+                
+            case .down:
+                let downIndex = currentVertexIndex - size.columns
+                if range.contains(downIndex), vertexList[downIndex].stateColor == .white {
+                    neighbourVertexList.append(vertexList[downIndex])
+                }
+            }
+        }
 
-        // Left
-        let leftIndex = currentVertexIndex - 1
-        if currentVertexIndex == 0 || currentVertexIndex % size.columns > 0, range.contains(leftIndex), vertexList[leftIndex].stateColor == .white {
-            neighbourVertexList.append(vertexList[leftIndex])
-        }
-        
-        // Right
-        let rightIndex = currentVertexIndex + 1
-        if currentVertexIndex + 1 >= size.columns, (currentVertexIndex + 1) % size.columns > 0, range.contains(rightIndex), vertexList[rightIndex].stateColor == .white {
-            neighbourVertexList.append(vertexList[rightIndex])
-        }
-        
-        // Up
-        let upIndex = currentVertexIndex + size.columns
-        if range.contains(upIndex), vertexList[upIndex].stateColor == .white {
-            neighbourVertexList.append(vertexList[upIndex])
-        }
-        
-        // Down
-        let downIndex = currentVertexIndex - size.columns
-        if range.contains(downIndex), vertexList[downIndex].stateColor == .white {
-            neighbourVertexList.append(vertexList[downIndex])
-        }
-        
         return neighbourVertexList
     }
 }

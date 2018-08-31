@@ -10,7 +10,7 @@ import UIKit
 
 class GraphView: UIView {
     
-    private var duration = 0.1
+    private var duration = 0.05
     
     // MARK: - Initialization
 
