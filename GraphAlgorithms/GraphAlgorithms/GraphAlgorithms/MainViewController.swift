@@ -12,11 +12,12 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let maze = Maze(columns: 50, rows: 50)
+    private let maze = Maze(columns: 10, rows: 10)
     private(set) var graphView = GraphView()
 
-    private let startButton = UIButton(type: UIButtonType.system)
-    
+    private let dFStartButton = UIButton(type: UIButtonType.system)
+    private let bFStartButton = UIButton(type: UIButtonType.system)
+
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -30,13 +31,21 @@ class MainViewController: UIViewController {
         
         maze.delegate = self
         
-        startButton.setTitle("Start", for: .normal)
-        startButton.addTarget(self, action: #selector(startAction(_:)), for: UIControlEvents.touchDown)
+        dFStartButton.setTitle("Depth-First", for: .normal)
+        dFStartButton.addTarget(self, action: #selector(dFStartAction(_:)), for: UIControlEvents.touchDown)
         
-        view.addSubview(startButton)
-        startButton.translatesAutoresizingMaskIntoConstraints = false
-        startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true        
+        bFStartButton.setTitle("Breadth-First", for: .normal)
+        bFStartButton.addTarget(self, action: #selector(bFStartAction(_:)), for: UIControlEvents.touchDown)
+        
+        view.addSubview(dFStartButton)
+        dFStartButton.translatesAutoresizingMaskIntoConstraints = false
+        dFStartButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        dFStartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        
+        view.addSubview(bFStartButton)
+        bFStartButton.translatesAutoresizingMaskIntoConstraints = false
+        bFStartButton.bottomAnchor.constraint(equalTo: dFStartButton.bottomAnchor).isActive = true
+        bFStartButton.trailingAnchor.constraint(equalTo: dFStartButton.leadingAnchor, constant: -20).isActive = true
         
         view.addSubview(graphView)
         graphView.constraints(edgesTo: self.view)
@@ -44,11 +53,16 @@ class MainViewController: UIViewController {
     
     // MARK: - Actions
     
-    @objc private func startAction(_ sender: UIButton) {
+    @objc private func dFStartAction(_ sender: UIButton) {
         graphView.reset()
-        maze.setup()
+        maze.setupDF()
         
 //        graphView.draw(maze: maze)
 //        graphView.drawGrid(columns: maze.columns, rows: maze.rows)
+    }
+    
+    @objc private func bFStartAction(_ sender: UIButton) {
+        graphView.reset()
+        maze.setupBF()
     }
 }

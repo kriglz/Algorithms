@@ -26,7 +26,7 @@ class GraphView: UIView {
     
     // MARK: - Views to draw
     
-    func drawVertexLine(vertex: Vertex, in maze: Maze, actionIndex: Int, cellSize: Int = 10) {
+    func drawVertexLine(vertex: Vertex, in maze: Maze, actionIndex: Int, cellSize: Int = 20) {
         let columns = maze.columns
         let rows = maze.rows
         

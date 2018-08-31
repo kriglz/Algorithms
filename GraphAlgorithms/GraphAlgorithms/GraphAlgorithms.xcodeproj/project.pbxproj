@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		89A06A3A2138BB510035EF5C /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A06A392138BB510035EF5C /* CGFloat+Extension.swift */; };
+		89A06A3C2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */; };
 		89F09E7B21374F14007D1A7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E7A21374F14007D1A7A /* AppDelegate.swift */; };
 		89F09E8021374F14007D1A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F09E7E21374F14007D1A7A /* Main.storyboard */; };
 		89F09E8221374F17007D1A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89F09E8121374F17007D1A7A /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		89A06A392138BB510035EF5C /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
+		89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadthFirstSearchAlgorithm.swift; sourceTree = "<group>"; };
 		89F09E7721374F14007D1A7A /* GraphAlgorithms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphAlgorithms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F09E7A21374F14007D1A7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89F09E7F21374F14007D1A7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				89F09E9821375843007D1A7A /* GraphView.swift */,
 				89F09E9321375056007D1A7A /* Maze.swift */,
 				89F09E9E21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift */,
+				89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */,
 				89F09EA221378B58007D1A7A /* Depth-first Search */,
 				89F09E97213756AB007D1A7A /* Utilities */,
 				89F09E8C21374F2B007D1A7A /* Supporting FIles */,
@@ -195,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A06A3C2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift in Sources */,
 				89F09E7B21374F14007D1A7A /* AppDelegate.swift in Sources */,
 				89F09E9B21375A95007D1A7A /* UIView+Extension.swift in Sources */,
 				89F09EA821378E1D007D1A7A /* VertexListSize.swift in Sources */,
