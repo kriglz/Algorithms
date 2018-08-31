@@ -1,4 +1,4 @@
-# Algorithms:
+# Sorting Algorithms:
 
 - Insertion Sort
 ![](./PreviewGIFs/insertion.gif)
@@ -6,7 +6,7 @@
 - Median Sort
 ![](./PreviewGIFs/median.gif)
 
-- QUICKSORT
+- Quicksort
 ![](./PreviewGIFs/quicksort.gif)
 
 - Heap Sort
@@ -14,3 +14,14 @@
 
 - Bucket Sort
 ![](./PreviewGIFs/bucket.gif)
+
+# Searching Algorithms:
+
+- Binary Search
+- Hash-Based Search
+- Sequential Search
+
+# Graph Algorithms:
+
+- Depth-First Search
+- Breadth-First Search
