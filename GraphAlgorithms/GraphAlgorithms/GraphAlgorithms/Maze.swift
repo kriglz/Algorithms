@@ -22,9 +22,10 @@ class Maze {
     private(set) var columns: Int
     private(set) var rows: Int
     
-    private let depthFirstAlgorithm = DepthFirstSearchAlgorithm()
-    private let breadthFirstAlgorithm = BreadthFirstSearchAlgorithm()
-
+    private var mazeSize: VertexListSize {
+        return VertexListSize(columns: columns, rows: rows)
+    }
+    
     // MARK: - Initialization
     
     /// Returns a maze object.
@@ -35,8 +36,6 @@ class Maze {
     init(columns: Int, rows: Int) {
         self.columns = columns
         self.rows = rows
-        
-        depthFirstAlgorithm.delegate = self
     }
     
     /// Sets up a new maze.
@@ -79,13 +78,15 @@ class Maze {
     
     /// Runs Depth-first search algorithm to setup Vertex list for maze.
     private func fillUpDFVertexList() {
-        vertexList = depthFirstAlgorithm.search(in: vertexList, size: VertexListSize(columns: columns, rows: rows))
+        let depthFirstAlgorithm = DepthFirstSearchAlgorithm()
+        depthFirstAlgorithm.delegate = self
+        vertexList = depthFirstAlgorithm.search(in: vertexList, size: mazeSize)
     }
     
     /// Runs Depth-first search algorithm to setup Vertex list for maze.
     private func fillUpBFVertexList() {
-        print("fillUpBFVertexList")
-//        vertexList = breadthFirstAlgorithm //.search(in: vertexList, size: VertexListSize(columns: columns, rows: rows))
+        let breadthFirstAlgorithm = BreadthFirstSearchAlgorithm()
+        vertexList = breadthFirstAlgorithm.search(in: vertexList, size: mazeSize)
     }
 }
 

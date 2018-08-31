@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let maze = Maze(columns: 10, rows: 10)
+    private let maze = Maze(columns: 3, rows: 3)
     private(set) var graphView = GraphView()
 
     private let dFStartButton = UIButton(type: UIButtonType.system)
