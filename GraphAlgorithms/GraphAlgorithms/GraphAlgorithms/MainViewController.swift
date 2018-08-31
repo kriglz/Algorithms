@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let maze = Maze(columns: 12, rows: 20)
+    private let maze = Maze(columns: 50, rows: 50)
     private(set) var graphView = GraphView()
 
     private let startButton = UIButton(type: UIButtonType.system)
@@ -47,6 +47,7 @@ class MainViewController: UIViewController {
     @objc private func startAction(_ sender: UIButton) {
         graphView.reset()
         maze.setup()
+        secondMaze.setup()
         
 //        graphView.draw(maze: maze)
 //        graphView.drawGrid(columns: maze.columns, rows: maze.rows)

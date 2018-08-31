@@ -6,7 +6,7 @@
 //  Copyright © 2018 Kristina Gelzinyte. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Depth-first search algorithm for specified vertex array.
 class DepthFirstSearchAlgorithm {
@@ -24,7 +24,7 @@ class DepthFirstSearchAlgorithm {
     ///     - vertexList: Vertex list to be searched.
     func search(in vertexList: [Vertex], size: VertexListSize) -> [Vertex] {
         self.size = size
-        return updateVertex(at: 0, in: vertexList)
+        return updateVertex(at: Int(CGFloat.random(min: 0, max: CGFloat(size.columns * size.rows)) / 2), in: vertexList)
     }
     
     /// Udpdates vertex based on position in vertex node system using Depth-first search algorithm.

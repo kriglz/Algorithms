@@ -26,7 +26,7 @@ class GraphView: UIView {
     
     // MARK: - Views to draw
     
-    func drawVertexLine(vertex: Vertex, in maze: Maze, actionIndex: Int, cellSize: Int = 30) {
+    func drawVertexLine(vertex: Vertex, in maze: Maze, actionIndex: Int, cellSize: Int = 10) {
         let columns = maze.columns
         let rows = maze.rows
         
@@ -34,7 +34,12 @@ class GraphView: UIView {
         let linePath = CGPath.line(vertex: vertex, columns: columns, rows: rows, cellSize: cellSize)
         lineLayer.path = linePath
         lineLayer.lineWidth = 3
+        
+//        let normalizedIndex = CGFloat(vertex.index) / CGFloat(maze.rows * maze.columns)
+//        lineLayer.strokeColor = UIColor(red: normalizedIndex, green: 0, blue: normalizedIndex * 0.5 + 0.5, alpha: 1).cgColor
+        
         lineLayer.strokeColor = UIColor.white.cgColor
+        
         layer.addSublayer(lineLayer)
         
         lineLayer.strokeStart = 1
