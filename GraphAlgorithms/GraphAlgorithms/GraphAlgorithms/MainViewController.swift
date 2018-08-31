@@ -47,7 +47,6 @@ class MainViewController: UIViewController {
     @objc private func startAction(_ sender: UIButton) {
         graphView.reset()
         maze.setup()
-        secondMaze.setup()
         
 //        graphView.draw(maze: maze)
 //        graphView.drawGrid(columns: maze.columns, rows: maze.rows)
