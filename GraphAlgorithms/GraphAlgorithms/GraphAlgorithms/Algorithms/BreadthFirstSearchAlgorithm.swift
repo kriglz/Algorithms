@@ -13,6 +13,8 @@ class BreadthFirstSearchAlgorithm {
     
     // MARK: - Properties
     
+    weak var delegate: BreadthFirstSearchAlgorithmDelegate? = nil
+    
     private var size = VertexListSize()
     
     // MARK: - Vertex list item management
@@ -24,7 +26,8 @@ class BreadthFirstSearchAlgorithm {
     ///     - size: Vertex list size in columns and rows.
     func search(in vertexList: [Vertex], size: VertexListSize) -> [Vertex] {
         self.size = size
-        return updateVertex(at: Int(CGFloat.random(min: 0, max: CGFloat(size.columns * size.rows)) / 2), in: vertexList)
+        let startIndex = (size.columns * size.rows) / 2
+        return updateVertex(at: startIndex, in: vertexList)
     }
     
     /// Udpdates vertex list based on specified verex position in vertex node system using Breadth-first search algorithm.
@@ -46,9 +49,11 @@ class BreadthFirstSearchAlgorithm {
             let neighbourList = availableNeighbourVertexList(for: queue.first!.index, in: vertexList)
                         
             neighbourList.forEach {
-                $0.predecessorIndex = index
+                $0.predecessorIndex = queue.first!.index
                 $0.stateColor = .gray
                 queue.push($0)
+                
+                delegate?.breadthFirstSearchAlgorith(self, didUpdate: $0)
             }
             
             queue.pop()
@@ -93,4 +98,19 @@ class BreadthFirstSearchAlgorithm {
         
         return neighbourVertexList
     }
+}
+
+/// The object that acts as the delegate of the `BreadthFirstSearchAlgorithm`.
+///
+/// The delegate must adopt the BreadthFirstSearchAlgorithmDelegate protocol.
+///
+/// The delegate object is responsible for managing the vertex update.
+protocol BreadthFirstSearchAlgorithmDelegate: class {
+    
+    /// Tells the delegate that vertex was updated.
+    ///
+    /// - Parameters:
+    ///     - algorithm: An object of the BreadthFirstSearchAlgorithm.
+    ///     - vertex: A vertex node to be updated.
+    func breadthFirstSearchAlgorith(_ algorithm: BreadthFirstSearchAlgorithm, didUpdate vertex: Vertex)
 }

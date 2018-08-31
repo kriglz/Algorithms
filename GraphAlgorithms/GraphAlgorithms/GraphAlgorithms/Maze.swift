@@ -86,6 +86,7 @@ class Maze {
     /// Runs Depth-first search algorithm to setup Vertex list for maze.
     private func fillUpBFVertexList() {
         let breadthFirstAlgorithm = BreadthFirstSearchAlgorithm()
+        breadthFirstAlgorithm.delegate = self
         vertexList = breadthFirstAlgorithm.search(in: vertexList, size: mazeSize)
     }
 }
