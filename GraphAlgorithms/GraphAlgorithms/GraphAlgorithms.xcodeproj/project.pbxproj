@@ -85,8 +85,7 @@
 				89F09E9821375843007D1A7A /* GraphView.swift */,
 				89F09E9321375056007D1A7A /* Maze.swift */,
 				89F09E9E21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift */,
-				89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */,
-				89F09EA221378B58007D1A7A /* Depth-first Search */,
+				89F09EA221378B58007D1A7A /* Algorithms */,
 				89F09E97213756AB007D1A7A /* Utilities */,
 				89F09E8C21374F2B007D1A7A /* Supporting FIles */,
 				89F09E8621374F17007D1A7A /* Info.plist */,
@@ -115,16 +114,17 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		89F09EA221378B58007D1A7A /* Depth-first Search */ = {
+		89F09EA221378B58007D1A7A /* Algorithms */ = {
 			isa = PBXGroup;
 			children = (
 				89F09E9C2137853C007D1A7A /* DepthFirstSearchAlgorithm.swift */,
+				89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */,
 				89F09E8F21374FE9007D1A7A /* Vertex.swift */,
 				89F09EA721378E1D007D1A7A /* VertexListSize.swift */,
 				89F09EA321378D74007D1A7A /* VertexStateColor.swift */,
 				89F09EA521378D87007D1A7A /* Direction.swift */,
 			);
-			path = "Depth-first Search";
+			path = Algorithms;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
