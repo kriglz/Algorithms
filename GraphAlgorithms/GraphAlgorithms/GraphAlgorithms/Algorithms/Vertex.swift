@@ -15,6 +15,8 @@ class Vertex {
     var predecessorIndex = -1
     /// The index of current vertex node.
     var index: Int
+    /// The distance to the source vertex node.
+    var distance: Int = 0
     /// The state defined by color of current vertex node.
     var stateColor = VertexStateColor.white
     
