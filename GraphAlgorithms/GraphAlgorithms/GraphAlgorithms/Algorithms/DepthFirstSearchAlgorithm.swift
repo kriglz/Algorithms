@@ -25,7 +25,9 @@ class DepthFirstSearchAlgorithm {
     ///     - size: Vertex list size in columns and rows.
     func search(in vertexList: [Vertex], size: VertexListSize) -> [Vertex] {
         self.size = size
-        return updateVertex(at: Int(CGFloat.random(min: 0, max: CGFloat(size.columns * size.rows)) / 2), in: vertexList)
+        let startIndex = (size.columns * size.rows) / 2
+//        let startIndex = Int(CGFloat.random(min: 0, max: CGFloat(size.columns * size.rows)) / 2)
+        return updateVertex(at: startIndex, in: vertexList)
     }
     
     /// Udpdates vertex list based on specified verex position in vertex node system using Depth-first search algorithm.
