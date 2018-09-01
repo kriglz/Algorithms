@@ -54,6 +54,14 @@ class Maze {
         fillUpBFVertexList()
     }
     
+    /// Sets up a new maze.
+    func setupDijkstras() {
+        reset()
+        
+        setupRawVertexList(columns: columns, rows: rows)
+        fillUpDijkstrasVertexList()
+    }
+    
     /// Resets existing maze.
     private func reset() {
         vertexList = []
@@ -88,6 +96,13 @@ class Maze {
         let breadthFirstAlgorithm = BreadthFirstSearchAlgorithm()
         breadthFirstAlgorithm.delegate = self
         vertexList = breadthFirstAlgorithm.search(in: vertexList, size: mazeSize)
+    }
+    
+    /// Runs Depth-first search algorithm to setup Vertex list for maze.
+    private func fillUpDijkstrasVertexList() {
+        let dijkstrasAlgorithm = DijkstrasPriorityQueueAlgorithm()
+//        dijkstrasAlgorithm.delegate = self
+        vertexList = dijkstrasAlgorithm.search(in: vertexList, size: mazeSize)
     }
 }
 

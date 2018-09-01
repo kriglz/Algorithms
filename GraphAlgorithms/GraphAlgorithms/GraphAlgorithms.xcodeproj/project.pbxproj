@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		890B5E0F213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5E0E213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift */; };
 		89A06A3A2138BB510035EF5C /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A06A392138BB510035EF5C /* CGFloat+Extension.swift */; };
 		89A06A3C2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */; };
 		89A06A3E2139AF4D0035EF5C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A06A3D2139AF4D0035EF5C /* Queue.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		890B5E0E213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DijkstrasPriorityQueueAlgorithm .swift"; sourceTree = "<group>"; };
 		89A06A392138BB510035EF5C /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadthFirstSearchAlgorithm.swift; sourceTree = "<group>"; };
 		89A06A3D2139AF4D0035EF5C /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				89F09E9C2137853C007D1A7A /* DepthFirstSearchAlgorithm.swift */,
 				89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */,
+				890B5E0E213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift */,
 				89F09E8F21374FE9007D1A7A /* Vertex.swift */,
 				89A06A3D2139AF4D0035EF5C /* Queue.swift */,
 				89F09EA721378E1D007D1A7A /* VertexListSize.swift */,
@@ -210,6 +213,7 @@
 				89F09EA821378E1D007D1A7A /* VertexListSize.swift in Sources */,
 				89F09E922137502D007D1A7A /* CGPath+Extension.swift in Sources */,
 				89F09E9F21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift in Sources */,
+				890B5E0F213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift in Sources */,
 				89F09EA421378D74007D1A7A /* VertexStateColor.swift in Sources */,
 				89A06A402139BC250035EF5C /* Maze+BreadthFirstSearchAlgorithmDelegate.swift in Sources */,
 				89F09E9421375056007D1A7A /* Maze.swift in Sources */,

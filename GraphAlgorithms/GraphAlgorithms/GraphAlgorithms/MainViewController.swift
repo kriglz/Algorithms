@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
 
     private let dFStartButton = UIButton(type: UIButtonType.system)
     private let bFStartButton = UIButton(type: UIButtonType.system)
+    private let dijkstrasStartButton = UIButton(type: UIButtonType.system)
 
     override var prefersStatusBarHidden: Bool {
         return true
@@ -37,6 +38,9 @@ class MainViewController: UIViewController {
         bFStartButton.setTitle("Breadth-First", for: .normal)
         bFStartButton.addTarget(self, action: #selector(bFStartAction(_:)), for: UIControlEvents.touchDown)
         
+        dijkstrasStartButton.setTitle("Dijkstra's", for: .normal)
+        dijkstrasStartButton.addTarget(self, action: #selector(dijkstrasStartAction(_:)), for: UIControlEvents.touchDown)
+
         view.addSubview(dFStartButton)
         dFStartButton.translatesAutoresizingMaskIntoConstraints = false
         dFStartButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
@@ -46,6 +50,16 @@ class MainViewController: UIViewController {
         bFStartButton.translatesAutoresizingMaskIntoConstraints = false
         bFStartButton.bottomAnchor.constraint(equalTo: dFStartButton.bottomAnchor).isActive = true
         bFStartButton.trailingAnchor.constraint(equalTo: dFStartButton.leadingAnchor, constant: -20).isActive = true
+        
+        view.addSubview(bFStartButton)
+        bFStartButton.translatesAutoresizingMaskIntoConstraints = false
+        bFStartButton.bottomAnchor.constraint(equalTo: dFStartButton.bottomAnchor).isActive = true
+        bFStartButton.trailingAnchor.constraint(equalTo: dFStartButton.leadingAnchor, constant: -20).isActive = true
+        
+        view.addSubview(dijkstrasStartButton)
+        dijkstrasStartButton.translatesAutoresizingMaskIntoConstraints = false
+        dijkstrasStartButton.bottomAnchor.constraint(equalTo: bFStartButton.bottomAnchor).isActive = true
+        dijkstrasStartButton.trailingAnchor.constraint(equalTo: bFStartButton.leadingAnchor, constant: -20).isActive = true
         
         view.addSubview(graphView)
         graphView.constraints(edgesTo: self.view)
@@ -64,5 +78,10 @@ class MainViewController: UIViewController {
     @objc private func bFStartAction(_ sender: UIButton) {
         graphView.reset()
         maze.setupBF()
+    }
+    
+    @objc private func dijkstrasStartAction(_ sender: UIButton) {
+        graphView.reset()
+        maze.setupDijkstras()
     }
 }
