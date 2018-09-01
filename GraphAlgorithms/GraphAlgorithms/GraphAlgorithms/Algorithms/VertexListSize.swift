@@ -6,10 +6,12 @@
 //  Copyright © 2018 Kristina Gelzinyte. All rights reserved.
 //
 
-/// Vertex list size object.
+/// Size of vertex list object as a matrix.
 struct VertexListSize {
     
+    /// Column number.
     var columns: Int
+    /// Row number.
     var rows: Int
     
     /// Returns a vertex list size object.

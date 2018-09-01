@@ -69,3 +69,10 @@ class Vertex {
         return neighbourVertexList
     }
 }
+
+extension Vertex: Equatable {
+    
+    static func == (lhs: Vertex, rhs: Vertex) -> Bool {
+        return lhs.index == rhs.index
+    }
+}

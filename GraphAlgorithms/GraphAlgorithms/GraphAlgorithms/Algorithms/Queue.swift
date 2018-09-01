@@ -28,6 +28,11 @@ public struct Queue<T> {
         return array.first
     }
     
+    /// Returns queue list as an array of `Vertex` type object.
+    var vertexList: [Vertex]? {
+        return array as? [Vertex]
+    }
+    
     /// Returns smallest distance `Vertex`.
     var smallest: Vertex? {
         if let vertexArray = array as? [Vertex] {
@@ -35,7 +40,7 @@ public struct Queue<T> {
                 a.distance < b.distance
             }            
         }
-        return nil
+        return first as? Vertex
     }
     
     // MARK: - Initialization
@@ -48,16 +53,29 @@ public struct Queue<T> {
     // MARK: - Queue list update
     
     /// Adds an element to the end of the queue.
+    ///
+    /// - Parameters:
+    ///     - element: An element to be added to the queue.
     mutating func push(_ element: T) {
         array.append(element)
     }
     
-    /// Removes first queue object in the list.
+    /// Removes first queue object in the queue list.
     @discardableResult mutating func pop() -> T? {
         if isEmpty {
             return nil
         } else {
             return array.removeFirst()
+        }
+    }
+    
+    /// Removes specified queue object in the list.
+    ///
+    /// - Parameters:
+    ///     - vertex: An object of a type `Vertex` to be removed from the queue list.
+    mutating func pop(vertex: Vertex) {
+        if !isEmpty, let vertexArray = array as? [Vertex], let index = vertexArray.index(where: { $0 == vertex }) {
+            array.remove(at: index)
         }
     }
 }
