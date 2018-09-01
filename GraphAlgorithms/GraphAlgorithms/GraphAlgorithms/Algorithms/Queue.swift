@@ -28,6 +28,16 @@ public struct Queue<T> {
         return array.first
     }
     
+    /// Returns smallest distance `Vertex`.
+    var smallest: Vertex? {
+        if let vertexArray = array as? [Vertex] {
+            return vertexArray.min { (a, b) in
+                a.distance < b.distance
+            }            
+        }
+        return nil
+    }
+    
     // MARK: - Initialization
     
     /// Initializes empty queue list.
