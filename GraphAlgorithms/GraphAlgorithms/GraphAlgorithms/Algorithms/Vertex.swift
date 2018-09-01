@@ -16,7 +16,7 @@ class Vertex {
     /// The index of current vertex node.
     var index: Int
     /// The distance to the source vertex node.
-    var distance: Int = 0
+    var distance = Int.max
     /// The state defined by color of current vertex node.
     var stateColor = VertexStateColor.white
     
@@ -26,5 +26,46 @@ class Vertex {
     ///     - index: Unique index for the vertex node.
     init(index: Int) {
         self.index = index
+    }
+    
+    /// Returns next in line neighbour vertex nodes.
+    ///
+    /// - Parameters:
+    ///     - vertexList: Vertex list of specifeid vertex.
+    ///     - size: Vertex list size.
+    func availableNeighbourVertexList(in vertexList: [Vertex], with size: VertexListSize) -> [Vertex] {
+        let range = 0...(vertexList.count - 1)
+        var neighbourVertexList = [Vertex]()
+        
+        // Randomizing neighbour vertex sequence to create patters.
+        Direction.randomDirections.forEach { direciton in
+            switch direciton {
+            case .left:
+                let leftIndex = index - 1
+                if index == 0 || index % size.columns > 0, range.contains(leftIndex), vertexList[leftIndex].stateColor == .white {
+                    neighbourVertexList.append(vertexList[leftIndex])
+                }
+                
+            case .right:
+                let rightIndex = index + 1
+                if index + 1 >= size.columns, (index + 1) % size.columns > 0, range.contains(rightIndex), vertexList[rightIndex].stateColor == .white {
+                    neighbourVertexList.append(vertexList[rightIndex])
+                }
+                
+            case .up:
+                let upIndex = index + size.columns
+                if range.contains(upIndex), vertexList[upIndex].stateColor == .white {
+                    neighbourVertexList.append(vertexList[upIndex])
+                }
+                
+            case .down:
+                let downIndex = index - size.columns
+                if range.contains(downIndex), vertexList[downIndex].stateColor == .white {
+                    neighbourVertexList.append(vertexList[downIndex])
+                }
+            }
+        }
+        
+        return neighbourVertexList
     }
 }

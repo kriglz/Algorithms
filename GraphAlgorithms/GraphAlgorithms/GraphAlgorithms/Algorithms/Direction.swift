@@ -27,4 +27,19 @@ enum Direction: Int {
         let randomInt = (Int(arc4random_uniform(4)) + 1);
         return Direction.init(rawValue: randomInt) ?? .up
     }
+    
+    /// Returns a random direction list from all possible (4) directions.
+    static var randomDirections: [Direction] {
+        var directions = [Direction]()
+        
+        while directions.count < 4 {
+            let direction = Direction.random
+            
+            if !directions.contains(direction) {
+                directions.append(direction)
+            }
+        }
+        
+        return directions
+    }
 }
