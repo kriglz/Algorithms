@@ -17,12 +17,22 @@ class DijkstrasPriorityQueueAlgorithm {
     
     // MARK: - Vertex list item management
     
+    /// Searches for shortest path in vertex list based on Dijkstra's Priority Queue search algorithm.
+    ///
+    /// - Parameters:
+    ///     - vertexList: Vertex list to be searched.
+    ///     - size: Vertex list size in columns and rows.
     func search(in vertexList: [Vertex], size: VertexListSize) -> [Vertex] {
         self.size = size
         let startIndex = (size.columns * size.rows) / 2
         return searchSingleSourceShortest(for: startIndex, in: vertexList)
     }
     
+    /// Searches for single shortest path in vertex list.
+    ///
+    /// - Parameters:
+    ///     - index: Index of specified initial vertex.
+    ///     - vertexList: Vertex list to be searched.
     private func searchSingleSourceShortest(for index: Int, in vertexList: [Vertex]) -> [Vertex] {
         let maxVertexIndex = vertexList.count - 1
         var queue = Queue<Vertex>()
@@ -54,7 +64,7 @@ class DijkstrasPriorityQueueAlgorithm {
                 }
             }
         }
-
+        
         return vertexList
     }
 }
