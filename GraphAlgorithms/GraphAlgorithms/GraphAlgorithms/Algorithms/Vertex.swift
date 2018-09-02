@@ -38,17 +38,21 @@ class Vertex {
         var neighbourVertexList = [Vertex]()
         
         // Randomizing neighbour vertex sequence to create patters.
-        Direction.randomDirections.forEach { direciton in
+        let randomDirections = Direction.randomDirections
+        randomDirections.forEach { direciton in
             switch direciton {
             case .left:
+                if index == 0 || index % size.columns == 0 { break }
+
                 let leftIndex = index - 1
-                if index == 0 || index % size.columns > 0, range.contains(leftIndex), vertexList[leftIndex].stateColor == .white {
+                if range.contains(leftIndex), vertexList[leftIndex].stateColor == .white {
                     neighbourVertexList.append(vertexList[leftIndex])
                 }
-                
             case .right:
                 let rightIndex = index + 1
-                if index + 1 >= size.columns, (index + 1) % size.columns > 0, range.contains(rightIndex), vertexList[rightIndex].stateColor == .white {
+                if rightIndex >= size.columns, rightIndex % size.columns == 0 { break }
+                
+                if range.contains(rightIndex), vertexList[rightIndex].stateColor == .white {
                     neighbourVertexList.append(vertexList[rightIndex])
                 }
                 
