@@ -10,7 +10,7 @@ extension Maze: BreadthFirstSearchAlgorithmDelegate {
 
     // MARK: - BreadthFirstSearchAlgorithmDelegate implementation
     
-    func breadthFirstSearchAlgorith(_ algorithm: BreadthFirstSearchAlgorithm, didUpdate vertex: Vertex) {
+    func breadthFirstSearchAlgorithm(_ algorithm: BreadthFirstSearchAlgorithm, didUpdate vertex: Vertex) {
         delegate?.maze(self, didUpdate: vertex, actionIndex: actionIndex)
         actionIndex += 1
     }

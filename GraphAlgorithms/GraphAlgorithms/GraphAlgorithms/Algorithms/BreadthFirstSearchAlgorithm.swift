@@ -53,7 +53,7 @@ class BreadthFirstSearchAlgorithm {
                 $0.stateColor = .gray
                 queue.push($0)
                 
-                delegate?.breadthFirstSearchAlgorith(self, didUpdate: $0)
+                delegate?.breadthFirstSearchAlgorithm(self, didUpdate: $0)
             }
             
             queue.pop()
@@ -76,5 +76,5 @@ protocol BreadthFirstSearchAlgorithmDelegate: class {
     /// - Parameters:
     ///     - algorithm: An object of the BreadthFirstSearchAlgorithm.
     ///     - vertex: A vertex node to be updated.
-    func breadthFirstSearchAlgorith(_ algorithm: BreadthFirstSearchAlgorithm, didUpdate vertex: Vertex)
+    func breadthFirstSearchAlgorithm(_ algorithm: BreadthFirstSearchAlgorithm, didUpdate vertex: Vertex)
 }
