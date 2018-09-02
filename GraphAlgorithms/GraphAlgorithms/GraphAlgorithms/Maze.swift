@@ -101,7 +101,7 @@ class Maze {
     /// Runs Depth-first search algorithm to setup Vertex list for maze.
     private func fillUpDijkstrasVertexList() {
         let dijkstrasAlgorithm = DijkstrasPriorityQueueAlgorithm()
-//        dijkstrasAlgorithm.delegate = self
+        dijkstrasAlgorithm.delegate = self
         vertexList = dijkstrasAlgorithm.search(in: vertexList, size: mazeSize)
     }
 }

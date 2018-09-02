@@ -13,6 +13,8 @@ class DijkstrasPriorityQueueAlgorithm {
 
     // MARK: - Properties
     
+    weak var delegate: DijkstrasPriorityQueueAlgorithmDelegate? = nil
+    
     private var size = VertexListSize()
     
     // MARK: - Vertex list item management
@@ -61,10 +63,27 @@ class DijkstrasPriorityQueueAlgorithm {
                     $0.stateColor = .gray
                     $0.distance = alternativeDistance
                     $0.predecessorIndex = smallestDistanceVertex.index
+                    
+                    delegate?.dijkstrasPriorityQueueAlgorithm(self, didUpdate: $0)
                 }
             }
         }
         
         return vertexList
     }
+}
+
+/// The object that acts as the delegate of the `DijkstrasPriorityQueueAlgorithm`.
+///
+/// The delegate must adopt the DijkstrasPriorityQueueAlgorithmDelegate protocol.
+///
+/// The delegate object is responsible for managing the vertex update.
+protocol DijkstrasPriorityQueueAlgorithmDelegate: class {
+    
+    /// Tells the delegate that vertex was updated.
+    ///
+    /// - Parameters:
+    ///     - algorithm: An object of the DijkstrasPriorityQueueAlgorithm.
+    ///     - vertex: A vertex node to be updated.
+    func dijkstrasPriorityQueueAlgorithm(_ algorithm: DijkstrasPriorityQueueAlgorithm, didUpdate vertex: Vertex)
 }

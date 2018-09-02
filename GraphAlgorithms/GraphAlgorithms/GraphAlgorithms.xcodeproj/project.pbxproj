@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		890B5E0F213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5E0E213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift */; };
+		890B5E11213B62DA0038E0B8 /* Maze+DijkstrasPriorityQueueAlgorithmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890B5E10213B62DA0038E0B8 /* Maze+DijkstrasPriorityQueueAlgorithmDelegate.swift */; };
 		89A06A3A2138BB510035EF5C /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A06A392138BB510035EF5C /* CGFloat+Extension.swift */; };
 		89A06A3C2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */; };
 		89A06A3E2139AF4D0035EF5C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A06A3D2139AF4D0035EF5C /* Queue.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		890B5E0E213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DijkstrasPriorityQueueAlgorithm .swift"; sourceTree = "<group>"; };
+		890B5E10213B62DA0038E0B8 /* Maze+DijkstrasPriorityQueueAlgorithmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maze+DijkstrasPriorityQueueAlgorithmDelegate.swift"; sourceTree = "<group>"; };
 		89A06A392138BB510035EF5C /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadthFirstSearchAlgorithm.swift; sourceTree = "<group>"; };
 		89A06A3D2139AF4D0035EF5C /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				89F09E9321375056007D1A7A /* Maze.swift */,
 				89F09E9E21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift */,
 				89A06A3F2139BC250035EF5C /* Maze+BreadthFirstSearchAlgorithmDelegate.swift */,
+				890B5E10213B62DA0038E0B8 /* Maze+DijkstrasPriorityQueueAlgorithmDelegate.swift */,
 				89F09EA221378B58007D1A7A /* Algorithms */,
 				89F09E97213756AB007D1A7A /* Utilities */,
 				89F09E8C21374F2B007D1A7A /* Supporting FIles */,
@@ -225,6 +228,7 @@
 				89F09E9921375843007D1A7A /* GraphView.swift in Sources */,
 				89A06A3A2138BB510035EF5C /* CGFloat+Extension.swift in Sources */,
 				89F09EA621378D87007D1A7A /* Direction.swift in Sources */,
+				890B5E11213B62DA0038E0B8 /* Maze+DijkstrasPriorityQueueAlgorithmDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
