@@ -42,7 +42,7 @@ class Maze {
     func setupDF() {
         reset()
 
-        setupRawVertexList(columns: columns, rows: rows)
+        setupRawVertexList(columns: columns, rows: rows, hasIgnoredVertex: true)
         fillUpDFVertexList()
     }
     

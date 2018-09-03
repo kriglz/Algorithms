@@ -42,38 +42,9 @@ class DepthFirstSearchAlgorithm {
             vertexList[index].stateColor = .gray
         }
         
-        var randomDirections = [Direction]()
-        func randomDirectionVertex() -> Vertex? {
-            let direction = Direction.random
-            
-            if randomDirections.contains(direction) {
-                return randomDirectionVertex()
-            }
-            
-            randomDirections.append(direction)
-            
-            let newVertex = nextVertex(for: index, in: vertexList, towards: direction)
-            
-            if newVertex == nil, randomDirections.count >= 4 {
-                return nil
-            }
-            
-            if newVertex == nil, randomDirections.count < 4 {
-                return randomDirectionVertex()
-            }
-            
-            if newVertex != nil, newVertex!.stateColor != .white, randomDirections.count < 4  {
-                return randomDirectionVertex()
-            }
-            
-            if newVertex != nil, newVertex!.stateColor == .white {
-                return newVertex
-            }
-            
-            return nil
-        }
+        let randomDirectionVertexList = vertexList[index].availableNeighbourVertexList(in: vertexList, with: size)
         
-        if let newVertex = randomDirectionVertex() {
+        if let newVertex = randomDirectionVertexList.first {
             newVertex.predecessorIndex = index
             delegate?.depthFirstSearchAlgorithm(self, didUpdate: newVertex)
             return updateVertex(at: newVertex.index, in: vertexList)
