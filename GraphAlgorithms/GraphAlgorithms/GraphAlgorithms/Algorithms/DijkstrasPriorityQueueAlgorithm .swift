@@ -41,7 +41,10 @@ class DijkstrasPriorityQueueAlgorithm {
         
         // Adds all vertex nodes to the queue.
         for index in 0...maxVertexIndex {
-            queue.push(vertexList[index])
+            let queueVertex = vertexList[index]
+            if !queueVertex.isIgnored {
+                queue.push(vertexList[index])
+            }
         }
         
         // Set source vertex distance to 0.

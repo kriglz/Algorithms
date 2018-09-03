@@ -50,7 +50,7 @@ class Maze {
     func setupBF() {
         reset()
         
-        setupRawVertexList(columns: columns, rows: rows)
+        setupRawVertexList(columns: columns, rows: rows, hasIgnoredVertex: true)
         fillUpBFVertexList()
     }
     
@@ -58,7 +58,7 @@ class Maze {
     func setupDijkstras() {
         reset()
         
-        setupRawVertexList(columns: columns, rows: rows)
+        setupRawVertexList(columns: columns, rows: rows, hasIgnoredVertex: true)
         fillUpDijkstrasVertexList()
     }
     
@@ -75,12 +75,22 @@ class Maze {
     /// - Parameters:
     ///     - columns: Column number for the maze.
     ///     - rows: Row number for the maze.
-    private func setupRawVertexList(columns: Int, rows: Int) {
+    private func setupRawVertexList(columns: Int, rows: Int, hasIgnoredVertex: Bool = false) {
         let maxIndex = columns * rows
         
         for index in 0..<maxIndex {
             let vertex = Vertex(index: index)
             vertexList.append(vertex)
+        }
+        
+        if hasIgnoredVertex {
+            var vertexObstacleIndexList = [Int]()
+            for _ in 0...10 {
+                let randomIndex = Int.random(min: 0, max: vertexList.count - 1)
+                vertexObstacleIndexList.append(randomIndex)
+                vertexList[randomIndex].isIgnored = true
+            }
+            delegate?.maze(self, ignoredVertexIndexList: vertexObstacleIndexList)
         }
     }
     
@@ -120,4 +130,11 @@ protocol MazeDelegate: class {
     ///     - vertex: A vertex node to be updated.
     ///     - actionIndex: Index of update action in maze setup sequence.
     func maze(_ maze: Maze, didUpdate vertex: Vertex, actionIndex: Int)
+    
+    /// Informs the delegate about obstacle type vertex index.
+    ///
+    /// - Parameters:
+    ///     - maze: An object of the maze.
+    ///     - ignoredVertexIndexList: A list of vertex indexes who needs to be ignored.
+    func maze(_ maze: Maze, ignoredVertexIndexList: [Int])
 }

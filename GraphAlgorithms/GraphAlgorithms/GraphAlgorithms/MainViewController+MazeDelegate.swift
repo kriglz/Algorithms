@@ -13,4 +13,8 @@ extension MainViewController: MazeDelegate {
     func maze(_ maze: Maze, didUpdate vertex: Vertex, actionIndex: Int) {
         graphView.drawVertexLine(vertex: vertex, in: maze, actionIndex: actionIndex)
     }
+    
+    func maze(_ maze: Maze, ignoredVertexIndexList: [Int]) {
+        graphView.drawObstacles(for: ignoredVertexIndexList, in: maze)
+    }
 }

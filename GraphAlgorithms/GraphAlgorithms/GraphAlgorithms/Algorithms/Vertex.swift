@@ -19,6 +19,8 @@ class Vertex {
     var distance = Int.max
     /// The state defined by color of current vertex node.
     var stateColor = VertexStateColor.white
+    /// The vertex node property set to true id it needs to be ignored in algortithm.
+    var isIgnored = false
     
     /// Returns a vertex node.
     ///
@@ -45,26 +47,26 @@ class Vertex {
                 if index == 0 || index % size.columns == 0 { break }
 
                 let leftIndex = index - 1
-                if range.contains(leftIndex), vertexList[leftIndex].stateColor == .white {
+                if range.contains(leftIndex), vertexList[leftIndex].stateColor == .white, !vertexList[leftIndex].isIgnored {
                     neighbourVertexList.append(vertexList[leftIndex])
                 }
             case .right:
                 let rightIndex = index + 1
                 if rightIndex >= size.columns, rightIndex % size.columns == 0 { break }
                 
-                if range.contains(rightIndex), vertexList[rightIndex].stateColor == .white {
+                if range.contains(rightIndex), vertexList[rightIndex].stateColor == .white, !vertexList[rightIndex].isIgnored {
                     neighbourVertexList.append(vertexList[rightIndex])
                 }
                 
             case .up:
                 let upIndex = index + size.columns
-                if range.contains(upIndex), vertexList[upIndex].stateColor == .white {
+                if range.contains(upIndex), vertexList[upIndex].stateColor == .white, !vertexList[upIndex].isIgnored {
                     neighbourVertexList.append(vertexList[upIndex])
                 }
                 
             case .down:
                 let downIndex = index - size.columns
-                if range.contains(downIndex), vertexList[downIndex].stateColor == .white {
+                if range.contains(downIndex), vertexList[downIndex].stateColor == .white, !vertexList[downIndex].isIgnored {
                     neighbourVertexList.append(vertexList[downIndex])
                 }
             }
