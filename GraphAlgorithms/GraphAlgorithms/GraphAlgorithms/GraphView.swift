@@ -55,7 +55,7 @@ class GraphView: UIView {
         lineLayer.add(drawAnimation, forKey: "Draw")
     }
     
-    func draw(maze: Maze, cellSize: Int = 30) {
+    func draw(maze: Maze, cellSize: Int = 20) {
         let vertexList = maze.vertexList
         let columns = maze.columns
         let rows = maze.rows
@@ -68,11 +68,32 @@ class GraphView: UIView {
         layer.addSublayer(lineLayer)
     }
     
-    func drawGrid(columns: Int, rows: Int, cellSize: Int = 30) {
+    func drawGrid(columns: Int, rows: Int, cellSize: Int = 20) {
         let lineLayer = CAShapeLayer()
         let linePath = CGPath.grid(columns: columns, rows: rows, cellSize: cellSize)
         lineLayer.path = linePath
         lineLayer.strokeColor = UIColor.red.cgColor
         layer.addSublayer(lineLayer)
+    }
+    
+    func drawObstacles(for vertexIndexList: [Int], in maze: Maze, cellSize: Int = 20) {
+        let columns = maze.columns
+        
+        for index in vertexIndexList {
+            let cellRow = (Double(index) / Double(columns)).rounded(.down)
+            let cellColumn = Double(index) - cellRow * Double(columns)
+            
+            let obstacleLayer = CAShapeLayer()
+            let circleWidth = 10.0
+            let circleRect = CGRect(x: (cellColumn + 0.5) * Double(cellSize) - circleWidth / 2,
+                                    y: (cellRow + 0.5) * Double(cellSize) - circleWidth / 2,
+                                    width: circleWidth,
+                                    height: circleWidth)
+            let obstaclePath = UIBezierPath(ovalIn: circleRect).cgPath
+            obstacleLayer.path = obstaclePath
+            obstacleLayer.fillColor = UIColor.red.cgColor
+            obstacleLayer.strokeColor = UIColor.clear.cgColor
+            layer.addSublayer(obstacleLayer)
+        }
     }
 }
