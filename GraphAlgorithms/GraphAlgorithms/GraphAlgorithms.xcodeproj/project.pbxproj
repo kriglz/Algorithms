@@ -16,6 +16,7 @@
 		89B1BE94213CCDA6000EA7B7 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B1BE93213CCDA6000EA7B7 /* Int+Extension.swift */; };
 		89B1BE96213EF5C9000EA7B7 /* PrimsAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B1BE95213EF5C9000EA7B7 /* PrimsAlgorithm.swift */; };
 		89B1BE98213EFC8C000EA7B7 /* AlgorithmTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B1BE97213EFC8C000EA7B7 /* AlgorithmTypes.swift */; };
+		89B1BE9A213F2686000EA7B7 /* Maze+PrimsAlgorithmDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B1BE99213F2686000EA7B7 /* Maze+PrimsAlgorithmDelegate.swift */; };
 		89F09E7B21374F14007D1A7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F09E7A21374F14007D1A7A /* AppDelegate.swift */; };
 		89F09E8021374F14007D1A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F09E7E21374F14007D1A7A /* Main.storyboard */; };
 		89F09E8221374F17007D1A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89F09E8121374F17007D1A7A /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		89B1BE93213CCDA6000EA7B7 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		89B1BE95213EF5C9000EA7B7 /* PrimsAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimsAlgorithm.swift; sourceTree = "<group>"; };
 		89B1BE97213EFC8C000EA7B7 /* AlgorithmTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTypes.swift; sourceTree = "<group>"; };
+		89B1BE99213F2686000EA7B7 /* Maze+PrimsAlgorithmDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maze+PrimsAlgorithmDelegate.swift"; sourceTree = "<group>"; };
 		89F09E7721374F14007D1A7A /* GraphAlgorithms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphAlgorithms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F09E7A21374F14007D1A7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89F09E7F21374F14007D1A7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				89F09E9E21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift */,
 				89A06A3F2139BC250035EF5C /* Maze+BreadthFirstSearchAlgorithmDelegate.swift */,
 				890B5E10213B62DA0038E0B8 /* Maze+DijkstrasPriorityQueueAlgorithmDelegate.swift */,
+				89B1BE99213F2686000EA7B7 /* Maze+PrimsAlgorithmDelegate.swift */,
 				89F09EA221378B58007D1A7A /* Algorithms */,
 				89F09E97213756AB007D1A7A /* Utilities */,
 				89F09E8C21374F2B007D1A7A /* Supporting FIles */,
@@ -134,11 +137,11 @@
 		89F09EA221378B58007D1A7A /* Algorithms */ = {
 			isa = PBXGroup;
 			children = (
-				89B1BE97213EFC8C000EA7B7 /* AlgorithmTypes.swift */,
 				89F09E9C2137853C007D1A7A /* DepthFirstSearchAlgorithm.swift */,
 				89A06A3B2138C3DE0035EF5C /* BreadthFirstSearchAlgorithm.swift */,
 				890B5E0E213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift */,
 				89B1BE95213EF5C9000EA7B7 /* PrimsAlgorithm.swift */,
+				89B1BE97213EFC8C000EA7B7 /* AlgorithmTypes.swift */,
 				89F09E8F21374FE9007D1A7A /* Vertex.swift */,
 				89A06A3D2139AF4D0035EF5C /* Queue.swift */,
 				89F09EA721378E1D007D1A7A /* VertexListSize.swift */,
@@ -226,6 +229,7 @@
 				89F09E922137502D007D1A7A /* CGPath+Extension.swift in Sources */,
 				89B1BE98213EFC8C000EA7B7 /* AlgorithmTypes.swift in Sources */,
 				89B1BE94213CCDA6000EA7B7 /* Int+Extension.swift in Sources */,
+				89B1BE9A213F2686000EA7B7 /* Maze+PrimsAlgorithmDelegate.swift in Sources */,
 				89F09E9F21378A94007D1A7A /* Maze+DepthFirstSearchAlgorithmDelegate.swift in Sources */,
 				890B5E0F213A07420038E0B8 /* DijkstrasPriorityQueueAlgorithm .swift in Sources */,
 				89F09EA421378D74007D1A7A /* VertexStateColor.swift in Sources */,
