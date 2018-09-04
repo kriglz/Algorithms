@@ -113,9 +113,9 @@ class Maze {
     
     /// Runs Prim's search algorithm to setup Vertex list for maze.
     private func fillUpPrimsVertexList() {
-//        let dijkstrasAlgorithm = DijkstrasPriorityQueueAlgorithm()
-//        dijkstrasAlgorithm.delegate = self
-//        vertexList = dijkstrasAlgorithm.search(in: vertexList, size: mazeSize)
+        let primsAlgorithm = PrimsAlgorithm()
+        primsAlgorithm.delegate = self
+        vertexList = primsAlgorithm.search(in: vertexList, size: mazeSize)
     }
 }
 

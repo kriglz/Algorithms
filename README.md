@@ -26,3 +26,4 @@
 - Depth-First Search
 - Breadth-First Search
 - Dijkstra's Priority Queue Search
+- Prim's Search
