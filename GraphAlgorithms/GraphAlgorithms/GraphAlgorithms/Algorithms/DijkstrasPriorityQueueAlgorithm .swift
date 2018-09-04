@@ -59,8 +59,8 @@ class DijkstrasPriorityQueueAlgorithm {
             
             let neighbourList = smallestDistanceVertex.availableNeighbourVertexList(in: vertexList, with: size)
             neighbourList.forEach {
-                // Weight/distance to neighbour vertex nodes is always set to 1.
-                let alternativeDistance = smallestDistanceVertex.distance + 1
+                // Weight/distance to neighbour vertex nodes is equal to neighbour vertex index difference.
+                let alternativeDistance = smallestDistanceVertex.distance + ($0.index - smallestDistanceVertex.index) // 1
                 
                 if alternativeDistance < $0.distance {
                     $0.stateColor = .gray

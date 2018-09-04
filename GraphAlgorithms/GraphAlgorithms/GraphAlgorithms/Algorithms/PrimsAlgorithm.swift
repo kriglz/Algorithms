@@ -56,11 +56,11 @@ class PrimsAlgorithm {
                 $0.stateColor = .gray
                 queue.push($0)
                 
-                // Weight/distance to neighbour vertex nodes is always set to 1.
-                let alternativeDistance = smallestDistanceVertex.distance + 1
+                // Weight/distance to neighbour vertex nodes is equal to neighbour vertex index difference.
+                let weight = ($0.index - smallestDistanceVertex.index)
                 
-                if alternativeDistance < $0.distance {
-                    $0.distance = alternativeDistance
+                if weight < $0.distance {
+                    $0.distance = weight
                     $0.predecessorIndex = smallestDistanceVertex.index
                     
                     delegate?.primsAlgorithm(self, didUpdate: $0)
