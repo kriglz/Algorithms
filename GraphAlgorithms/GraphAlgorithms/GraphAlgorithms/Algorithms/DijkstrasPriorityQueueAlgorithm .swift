@@ -26,8 +26,8 @@ class DijkstrasPriorityQueueAlgorithm {
     ///     - size: Vertex list size in columns and rows.
     func search(in vertexList: [Vertex], size: VertexListSize) -> [Vertex] {
         self.size = size
-        let startIndex = (size.columns * size.rows) / 2
-        return searchSingleSourceShortest(for: startIndex, in: vertexList)
+        let index = Vertex.startIndex(for: vertexList)
+        return searchSingleSourceShortest(for: index, in: vertexList)
     }
     
     /// Searches for single shortest path in vertex list.

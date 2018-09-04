@@ -30,6 +30,21 @@ class Vertex {
         self.index = index
     }
     
+    /// Returns start index for algorithm.
+    ///
+    /// - Parameters:
+    ///     - vertexList: Vertex list of specifeid vertex.
+    static func startIndex(for vertexList: [Vertex]) -> Int {
+        //        let startIndex = Int(CGFloat.random(min: 0, max: CGFloat(size.columns * size.rows)) / 2)
+        var startIndex = vertexList.count / 2
+        
+        if vertexList[startIndex].isIgnored, let firstVertex = vertexList.first(where: { $0.isIgnored == false }) {
+            startIndex = firstVertex.index
+        }
+        
+        return startIndex
+    }
+    
     /// Returns next in line neighbour vertex nodes.
     ///
     /// - Parameters:
