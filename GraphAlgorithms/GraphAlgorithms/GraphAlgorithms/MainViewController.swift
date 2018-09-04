@@ -78,7 +78,7 @@ class MainViewController: UIViewController {
     
     @objc private func dFStartAction(_ sender: UIButton) {
         graphView.reset()
-        maze.setupAlgorithm(type: .breadthFirst)
+        maze.setupAlgorithm(type: .depthFirst)
         
 //        graphView.draw(maze: maze)
 //        graphView.drawGrid(columns: maze.columns, rows: maze.rows)
@@ -86,7 +86,7 @@ class MainViewController: UIViewController {
     
     @objc private func bFStartAction(_ sender: UIButton) {
         graphView.reset()
-        maze.setupAlgorithm(type: .depthFirst)
+        maze.setupAlgorithm(type: .breadthFirst)
     }
     
     @objc private func dijkstrasStartAction(_ sender: UIButton) {
