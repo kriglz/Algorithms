@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     private let dFStartButton = UIButton(type: UIButtonType.system)
     private let bFStartButton = UIButton(type: UIButtonType.system)
     private let dijkstrasStartButton = UIButton(type: UIButtonType.system)
+    private let primsStartButton = UIButton(type: UIButtonType.system)
 
     override var prefersStatusBarHidden: Bool {
         return true
@@ -33,14 +34,17 @@ class MainViewController: UIViewController {
         maze.delegate = self
         
         dFStartButton.setTitle("Depth-First", for: .normal)
-        dFStartButton.addTarget(self, action: #selector(dFStartAction(_:)), for: UIControlEvents.touchDown)
+        dFStartButton.addTarget(self, action: #selector(dFStartAction(_:)), for: .touchDown)
         
         bFStartButton.setTitle("Breadth-First", for: .normal)
-        bFStartButton.addTarget(self, action: #selector(bFStartAction(_:)), for: UIControlEvents.touchDown)
+        bFStartButton.addTarget(self, action: #selector(bFStartAction(_:)), for: .touchDown)
         
         dijkstrasStartButton.setTitle("Dijkstra's", for: .normal)
-        dijkstrasStartButton.addTarget(self, action: #selector(dijkstrasStartAction(_:)), for: UIControlEvents.touchDown)
+        dijkstrasStartButton.addTarget(self, action: #selector(dijkstrasStartAction(_:)), for: .touchDown)
 
+        primsStartButton.setTitle("Prim's", for: .normal)
+        primsStartButton.addTarget(self, action: #selector(primsStartAction(_:)), for: .touchDown)
+        
         view.addSubview(dFStartButton)
         dFStartButton.translatesAutoresizingMaskIntoConstraints = false
         dFStartButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
@@ -61,6 +65,11 @@ class MainViewController: UIViewController {
         dijkstrasStartButton.bottomAnchor.constraint(equalTo: bFStartButton.bottomAnchor).isActive = true
         dijkstrasStartButton.trailingAnchor.constraint(equalTo: bFStartButton.leadingAnchor, constant: -20).isActive = true
         
+        view.addSubview(primsStartButton)
+        primsStartButton.translatesAutoresizingMaskIntoConstraints = false
+        primsStartButton.bottomAnchor.constraint(equalTo: dFStartButton.topAnchor, constant: -20).isActive = true
+        primsStartButton.trailingAnchor.constraint(equalTo: dFStartButton.trailingAnchor).isActive = true
+        
         view.addSubview(graphView)
         graphView.constraints(edgesTo: self.view)
     }
@@ -69,7 +78,7 @@ class MainViewController: UIViewController {
     
     @objc private func dFStartAction(_ sender: UIButton) {
         graphView.reset()
-        maze.setupDF()
+        maze.setupAlgorithm(type: .breadthFirst)
         
 //        graphView.draw(maze: maze)
 //        graphView.drawGrid(columns: maze.columns, rows: maze.rows)
@@ -77,11 +86,16 @@ class MainViewController: UIViewController {
     
     @objc private func bFStartAction(_ sender: UIButton) {
         graphView.reset()
-        maze.setupBF()
+        maze.setupAlgorithm(type: .depthFirst)
     }
     
     @objc private func dijkstrasStartAction(_ sender: UIButton) {
         graphView.reset()
-        maze.setupDijkstras()
+        maze.setupAlgorithm(type: .dijkstras)
+    }
+    
+    @objc private func primsStartAction(_ sender: UIButton) {
+        graphView.reset()
+        maze.setupAlgorithm(type: .prims)
     }
 }

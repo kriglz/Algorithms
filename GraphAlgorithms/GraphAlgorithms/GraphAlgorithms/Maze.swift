@@ -38,28 +38,24 @@ class Maze {
         self.rows = rows
     }
     
-    /// Sets up a new maze.
-    func setupDF() {
+    /// Sets up a new maze with specified alforithm.
+    ///
+    /// - Parameters:
+    ///     - type: The type of algorithm to be used for maze generation.
+    func setupAlgorithm(type: AlgorithmTypes) {
         reset()
+        setupRawVertexList(columns: columns, rows: rows, hasIgnoredVertex: true)
 
-        setupRawVertexList(columns: columns, rows: rows, hasIgnoredVertex: true)
-        fillUpDFVertexList()
-    }
-    
-    /// Sets up a new maze.
-    func setupBF() {
-        reset()
-        
-        setupRawVertexList(columns: columns, rows: rows, hasIgnoredVertex: true)
-        fillUpBFVertexList()
-    }
-    
-    /// Sets up a new maze.
-    func setupDijkstras() {
-        reset()
-        
-        setupRawVertexList(columns: columns, rows: rows, hasIgnoredVertex: true)
-        fillUpDijkstrasVertexList()
+        switch type {
+        case .depthFirst:
+            fillUpDFVertexList()
+        case .breadthFirst:
+            fillUpBFVertexList()
+        case .dijkstras:
+            fillUpDijkstrasVertexList()
+        case .prims:
+            fillUpPrimsVertexList()
+        }
     }
     
     /// Resets existing maze.
@@ -113,6 +109,13 @@ class Maze {
         let dijkstrasAlgorithm = DijkstrasPriorityQueueAlgorithm()
         dijkstrasAlgorithm.delegate = self
         vertexList = dijkstrasAlgorithm.search(in: vertexList, size: mazeSize)
+    }
+    
+    /// Runs Prim's search algorithm to setup Vertex list for maze.
+    private func fillUpPrimsVertexList() {
+//        let dijkstrasAlgorithm = DijkstrasPriorityQueueAlgorithm()
+//        dijkstrasAlgorithm.delegate = self
+//        vertexList = dijkstrasAlgorithm.search(in: vertexList, size: mazeSize)
     }
 }
 
