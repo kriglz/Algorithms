@@ -57,10 +57,10 @@ class FloydWarshallAlgorithm {
         // Optimizes paths.
         for pivotIndex in 0..<count {
             for rowIndex in 0..<count {
-                guard pivotIndex != rowIndex else { continue }
+                guard pivotIndex != rowIndex, !vertexList[pivotIndex].isIgnored, !vertexList[rowIndex].isIgnored else { continue }
 
                 for columnIndex in 0..<count {
-                    guard pivotIndex != columnIndex, rowIndex != columnIndex else { continue }
+                    guard pivotIndex != columnIndex, rowIndex != columnIndex, !vertexList[columnIndex].isIgnored  else { continue }
 
                     var alterantiveDistance = Double(distanceMatrix[rowIndex][pivotIndex])
                     alterantiveDistance += Double(distanceMatrix[pivotIndex][columnIndex])
@@ -103,19 +103,21 @@ class FloydWarshallAlgorithm {
         var pathTargetIndex = targetIndex
         
         while pathTargetIndex != sourceIndex {
-            if predecessorMatrix[sourceIndex][pathTargetIndex] >= 0 {
-                let predecessorIndex = predecessorMatrix[sourceIndex][pathTargetIndex]
-                
-                vertexList[pathTargetIndex].stateColor = .gray
-                vertexList[pathTargetIndex].predecessorIndex = predecessorIndex
-                
-                if path == nil {
-                    path = [Vertex]()
-                }
-                path!.insert(vertexList[pathTargetIndex], at: 0)
-                
-                pathTargetIndex = predecessorIndex
+            if predecessorMatrix[sourceIndex][pathTargetIndex] == -1, vertexList[pathTargetIndex].isIgnored == true {
+                return nil
             }
+            
+            let predecessorIndex = predecessorMatrix[sourceIndex][pathTargetIndex]
+            
+            vertexList[pathTargetIndex].stateColor = .gray
+            vertexList[pathTargetIndex].predecessorIndex = predecessorIndex
+            
+            if path == nil {
+                path = [Vertex]()
+            }
+            path!.insert(vertexList[pathTargetIndex], at: 0)
+            
+            pathTargetIndex = predecessorIndex
         }
         
         return path

@@ -83,7 +83,8 @@ class Maze {
         
         if hasIgnoredVertex {
             var vertexObstacleIndexList = [Int]()
-            for _ in 0...10 {
+            let maxNumber = maxIndex / 10
+            for _ in 0...maxNumber {
                 let randomIndex = Int.random(min: 0, max: vertexList.count - 1)
                 vertexObstacleIndexList.append(randomIndex)
                 vertexList[randomIndex].isIgnored = true
