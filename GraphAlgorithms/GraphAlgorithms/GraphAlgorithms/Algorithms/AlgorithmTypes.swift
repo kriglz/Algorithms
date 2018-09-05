@@ -13,10 +13,12 @@
 /// - Breadth-First search
 /// - Dijkstra's Single Source Shortest Path search
 /// - Prim's Minimum Spanning Tree search
+/// - Floyd-Warshall All Pairs Shortest Path search
 enum AlgorithmTypes {
     
     case depthFirst
     case breadthFirst
     case dijkstras
     case prims
+    case floydWarshall
 }
