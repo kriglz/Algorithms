@@ -55,6 +55,8 @@ class Maze {
             fillUpDijkstrasVertexList()
         case .prims:
             fillUpPrimsVertexList()
+        case .floydWarshall:
+            fillUpFloydWarshallVertexList()
         }
     }
     
@@ -116,6 +118,13 @@ class Maze {
         let primsAlgorithm = PrimsAlgorithm()
         primsAlgorithm.delegate = self
         vertexList = primsAlgorithm.search(in: vertexList, size: mazeSize)
+    }
+    
+    /// Runs Floyd-Warshall's search algorithm to setup Vertex list for maze.
+    private func fillUpFloydWarshallVertexList() {
+        let fWAlgorithm = FloydWarshallAlgorithm()
+        fWAlgorithm.delegate = self
+        vertexList = fWAlgorithm.search(in: vertexList, size: mazeSize)
     }
 }
 
