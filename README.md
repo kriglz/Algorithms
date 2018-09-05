@@ -23,17 +23,17 @@
 
 # Graph Algorithms:
 
-- Depth-First Search
+- Depth-First Search  
 ![](./PreviewGIFs/DepthFirst.gif)
 
-- Breadth-First Search
+- Breadth-First Search  
 ![](./PreviewGIFs/BredthFirst.gif)
 
-- Dijkstra's Priority Queue Search (weight is equal to neighbor vertices index difference)
+- Dijkstra's Priority Queue Search (weight is equal to neighbor vertices index difference)  
 ![](./PreviewGIFs/Dijkstras.gif)
 
-- Prim's Search (weight is equal to neighbor vertices index difference)
+- Prim's Search (weight is equal to neighbor vertices index difference)  
 ![](./PreviewGIFs/Prims.gif)
 
-- Floyd-Warshall (weight is equal to neighbor vertices index difference)
+- Floyd-Warshall (weight is equal to neighbor vertices index difference)  
 ![](./PreviewGIFs/FloydWarshall.gif)
