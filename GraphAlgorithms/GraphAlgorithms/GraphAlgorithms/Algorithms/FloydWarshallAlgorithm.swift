@@ -43,29 +43,29 @@ class FloydWarshallAlgorithm {
             distanceMatrix[index][index] = 0
             
             let neighbourList = vertexList[index].availableNeighbourVertexList(in: vertexList, with: size)
-            neighbourList.forEach {
-                
+            neighbourList.forEach {                
                 // Weight/distance to neighbour vertex nodes is equal to neighbour vertex index difference.
                 let weight = ($0.index - vertexList[index].index)
                 let neighbourIndex = $0.index
                 
                 distanceMatrix[index][neighbourIndex] = weight
                 predecessorMatrix[index][neighbourIndex] = index
+                
+                vertexList[neighbourIndex].predecessorIndex = index
             }
         }
         
+        // 0 1 2
+        // 3 4 5
+        // 6 7 8
+        
         for pivotIndex in 0..<count {
             for rowIndex in 0..<count {
+                guard pivotIndex != rowIndex else { continue }
+
                 for columnIndex in 0..<count {
-                    
-                    if vertexList[rowIndex].isNeighbour(of: vertexList[columnIndex], in: size) {
-                        vertexList[columnIndex].predecessorIndex = rowIndex
-                        delegate?.floydWarshallAlgorithm(self, didUpdate: vertexList[columnIndex])
-                        continue
-                    }
-                    
-                    guard pivotIndex != rowIndex else { continue }
-                    
+                    guard pivotIndex != columnIndex, rowIndex != columnIndex else { continue }
+
                     guard vertexList[pivotIndex].isNeighbour(of: vertexList[rowIndex], in: size),
                         vertexList[pivotIndex].isNeighbour(of: vertexList[columnIndex], in: size) else { continue }
                     
@@ -76,17 +76,24 @@ class FloydWarshallAlgorithm {
                         distanceMatrix[rowIndex][columnIndex] = Int(alterantiveDistance)
                         predecessorMatrix[rowIndex][columnIndex] = predecessorMatrix[pivotIndex][columnIndex]
                         
+                        vertexList[columnIndex].stateColor = .gray
+                        vertexList[pivotIndex].stateColor = .gray
+                        vertexList[rowIndex].stateColor = .gray
+
                         vertexList[pivotIndex].predecessorIndex = rowIndex
-                        delegate?.floydWarshallAlgorithm(self, didUpdate: vertexList[pivotIndex])
-                        
                         vertexList[columnIndex].predecessorIndex = pivotIndex
-                        delegate?.floydWarshallAlgorithm(self, didUpdate: vertexList[columnIndex])
-                        
-                    } else if vertexList[rowIndex].isNeighbour(of: vertexList[columnIndex], in: size) {
-                        vertexList[columnIndex].predecessorIndex = rowIndex
+
+                        delegate?.floydWarshallAlgorithm(self, didUpdate: vertexList[pivotIndex])
                         delegate?.floydWarshallAlgorithm(self, didUpdate: vertexList[columnIndex])
                     }
                 }
+            }
+        }
+        
+        for index in 0..<count {
+            if vertexList[index].stateColor != .gray {
+                vertexList[index].stateColor = .black
+                delegate?.floydWarshallAlgorithm(self, didUpdate: vertexList[index])
             }
         }
         
