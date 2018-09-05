@@ -15,11 +15,12 @@ class MainViewController: UIViewController {
     private let maze = Maze(columns: 15, rows: 15)
     private(set) var graphView = GraphView()
 
-    private let dFStartButton = UIButton(type: UIButtonType.system)
-    private let bFStartButton = UIButton(type: UIButtonType.system)
-    private let dijkstrasStartButton = UIButton(type: UIButtonType.system)
-    private let primsStartButton = UIButton(type: UIButtonType.system)
-
+    private let dFStartButton = UIButton(type: .system)
+    private let bFStartButton = UIButton(type: .system)
+    private let dijkstrasStartButton = UIButton(type: .system)
+    private let primsStartButton = UIButton(type: .system)
+    private let floydWarshallStartButton = UIButton(type: .system)
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -45,6 +46,9 @@ class MainViewController: UIViewController {
         primsStartButton.setTitle("Prim's", for: .normal)
         primsStartButton.addTarget(self, action: #selector(primsStartAction(_:)), for: .touchDown)
         
+        floydWarshallStartButton.setTitle("Floyd-Warshall", for: .normal)
+        floydWarshallStartButton.addTarget(self, action: #selector(floydWarchallStartAction(_:)), for: .touchDown)
+        
         view.addSubview(dFStartButton)
         dFStartButton.translatesAutoresizingMaskIntoConstraints = false
         dFStartButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
@@ -69,6 +73,11 @@ class MainViewController: UIViewController {
         primsStartButton.translatesAutoresizingMaskIntoConstraints = false
         primsStartButton.bottomAnchor.constraint(equalTo: dFStartButton.topAnchor, constant: -20).isActive = true
         primsStartButton.trailingAnchor.constraint(equalTo: dFStartButton.trailingAnchor).isActive = true
+        
+        view.addSubview(floydWarshallStartButton)
+        floydWarshallStartButton.translatesAutoresizingMaskIntoConstraints = false
+        floydWarshallStartButton.bottomAnchor.constraint(equalTo: primsStartButton.bottomAnchor).isActive = true
+        floydWarshallStartButton.trailingAnchor.constraint(equalTo: primsStartButton.leadingAnchor, constant: -20).isActive = true
         
         view.addSubview(graphView)
         graphView.constraints(edgesTo: self.view)
@@ -97,5 +106,10 @@ class MainViewController: UIViewController {
     @objc private func primsStartAction(_ sender: UIButton) {
         graphView.reset()
         maze.setupAlgorithm(type: .prims)
+    }
+    
+    @objc private func floydWarchallStartAction(_ sender: UIButton) {
+        graphView.reset()
+        maze.setupAlgorithm(type: .floydWarshall)
     }
 }
