@@ -84,14 +84,14 @@ class GraphView: UIView {
             let cellColumn = Double(index) - cellRow * Double(columns)
             
             let obstacleLayer = CAShapeLayer()
-            let circleWidth = 10.0
+            let circleWidth = 8.0
             let circleRect = CGRect(x: (cellColumn + 0.5) * Double(cellSize) - circleWidth / 2,
                                     y: (cellRow + 0.5) * Double(cellSize) - circleWidth / 2,
                                     width: circleWidth,
                                     height: circleWidth)
             let obstaclePath = UIBezierPath(ovalIn: circleRect).cgPath
             obstacleLayer.path = obstaclePath
-            obstacleLayer.fillColor = UIColor.red.cgColor
+            obstacleLayer.fillColor = UIColor.darkGray.cgColor
             obstacleLayer.strokeColor = UIColor.clear.cgColor
             layer.addSublayer(obstacleLayer)
         }
