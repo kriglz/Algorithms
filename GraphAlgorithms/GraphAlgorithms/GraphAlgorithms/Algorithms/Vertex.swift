@@ -45,46 +45,6 @@ class Vertex {
         return startIndex
     }
     
-    /// Returns boolen indicating if specified vertex is a neighbour vertex.
-    ///
-    /// - Parameters:
-    ///     - vertex: Vertex to be identified as a neighbour.
-    func isNeighbour(of vertex: Vertex, in size: VertexListSize) -> Bool {
-        guard vertex.stateColor == .white else { return false }
-        
-        // Current vertex is most left vertex.
-        if (index == 0 || index % size.columns == 0) && index == vertex.index + 1 {
-            return false
-        }
-        
-        // Current vertex is most right vertex.
-        if (index + 1 >= size.columns || index + 1 % size.columns == 0) && index == vertex.index - 1 {
-            return false
-        }
-        
-        // Specified vertex is left direction neighbour.
-        if index == vertex.index + 1 {
-            return true
-        }
-        
-        // Specified vertex is right direction neighbour.
-        if index == vertex.index - 1 {
-            return true
-        }
-        
-        // Specified vertex is up direction neighbour.
-        if index == vertex.index - size.columns {
-            return true
-        }
-        
-        // Specified vertex is down direction neighbour.
-        if index == vertex.index + size.columns {
-            return true
-        }
-
-        return false
-    }
-    
     /// Returns next in line neighbour vertex nodes.
     ///
     /// - Parameters:
