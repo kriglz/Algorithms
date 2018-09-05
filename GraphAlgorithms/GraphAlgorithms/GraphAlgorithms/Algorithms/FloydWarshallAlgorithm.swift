@@ -39,26 +39,22 @@ class FloydWarshallAlgorithm {
         var distanceMatrix = [[Int]](repeating: [Int](repeating: Int.max, count: count), count: count)
         var predecessorMatrix = [[Int]](repeating: [Int](repeating: -1, count: count), count: count)
         
+        // Sets up default matrix.
         for index in 0..<count {
             distanceMatrix[index][index] = 0
             
             let neighbourList = vertexList[index].availableNeighbourVertexList(in: vertexList, with: size)
             neighbourList.forEach {                
                 // Weight/distance to neighbour vertex nodes is equal to neighbour vertex index difference.
-                let weight = ($0.index - vertexList[index].index)
+                let weight = abs($0.index - vertexList[index].index)
                 let neighbourIndex = $0.index
                 
                 distanceMatrix[index][neighbourIndex] = weight
                 predecessorMatrix[index][neighbourIndex] = index
-                
-                vertexList[neighbourIndex].predecessorIndex = index
             }
         }
         
-        // 0 1 2
-        // 3 4 5
-        // 6 7 8
-        
+        // Optimizes paths.
         for pivotIndex in 0..<count {
             for rowIndex in 0..<count {
                 guard pivotIndex != rowIndex else { continue }
@@ -66,38 +62,63 @@ class FloydWarshallAlgorithm {
                 for columnIndex in 0..<count {
                     guard pivotIndex != columnIndex, rowIndex != columnIndex else { continue }
 
-                    guard vertexList[pivotIndex].isNeighbour(of: vertexList[rowIndex], in: size),
-                        vertexList[pivotIndex].isNeighbour(of: vertexList[columnIndex], in: size) else { continue }
-                    
                     var alterantiveDistance = Double(distanceMatrix[rowIndex][pivotIndex])
                     alterantiveDistance += Double(distanceMatrix[pivotIndex][columnIndex])
                     
                     if alterantiveDistance < Double(distanceMatrix[rowIndex][columnIndex]) {
                         distanceMatrix[rowIndex][columnIndex] = Int(alterantiveDistance)
                         predecessorMatrix[rowIndex][columnIndex] = predecessorMatrix[pivotIndex][columnIndex]
-                        
-                        vertexList[columnIndex].stateColor = .gray
-                        vertexList[pivotIndex].stateColor = .gray
-                        vertexList[rowIndex].stateColor = .gray
-
-                        vertexList[pivotIndex].predecessorIndex = rowIndex
-                        vertexList[columnIndex].predecessorIndex = pivotIndex
-
-                        delegate?.floydWarshallAlgorithm(self, didUpdate: vertexList[pivotIndex])
-                        delegate?.floydWarshallAlgorithm(self, didUpdate: vertexList[columnIndex])
                     }
                 }
             }
         }
         
-        for index in 0..<count {
-            if vertexList[index].stateColor != .gray {
-                vertexList[index].stateColor = .black
-                delegate?.floydWarshallAlgorithm(self, didUpdate: vertexList[index])
+        // Finds shortest paths.
+        let sourceIndex = Vertex.startIndex(for: vertexList)
+        var targetIndex = count - 1
+
+        while targetIndex >= 0 {
+            if let path = constructShortestPath(from: sourceIndex, to: targetIndex, for: vertexList, predecessorMatrix) {
+                for vertexInPath in path {
+                    delegate?.floydWarshallAlgorithm(self, didUpdate: vertexInPath)
+                }
+            }
+            targetIndex -= 1
+        }
+
+        return vertexList
+    }
+    
+    /// Constructs shortest path in given vertex list.
+    ///
+    /// - Parameters:
+    ///     - sourceIndex: A path's source index.
+    ///     - targetIndex: A path's target index.
+    ///     - vertexList: Vertex list to be searched.
+    ///     - predecessorMatrix: A matrix of all pair predecessors.
+    private func constructShortestPath(from sourceIndex: Int, to targetIndex: Int, for vertexList: [Vertex], _ predecessorMatrix: [[Int]]) -> [Vertex]? {
+        guard vertexList[targetIndex].stateColor == .white else { return nil }
+        
+        var path: [Vertex]?
+        var pathTargetIndex = targetIndex
+        
+        while pathTargetIndex != sourceIndex {
+            if predecessorMatrix[sourceIndex][pathTargetIndex] >= 0 {
+                let predecessorIndex = predecessorMatrix[sourceIndex][pathTargetIndex]
+                
+                vertexList[pathTargetIndex].stateColor = .gray
+                vertexList[pathTargetIndex].predecessorIndex = predecessorIndex
+                
+                if path == nil {
+                    path = [Vertex]()
+                }
+                path!.insert(vertexList[pathTargetIndex], at: 0)
+                
+                pathTargetIndex = predecessorIndex
             }
         }
         
-        return vertexList
+        return path
     }
 }
 
