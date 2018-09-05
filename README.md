@@ -25,5 +25,6 @@
 
 - Depth-First Search
 - Breadth-First Search
-- Dijkstra's Priority Queue Search (while weight is equal to neighbor vertices index difference)
+- Dijkstra's Priority Queue Search (weight is equal to neighbor vertices index difference)
 - Prim's Search (weight is equal to neighbor vertices index difference)
+- Floyd-Warshall (weight is equal to neighbor vertices index difference)

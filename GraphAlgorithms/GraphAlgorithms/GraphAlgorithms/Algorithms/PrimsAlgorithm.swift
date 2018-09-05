@@ -72,7 +72,6 @@ class PrimsAlgorithm {
     }
 }
 
-
 /// The object that acts as the delegate of the `PrimsAlgorithm`.
 ///
 /// The delegate must adopt the PrimsAlgorithmDelegate protocol.
