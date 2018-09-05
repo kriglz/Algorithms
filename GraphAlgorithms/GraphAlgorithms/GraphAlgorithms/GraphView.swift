@@ -48,7 +48,7 @@ class GraphView: UIView {
         drawAnimation.fillMode = kCAFillModeForwards
         drawAnimation.fromValue = 1
         drawAnimation.toValue = 0
-        drawAnimation.beginTime = CACurrentMediaTime() + duration * Double(actionIndex)
+        drawAnimation.beginTime = CACurrentMediaTime() + duration * Double(actionIndex) + 4
         drawAnimation.duration = duration
         drawAnimation.isRemovedOnCompletion = false
         

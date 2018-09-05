@@ -82,12 +82,9 @@ class Maze {
         }
         
         if hasIgnoredVertex {
-            var vertexObstacleIndexList = [Int]()
-            let maxNumber = maxIndex / 10
-            for _ in 0...maxNumber {
-                let randomIndex = Int.random(min: 0, max: vertexList.count - 1)
-                vertexObstacleIndexList.append(randomIndex)
-                vertexList[randomIndex].isIgnored = true
+            let vertexObstacleIndexList = [56, 105, 58, 21, 192, 132, 39, 123, 170, 50, 152, 148, 65, 61, 3, 168, 179, 92, 207, 143, 123, 42, 41]
+            for index in vertexObstacleIndexList {
+                vertexList[index].isIgnored = true
             }
             delegate?.maze(self, ignoredVertexIndexList: vertexObstacleIndexList)
         }
