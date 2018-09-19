@@ -2,6 +2,17 @@ import UIKit
 
 var str = "Hello, playground"
 
+class Move {
+    
+    var hasNext = false
+    var next: Move?
+    
+    func execute(_ successorNode: Node) {
+        
+    }
+    
+}
+
 class Node {
     
     /// Associates an integer score with the board state, representing the result of the evaluation funtion.
@@ -16,7 +27,7 @@ class Node {
     }
     
     /// Returns a list of available moves for a board state.
-    func validMoves() -> [Int] {
+    func validMoves() -> [Move] {
         return []
     }
     
@@ -32,8 +43,10 @@ class Node {
 //    }
  
     /// Associates the given object with the board state to be used by search algorithm.
-    func storedData(object: Node) {
-        
+    /// Returns transition depth data.
+    func storedData() -> Int? {
+        // Stored data object should have transition depth (Int) info.
+        return nil
     }
 }
 
@@ -70,7 +83,7 @@ public struct Queue<T> {
     }
     
     /// Returns smallest score `Node`.
-    var smallest: Node {
+    var smallest: Node? {
         if let nodeArray = array as? [Node] {
             return nodeArray.min { (a, b) in
                 a.score < b.score
@@ -114,6 +127,15 @@ public struct Queue<T> {
             array.remove(at: index)
         }
     }
+    
+    // MARK: - Queue list check
+    func contains(node: Node) -> Node? {
+        if let nodeArray = array as? [Node], let equivalentNode = nodeArray.first(where: { $0.key == node.key }) {
+            return equivalentNode
+        }
+        
+        return nil
+    }
 }
 
 
@@ -136,18 +158,56 @@ struct ASearch {
             // Removes node with smallest evaluation function and marks it as closed.
             guard let smallestScoreOpenNode = openNodeSet.smallest else {
                 fatalError("No elements in the set")
-                return (initialNode, nil)
+//                return (initialNode, nil)
             }
             
+            // Remove node with smallest score and mark it as closed.
             openNodeSet.pop(node: smallestScoreOpenNode)
             closedNodeSet.push(smallestScoreOpenNode)
             
+            // Return if the goal state reached.
             if smallestScoreOpenNode == goalNode {
                 return (initialNode, smallestScoreOpenNode)
             }
             
+            // Compute successor moves and update open/closed lists.
+            var depth = 1
+            if let transitionDepth = smallestScoreOpenNode.storedData() { // retrieves stored data
+                depth = transitionDepth + 1
+            }
+            
+            let moves = smallestScoreOpenNode.validMoves()
+            
+            moves.forEach { move in
+                guard let nextMove = move.next else {
+                    NSLog("No next move")
+                    return
+                }
+                    
+                // Make the move and score the board state.
+                let successorNode = smallestScoreOpenNode.copy()
+                nextMove.execute(successorNode)
+                
+                // Record previous move for solution trace and compute evaluation function to see if we have improved upon a state already closed.
+                successorNode.storedData() // should add new transition deoth to stored data
+                successorNode.evaluateScore()
+                
+                // If already visited, see if we are revisiting with lower cost.
+                // If not, just continue. Otherwise, pull out of closed and process.
+                if let pastNode = closedNodeSet.contains(node: successorNode) {
+                    if successorNode.score >= pastNode.score {
+                        return
+                    }
+                    
+                    // Revisit with lower score
+                    closedNodeSet.pop(node: pastNode)
+                }
+                
+                openNodeSet.push(successorNode)
+            }
         }
         
+        return (initialNode, nil)
     }
     
 }
