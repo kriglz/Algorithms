@@ -54,10 +54,48 @@ class Node: Equatable {
         self.score = score
     }
     
-    /// Returns a list of available moves for a board state.
+    /// Returns a list of available moves for a board, which is 3 x 3 dimesion.
     func validMoves() -> [Move] {
-        // TODO: - evaluate possible moves
-        return []
+        var moves = [Move]()
+        
+        if let emptyPositionIndex = board.index(where: { $0 == nil }) {
+            // 3 x 3 board makes an index range from 0 to 8.
+            let range = 0...8
+            
+            // From left invalid, move from right.
+            if (emptyPositionIndex == 0 || emptyPositionIndex % 3 == 0) && range.contains(emptyPositionIndex + 1) {
+                let fromRight = Move(fromIndex: emptyPositionIndex + 1, toIndex: emptyPositionIndex)
+                moves.append(fromRight)
+            } else if range.contains(emptyPositionIndex - 1) {
+                let fromLeft = Move(fromIndex: emptyPositionIndex - 1, toIndex: emptyPositionIndex)
+                moves.append(fromLeft)
+            }
+            
+            // From right invalid, move from left.
+            if emptyPositionIndex + 1 >= 3, (emptyPositionIndex + 1) % 3 == 0, range.contains(emptyPositionIndex - 1) {
+                let fromLeft = Move(fromIndex: emptyPositionIndex - 1, toIndex: emptyPositionIndex)
+                moves.append(fromLeft)
+            } else if range.contains(emptyPositionIndex + 1) {
+                let fromRight = Move(fromIndex: emptyPositionIndex + 1, toIndex: emptyPositionIndex)
+                moves.append(fromRight)
+            }
+            
+            // Move down.
+            let upIndex = emptyPositionIndex + 3
+            if range.contains(upIndex) {
+                let fromUp = Move(fromIndex: upIndex, toIndex: emptyPositionIndex)
+                moves.append(fromUp)
+            }
+            
+            // Move up.
+            let downIndex = emptyPositionIndex - 3
+            if range.contains(downIndex) {
+                let fromDown = Move(fromIndex: downIndex, toIndex: emptyPositionIndex)
+                moves.append(fromDown)
+            }
+        }
+        
+        return moves
     }
     
     /// Returns the identical copy of the board.
