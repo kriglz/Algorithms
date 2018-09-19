@@ -2,8 +2,15 @@ import UIKit
 
 class Move {
     
-    var hasNext = false
     var next: Move?
+    
+    private(set) var fromIndex: Int
+    private(set) var toIndex: Int
+    
+    init(fromIndex: Int, toIndex: Int) {
+        self.fromIndex = fromIndex
+        self.toIndex = toIndex
+    }
 }
 
 class DepthTransition {
@@ -19,14 +26,21 @@ class DepthTransition {
     }
 }
 
-class Node: NSObject {
+class Node: Equatable {
     
+    /// Board state, describing game.
+    private var board: [Int?]
     /// Associates an integer score with the board state, representing the result of the evaluation funtion.
     private(set) var score = 0
     /// Object used to compare two nodes.
     private(set) var key = 0
     /// Returns stored transition depth data.
     private(set) var storedData: DepthTransition?
+    
+    init(board: [Int?]) {
+        self.board = board
+        evaluateKey()
+    }
     
     /// Comparison operator
     static func == (lhs: Node, rhs: Node) -> Bool {
@@ -46,10 +60,12 @@ class Node: NSObject {
         return []
     }
     
-    /// Returns the identical copy of the board state.
+    /// Returns the identical copy of the board.
     func clone() -> Node {
-        let copyNode = self.copy() as! Node
-        copyNode.key = self.key
+        let copyNode = Node(board: self.board)
+        if let depthTransition = self.storedData {
+            copyNode.storeData(data: depthTransition)
+        }
         return copyNode
     }
  
@@ -58,8 +74,23 @@ class Node: NSObject {
         self.storedData = data
     }
     
+    /// Performs the move in the board.
     func execute(move: Move) {
-        // TODO: - Move the node
+        board.swapAt(move.fromIndex, move.toIndex)
+        evaluateKey()
+    }
+    
+    /// Calculates the board key based on board state.
+    private func evaluateKey() {
+        var keyValue = 0
+        
+        for (index, boardValue) in board.enumerated() {
+            if let value = boardValue {
+                keyValue += index * value
+            }
+        }
+        
+        self.key = keyValue
     }
 }
 
@@ -138,7 +169,6 @@ struct ASearch {
             // Removes node with smallest evaluation function and marks it as closed.
             guard let smallestScoreOpenNode = openNodeSet.smallest else {
                 fatalError("No elements in the set")
-//                return (initialNode, nil)
             }
             
             // Remove node with smallest score and mark it as closed.
@@ -152,12 +182,11 @@ struct ASearch {
             
             // Compute successor moves and update open/closed lists.
             var depth = 1
-            if let transition = smallestScoreOpenNode.storedData { // retrieves stored data
+            if let transition = smallestScoreOpenNode.storedData {
                 depth = transition.depth + 1
             }
             
             let moves = smallestScoreOpenNode.validMoves()
-            
             moves.forEach { move in
                 guard let nextMove = move.next else {
                     NSLog("No next move")
@@ -168,7 +197,8 @@ struct ASearch {
                 let successorNode = smallestScoreOpenNode.clone()
                 successorNode.execute(move: nextMove)
                 
-                // Record previous move for solution trace and compute evaluation function to see if we have improved upon a state already closed.
+                // Record previous move for solution trace.
+                // Compute evaluation function to see if we have improved upon a state already closed.
                 let transitionDepth = DepthTransition(move: nextMove, node: smallestScoreOpenNode, depth: depth)
                 successorNode.storeData(data: transitionDepth)
                 successorNode.evaluateScore()
@@ -190,5 +220,4 @@ struct ASearch {
         
         return (initialNode, nil)
     }
-    
 }
