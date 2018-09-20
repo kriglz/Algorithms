@@ -11,6 +11,10 @@ class Move {
         self.fromIndex = fromIndex
         self.toIndex = toIndex
     }
+    
+    func isReverse(to move: Move) -> Bool {
+        return self.fromIndex == move.toIndex && self.toIndex == move.fromIndex
+    }
 }
 
 class DepthTransition {
@@ -110,6 +114,13 @@ class Node: Equatable {
     func validMoves() -> [Move] {
         var moves = [Move]()
         
+        func appendMove(from: Int, to: Int) {
+            let move = Move(fromIndex: from, toIndex: to)
+            if let previousMove = storedData?.move, !move.isReverse(to: previousMove) {
+                moves.append(move)
+            }
+        }
+        
         if let emptyPositionIndex = board.index(where: { $0 == nil }) {
             // 3 x 3 board makes an index range from 0 to 8.
             let range = 0...8
@@ -128,34 +139,28 @@ class Node: Equatable {
             
             // From left invalid, move from right.
             if (emptyPositionIndex == 0 || emptyPositionIndex % 3 == 0) && range.contains(emptyPositionIndex + 1) {
-                let fromRight = Move(fromIndex: emptyPositionIndex + 1, toIndex: emptyPositionIndex)
-                moves.append(fromRight)
+                appendMove(from: emptyPositionIndex + 1, to: emptyPositionIndex)
             } else if range.contains(emptyPositionIndex - 1) {
-                let fromLeft = Move(fromIndex: emptyPositionIndex - 1, toIndex: emptyPositionIndex)
-                moves.append(fromLeft)
+                appendMove(from: emptyPositionIndex - 1, to: emptyPositionIndex)
             }
             
             // From right invalid, move from left.
             if emptyPositionIndex + 1 >= 3, (emptyPositionIndex + 1) % 3 == 0, range.contains(emptyPositionIndex - 1) {
-                let fromLeft = Move(fromIndex: emptyPositionIndex - 1, toIndex: emptyPositionIndex)
-                moves.append(fromLeft)
+                appendMove(from: emptyPositionIndex - 1, to: emptyPositionIndex)
             } else if range.contains(emptyPositionIndex + 1) {
-                let fromRight = Move(fromIndex: emptyPositionIndex + 1, toIndex: emptyPositionIndex)
-                moves.append(fromRight)
+                appendMove(from: emptyPositionIndex + 1, to: emptyPositionIndex)
             }
             
             // Move down.
             let upIndex = emptyPositionIndex + 3
             if range.contains(upIndex) {
-                let fromUp = Move(fromIndex: upIndex, toIndex: emptyPositionIndex)
-                moves.append(fromUp)
+                appendMove(from: upIndex, to: emptyPositionIndex)
             }
             
             // Move up.
             let downIndex = emptyPositionIndex - 3
             if range.contains(downIndex) {
-                let fromDown = Move(fromIndex: downIndex, toIndex: emptyPositionIndex)
-                moves.append(fromDown)
+                appendMove(from: downIndex, to: emptyPositionIndex)
             }
         }
         
