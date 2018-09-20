@@ -28,7 +28,7 @@ class DepthTransition {
 
 class Node: Equatable {
     
-    /// Board state, describing game.
+    /// Board state, describing game. Using regulat matrix - array conversion.
     private var board: [Int?]
     /// Associates an integer score with the board state, representing the result of the evaluation funtion.
     private(set) var score = 0
@@ -49,9 +49,61 @@ class Node: Equatable {
     
     /// Evaluates the score for current board state.
     func evaluateScore() {
-        // TODO: - evaluate score
-        let score = 0
-        self.score = score
+        
+        /*
+         
+         GoodEvaluator
+         
+         h*(n) = P(n) + 3 * S(n), where P(n) is the sum of Manhattan distances that each tile is from "home". S(n) is a sequence score that checks the noncentral squares in turn, alllotting 2 for every tile not followed by its proper successor and 0 for every other tile, except that a piece in the center scores 1.
+         
+         Example:
+         
+         1 4 8
+         7 3
+         6 5 2
+         
+         h*(n) = 13 + 3 * 11 = 46
+         
+         */
+        
+        var sequenceScore = 0
+        var manhattanDistanceScore = 0
+        
+        for (index, boardValue) in board.enumerated() {
+            let value = boardValue ?? 9
+            
+            // Array indexes start from 0, while board values start from 1.
+            let homeIndex = covertToRegularIndex(from: value - 1)
+            manhattanDistanceScore += manhattanDistance(fromIndex: index, toIndex: homeIndex)
+            
+            if index < 8 {
+                let swirledNextValueIndex = convertToSwirledIndex(from: index) + 1
+                let regularNextValueIndex = covertToRegularIndex(from: swirledNextValueIndex)
+                let nextValue = board[regularNextValueIndex] ?? 9
+                sequenceScore += sequence(value: value, nextValue: nextValue)
+            } else if board[8] != nil {
+                sequenceScore += 1
+            }
+        }
+        
+        self.score = manhattanDistanceScore + 3 * sequenceScore
+    }
+    
+    private func sequence(value: Int, nextValue: Int) -> Int {
+        if value == nextValue - 1 {
+            return 0
+        }
+        return 2
+    }
+    
+    private func manhattanDistance(fromIndex: Int, toIndex: Int) -> Int {
+        let fromIndexRow = fromIndex / 3 // TODO - might need to row down
+        let fromIndexColum = fromIndex - fromIndexRow * 3
+        
+        let toIndexRow = toIndex / 3 // TODO - might need to row down
+        let toIndexColumn = toIndex - toIndexRow * 3
+        
+        return abs(fromIndexRow - toIndexRow) + abs(fromIndexColum - toIndexColumn)
     }
     
     /// Returns a list of available moves for a board, which is 3 x 3 dimesion.
@@ -61,6 +113,18 @@ class Node: Equatable {
         if let emptyPositionIndex = board.index(where: { $0 == nil }) {
             // 3 x 3 board makes an index range from 0 to 8.
             let range = 0...8
+            
+            /*
+             
+             Using regulat matrix - array conversion.
+
+             1 4 8
+             7 3
+             6 5 2
+             
+             1 4 8 7 3 nil 6 5 2
+             
+             */
             
             // From left invalid, move from right.
             if (emptyPositionIndex == 0 || emptyPositionIndex % 3 == 0) && range.contains(emptyPositionIndex + 1) {
@@ -129,6 +193,62 @@ class Node: Equatable {
         }
         
         self.key = keyValue
+    }
+    
+    /*
+     
+     Index conversion
+     
+     Regular array:
+     
+     1 2 3
+     4 5 6
+     7 8 9
+     
+     Swirled array:
+
+     1 2 3
+     8   4
+     7 6 5
+     
+     */
+    
+    /// Does an index conversion from "swirled" array to regular one.
+    ///
+    /// Returns a home index in matrix based array. Start index = 0.
+    private func covertToRegularIndex(from swirledIndex: Int) -> Int {
+        switch swirledIndex {
+        case 3:
+            return 5
+        case 4:
+            return 8
+        case 5:
+            return 7
+        case 7:
+            return 3
+        case 8:
+            return 4
+        default:
+            return swirledIndex
+        }
+    }
+    
+    /// Does an index conversion from regular array to "swirled" one.
+    private func convertToSwirledIndex(from regularIndex: Int) -> Int {
+        switch regularIndex {
+        case 3:
+            return 7
+        case 4:
+            return 8
+        case 5:
+            return 3
+        case 7:
+            return 5
+        case 8:
+            return 4
+        default:
+            return regularIndex
+        }
     }
 }
 
