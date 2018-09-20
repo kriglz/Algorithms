@@ -31,7 +31,7 @@ class DepthTransition {
 class Node: Equatable {
     
     /// Board state, describing game. Using regulat matrix - array conversion.
-    private var board: [Int?]
+    private(set) var board: [Int?]
     /// Associates an integer score with the board state, representing the result of the evaluation funtion.
     private(set) var score = 0
     /// Object used to compare two nodes.
@@ -56,7 +56,7 @@ class Node: Equatable {
          
          GoodEvaluator
          
-         h*(n) = P(n) + 3 * S(n), where P(n) is the sum of Manhattan distances that each tile is from "home". S(n) is a sequence score that checks the noncentral squares in turn, alllotting 2 for every tile not followed by its proper successor and 0 for every other tile, except that a piece in the center scores 1.
+         h*(n) = P(n) + 3 * S(n), where P(n) is the sum of Manhattan distances that each tile is from "home", ignoring empty one. S(n) is a sequence score that checks the noncentral squares in turn, alllotting 2 for every tile not followed by its proper successor and 0 for every other tile, except that a piece in the center scores 1.
          
          Example:
          
@@ -72,23 +72,30 @@ class Node: Equatable {
         var manhattanDistanceScore = 0
         
         for (index, boardValue) in board.enumerated() {
-            let value = boardValue ?? 9
+            // Manhattan distance is not calculated for empty tile.
+            if let value = boardValue {
+                let homeIndex = covertToRegularIndex(from: value - 1) // Array indexes start from 0, while board values start from 1.
+                manhattanDistanceScore += manhattanDistance(fromIndex: index, toIndex: homeIndex)
+            }
+           
+            // Regular index = 4, swirled index is 8, that means the center value of the board, which is scored 1 in case it's not nil.
+            if index == 4, boardValue != nil {
+                sequenceScore += 1
+            }
             
-            // Array indexes start from 0, while board values start from 1.
-            let homeIndex = covertToRegularIndex(from: value - 1)
-            manhattanDistanceScore += manhattanDistance(fromIndex: index, toIndex: homeIndex)
-            
-            if index < 8 {
+            if index != 4, index != 3, let value = boardValue {
                 let swirledNextValueIndex = convertToSwirledIndex(from: index) + 1
                 let regularNextValueIndex = covertToRegularIndex(from: swirledNextValueIndex)
-                let nextValue = board[regularNextValueIndex] ?? 9
-                sequenceScore += sequence(value: value, nextValue: nextValue)
-            } else if board[8] != nil {
-                sequenceScore += 1
+                
+                sequenceScore += sequence(value: value, nextValue: board[regularNextValueIndex] ?? 9)
             }
         }
         
         self.score = manhattanDistanceScore + 3 * sequenceScore
+        
+        if let depth = storedData?.depth {
+            self.score += depth
+        }
     }
     
     private func sequence(value: Int, nextValue: Int) -> Int {
@@ -99,12 +106,12 @@ class Node: Equatable {
     }
     
     private func manhattanDistance(fromIndex: Int, toIndex: Int) -> Int {
-        let fromIndexRow = fromIndex / 3 // TODO - might need to row down
+        let fromIndexRow = fromIndex / 3
         let fromIndexColum = fromIndex - fromIndexRow * 3
         
-        let toIndexRow = toIndex / 3 // TODO - might need to row down
+        let toIndexRow = toIndex / 3
         let toIndexColumn = toIndex - toIndexRow * 3
-        
+
         return abs(fromIndexRow - toIndexRow) + abs(fromIndexColum - toIndexColumn)
     }
     
@@ -114,9 +121,11 @@ class Node: Equatable {
         
         func appendMove(from: Int, to: Int) {
             let move = Move(fromIndex: from, toIndex: to)
-            if let previousMove = storedData?.move, !move.isReverse(to: previousMove) {
-                moves.append(move)
+            if let previousMove = storedData?.move, move.isReverse(to: previousMove) {
+                return
             }
+
+            moves.append(move)
         }
         
         if let emptyPositionIndex = board.index(where: { $0 == nil }) {
@@ -138,15 +147,11 @@ class Node: Equatable {
             // From left invalid, move from right.
             if (emptyPositionIndex == 0 || emptyPositionIndex % 3 == 0) && range.contains(emptyPositionIndex + 1) {
                 appendMove(from: emptyPositionIndex + 1, to: emptyPositionIndex)
-            } else if range.contains(emptyPositionIndex - 1) {
-                appendMove(from: emptyPositionIndex - 1, to: emptyPositionIndex)
             }
             
             // From right invalid, move from left.
             if emptyPositionIndex + 1 >= 3, (emptyPositionIndex + 1) % 3 == 0, range.contains(emptyPositionIndex - 1) {
                 appendMove(from: emptyPositionIndex - 1, to: emptyPositionIndex)
-            } else if range.contains(emptyPositionIndex + 1) {
-                appendMove(from: emptyPositionIndex + 1, to: emptyPositionIndex)
             }
             
             // Move down.
@@ -335,9 +340,10 @@ struct ASearch {
             // Remove node with smallest score and mark it as closed.
             openNodeSet.pop(node: smallestScoreOpenNode)
             closedNodeSet.push(smallestScoreOpenNode)
-            
+
             // Return if the goal state reached.
             if smallestScoreOpenNode == goalNode {
+                NSLog("Got the result")
                 return (initialNode, smallestScoreOpenNode)
             }
             
@@ -348,13 +354,12 @@ struct ASearch {
             }
             
             let moves = smallestScoreOpenNode.validMoves()
-            
             moves.forEach { move in
                 // Make the move and score the board state.
                 let successorNode = smallestScoreOpenNode.clone()
                 successorNode.execute(move: move)
                 successorNode.evaluateScore()
-
+                
                 // Record previous move for solution trace.
                 // Compute evaluation function to see if we have improved upon a state already closed.
                 let transitionDepth = DepthTransition(move: move, node: smallestScoreOpenNode, depth: depth)
@@ -377,3 +382,27 @@ struct ASearch {
         return (initialNode, nil)
     }
 }
+
+/*
+
+Initial
+
+8 1 3
+  4 5
+2 7 6
+
+Goal
+
+1 2 3
+8   4
+7 6 5
+
+*/
+
+let initialNode = Node(board: [8, 1, 3, nil, 4, 5, 2, 7, 6])
+let goalNode = Node(board: [1, 2, 3, 8, nil, 4, 7, 6, 5])
+
+let aSearchAlgorithm = ASearch()
+let result = aSearchAlgorithm.search(initialNode: initialNode, goalNode: goalNode)
+
+print(result.solution)
