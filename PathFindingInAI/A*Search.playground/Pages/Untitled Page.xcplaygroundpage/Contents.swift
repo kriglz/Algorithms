@@ -2,8 +2,6 @@ import UIKit
 
 class Move {
     
-    var next: Move?
-    
     private(set) var fromIndex: Int
     private(set) var toIndex: Int
     
@@ -350,21 +348,17 @@ struct ASearch {
             }
             
             let moves = smallestScoreOpenNode.validMoves()
+            
             moves.forEach { move in
-                guard let nextMove = move.next else {
-                    NSLog("No next move")
-                    return
-                }
-                    
                 // Make the move and score the board state.
                 let successorNode = smallestScoreOpenNode.clone()
-                successorNode.execute(move: nextMove)
-                
+                successorNode.execute(move: move)
+                successorNode.evaluateScore()
+
                 // Record previous move for solution trace.
                 // Compute evaluation function to see if we have improved upon a state already closed.
-                let transitionDepth = DepthTransition(move: nextMove, node: smallestScoreOpenNode, depth: depth)
+                let transitionDepth = DepthTransition(move: move, node: smallestScoreOpenNode, depth: depth)
                 successorNode.storeData(data: transitionDepth)
-                successorNode.evaluateScore()
                 
                 // If already visited, see if we are revisiting with lower cost.
                 // If not, just continue. Otherwise, pull out of closed and process.
@@ -380,7 +374,6 @@ struct ASearch {
                 openNodeSet.push(successorNode)
             }
         }
-        
         return (initialNode, nil)
     }
 }
