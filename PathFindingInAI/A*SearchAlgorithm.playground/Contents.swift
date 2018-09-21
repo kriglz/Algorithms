@@ -1,9 +1,9 @@
 /*
-
-Heuristic search three type algorithm A*.
-Good evaluator used for scoring.
-
-*/
+ 
+ Heuristic search three type algorithm A*.
+ Good evaluator used for scoring.
+ 
+ */
 
 import UIKit
 
@@ -85,7 +85,7 @@ class Node: Equatable {
                 let homeIndex = covertToRegularIndex(from: value - 1) // Array indexes start from 0, while board values start from 1.
                 manhattanDistanceScore += manhattanDistance(fromIndex: index, toIndex: homeIndex)
             }
-           
+            
             // Regular index = 4, swirled index is 8, that means the center value of the board, which is scored 1 in case it's not nil.
             if index == 4, boardValue != nil {
                 sequenceScore += 1
@@ -115,7 +115,7 @@ class Node: Equatable {
         
         let toIndexRow = toIndex / 3
         let toIndexColumn = toIndex - toIndexRow * 3
-
+        
         return abs(fromIndexRow - toIndexRow) + abs(fromIndexColum - toIndexColumn)
     }
     
@@ -133,7 +133,7 @@ class Node: Equatable {
             if moves.contains(where: { $0.isEqual(to: move) }) {
                 return
             }
-
+            
             moves.append(move)
         }
         
@@ -144,7 +144,7 @@ class Node: Equatable {
             /*
              
              Using regulat matrix - array conversion.
-
+             
              1 4 8
              7 3
              6 5 2
@@ -191,7 +191,7 @@ class Node: Equatable {
         }
         return copyNode
     }
- 
+    
     /// Associates the given object with the board state to be used by search algorithm.
     func storeData(data: DepthTransition) {
         self.storedData = data
@@ -201,7 +201,7 @@ class Node: Equatable {
     func execute(move: Move) {
         board.swapAt(move.fromIndex, move.toIndex)
     }
-   
+    
     /*
      
      Index conversion
@@ -213,7 +213,7 @@ class Node: Equatable {
      7 8 9
      
      Swirled array:
-
+     
      1 2 3
      8   4
      7 6 5
@@ -320,11 +320,11 @@ public struct Queue<T> {
 }
 
 struct ASearch {
-
+    
     func search(initialNode: Node, goalNode: Node) -> (initial: Node, solution: Node?) {
         var openNodeSet = Queue<Node>()
         var closedNodeSet = Queue<Node>()
-
+        
         let initialNodeCopy = initialNode.clone()
         initialNodeCopy.evaluateScore()
         
@@ -339,7 +339,7 @@ struct ASearch {
             // Remove node with smallest score and mark it as closed.
             openNodeSet.pop(node: smallestScoreOpenNode)
             closedNodeSet.push(smallestScoreOpenNode)
-
+            
             // Return if the goal state reached.
             if smallestScoreOpenNode == goalNode {
                 return (initialNode, smallestScoreOpenNode)
@@ -383,20 +383,20 @@ struct ASearch {
 }
 
 /*
-
-Initial
-
-8 1 3
-  4 5
-2 7 6
-
-Goal
-
-1 2 3
-8   4
-7 6 5
-
-*/
+ 
+ Initial
+ 
+ 8 1 3
+ 4 5
+ 2 7 6
+ 
+ Goal
+ 
+ 1 2 3
+ 8   4
+ 7 6 5
+ 
+ */
 
 let initialNode = Node(board: [8, 1, 3, nil, 4, 5, 2, 7, 6])
 let goalNode = Node(board: [1, 2, 3, 8, nil, 4, 7, 6, 5])
@@ -405,3 +405,4 @@ let aSearchAlgorithm = ASearch()
 let result = aSearchAlgorithm.search(initialNode: initialNode, goalNode: goalNode)
 
 print(result.solution?.board)
+
