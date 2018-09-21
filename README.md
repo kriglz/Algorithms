@@ -37,3 +37,11 @@
 
 - Floyd-Warshall (weight is equal to neighbor vertices index difference)  
 ![](./PreviewGIFs/FloydWarshall.gif)
+
+# Path finding in AI Algorithms:
+
+### Search tree 
+- A* Search
+    
+### Game tree
+- Minimax 
