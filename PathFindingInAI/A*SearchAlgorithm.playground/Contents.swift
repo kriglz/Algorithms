@@ -1,6 +1,6 @@
 /*
  
- Heuristic search three type algorithm A*.
+ Heuristic search tree type algorithm A*.
  Good evaluator used for scoring.
  
  */
