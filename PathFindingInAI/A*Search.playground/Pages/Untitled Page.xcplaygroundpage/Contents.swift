@@ -13,6 +13,10 @@ class Move {
     func isReverse(to move: Move) -> Bool {
         return self.fromIndex == move.toIndex && self.toIndex == move.fromIndex
     }
+    
+    func isEqual(to move: Move) -> Bool {
+        return self.fromIndex == move.fromIndex && self.toIndex == move.toIndex
+    }
 }
 
 class DepthTransition {
@@ -34,19 +38,16 @@ class Node: Equatable {
     private(set) var board: [Int?]
     /// Associates an integer score with the board state, representing the result of the evaluation funtion.
     private(set) var score = 0
-    /// Object used to compare two nodes.
-    private(set) var key = 0
     /// Returns stored transition depth data.
     private(set) var storedData: DepthTransition?
     
     init(board: [Int?]) {
         self.board = board
-        evaluateKey()
     }
     
     /// Comparison operator
     static func == (lhs: Node, rhs: Node) -> Bool {
-        return lhs.key == rhs.key
+        return lhs.board == rhs.board
     }
     
     /// Evaluates the score for current board state.
@@ -92,10 +93,6 @@ class Node: Equatable {
         }
         
         self.score = manhattanDistanceScore + 3 * sequenceScore
-        
-        if let depth = storedData?.depth {
-            self.score += depth
-        }
     }
     
     private func sequence(value: Int, nextValue: Int) -> Int {
@@ -121,7 +118,12 @@ class Node: Equatable {
         
         func appendMove(from: Int, to: Int) {
             let move = Move(fromIndex: from, toIndex: to)
+            
             if let previousMove = storedData?.move, move.isReverse(to: previousMove) {
+                return
+            }
+            
+            if moves.contains(where: { $0.isEqual(to: move) }) {
                 return
             }
 
@@ -147,11 +149,15 @@ class Node: Equatable {
             // From left invalid, move from right.
             if (emptyPositionIndex == 0 || emptyPositionIndex % 3 == 0) && range.contains(emptyPositionIndex + 1) {
                 appendMove(from: emptyPositionIndex + 1, to: emptyPositionIndex)
+            } else if range.contains(emptyPositionIndex - 1) {
+                appendMove(from: emptyPositionIndex - 1, to: emptyPositionIndex)
             }
             
             // From right invalid, move from left.
             if emptyPositionIndex + 1 >= 3, (emptyPositionIndex + 1) % 3 == 0, range.contains(emptyPositionIndex - 1) {
                 appendMove(from: emptyPositionIndex - 1, to: emptyPositionIndex)
+            } else if range.contains(emptyPositionIndex + 1) {
+                appendMove(from: emptyPositionIndex + 1, to: emptyPositionIndex)
             }
             
             // Move down.
@@ -187,22 +193,8 @@ class Node: Equatable {
     /// Performs the move in the board.
     func execute(move: Move) {
         board.swapAt(move.fromIndex, move.toIndex)
-        evaluateKey()
     }
-    
-    /// Calculates the board key based on board state.
-    private func evaluateKey() {
-        var keyValue = 0
-        
-        for (index, boardValue) in board.enumerated() {
-            if let value = boardValue {
-                keyValue += index * value
-            }
-        }
-        
-        self.key = keyValue
-    }
-    
+   
     /*
      
      Index conversion
@@ -312,7 +304,7 @@ public struct Queue<T> {
     
     /// Checks and returns the node if its in the queue.
     func contains(node: Node) -> Node? {
-        if let nodeArray = array as? [Node], let equivalentNode = nodeArray.first(where: { $0.key == node.key }) {
+        if let nodeArray = array as? [Node], let equivalentNode = nodeArray.first(where: { $0.board == node.board }) {
             return equivalentNode
         }
         
@@ -343,7 +335,6 @@ struct ASearch {
 
             // Return if the goal state reached.
             if smallestScoreOpenNode == goalNode {
-                NSLog("Got the result")
                 return (initialNode, smallestScoreOpenNode)
             }
             
@@ -379,6 +370,7 @@ struct ASearch {
                 openNodeSet.push(successorNode)
             }
         }
+        
         return (initialNode, nil)
     }
 }
@@ -405,4 +397,4 @@ let goalNode = Node(board: [1, 2, 3, 8, nil, 4, 7, 6, 5])
 let aSearchAlgorithm = ASearch()
 let result = aSearchAlgorithm.search(initialNode: initialNode, goalNode: goalNode)
 
-print(result.solution)
+print(result.solution?.board)
