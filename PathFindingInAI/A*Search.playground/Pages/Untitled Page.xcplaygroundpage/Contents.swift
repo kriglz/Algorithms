@@ -1,3 +1,10 @@
+/*
+
+Heuristic search three type algorithm A*.
+Good evaluator used for scoring.
+
+*/
+
 import UIKit
 
 class Move {
