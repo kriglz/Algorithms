@@ -34,16 +34,29 @@ class GameState {
     }
 }
 
-class Move {
-
-    private(set) var score: Int
+class MoveEvaluator {
     
+    private(set) var score: Int
+    private var move: Move?
+
     init(with score: Int) {
         self.score = score
     }
     
-    func updateScore(to score: Int) {
-        self.score = score
+    convenience init(move: Move, with score: Int) {
+        self.init(with: score)
+        self.move = move
+    }
+}
+
+class Move {
+    
+    private(set) var fromIndex: Int
+    private(set) var toIndex: Int
+    
+    init(fromIndex: Int, toIndex: Int) {
+        self.fromIndex = fromIndex
+        self.toIndex = toIndex
     }
 }
 
@@ -101,7 +114,7 @@ class MinimaxAlgorithm {
         self.plyDepth = plyDepth
     }
     
-    func bestMove(gameState: GameState, player: Player, opponent: Player) -> Move {
+    func bestMove(gameState: GameState, player: Player, opponent: Player) -> MoveEvaluator {
         self.player = player
         self.gameState = gameState.copy()
         
@@ -110,16 +123,16 @@ class MinimaxAlgorithm {
         return move
     }
     
-    func search(plyDepth: Int, comparator: Comparator, player: Player, opponent: Player) -> Move {
+    func search(plyDepth: Int, comparator: Comparator, player: Player, opponent: Player) -> MoveEvaluator {
         let moves = player.validMoves(for: gameState)
         
         // If no allowed moves or a leaf node, return games state score.
         if plyDepth == 0 || moves.isEmpty {
-            return Move(with: player.evaluateScore(for: gameState))
+            return MoveEvaluator(with: player.evaluateScore(for: gameState))
         }
         
         // Try to improve on this lower bound (based on selector).
-        var best = Move(with: comparator.initalValue.scoreRepresentitive)
+        var best = MoveEvaluator(with: comparator.initalValue.scoreRepresentitive)
         
         // Generate game state that result from all valid moves for this player.
         moves.forEach { move in
@@ -132,8 +145,7 @@ class MinimaxAlgorithm {
             
             // Select maximum (minimum) of children if we are MAX (MIN).
             if comparator.compare(i: best.score, j: newMove.score) < 0 {
-                best = move
-                best.updateScore(to: newMove.score)
+                best = MoveEvaluator(move: move, with: newMove.score)
             }
         }
         
