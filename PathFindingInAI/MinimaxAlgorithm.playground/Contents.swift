@@ -94,9 +94,9 @@ enum Comparator {
     func compare(i: Int, j: Int) -> Int {
         switch self {
         case .maxi:
-            return max(i, j)
+            return i - j
         case .mini:
-            return min(i, j)
+            return j - i
         }
     }
 }
@@ -119,7 +119,6 @@ class MinimaxAlgorithm {
         self.gameState = gameState.copy()
         
         let move = search(plyDepth: plyDepth, comparator: Comparator.maxi, player: player, opponent: opponent)
-        
         return move
     }
     
