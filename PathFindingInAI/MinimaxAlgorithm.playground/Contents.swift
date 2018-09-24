@@ -6,16 +6,128 @@
 
 import UIKit
 
+enum PlayerMark: Int {
+    
+    case x = 1
+    case o = -1
+}
+
+extension Array where Element == PlayerMark? {
+    
+    /// Returns matrix 3 by 3, made from receiver's array, which must consist of 9 elements.
+    ///
+    /// Original array
+    ///
+    /// 1 2 3 4 5 6 7 8
+    ///
+    /// ->
+    ///
+    /// Matrix
+    ///
+    /// 1 2 3
+    ///
+    /// 4 5 6
+    ///
+    /// 7 8 9
+    var rows: [[PlayerMark?]] {
+        guard self.count == 9 else { return []}
+        
+        var newArray = Array<[PlayerMark?]>(repeating: Array<PlayerMark?>(repeating: nil, count: 3), count: 3)
+        for (index, element) in self.enumerated() {
+            let row = index / 3
+            let column = index - row * 3
+            newArray[row][column] = element
+        }
+        
+        return newArray
+    }
+    
+    /// Returns matrix 3 by 3, made from receiver's array, which must consist of 9 elements.
+    ///
+    /// Original array
+    ///
+    /// 1 2 3 4 5 6 7 8
+    ///
+    /// ->
+    ///
+    /// Matrix
+    ///
+    /// 1 4 7
+    ///
+    /// 2 5 8
+    ///
+    /// 3 6 9
+    var columns: [[PlayerMark?]] {
+        guard self.count == 9 else { return []}
+
+        var newArray = Array<[PlayerMark?]>(repeating: Array<PlayerMark?>(repeating: nil, count: 3), count: 3)
+        for (index, element) in self.enumerated() {
+            let row = index / 3
+            let column = index - row * 3
+            newArray[column][row] = element
+        }
+        
+        return newArray
+    }
+    
+    /// Returns 2 diagonal array of matrix constructed from receiver's array.
+    var diagonals: [[PlayerMark?]] {
+        guard self.count == 9 else { return []}
+
+        var newArray = [[PlayerMark?]]()
+
+        var diagonal = [PlayerMark?]()
+        for index in 0...2 {
+            diagonal.append(self[index * 4])
+        }
+        newArray.append(diagonal)
+        
+        diagonal = []
+        for index in 0...2 {
+            diagonal.append(self[index * 2 + 2])
+        }
+        newArray.append(diagonal)
+        
+        return newArray
+    }
+}
+
 class Player {
     
+    private var playerMark: PlayerMark
+    
+    init(playerMark: PlayerMark) {
+        self.playerMark = playerMark
+    }
+    
+    /// Returns the score of the board, which is a difference between players and opponents possible wins - sum of rows, columns, diagonals.
     func evaluateScore(for state: GameState) -> Int {
+        var score = 0
+        
+        // Check lines.
+        
+        
+        // Check rows.
+        
+        
+        // Check diagonals.
+        
+        
         // Posible row, column, diagonal sum to win
         return 0
     }
     
-    func validMoves(for state: GameState) -> [Move] {
-        // All open/ not used tiles.
-        return []
+    func validMoves(for gameState: GameState) -> [Move] {
+        var validMoves = [Move]()
+        
+        for (index, state) in gameState.board.enumerated() {
+            if state == nil {
+                let move = Move(playerMark: playerMark, toIndex: index)
+                validMoves.append(move)
+            }
+        }
+        
+        return validMoves
     }
     
 }
@@ -23,9 +135,9 @@ class Player {
 class GameState {
     
     /// Board state, describing game.
-    private(set) var board: [Int?]
+    private(set) var board: [PlayerMark?]
     
-    init(board: [Int?] = []) {
+    init(board: [PlayerMark?] = []) {
         self.board = board
     }
     
@@ -34,11 +146,11 @@ class GameState {
     }
     
     func execute(move: Move) {
-        board.swapAt(move.fromIndex, move.toIndex)
+        board[move.toIndex] = .o
     }
     
     func undo(move: Move) {
-        board.swapAt(move.fromIndex, move.toIndex)
+        board[move.toIndex] = nil
     }
 }
 
@@ -59,16 +171,16 @@ class MoveEvaluator {
 
 class Move {
     
-    private(set) var fromIndex: Int
     private(set) var toIndex: Int
+    private(set) var playerMark: PlayerMark
     
     var debugDescription: String {
-        return "From: \(fromIndex), to: \(toIndex)"
+        return "To: \(toIndex)"
     }
     
-    init(fromIndex: Int, toIndex: Int) {
-        self.fromIndex = fromIndex
+    init(playerMark: PlayerMark, toIndex: Int) {
         self.toIndex = toIndex
+        self.playerMark = playerMark
     }
 }
 
@@ -118,7 +230,7 @@ class MinimaxAlgorithm {
     /// The depth of game tree. How far to continue the search.
     private var plyDepth: Int
     /// All game states are evaluates from this player perspective.
-    private var player = Player()
+    private var player: Player!
     /// Game state to be modified during the search.
     private var gameState = GameState()
     
@@ -165,10 +277,15 @@ class MinimaxAlgorithm {
 }
 
 let algorithm = MinimaxAlgorithm(plyDepth: 2)
-let emptyBoard = Array<Int?>(repeating: nil, count: 9)
+let emptyBoard = Array<PlayerMark?>(repeating: nil, count: 9)
 let gameState = GameState(board: emptyBoard)
-let player = Player()
-let opponent = Player()
+let player = Player(playerMark: .x)
+let opponent = Player(playerMark: .o)
 let bestMove = algorithm.bestMove(gameState: gameState, player: player, opponent: opponent)
 
 print(bestMove.score, bestMove.move.debugDescription)
+
+let testBoard: [PlayerMark?] = [.x, .o, nil, .x, .x, nil, nil, .o, .x]
+let testUpdated = testBoard.diagonals
+print(testUpdated)
+
