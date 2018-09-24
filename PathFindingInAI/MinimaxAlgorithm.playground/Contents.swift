@@ -20,17 +20,22 @@ class Player {
 
 class GameState {
     
+    private(set) var board: [Int?]
+    
+    init(board: [Int?] = []) {
+        self.board = board
+    }
+    
     func copy() -> GameState {
-        
-        return GameState()
+        return GameState(board: self.board)
     }
     
     func execute(move: Move) {
-        
+        board.swapAt(move.fromIndex, move.toIndex)
     }
     
     func undo(move: Move) {
-        
+        board.swapAt(move.fromIndex, move.toIndex)
     }
 }
 
