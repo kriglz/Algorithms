@@ -10,9 +10,34 @@ enum PlayerMark: Int {
     
     case x = 1
     case o = -1
+    
+    var opposite: PlayerMark {
+        switch self {
+        case .o:
+            return .x
+        case .x:
+            return .o
+        }
+    }
 }
 
 extension Array where Element == PlayerMark? {
+    
+    var isNil: Bool {
+        if self.first(where: { $0 != nil }) == nil {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isOfType(_ type: PlayerMark) -> Bool {
+        if self.first(where: { $0 == type.opposite }) == nil {
+            return true
+        }
+        
+        return false
+    }
     
     /// Returns matrix 3 by 3, made from receiver's array, which must consist of 9 elements.
     ///
@@ -94,17 +119,26 @@ extension Array where Element == PlayerMark? {
 
 class Player {
     
-    private var playerMark: PlayerMark
+    private var playersMark: PlayerMark
     
-    init(playerMark: PlayerMark) {
-        self.playerMark = playerMark
+    init(with mark: PlayerMark) {
+        self.playersMark = mark
     }
     
     /// Returns the score of the board, which is a difference between players and opponents possible wins - sum of rows, columns, diagonals.
-    func evaluateScore(for state: GameState) -> Int {
+    func evaluateScore(for gameState: GameState) -> Int {
         var score = 0
         
         // Check lines.
+        for row in gameState.board.rows {
+            if row.isNil {
+                score += 1
+            } else if row.isOfType(playersMark) {
+                
+            }
+        }
+       
+       
         
         
         // Check rows.
@@ -122,7 +156,7 @@ class Player {
         
         for (index, state) in gameState.board.enumerated() {
             if state == nil {
-                let move = Move(playerMark: playerMark, toIndex: index)
+                let move = Move(playerMark: playersMark, toIndex: index)
                 validMoves.append(move)
             }
         }
@@ -279,13 +313,11 @@ class MinimaxAlgorithm {
 let algorithm = MinimaxAlgorithm(plyDepth: 2)
 let emptyBoard = Array<PlayerMark?>(repeating: nil, count: 9)
 let gameState = GameState(board: emptyBoard)
-let player = Player(playerMark: .x)
-let opponent = Player(playerMark: .o)
+let player = Player(with: .x)
+let opponent = Player(with: .o)
 let bestMove = algorithm.bestMove(gameState: gameState, player: player, opponent: opponent)
 
 print(bestMove.score, bestMove.move.debugDescription)
 
-let testBoard: [PlayerMark?] = [.x, .o, nil, .x, .x, nil, nil, .o, .x]
-let testUpdated = testBoard.diagonals
-print(testUpdated)
-
+let test: [PlayerMark?] = [.x, .x, .x]
+test.isOfType(.x)
