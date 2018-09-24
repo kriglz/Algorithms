@@ -9,10 +9,12 @@ import UIKit
 class Player {
     
     func evaluateScore(for state: GameState) -> Int {
+        // Posible row, column, diagonal sum to win
         return 0
     }
     
     func validMoves(for state: GameState) -> [Move] {
+        // All open/ not used tiles.
         return []
     }
     
@@ -20,6 +22,7 @@ class Player {
 
 class GameState {
     
+    /// Board state, describing game.
     private(set) var board: [Int?]
     
     init(board: [Int?] = []) {
@@ -42,7 +45,7 @@ class GameState {
 class MoveEvaluator {
     
     private(set) var score: Int
-    private var move: Move?
+    private(set) var move: Move?
 
     init(with score: Int) {
         self.score = score
@@ -58,6 +61,10 @@ class Move {
     
     private(set) var fromIndex: Int
     private(set) var toIndex: Int
+    
+    var debugDescription: String {
+        return "From: \(fromIndex), to: \(toIndex)"
+    }
     
     init(fromIndex: Int, toIndex: Int) {
         self.fromIndex = fromIndex
@@ -156,3 +163,12 @@ class MinimaxAlgorithm {
         return best
     }
 }
+
+let algorithm = MinimaxAlgorithm(plyDepth: 2)
+let emptyBoard = Array<Int?>(repeating: nil, count: 9)
+let gameState = GameState(board: emptyBoard)
+let player = Player()
+let opponent = Player()
+let bestMove = algorithm.bestMove(gameState: gameState, player: player, opponent: opponent)
+
+print(bestMove.score, bestMove.move.debugDescription)
