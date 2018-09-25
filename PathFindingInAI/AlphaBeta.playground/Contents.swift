@@ -298,7 +298,7 @@ class AlphaBetaAlgorithm {
     
     func bestMove(gameState: GameState, player: Player, opponent: Player) -> MoveEvaluator {
         self.gameState = gameState.copy()
-        
+
         let move = search(plyDepth: plyDepth, player: player, opponent: opponent, alpha: alpha, beta: beta)
         return move
     }
@@ -329,13 +329,9 @@ class AlphaBetaAlgorithm {
             // Recursively evaluate position.
             let newMove = search(plyDepth: plyDepth - 1, player: opponent, opponent: player, alpha: -beta, beta: -alpha)
             
-//            if best == nil {
-//                best = MoveEvaluator(move: move, with: newMove.score)
-//            }
-            
             print("\n", alpha, beta, plyDepth)
             print(best.score)
-            print(newMove.score)
+            print("new", newMove.score)
             print(gameState.board.rows[0].stringRepresentation)
             print(gameState.board.rows[1].stringRepresentation)
             print(gameState.board.rows[2].stringRepresentation)
@@ -349,6 +345,8 @@ class AlphaBetaAlgorithm {
             
             // Search no longer productive.
             if best.score >= beta {
+                print("PRUNES")
+                
                 return best
             }
         }
@@ -357,24 +355,24 @@ class AlphaBetaAlgorithm {
     }
 }
 
-let algorithm = AlphaBetaAlgorithm(plyDepth: 2)
+let algorithm = AlphaBetaAlgorithm(plyDepth: 3)
 //let initialBoard: [PlayerMark?] = [
 //    .o,    nil,  nil,
 //    nil,   .x,   nil,
 //    .x,    nil,  nil
 //]
 
-//let initialBoard: [PlayerMark?] = [
-//    nil,   nil,  .o,
-//    nil,   .x,   .x,
-//    nil,    nil,  nil
-//]
-
 let initialBoard: [PlayerMark?] = [
     nil,   nil,  .o,
-    nil,   .x,   nil,
-    nil,   nil,  .x
+    nil,   .x,   .x,
+    nil,    nil,  nil
 ]
+
+//let initialBoard: [PlayerMark?] = [
+//    nil,   nil,  .o,
+//    nil,   .x,   nil,
+//    nil,   nil,  .x
+//]
 
 let gameState = GameState(board: initialBoard)
 let player = Player(with: .o)
