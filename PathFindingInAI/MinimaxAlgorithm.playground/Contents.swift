@@ -19,6 +19,15 @@ enum PlayerMark: Int {
             return .o
         }
     }
+    
+    var stringRepresentation: String {
+        switch self {
+        case .o:
+            return "o "
+        case .x:
+            return "x "
+        }
+    }
 }
 
 extension Array where Element == PlayerMark? {
@@ -31,12 +40,32 @@ extension Array where Element == PlayerMark? {
         return false
     }
     
-    func isOfType(_ type: PlayerMark) -> Bool {
+    func canBeOfType(_ type: PlayerMark) -> Bool {
         if self.first(where: { $0 == type.opposite }) == nil {
             return true
         }
         
         return false
+    }
+    
+    func isOfType(_ type: PlayerMark) -> Bool {
+        if self.first(where: { $0 == type.opposite || $0 == nil }) == nil {
+            return true
+        }
+        
+        return false
+    }
+    
+    var stringRepresentation: String {
+        var text = ""
+        for element in self {
+            if element == nil {
+                text.append("- ")
+            } else {
+                text.append(element!.stringRepresentation)
+            }
+        }
+        return text
     }
     
     /// Returns matrix 3 by 3, made from receiver's array, which must consist of 9 elements.
@@ -131,30 +160,56 @@ class Player {
         
         // Check columns.
         for column in gameState.board.columns {
-            if column.isNil || column.isOfType(playersMark) {
+            if column.isOfType(playersMark) {
+                return 100
+            }
+            
+            if column.isOfType(playersMark.opposite) {
+                return -100
+            }
+            
+            if column.isNil || column.canBeOfType(playersMark) {
                 score += 1
-            } else if column.isOfType(playersMark.opposite) {
+            } else if column.canBeOfType(playersMark.opposite) {
                 score -= 1
             }
         }
         
         // Check rows.
         for row in gameState.board.rows {
-            if row.isNil || row.isOfType(playersMark) {
+            if row.isOfType(playersMark) {
+                return 100
+            }
+            
+            if row.isOfType(playersMark.opposite) {
+                return -100
+            }
+            
+            if row.isNil || row.canBeOfType(playersMark) {
                 score += 1
-            } else if row.isOfType(playersMark.opposite) {
+            } else if row.canBeOfType(playersMark.opposite) {
                 score -= 1
             }
         }
         
         // Check diagonals.
         for diagonal in gameState.board.diagonals {
-            if diagonal.isNil || diagonal.isOfType(playersMark) {
+            if diagonal.isOfType(playersMark) {
+                return 100
+            }
+            
+            if diagonal.isOfType(playersMark.opposite) {
+                return -100
+            }
+            
+            if diagonal.isNil || diagonal.canBeOfType(playersMark) {
                 score += 1
-            } else if diagonal.isOfType(playersMark.opposite) {
+            } else if diagonal.canBeOfType(playersMark.opposite) {
                 score -= 1
             }
         }
+        
+//        print("board score \(score)\n","\(gameState.board.rows[0].stringRepresentation)\n\(gameState.board.rows[1].stringRepresentation)\n\(gameState.board.rows[2].stringRepresentation)\n ")
         
         return score
     }
@@ -246,7 +301,7 @@ enum Comparator {
     
     /// The worst score for each of these comparators is returned by this value; the actual value is different for MAX and MIN.
     var initalValue: Comparator {
-        return .maxi
+        return .mini
     }
     
     /// Swithes between MIN and MAX.
@@ -294,15 +349,11 @@ class MinimaxAlgorithm {
     func search(plyDepth: Int, comparator: Comparator, player: Player, opponent: Player) -> MoveEvaluator {
         let moves = player.validMoves(for: gameState)
         
-        for move in moves {
-            print("valid moves", move.debuggingDescription)
-        }
-        
-        print("plyDepth:", plyDepth, ", mark:", player.playersMark, "\n")
+        print("plyDepth:", plyDepth, ", mark:", player.playersMark, "valid moves count:", moves.count)
         
         // If no allowed moves or a leaf node, return games state score.
         if plyDepth == 0 || moves.isEmpty {
-            print("NO moves available")
+            print("\nreturns score\n")
             return MoveEvaluator(with: player.evaluateScore(for: gameState))
         }
         
@@ -313,21 +364,19 @@ class MinimaxAlgorithm {
         moves.forEach { move in
             player.execute(move: move, in: gameState)
             
-            print("after first move\n", "\(gameState.board.rows[0])\n\(gameState.board.rows[1])\n\(gameState.board.rows[2])\n")
+            print("\(gameState.board.rows[0].stringRepresentation)\n\(gameState.board.rows[1].stringRepresentation)\n\(gameState.board.rows[2].stringRepresentation)\n")
             
             // Recursively evaluate position. Compute Minimax and swap player and opponent, synchronously eith MIN and MAX.
             let newMove = search(plyDepth: plyDepth - 1, comparator: comparator.opposite, player: opponent, opponent: player)
             
             player.undo(move: move, in: gameState)
             
-            print("\nundo move\n", "\(gameState.board.rows[0])\n\(gameState.board.rows[1])\n\(gameState.board.rows[2])")
-            
             print(comparator, best.score, newMove.score)
             
             // Select maximum (minimum) of children if we are MAX (MIN).
             if comparator.compare(i: best.score, j: newMove.score) < 0 {
                 best = MoveEvaluator(move: move, with: newMove.score)
-                print("updates best move", best)
+                print("updates best move", best.score, best.move!.toIndex, best.move!.playerMark, "\n")
             }
         }
         
@@ -335,16 +384,15 @@ class MinimaxAlgorithm {
     }
 }
 
-let algorithm = MinimaxAlgorithm(plyDepth: 3)
+let algorithm = MinimaxAlgorithm(plyDepth: 2)
 let emptyBoard: [PlayerMark?] = [
-    nil,   nil,   nil,
-    .x,    nil,   nil,
-    .o,    nil,    nil
+    nil,   nil,   .o,
+    nil,    .x,   nil,
+    nil,    nil,   .x
 ]
 let gameState = GameState(board: emptyBoard)
-let player = Player(with: .x)
-let opponent = Player(with: .o)
+let player = Player(with: .o)
+let opponent = Player(with: .x)
 let bestMove = algorithm.bestMove(gameState: gameState, player: player, opponent: opponent)
 
 print("\n\n", bestMove.score, bestMove.move)
-print("\n\(algorithm.gameState.board.rows[0])\n\(algorithm.gameState.board.rows[1])\n\(algorithm.gameState.board.rows[2])")
