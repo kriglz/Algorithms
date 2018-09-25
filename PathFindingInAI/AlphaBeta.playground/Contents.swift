@@ -318,7 +318,7 @@ class AlphaBetaAlgorithm {
         }
         
         // Select "maximum of negative value of children" that improves alpha.
-        var best: MoveEvaluator!
+        var best = MoveEvaluator(with: alpha)
         
         // Generate game state that result from all valid moves for this player.
         // Select maximum of the negative scores of children.
@@ -329,9 +329,9 @@ class AlphaBetaAlgorithm {
             // Recursively evaluate position.
             let newMove = search(plyDepth: plyDepth - 1, player: opponent, opponent: player, alpha: -beta, beta: -alpha)
             
-            if best == nil {
-                best = MoveEvaluator(move: move, with: newMove.score)
-            }
+//            if best == nil {
+//                best = MoveEvaluator(move: move, with: newMove.score)
+//            }
             
             print("\n", alpha, beta, plyDepth)
             print(best.score)
@@ -342,15 +342,13 @@ class AlphaBetaAlgorithm {
 
             player.undo(move: move, in: gameState)
             
-            if -newMove.score > alpha {
-//                alpha = -newMove.score
+            if -newMove.score > best.score {
                 best = MoveEvaluator(move: move, with: -newMove.score)
-                print("\nalpha \(alpha)")
                 print("new score \(best.score)\n")
             }
             
             // Search no longer productive.
-            if alpha >= beta {
+            if best.score >= beta {
                 return best
             }
         }
