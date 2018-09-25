@@ -358,7 +358,7 @@ class MinimaxAlgorithm {
         }
         
         // Try to improve on this lower bound (based on selector).
-        var best = MoveEvaluator(with: comparator.initalValue.scoreRepresentitive)
+        var best: MoveEvaluator?
         
         // Generate game state that result from all valid moves for this player.
         moves.forEach { move in
@@ -369,18 +369,20 @@ class MinimaxAlgorithm {
             // Recursively evaluate position. Compute Minimax and swap player and opponent, synchronously eith MIN and MAX.
             let newMove = search(plyDepth: plyDepth - 1, comparator: comparator.opposite, player: opponent, opponent: player)
             
+            if best == nil {
+                best = MoveEvaluator(move: move, with: newMove.score)
+                print(best?.score, best?.move?.toIndex, best?.move?.playerMark, player.playersMark)
+            }
+            
             player.undo(move: move, in: gameState)
             
-            print(comparator, best.score, newMove.score)
-            
             // Select maximum (minimum) of children if we are MAX (MIN).
-            if comparator.compare(i: best.score, j: newMove.score) < 0 {
+            if comparator.compare(i: best!.score, j: newMove.score) < 0 {
                 best = MoveEvaluator(move: move, with: newMove.score)
-                print("updates best move", best.score, best.move!.toIndex, best.move!.playerMark, "\n")
             }
         }
         
-        return best
+        return best ?? MoveEvaluator(with: 999999)
     }
 }
 
@@ -395,4 +397,4 @@ let player = Player(with: .o)
 let opponent = Player(with: .x)
 let bestMove = algorithm.bestMove(gameState: gameState, player: player, opponent: opponent)
 
-print("\n\n", bestMove.score, bestMove.move)
+print("\n\n", bestMove.score, bestMove.move?.toIndex)
