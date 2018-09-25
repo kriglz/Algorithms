@@ -330,6 +330,11 @@ class NegMaxAlgorithm {
             
             if -newMove.score > best!.score {
                 best = MoveEvaluator(move: move, with: -newMove.score)
+                
+                print(best?.score)
+                print(gameState.board.rows[0].stringRepresentation)
+                print(gameState.board.rows[1].stringRepresentation)
+                print(gameState.board.rows[2].stringRepresentation)
             }
         }
         
@@ -340,8 +345,8 @@ class NegMaxAlgorithm {
 let algorithm = NegMaxAlgorithm(plyDepth: 3)
 let initialBoard: [PlayerMark?] = [
     nil,   nil,  .o,
-    nil,   .x,   nil,
-    nil,   nil,  .x
+    nil,   .x,   .x,
+    nil,   nil,  nil
 ]
 let gameState = GameState(board: initialBoard)
 let player = Player(with: .o)

@@ -45,3 +45,5 @@
     
 ### Game tree
 - Minimax 
+- NegMax
+- AlphaBeta
