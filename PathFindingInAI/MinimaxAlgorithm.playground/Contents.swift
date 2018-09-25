@@ -8,8 +8,8 @@ import UIKit
 
 enum PlayerMark: Int {
     
-    case x = 1
-    case o = -1
+    case x
+    case o
     
     var opposite: PlayerMark {
         switch self {
@@ -161,16 +161,16 @@ class Player {
         // Check columns.
         for column in gameState.board.columns {
             if column.isOfType(playersMark) {
-                return 100
+                score += Comparator.maxi.scoreRepresentitive
             }
             
             if column.isOfType(playersMark.opposite) {
-                return -100
+                return Comparator.mini.scoreRepresentitive
             }
-            
-            if column.isNil || column.canBeOfType(playersMark) {
+      
+            if column.canBeOfType(playersMark), !column.isNil {
                 score += 1
-            } else if column.canBeOfType(playersMark.opposite) {
+            } else if column.canBeOfType(playersMark.opposite), !column.isNil {
                 score -= 1
             }
         }
@@ -178,16 +178,16 @@ class Player {
         // Check rows.
         for row in gameState.board.rows {
             if row.isOfType(playersMark) {
-                return 100
+                score += Comparator.maxi.scoreRepresentitive
             }
             
             if row.isOfType(playersMark.opposite) {
-                return -100
+                return Comparator.mini.scoreRepresentitive
             }
             
-            if row.isNil || row.canBeOfType(playersMark) {
+            if row.canBeOfType(playersMark), !row.isNil {
                 score += 1
-            } else if row.canBeOfType(playersMark.opposite) {
+            } else if row.canBeOfType(playersMark.opposite), !row.isNil {
                 score -= 1
             }
         }
@@ -195,21 +195,19 @@ class Player {
         // Check diagonals.
         for diagonal in gameState.board.diagonals {
             if diagonal.isOfType(playersMark) {
-                return 100
+                score += Comparator.maxi.scoreRepresentitive
             }
             
             if diagonal.isOfType(playersMark.opposite) {
-                return -100
+                return Comparator.mini.scoreRepresentitive
             }
             
-            if diagonal.isNil || diagonal.canBeOfType(playersMark) {
+            if diagonal.canBeOfType(playersMark), !diagonal.isNil {
                 score += 1
-            } else if diagonal.canBeOfType(playersMark.opposite) {
+            } else if diagonal.canBeOfType(playersMark.opposite), !diagonal.isNil {
                 score -= 1
             }
         }
-        
-//        print("board score \(score)\n","\(gameState.board.rows[0].stringRepresentation)\n\(gameState.board.rows[1].stringRepresentation)\n\(gameState.board.rows[2].stringRepresentation)\n ")
         
         return score
     }
@@ -293,9 +291,9 @@ enum Comparator {
     var scoreRepresentitive: Int {
         switch self {
         case .mini:
-            return -100 //Int.min
+            return -100
         case .maxi:
-            return 100 // Int.max
+            return 100
         }
     }
     
@@ -330,7 +328,7 @@ class MinimaxAlgorithm {
     /// The depth of game tree. How far to continue the search.
     private var plyDepth: Int
     /// All game states are evaluates from this player perspective.
-    private var player: Player!
+    private var initialPlayer: Player!
     /// Game state to be modified during the search.
     private(set) var gameState = GameState()
     
@@ -339,7 +337,7 @@ class MinimaxAlgorithm {
     }
     
     func bestMove(gameState: GameState, player: Player, opponent: Player) -> MoveEvaluator {
-        self.player = player
+        self.initialPlayer = player
         self.gameState = gameState.copy()
         
         let move = search(plyDepth: plyDepth, comparator: Comparator.maxi, player: player, opponent: opponent)
@@ -349,12 +347,9 @@ class MinimaxAlgorithm {
     func search(plyDepth: Int, comparator: Comparator, player: Player, opponent: Player) -> MoveEvaluator {
         let moves = player.validMoves(for: gameState)
         
-        print("plyDepth:", plyDepth, ", mark:", player.playersMark, "valid moves count:", moves.count)
-        
         // If no allowed moves or a leaf node, return games state score.
         if plyDepth == 0 || moves.isEmpty {
-            print("\nreturns score\n")
-            return MoveEvaluator(with: player.evaluateScore(for: gameState))
+            return MoveEvaluator(with: self.initialPlayer.evaluateScore(for: gameState))
         }
         
         // Try to improve on this lower bound (based on selector).
@@ -363,15 +358,12 @@ class MinimaxAlgorithm {
         // Generate game state that result from all valid moves for this player.
         moves.forEach { move in
             player.execute(move: move, in: gameState)
-            
-            print("\(gameState.board.rows[0].stringRepresentation)\n\(gameState.board.rows[1].stringRepresentation)\n\(gameState.board.rows[2].stringRepresentation)\n")
-            
+
             // Recursively evaluate position. Compute Minimax and swap player and opponent, synchronously eith MIN and MAX.
             let newMove = search(plyDepth: plyDepth - 1, comparator: comparator.opposite, player: opponent, opponent: player)
             
             if best == nil {
                 best = MoveEvaluator(move: move, with: newMove.score)
-                print(best?.score, best?.move?.toIndex, best?.move?.playerMark, player.playersMark)
             }
             
             player.undo(move: move, in: gameState)
@@ -386,13 +378,13 @@ class MinimaxAlgorithm {
     }
 }
 
-let algorithm = MinimaxAlgorithm(plyDepth: 2)
-let emptyBoard: [PlayerMark?] = [
-    nil,   nil,   .o,
-    nil,    .x,   nil,
-    nil,    nil,   .x
+let algorithm = MinimaxAlgorithm(plyDepth: 3)
+let initialBoard: [PlayerMark?] = [
+    nil,   nil,  .o,
+    nil,   .x,   nil,
+    nil,   nil,  .x
 ]
-let gameState = GameState(board: emptyBoard)
+let gameState = GameState(board: initialBoard)
 let player = Player(with: .o)
 let opponent = Player(with: .x)
 let bestMove = algorithm.bestMove(gameState: gameState, player: player, opponent: opponent)
