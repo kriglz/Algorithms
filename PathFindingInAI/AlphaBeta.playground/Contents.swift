@@ -158,14 +158,22 @@ class Player {
     func evaluateScore(for gameState: GameState) -> Int {
         var score = 0
         
+        if gameState.board.columns.contains(where: { $0.isOfType(playersMark.opposite) }) {
+            return -100
+        }
+        
+        if gameState.board.rows.contains(where: { $0.isOfType(playersMark.opposite) }) {
+            return -100
+        }
+        
+        if gameState.board.diagonals.contains(where: { $0.isOfType(playersMark.opposite) }) {
+            return -100
+        }
+        
         // Check columns.
         for column in gameState.board.columns {
             if column.isOfType(playersMark) {
                 score += 100
-            }
-            
-            if column.isOfType(playersMark.opposite) {
-                return -100
             }
             
             if column.canBeOfType(playersMark), !column.isNil {
@@ -181,10 +189,6 @@ class Player {
                 score += 100
             }
             
-            if row.isOfType(playersMark.opposite) {
-                return -100
-            }
-            
             if row.canBeOfType(playersMark), !row.isNil {
                 score += 1
             } else if row.canBeOfType(playersMark.opposite), !row.isNil {
@@ -197,11 +201,7 @@ class Player {
             if diagonal.isOfType(playersMark) {
                 score += 100
             }
-            
-            if diagonal.isOfType(playersMark.opposite) {
-                return -100
-            }
-            
+   
             if diagonal.canBeOfType(playersMark), !diagonal.isNil {
                 score += 1
             } else if diagonal.canBeOfType(playersMark.opposite), !diagonal.isNil {
@@ -327,7 +327,7 @@ class AlphaBetaAlgorithm {
             player.execute(move: move, in: gameState)
             
             // Recursively evaluate position.
-            let newMove = search(plyDepth: plyDepth - 1, player: opponent, opponent: player, alpha: -beta, beta: -alpha)
+            let newMove = search(plyDepth: plyDepth - 1, player: opponent, opponent: player, alpha: -beta, beta: -best.score)
             
             print("\n", alpha, beta, plyDepth)
             print(best.score)
@@ -346,7 +346,6 @@ class AlphaBetaAlgorithm {
             // Search no longer productive.
             if best.score >= beta {
                 print("PRUNES")
-                
                 return best
             }
         }
@@ -360,6 +359,12 @@ let algorithm = AlphaBetaAlgorithm(plyDepth: 3)
 //    .o,    nil,  nil,
 //    nil,   .x,   nil,
 //    .x,    nil,  nil
+//]
+
+//let initialBoard: [PlayerMark?] = [
+//    .o,    nil,  .x,
+//    nil,   .x,   nil,
+//    nil,   nil,  nil
 //]
 
 let initialBoard: [PlayerMark?] = [
