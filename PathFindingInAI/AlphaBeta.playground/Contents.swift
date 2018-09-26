@@ -158,6 +158,18 @@ class Player {
     func evaluateScore(for gameState: GameState) -> Int {
         var score = 0
         
+        if gameState.board.columns.contains(where: { $0.isOfType(playersMark) }) {
+            return 100
+        }
+        
+        if gameState.board.rows.contains(where: { $0.isOfType(playersMark) }) {
+            return 100
+        }
+        
+        if gameState.board.diagonals.contains(where: { $0.isOfType(playersMark) }) {
+            return 100
+        }
+        
         if gameState.board.columns.contains(where: { $0.isOfType(playersMark.opposite) }) {
             return -100
         }
@@ -172,10 +184,6 @@ class Player {
         
         // Check columns.
         for column in gameState.board.columns {
-            if column.isOfType(playersMark) {
-                score += 100
-            }
-            
             if column.canBeOfType(playersMark), !column.isNil {
                 score += 1
             } else if column.canBeOfType(playersMark.opposite), !column.isNil {
@@ -185,10 +193,6 @@ class Player {
         
         // Check rows.
         for row in gameState.board.rows {
-            if row.isOfType(playersMark) {
-                score += 100
-            }
-            
             if row.canBeOfType(playersMark), !row.isNil {
                 score += 1
             } else if row.canBeOfType(playersMark.opposite), !row.isNil {
@@ -198,10 +202,6 @@ class Player {
         
         // Check diagonals.
         for diagonal in gameState.board.diagonals {
-            if diagonal.isOfType(playersMark) {
-                score += 100
-            }
-   
             if diagonal.canBeOfType(playersMark), !diagonal.isNil {
                 score += 1
             } else if diagonal.canBeOfType(playersMark.opposite), !diagonal.isNil {
@@ -323,29 +323,19 @@ class AlphaBetaAlgorithm {
         // Generate game state that result from all valid moves for this player.
         // Select maximum of the negative scores of children.
         for move in moves {
-            print("move was executed", move.toIndex, move.playerMark)
             player.execute(move: move, in: gameState)
             
             // Recursively evaluate position.
             let newMove = search(plyDepth: plyDepth - 1, player: opponent, opponent: player, alpha: -beta, beta: -best.score)
             
-            print("\n", alpha, beta, plyDepth)
-            print(best.score)
-            print("new", newMove.score)
-            print(gameState.board.rows[0].stringRepresentation)
-            print(gameState.board.rows[1].stringRepresentation)
-            print(gameState.board.rows[2].stringRepresentation)
-
             player.undo(move: move, in: gameState)
             
             if -newMove.score > best.score {
                 best = MoveEvaluator(move: move, with: -newMove.score)
-                print("new score \(best.score)\n")
             }
             
             // Search no longer productive.
             if best.score >= beta {
-                print("PRUNES")
                 return best
             }
         }
@@ -354,7 +344,7 @@ class AlphaBetaAlgorithm {
     }
 }
 
-let algorithm = AlphaBetaAlgorithm(plyDepth: 3)
+let algorithm = AlphaBetaAlgorithm(plyDepth: 2)
 //let initialBoard: [PlayerMark?] = [
 //    .o,    nil,  nil,
 //    nil,   .x,   nil,
@@ -367,22 +357,22 @@ let algorithm = AlphaBetaAlgorithm(plyDepth: 3)
 //    nil,   nil,  nil
 //]
 
-let initialBoard: [PlayerMark?] = [
-    nil,   nil,  .o,
-    nil,   .x,   .x,
-    nil,    nil,  nil
-]
-
 //let initialBoard: [PlayerMark?] = [
 //    nil,   nil,  .o,
-//    nil,   .x,   nil,
-//    nil,   nil,  .x
+//    nil,   .x,   .x,
+//    nil,    nil,  nil
 //]
+
+let initialBoard: [PlayerMark?] = [
+    nil,   nil,  .o,
+    nil,   .x,   nil,
+    nil,   nil,  .x
+]
 
 let gameState = GameState(board: initialBoard)
 let player = Player(with: .o)
 let opponent = Player(with: .x)
 let bestMove = algorithm.bestMove(gameState: gameState, player: player, opponent: opponent)
 
-print("\n\n", bestMove.score, bestMove.move?.toIndex)
+print(bestMove.score, bestMove.move?.toIndex)
 
