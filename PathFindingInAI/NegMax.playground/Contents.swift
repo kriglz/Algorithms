@@ -286,8 +286,6 @@ class NegMaxAlgorithm {
     
     /// The depth of game tree. How far to continue the search.
     private var plyDepth: Int
-    /// All game states are evaluates from this player perspective.
-    private var initialPlayer: Player!
     /// Game state to be modified during the search.
     private(set) var gameState = GameState()
     
@@ -296,7 +294,6 @@ class NegMaxAlgorithm {
     }
     
     func bestMove(gameState: GameState, player: Player, opponent: Player) -> MoveEvaluator {
-        self.initialPlayer = player
         self.gameState = gameState.copy()
         
         let move = search(plyDepth: plyDepth, player: player, opponent: opponent)
@@ -308,7 +305,7 @@ class NegMaxAlgorithm {
         
         // If no allowed moves or a leaf node, return games state score.
         if plyDepth == 0 || moves.isEmpty {
-            return MoveEvaluator(with: self.initialPlayer.evaluateScore(for: gameState))
+            return MoveEvaluator(with: player.evaluateScore(for: gameState))
         }
         
         // Try to improve on this lower bound (based on selector).
