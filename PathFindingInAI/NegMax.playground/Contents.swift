@@ -312,7 +312,7 @@ class NegMaxAlgorithm {
         }
         
         // Try to improve on this lower bound (based on selector).
-        var best: MoveEvaluator?
+        var best = MoveEvaluator(with: -100)
         
         // Generate game state that result from all valid moves for this player.
         // Select maximum of the negative scores of children.
@@ -322,32 +322,43 @@ class NegMaxAlgorithm {
             // Recursively evaluate position using consistent negmax. Treat score as negative value.
             let newMove = search(plyDepth: plyDepth - 1, player: opponent, opponent: player)
             
-            if best == nil {
-                best = MoveEvaluator(move: move, with: newMove.score)
-            }
-            
             player.undo(move: move, in: gameState)
             
-            if -newMove.score > best!.score {
+            if -newMove.score > best.score {
                 best = MoveEvaluator(move: move, with: -newMove.score)
-                
-                print(best?.score)
-                print(gameState.board.rows[0].stringRepresentation)
-                print(gameState.board.rows[1].stringRepresentation)
-                print(gameState.board.rows[2].stringRepresentation)
             }
         }
         
-        return best ?? MoveEvaluator(with: 999999)
+        return best
     }
 }
 
 let algorithm = NegMaxAlgorithm(plyDepth: 3)
+
+//let initialBoard: [PlayerMark?] = [
+//    .o,    nil,  nil,
+//    nil,   .x,   nil,
+//    .x,    nil,  nil
+//]
+
+//let initialBoard: [PlayerMark?] = [
+//    .o,    nil,  .x,
+//    nil,   .x,   nil,
+//    nil,   nil,  nil
+//]
+
 let initialBoard: [PlayerMark?] = [
     nil,   nil,  .o,
     nil,   .x,   .x,
-    nil,   nil,  nil
+    nil,    nil,  nil
 ]
+
+//let initialBoard: [PlayerMark?] = [
+//    nil,   nil,  .o,
+//    nil,   .x,   nil,
+//    nil,   nil,  .x
+//]
+
 let gameState = GameState(board: initialBoard)
 let player = Player(with: .o)
 let opponent = Player(with: .x)
