@@ -184,14 +184,6 @@ class Player {
         
         // Check columns.
         for column in gameState.board.columns {
-//            if column.isOfType(playersMark) {
-//                return 100
-//            }
-//
-//            if column.isOfType(playersMark.opposite) {
-//                return -100
-//            }
-            
             if column.canBeOfType(playersMark), !column.isNil {
                 score += 1
             } else if column.canBeOfType(playersMark.opposite), !column.isNil {
@@ -201,14 +193,6 @@ class Player {
         
         // Check rows.
         for row in gameState.board.rows {
-//            if row.isOfType(playersMark) {
-//                return 100
-//            }
-//
-//            if row.isOfType(playersMark.opposite) {
-//                return -100
-//            }
-            
             if row.canBeOfType(playersMark), !row.isNil {
                 score += 1
             } else if row.canBeOfType(playersMark.opposite), !row.isNil {
@@ -218,22 +202,12 @@ class Player {
         
         // Check diagonals.
         for diagonal in gameState.board.diagonals {
-//            if diagonal.isOfType(playersMark) {
-//                return 100
-//            }
-//
-//            if diagonal.isOfType(playersMark.opposite) {
-//                return -100
-//            }
-            
             if diagonal.canBeOfType(playersMark), !diagonal.isNil {
                 score += 1
             } else if diagonal.canBeOfType(playersMark.opposite), !diagonal.isNil {
                 score -= 1
             }
         }
-        
-        print("playersMark, score", playersMark, score)
         
         return score
     }
@@ -341,30 +315,14 @@ class NegMaxAlgorithm {
         // Select maximum of the negative scores of children.
         moves.forEach { move in
             player.execute(move: move, in: gameState)
-            print("move was executed", move.toIndex, move.playerMark)
             
             // Recursively evaluate position using consistent negmax. Treat score as negative value.
             let newMove = search(plyDepth: plyDepth - 1, player: opponent, opponent: player)
-            
-//            if plyDepth == 3 {
-//
-//                print("\n333333333333\n", plyDepth)
-//
-//            }
-//
-//            print("\n", best.score)
-//            print("new", newMove.score, player.playersMark)
-//            print(gameState.board.rows[0].stringRepresentation)
-//            print(gameState.board.rows[1].stringRepresentation)
-//            print(gameState.board.rows[2].stringRepresentation)
-            
-            
-           
+
             player.undo(move: move, in: gameState)
             
             if -newMove.score > best.score {
                 best = MoveEvaluator(move: move, with: -newMove.score)
-                print("new score \(best.score)\n")
             }
         }
         
@@ -403,4 +361,4 @@ let player = Player(with: .o)
 let opponent = Player(with: .x)
 let bestMove = algorithm.bestMove(gameState: gameState, player: player, opponent: opponent)
 
-print("\n\n", bestMove.score, bestMove.move?.toIndex)
+print(bestMove.score, bestMove.move?.toIndex)
