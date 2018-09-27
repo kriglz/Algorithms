@@ -57,11 +57,24 @@ class GraphView: UIView {
     }
     
     func perform(lineDrawingActions: [LineDrawingAction]) {
+        let duration = 0.3
+        let initialTime = CACurrentMediaTime()
+        
         for action in lineDrawingActions {
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = action.line.cgPath
             shapeLayer.strokeColor = UIColor.red.cgColor
+            shapeLayer.opacity = 0
             layer.addSublayer(shapeLayer)
+            
+            let drawAnimation = CABasicAnimation(keyPath: "opacity")
+            drawAnimation.fillMode = CAMediaTimingFillMode.forwards
+            drawAnimation.fromValue = 0
+            drawAnimation.toValue = 1
+            drawAnimation.beginTime = initialTime + duration * Double(action.index)
+            drawAnimation.duration = duration
+            drawAnimation.isRemovedOnCompletion = false
+            shapeLayer.add(drawAnimation, forKey: "lineOpacity")
         }
     }
 }
