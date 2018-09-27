@@ -10,6 +10,10 @@ import UIKit
 
 class ConvexHullScanAlgorithm {
     
+    // MARK: - Properties
+    
+    weak var delegate: ConvexHullScanAlgorithmDelegate? = nil
+    
     // MARK: - Compute method
     
     @discardableResult func compute(points: [CGPoint]) -> [CGPoint] {
@@ -33,9 +37,11 @@ class ConvexHullScanAlgorithm {
         let upperHull = ConexHull(sortedPoints[0], sortedPoints[1])
         for index in 2..<count {
             upperHull.add(point: sortedPoints[index])
+            delegate?.convexHullScanAlgorithm(self, didAddPoint: sortedPoints[index])
             
             while upperHull.hasThree, upperHull.areLastThreeNonRight {
                 upperHull.removeMiddleOfLastThree()
+                delegate?.convexHullScanAlgorithmDidRemoveMiddleOfTheLastThreePoint(self)
             }
         }
         
@@ -43,9 +49,11 @@ class ConvexHullScanAlgorithm {
         let lowerHull = ConexHull(sortedPoints[count - 1], sortedPoints[count - 2])
         for index in (0...(count - 3)).reversed() {
             lowerHull.add(point: sortedPoints[index])
-            
+            delegate?.convexHullScanAlgorithm(self, didAddPoint: sortedPoints[index])
+
             while lowerHull.hasThree, lowerHull.areLastThreeNonRight {
                 lowerHull.removeMiddleOfLastThree()
+                delegate?.convexHullScanAlgorithmDidRemoveMiddleOfTheLastThreePoint(self)
             }
         }
         
@@ -54,4 +62,11 @@ class ConvexHullScanAlgorithm {
         
         return hullConexPoints
     }
+}
+
+protocol ConvexHullScanAlgorithmDelegate: class {
+    
+    func convexHullScanAlgorithm(_ algorithm: ConvexHullScanAlgorithm, didAddPoint point: CGPoint)
+    
+    func convexHullScanAlgorithmDidRemoveMiddleOfTheLastThreePoint(_ algorithm: ConvexHullScanAlgorithm)
 }
