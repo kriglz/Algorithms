@@ -22,8 +22,35 @@ class ConexHull {
         return hullPointsCount >= 3
     }
     
+    /*
+     
+     Determinant needs to be computed to determine the right turn of 3 points.
+     
+     Three points L(i-1), L(i), and the candidate point p form a right turn if cp is negative.
+     If cp == 0, three points are collinear, or if cp > 0, the three points determine the left turn.
+     
+     Matrix ->
+     
+     1    L(i-1).x  L(i-1).y
+     1    L(i).x    L(i).y
+     1    p.x       p.y
+     
+     Cross product ->
+     
+     cp = (L(i).x - L(i - 1).x) * (p.y - L(i - 1).y) - (L(i).y - L(i - 1).y) * (p.x - L(i - 1).x)
+ 
+    */
     var areLastThreeNonRight: Bool {
-        // TODO, do determinant calc.
+        let last = points[hullPointsCount - 1]
+        let secondLast = points[hullPointsCount - 2]
+        let thirdLast = points[hullPointsCount - 3]
+
+        let cp = (secondLast.x - thirdLast.x) * (last.y - thirdLast.y) - (secondLast.y - thirdLast.y) * (last.x - thirdLast.x)
+        
+        if cp >= 0 {
+            return true
+        }
+        
         return false
     }
     

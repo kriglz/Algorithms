@@ -41,7 +41,7 @@ class ConvexHullScanAlgorithm {
         
         // Compute lower hull by starting with rightmost two points
         let lowerHull = ConexHull(sortedPoints[count - 1], sortedPoints[count - 2])
-        for index in count - 3...0 {
+        for index in (0...(count - 3)).reversed() {
             lowerHull.add(point: sortedPoints[index])
             
             while lowerHull.hasThree, lowerHull.areLastThreeNonRight {
