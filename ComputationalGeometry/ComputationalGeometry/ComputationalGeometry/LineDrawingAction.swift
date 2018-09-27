@@ -15,13 +15,13 @@ struct LineDrawingAction {
         case removal
     }
     
-    let sequenceNumber: Int
+    let index: Int
     let line: Line
     let type: ActionType
     
-    init(line: Line, type: ActionType, sequenceNumber: Int) {
+    init(line: Line, type: ActionType, index: Int) {
         self.line = line
         self.type = type
-        self.sequenceNumber = sequenceNumber
+        self.index = index
     }
 }

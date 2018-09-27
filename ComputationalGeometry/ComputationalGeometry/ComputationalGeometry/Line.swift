@@ -6,7 +6,7 @@
 //  Copyright © 2018 Kristina Gelzinyte. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Line {
     

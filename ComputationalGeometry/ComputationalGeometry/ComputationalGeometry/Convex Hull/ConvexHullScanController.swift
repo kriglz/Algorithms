@@ -44,13 +44,13 @@ class ConvexHullScanController {
 extension ConvexHullScanController: ConvexHullScanAlgorithmDelegate {
     
     func convexHullScanAlgorithm(_ algorithm: ConvexHullScanAlgorithm, didAddLine line: Line) {
-        let action = LineDrawingAction(line: line, type: .addition, sequenceNumber: actionIndex)
+        let action = LineDrawingAction(line: line, type: .addition, index: actionIndex)
         pointActionBuffer.append(action)
         actionIndex += 1
     }
     
     func convexHullScanAlgorithm(_ algorithm: ConvexHullScanAlgorithm, didRemoveLine line: Line) {
-        let action = LineDrawingAction(line: line, type: .removal, sequenceNumber: actionIndex)
+        let action = LineDrawingAction(line: line, type: .removal, index: actionIndex)
         pointActionBuffer.append(action)
         actionIndex += 1
     }
