@@ -61,20 +61,41 @@ class GraphView: UIView {
         let initialTime = CACurrentMediaTime()
         
         for action in lineDrawingActions {
-            let shapeLayer = CAShapeLayer()
-            shapeLayer.path = action.line.cgPath
-            shapeLayer.strokeColor = UIColor.red.cgColor
-            shapeLayer.opacity = 0
-            layer.addSublayer(shapeLayer)
-            
-            let drawAnimation = CABasicAnimation(keyPath: "opacity")
-            drawAnimation.fillMode = CAMediaTimingFillMode.forwards
-            drawAnimation.fromValue = 0
-            drawAnimation.toValue = 1
-            drawAnimation.beginTime = initialTime + duration * Double(action.index)
-            drawAnimation.duration = duration
-            drawAnimation.isRemovedOnCompletion = false
-            shapeLayer.add(drawAnimation, forKey: "lineOpacity")
+            switch action.type {
+            case .addition:
+                addLine(with: action, beginTime: initialTime, duration: duration)
+            case .removal:
+                continue
+            }
         }
+    }
+    
+    private func addLine(with action: LineDrawingAction, beginTime: TimeInterval, duration: Double) {
+        let lineLayer = UniqueIdLayer(from: action.line.cgPath, with: action.line.uuid)
+        layer.addSublayer(lineLayer)
+        
+        let drawAnimation = CABasicAnimation(keyPath: "opacity")
+        drawAnimation.fillMode = CAMediaTimingFillMode.forwards
+        drawAnimation.fromValue = 0
+        drawAnimation.toValue = 1
+        drawAnimation.beginTime = beginTime + duration * Double(action.index)
+        drawAnimation.duration = duration
+        drawAnimation.isRemovedOnCompletion = false
+        lineLayer.add(drawAnimation, forKey: "lineOpacity")
+    }
+}
+
+class UniqueIdLayer: CAShapeLayer {
+    
+    private(set) var uuid: UUID!
+    
+    convenience init(from path: CGPath, with uuid: UUID) {
+        self.init()
+        
+        self.uuid = uuid
+        
+        self.path = path
+        self.strokeColor = UIColor.red.cgColor
+        self.opacity = 0
     }
 }
