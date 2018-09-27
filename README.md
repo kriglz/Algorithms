@@ -47,3 +47,7 @@
 - Minimax 
 - NegMax
 - AlphaBeta
+
+# Computational Geometry Algorithms:
+
+- Convex Hull Scan
