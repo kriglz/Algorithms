@@ -10,9 +10,13 @@ import UIKit
 
 class ConvexHullScanController {
     
+    // MARK: - Properties
+    
     private(set) var points = [CGPoint]()
     
     private let algorithm = ConvexHullScanAlgorithm()
+    
+    // MARK: - Initialization
     
     init(pointCount: Int, in rect: CGRect) {
         for _ in 0...pointCount {
@@ -20,6 +24,8 @@ class ConvexHullScanController {
             points.append(newPoint)
         }
     }
+    
+    // MARK: - Compute methods
     
     @discardableResult func compute() -> [CGPoint] {
         return algorithm.compute(points: points)
