@@ -24,14 +24,35 @@ class GraphView: UIView {
 
     // MARK: - Draw methods
     
-    func draw(points: [CGPoint]) {
-        let pointSize = CGSize(width: 2, height: 2)
+    func draw(points: [CGPoint], color: CGColor = UIColor.black.cgColor) {
+        let pointSize = CGSize(width: 5, height: 5)
         points.forEach { pointPosition in
             let pointRectangle = CGRect(origin: pointPosition, size: pointSize)
-            let circle = CGPath(rect: pointRectangle, transform: nil)
+            let circle = CGPath(ellipseIn: pointRectangle, transform: nil)
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circle
+            shapeLayer.fillColor = color
             layer.addSublayer(shapeLayer)
         }
+    }
+    
+    func draw(line points: [CGPoint]) {
+        guard points.count > 2 else {
+            NSLog("Line has less than two points")
+            return
+        }
+        
+        let linePath = UIBezierPath()
+        linePath.move(to: points.first!)
+        for index in 1..<points.count {
+            linePath.addLine(to: points[index])
+        }
+        linePath.close()
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = linePath.cgPath
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = UIColor.lightGray.cgColor
+        layer.addSublayer(shapeLayer)
     }
 }
