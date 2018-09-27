@@ -66,9 +66,7 @@
 			children = (
 				8916D1D5215C6207007816C6 /* MainViewController.swift */,
 				8916D1E6215C63C2007816C6 /* GraphView.swift */,
-				8916D1EC215C6625007816C6 /* ConvexHullScanController.swift */,
-				8916D1EA215C65D1007816C6 /* ConvexHullScanAlgorithm.swift */,
-				8916D1EE215D4E51007816C6 /* ConexHull.swift */,
+				8916D1F0215D7D33007816C6 /* Convex Hull */,
 				8916D1E8215C641C007816C6 /* UIView+Extension.swift */,
 				8916D1E5215C6231007816C6 /* SupportingFiles */,
 				8916D1DF215C620C007816C6 /* Info.plist */,
@@ -85,6 +83,16 @@
 				8916D1DC215C620C007816C6 /* LaunchScreen.storyboard */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		8916D1F0215D7D33007816C6 /* Convex Hull */ = {
+			isa = PBXGroup;
+			children = (
+				8916D1EC215C6625007816C6 /* ConvexHullScanController.swift */,
+				8916D1EA215C65D1007816C6 /* ConvexHullScanAlgorithm.swift */,
+				8916D1EE215D4E51007816C6 /* ConexHull.swift */,
+			);
+			path = "Convex Hull";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
