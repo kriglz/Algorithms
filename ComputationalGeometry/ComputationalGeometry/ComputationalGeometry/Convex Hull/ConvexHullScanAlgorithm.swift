@@ -33,17 +33,20 @@ class ConvexHullScanAlgorithm {
             return firstPoint.x < secondPoint.x
         }
         
+        var lines = [Line]()
+        
         func requestLineAddition(fromPoint: CGPoint, toPoint: CGPoint) {
             let line = Line(startPoint: fromPoint, endPoint: toPoint)
             delegate?.convexHullScanAlgorithm(self, didAddLine: line)
+            lines.append(line)
         }
         
         func requestRemovalOfMiddleOfLastThreePointLines() {
-            let fromLine = Line(startPoint: sortedPoints[count - 2], endPoint: sortedPoints[count - 1])
-            delegate?.convexHullScanAlgorithm(self, didRemoveLine: fromLine)
+            delegate?.convexHullScanAlgorithm(self, didRemoveLine: lines.last!)
+            lines.removeLast()
             
-            let toLine = Line(startPoint: sortedPoints[count - 3], endPoint: sortedPoints[count - 2])
-            delegate?.convexHullScanAlgorithm(self, didRemoveLine: toLine)
+            delegate?.convexHullScanAlgorithm(self, didRemoveLine: lines.last!)
+            lines.removeLast()
         }
         
         // Compute upper hull by starting with leftmost two points.
@@ -51,11 +54,12 @@ class ConvexHullScanAlgorithm {
         requestLineAddition(fromPoint: sortedPoints[0], toPoint: sortedPoints[1])
         for index in 2..<count {
             upperHull.add(point: sortedPoints[index])
-            requestLineAddition(fromPoint: sortedPoints[index - 1], toPoint: sortedPoints[index])
+            requestLineAddition(fromPoint: upperHull.points[upperHull.hullPointsCount - 2], toPoint: upperHull.points[upperHull.hullPointsCount - 1])
             
             while upperHull.hasThree, upperHull.areLastThreeNonRight {
                 upperHull.removeMiddleOfLastThree()
                 requestRemovalOfMiddleOfLastThreePointLines()
+                requestLineAddition(fromPoint: upperHull.points[upperHull.hullPointsCount - 2], toPoint: upperHull.points[upperHull.hullPointsCount - 1])
             }
         }
         
@@ -64,11 +68,12 @@ class ConvexHullScanAlgorithm {
         requestLineAddition(fromPoint: sortedPoints[count - 1], toPoint: sortedPoints[count - 2])
         for index in (0...(count - 3)).reversed() {
             lowerHull.add(point: sortedPoints[index])
-            requestLineAddition(fromPoint: sortedPoints[index], toPoint: sortedPoints[index + 1])
+            requestLineAddition(fromPoint: lowerHull.points[lowerHull.hullPointsCount - 2], toPoint: lowerHull.points[lowerHull.hullPointsCount - 1])
 
             while lowerHull.hasThree, lowerHull.areLastThreeNonRight {
                 lowerHull.removeMiddleOfLastThree()
                 requestRemovalOfMiddleOfLastThreePointLines()
+                requestLineAddition(fromPoint: lowerHull.points[lowerHull.hullPointsCount - 2], toPoint: lowerHull.points[lowerHull.hullPointsCount - 1])
             }
         }
         
