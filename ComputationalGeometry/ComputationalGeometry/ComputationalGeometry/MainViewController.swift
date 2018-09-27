@@ -14,6 +14,8 @@ class MainViewController: UIViewController {
     
     private let graphView = GraphView()
     
+    private let convexHullScanButton = UIButton(type: .system)
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -25,6 +27,21 @@ class MainViewController: UIViewController {
         
         view.addSubview(graphView)
         graphView.constraints(edgesTo: self.view)
+        
+        convexHullScanButton.setTitle("Convex Hull Scan", for: .normal)
+        convexHullScanButton.addTarget(self, action: #selector(startConvexHullScanAction), for: .touchDown)
+        
+        view.addSubview(convexHullScanButton)
+        convexHullScanButton.translatesAutoresizingMaskIntoConstraints = false
+        convexHullScanButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+        convexHullScanButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+        
+    }
+    
+    // MARK: - Actionw
+    
+    @objc private func startConvexHullScanAction(_ sender: UIButton) {
+        
     }
 }
 
