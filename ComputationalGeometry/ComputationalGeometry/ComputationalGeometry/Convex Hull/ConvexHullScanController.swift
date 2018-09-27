@@ -12,7 +12,7 @@ class ConvexHullScanController {
     
     // MARK: - Properties
     
-    var convexHullScanActions: [PointAction] {
+    var convexHullScanActions: [LineDrawingAction] {
         return pointActionBuffer
     }
     
@@ -20,7 +20,7 @@ class ConvexHullScanController {
     
     private let algorithm = ConvexHullScanAlgorithm()
     
-    fileprivate var pointActionBuffer = [PointAction]()
+    fileprivate var pointActionBuffer = [LineDrawingAction]()
     fileprivate var actionIndex = 0
     
     // MARK: - Initialization
@@ -30,6 +30,8 @@ class ConvexHullScanController {
             let newPoint = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
             points.append(newPoint)
         }
+        
+        algorithm.delegate = self
     }
     
     // MARK: - Compute methods
@@ -41,14 +43,14 @@ class ConvexHullScanController {
 
 extension ConvexHullScanController: ConvexHullScanAlgorithmDelegate {
     
-    func convexHullScanAlgorithm(_ algorithm: ConvexHullScanAlgorithm, didAddPoint point: CGPoint) {
-        let action = PointAction(point: point, action: .addition, sequenceNumber: actionIndex)
+    func convexHullScanAlgorithm(_ algorithm: ConvexHullScanAlgorithm, didAddLine line: Line) {
+        let action = LineDrawingAction(line: line, type: .addition, sequenceNumber: actionIndex)
         pointActionBuffer.append(action)
         actionIndex += 1
     }
     
-    func convexHullScanAlgorithmDidRemoveMiddleOfTheLastThreePoint(_ algorithm: ConvexHullScanAlgorithm) {
-        let action = PointAction(point: points[points.count - 2], action: .removal, sequenceNumber: actionIndex)
+    func convexHullScanAlgorithm(_ algorithm: ConvexHullScanAlgorithm, didRemoveLine line: Line) {
+        let action = LineDrawingAction(line: line, type: .removal, sequenceNumber: actionIndex)
         pointActionBuffer.append(action)
         actionIndex += 1
     }

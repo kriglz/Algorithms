@@ -33,15 +33,28 @@ class ConvexHullScanAlgorithm {
             return firstPoint.x < secondPoint.x
         }
         
+        func requestLineAddition(fromPoint: CGPoint, toPoint: CGPoint) {
+            let line = Line(startPoint: fromPoint, endPoint: toPoint)
+            delegate?.convexHullScanAlgorithm(self, didAddLine: line)
+        }
+        
+        func requestRemovalOfMiddleOfLastThreePointLines() {
+            let fromLine = Line(startPoint: sortedPoints[count - 2], endPoint: sortedPoints[count - 1])
+            delegate?.convexHullScanAlgorithm(self, didRemoveLine: fromLine)
+            
+            let toLine = Line(startPoint: sortedPoints[count - 3], endPoint: sortedPoints[count - 2])
+            delegate?.convexHullScanAlgorithm(self, didRemoveLine: toLine)
+        }
+        
         // Compute upper hull by starting with leftmost two points.
         let upperHull = ConexHull(sortedPoints[0], sortedPoints[1])
         for index in 2..<count {
             upperHull.add(point: sortedPoints[index])
-            delegate?.convexHullScanAlgorithm(self, didAddPoint: sortedPoints[index])
+            requestLineAddition(fromPoint: sortedPoints[index - 1], toPoint: sortedPoints[index])
             
             while upperHull.hasThree, upperHull.areLastThreeNonRight {
                 upperHull.removeMiddleOfLastThree()
-                delegate?.convexHullScanAlgorithmDidRemoveMiddleOfTheLastThreePoint(self)
+                requestRemovalOfMiddleOfLastThreePointLines()
             }
         }
         
@@ -49,11 +62,11 @@ class ConvexHullScanAlgorithm {
         let lowerHull = ConexHull(sortedPoints[count - 1], sortedPoints[count - 2])
         for index in (0...(count - 3)).reversed() {
             lowerHull.add(point: sortedPoints[index])
-            delegate?.convexHullScanAlgorithm(self, didAddPoint: sortedPoints[index])
+            requestLineAddition(fromPoint: sortedPoints[index], toPoint: sortedPoints[index + 1])
 
             while lowerHull.hasThree, lowerHull.areLastThreeNonRight {
                 lowerHull.removeMiddleOfLastThree()
-                delegate?.convexHullScanAlgorithmDidRemoveMiddleOfTheLastThreePoint(self)
+                requestRemovalOfMiddleOfLastThreePointLines()
             }
         }
         
@@ -66,7 +79,7 @@ class ConvexHullScanAlgorithm {
 
 protocol ConvexHullScanAlgorithmDelegate: class {
     
-    func convexHullScanAlgorithm(_ algorithm: ConvexHullScanAlgorithm, didAddPoint point: CGPoint)
+    func convexHullScanAlgorithm(_ algorithm: ConvexHullScanAlgorithm, didAddLine line: Line)
     
-    func convexHullScanAlgorithmDidRemoveMiddleOfTheLastThreePoint(_ algorithm: ConvexHullScanAlgorithm)
+    func convexHullScanAlgorithm(_ algorithm: ConvexHullScanAlgorithm, didRemoveLine line: Line)
 }

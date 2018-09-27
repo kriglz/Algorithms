@@ -47,11 +47,13 @@ class MainViewController: UIViewController {
                                         y: graphView.frame.size.height / 4,
                                         width: graphView.frame.size.width / 2,
                                         height: graphView.frame.size.height / 2)
+        
         let controller = ConvexHullScanController(pointCount: 30, in: convexHullRectange)
         graphView.draw(points: controller.points)
         
-        let convexPoints = controller.compute()
-        graphView.draw(line: convexPoints)
+        controller.compute()
+        let actions = controller.convexHullScanActions
+        graphView.perform(lineDrawingActions: actions)
     }
 }
 

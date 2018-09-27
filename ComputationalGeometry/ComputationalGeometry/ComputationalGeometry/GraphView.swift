@@ -55,4 +55,13 @@ class GraphView: UIView {
         shapeLayer.strokeColor = UIColor.lightGray.cgColor
         layer.addSublayer(shapeLayer)
     }
+    
+    func perform(lineDrawingActions: [LineDrawingAction]) {
+        for action in lineDrawingActions {
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.path = action.line.cgPath
+            shapeLayer.strokeColor = UIColor.red.cgColor
+            layer.addSublayer(shapeLayer)
+        }
+    }
 }
