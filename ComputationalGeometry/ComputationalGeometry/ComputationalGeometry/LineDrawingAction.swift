@@ -1,5 +1,5 @@
 //
-//  PointAction.swift
+//  LineDrawingAction.swift
 //  ComputationalGeometry
 //
 //  Created by Kristina Gelzinyte on 9/27/18.
@@ -8,21 +8,20 @@
 
 import UIKit
 
-struct PointAction {
+struct LineDrawingAction {
     
-    enum AnimationAction {
-        
+    enum ActionType {
         case addition
         case removal
     }
     
     let sequenceNumber: Int
-    let point: CGPoint
-    let action: AnimationAction
+    let line: Line
+    let type: ActionType
     
-    init(point: CGPoint, action: AnimationAction, sequenceNumber: Int) {
-        self.point = point
-        self.action = action
+    init(line: Line, type: ActionType, sequenceNumber: Int) {
+        self.line = line
+        self.type = type
         self.sequenceNumber = sequenceNumber
     }
 }

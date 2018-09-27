@@ -17,7 +17,8 @@
 		8916D1EB215C65D1007816C6 /* ConvexHullScanAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1EA215C65D1007816C6 /* ConvexHullScanAlgorithm.swift */; };
 		8916D1ED215C6625007816C6 /* ConvexHullScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1EC215C6625007816C6 /* ConvexHullScanController.swift */; };
 		8916D1EF215D4E51007816C6 /* ConexHull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1EE215D4E51007816C6 /* ConexHull.swift */; };
-		8916D1F2215D82AF007816C6 /* PointAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1F1215D82AF007816C6 /* PointAction.swift */; };
+		8916D1F2215D82AF007816C6 /* LineDrawingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1F1215D82AF007816C6 /* LineDrawingAction.swift */; };
+		8916D1F4215D8BE1007816C6 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1F3215D8BE1007816C6 /* Line.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +34,8 @@
 		8916D1EA215C65D1007816C6 /* ConvexHullScanAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvexHullScanAlgorithm.swift; sourceTree = "<group>"; };
 		8916D1EC215C6625007816C6 /* ConvexHullScanController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvexHullScanController.swift; sourceTree = "<group>"; };
 		8916D1EE215D4E51007816C6 /* ConexHull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConexHull.swift; sourceTree = "<group>"; };
-		8916D1F1215D82AF007816C6 /* PointAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointAction.swift; sourceTree = "<group>"; };
+		8916D1F1215D82AF007816C6 /* LineDrawingAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDrawingAction.swift; sourceTree = "<group>"; };
+		8916D1F3215D8BE1007816C6 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,8 @@
 			children = (
 				8916D1D5215C6207007816C6 /* MainViewController.swift */,
 				8916D1E6215C63C2007816C6 /* GraphView.swift */,
-				8916D1F1215D82AF007816C6 /* PointAction.swift */,
+				8916D1F1215D82AF007816C6 /* LineDrawingAction.swift */,
+				8916D1F3215D8BE1007816C6 /* Line.swift */,
 				8916D1F0215D7D33007816C6 /* Convex Hull */,
 				8916D1E8215C641C007816C6 /* UIView+Extension.swift */,
 				8916D1E5215C6231007816C6 /* SupportingFiles */,
@@ -173,8 +176,9 @@
 				8916D1D4215C6207007816C6 /* AppDelegate.swift in Sources */,
 				8916D1EB215C65D1007816C6 /* ConvexHullScanAlgorithm.swift in Sources */,
 				8916D1E9215C641C007816C6 /* UIView+Extension.swift in Sources */,
-				8916D1F2215D82AF007816C6 /* PointAction.swift in Sources */,
+				8916D1F2215D82AF007816C6 /* LineDrawingAction.swift in Sources */,
 				8916D1EF215D4E51007816C6 /* ConexHull.swift in Sources */,
+				8916D1F4215D8BE1007816C6 /* Line.swift in Sources */,
 				8916D1ED215C6625007816C6 /* ConvexHullScanController.swift in Sources */,
 				8916D1E7215C63C2007816C6 /* GraphView.swift in Sources */,
 			);
