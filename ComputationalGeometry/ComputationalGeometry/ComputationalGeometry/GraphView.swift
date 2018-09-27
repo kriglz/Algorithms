@@ -22,4 +22,16 @@ class GraphView: UIView {
         layer.sublayers?.removeAll()
     }
 
+    // MARK: - Draw methods
+    
+    func draw(points: [CGPoint]) {
+        let pointSize = CGSize(width: 2, height: 2)
+        points.forEach { pointPosition in
+            let pointRectangle = CGRect(origin: pointPosition, size: pointSize)
+            let circle = CGPath(rect: pointRectangle, transform: nil)
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.path = circle
+            layer.addSublayer(shapeLayer)
+        }
+    }
 }

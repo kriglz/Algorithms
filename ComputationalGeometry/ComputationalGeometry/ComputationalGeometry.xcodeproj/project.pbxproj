@@ -14,6 +14,8 @@
 		8916D1DE215C620C007816C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8916D1DC215C620C007816C6 /* LaunchScreen.storyboard */; };
 		8916D1E7215C63C2007816C6 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1E6215C63C2007816C6 /* GraphView.swift */; };
 		8916D1E9215C641C007816C6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1E8215C641C007816C6 /* UIView+Extension.swift */; };
+		8916D1EB215C65D1007816C6 /* ConvexHullScanAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1EA215C65D1007816C6 /* ConvexHullScanAlgorithm.swift */; };
+		8916D1ED215C6625007816C6 /* ConvexHullScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1EC215C6625007816C6 /* ConvexHullScanController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		8916D1DF215C620C007816C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8916D1E6215C63C2007816C6 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		8916D1E8215C641C007816C6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		8916D1EA215C65D1007816C6 /* ConvexHullScanAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvexHullScanAlgorithm.swift; sourceTree = "<group>"; };
+		8916D1EC215C6625007816C6 /* ConvexHullScanController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvexHullScanController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			children = (
 				8916D1D5215C6207007816C6 /* MainViewController.swift */,
 				8916D1E6215C63C2007816C6 /* GraphView.swift */,
+				8916D1EC215C6625007816C6 /* ConvexHullScanController.swift */,
+				8916D1EA215C65D1007816C6 /* ConvexHullScanAlgorithm.swift */,
 				8916D1E8215C641C007816C6 /* UIView+Extension.swift */,
 				8916D1E5215C6231007816C6 /* SupportingFiles */,
 				8916D1DF215C620C007816C6 /* Info.plist */,
@@ -151,7 +157,9 @@
 			files = (
 				8916D1D6215C6207007816C6 /* MainViewController.swift in Sources */,
 				8916D1D4215C6207007816C6 /* AppDelegate.swift in Sources */,
+				8916D1EB215C65D1007816C6 /* ConvexHullScanAlgorithm.swift in Sources */,
 				8916D1E9215C641C007816C6 /* UIView+Extension.swift in Sources */,
+				8916D1ED215C6625007816C6 /* ConvexHullScanController.swift in Sources */,
 				8916D1E7215C63C2007816C6 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
