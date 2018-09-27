@@ -12,6 +12,8 @@ class ConvexHullScanController {
     
     private(set) var points = [CGPoint]()
     
+    private let algorithm = ConvexHullScanAlgorithm()
+    
     init(pointCount: Int, in rect: CGRect) {
         for _ in 0...pointCount {
             let newPoint = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
@@ -19,4 +21,7 @@ class ConvexHullScanController {
         }
     }
     
+    @discardableResult func compute() -> [CGPoint] {
+        return algorithm.compute(points: points)
+    }
 }

@@ -45,8 +45,9 @@ class MainViewController: UIViewController {
                                         y: graphView.frame.size.height / 4,
                                         width: graphView.frame.size.width / 2,
                                         height: graphView.frame.size.height / 2)
-        let controller = ConvexHullScanController(pointCount: 50, in: convexHullRectange)
+        let controller = ConvexHullScanController(pointCount: 3, in: convexHullRectange)
         graphView.draw(points: controller.points)
+        controller.compute()
     }
 }
 
