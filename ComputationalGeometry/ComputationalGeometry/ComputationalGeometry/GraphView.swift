@@ -27,7 +27,7 @@ class GraphView: UIView {
     func draw(points: [CGPoint], color: CGColor = UIColor.black.cgColor) {
         let pointSize = CGSize(width: 5, height: 5)
         points.forEach { pointPosition in
-            let pointRectangle = CGRect(origin: pointPosition, size: pointSize)
+            let pointRectangle = CGRect(origin: CGPoint(x: pointPosition.x - pointSize.width / 2, y: pointPosition.y - pointSize.height / 2), size: pointSize)
             let circle = CGPath(ellipseIn: pointRectangle, transform: nil)
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circle
@@ -65,37 +65,43 @@ class GraphView: UIView {
             case .addition:
                 addLine(with: action, beginTime: initialTime, duration: duration)
             case .removal:
-                continue
+                removeLine(with: action, beginTime: initialTime, duration: duration)
             }
         }
     }
     
     private func addLine(with action: LineDrawingAction, beginTime: TimeInterval, duration: Double) {
-        let lineLayer = UniqueIdLayer(from: action.line.cgPath, with: action.line.uuid)
+        let lineLayer = LineLayer(from: action.line.cgPath, with: action.line.uuid)
         layer.addSublayer(lineLayer)
         
         let drawAnimation = CABasicAnimation(keyPath: "opacity")
         drawAnimation.fillMode = CAMediaTimingFillMode.forwards
-        drawAnimation.fromValue = 0
         drawAnimation.toValue = 1
         drawAnimation.beginTime = beginTime + duration * Double(action.index)
         drawAnimation.duration = duration
         drawAnimation.isRemovedOnCompletion = false
-        lineLayer.add(drawAnimation, forKey: "lineOpacity")
+        lineLayer.add(drawAnimation, forKey: "showLine")
     }
-}
-
-class UniqueIdLayer: CAShapeLayer {
     
-    private(set) var uuid: UUID!
-    
-    convenience init(from path: CGPath, with uuid: UUID) {
-        self.init()
+    private func removeLine(with action: LineDrawingAction, beginTime: TimeInterval, duration: Double) {
+        let lineToRemove = layer.sublayers?.first { layer in
+            if let lineLayer = layer as? LineLayer, lineLayer.uuid == action.line.uuid {
+                return true
+            }
+            return false
+        }
         
-        self.uuid = uuid
+        guard lineToRemove != nil else {
+            NSLog("Asking to remove non existing line")
+            return
+        }
         
-        self.path = path
-        self.strokeColor = UIColor.red.cgColor
-        self.opacity = 0
+        let drawAnimation = CABasicAnimation(keyPath: "opacity")
+        drawAnimation.fillMode = CAMediaTimingFillMode.forwards
+        drawAnimation.toValue = 0
+        drawAnimation.beginTime = beginTime + duration * Double(action.index)
+        drawAnimation.duration = duration / 2
+        drawAnimation.isRemovedOnCompletion = false
+        lineToRemove!.add(drawAnimation, forKey: "hideLine")
     }
 }
