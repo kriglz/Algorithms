@@ -42,14 +42,27 @@ class MainViewController: UIViewController {
     
     @objc private func startConvexHullScanAction(_ sender: UIButton) {
         graphView.reset()
+//
+//        let convexHullRectange = CGRect(x: graphView.frame.size.width / 4,
+//                                        y: graphView.frame.size.height / 4,
+//                                        width: graphView.frame.size.width / 2,
+//                                        height: graphView.frame.size.height / 2)
         
-        let convexHullRectange = CGRect(x: graphView.frame.size.width / 4,
+        
+        let convexHullRectange = CGRect(x: 0,
                                         y: graphView.frame.size.height / 4,
-                                        width: graphView.frame.size.width / 2,
+                                        width: graphView.frame.size.width,
                                         height: graphView.frame.size.height / 2)
         
-        let controller = ConvexHullScanController(pointCount: 30, in: convexHullRectange)
-        graphView.draw(points: controller.points)
+        let testView = UIView(frame: convexHullRectange)
+        testView.backgroundColor = .red
+        view.addSubview(testView)
+        view.sendSubviewToBack(testView)
+        
+        graphView.backgroundColor = .black
+        
+        let controller = ConvexHullScanController(pointCount: 10, in: convexHullRectange)
+//        graphView.draw(points: controller.points)
         
         controller.compute()
         let actions = controller.convexHullScanActions

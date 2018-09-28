@@ -13,7 +13,7 @@ struct Line {
     let startPoint: CGPoint
     let endPoint: CGPoint
     
-    let uuid: UUID
+    let uuid: String
     
     var cgPath: CGPath {
         let path = UIBezierPath()
@@ -25,6 +25,6 @@ struct Line {
     init(startPoint: CGPoint, endPoint: CGPoint) {
         self.startPoint = startPoint
         self.endPoint = endPoint
-        self.uuid = UUID()
+        self.uuid = UUID().uuidString
     }
 }
