@@ -50,7 +50,7 @@ class ConvexHullScanAlgorithm {
         }
         
         // Compute upper hull by starting with leftmost two points.
-        let upperHull = ConexHull(sortedPoints[0], sortedPoints[1])
+        let upperHull = ConvexHull(sortedPoints[0], sortedPoints[1])
         requestLineAddition(fromPoint: sortedPoints[0], toPoint: sortedPoints[1])
         for index in 2..<count {
             upperHull.add(point: sortedPoints[index])
@@ -64,7 +64,7 @@ class ConvexHullScanAlgorithm {
         }
         
         // Compute lower hull by starting with rightmost two points
-        let lowerHull = ConexHull(sortedPoints[count - 1], sortedPoints[count - 2])
+        let lowerHull = ConvexHull(sortedPoints[count - 1], sortedPoints[count - 2])
         requestLineAddition(fromPoint: sortedPoints[count - 1], toPoint: sortedPoints[count - 2])
         for index in (0...(count - 3)).reversed() {
             lowerHull.add(point: sortedPoints[index])
