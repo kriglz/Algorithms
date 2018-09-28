@@ -86,6 +86,7 @@ class EventQueue {
         }
     }
     
+    /// Returs first in the list specified point event or nil if it is not in the list.
     func event(for eventPoint: EventPoint) -> EventPoint? {
         return array.first(where: { $0 == eventPoint })
     }

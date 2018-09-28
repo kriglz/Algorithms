@@ -29,5 +29,4 @@ class EventPoint: Equatable {
     func addLowerLineSegment(_ segment: LineSegment) {
         self.lowerLineSegment = segment
     }
-    
 }

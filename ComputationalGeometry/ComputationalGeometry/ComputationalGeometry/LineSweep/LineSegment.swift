@@ -10,11 +10,11 @@ import UIKit
 
 class LineSegment {
  
-    var start: CGPoint {
-        return .zero
-    }
+    private(set) var start: CGPoint
+    private(set) var end: CGPoint
     
-    var end: CGPoint {
-        return .zero
+    init(startPoint: CGPoint, endPoint: CGPoint) {
+        self.start = startPoint
+        self.end = endPoint
     }
 }

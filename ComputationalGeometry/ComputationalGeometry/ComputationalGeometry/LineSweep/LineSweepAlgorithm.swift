@@ -56,5 +56,4 @@ class LineSweepAlgorithm {
     private func handleEventPoint(_ point: EventPoint) {
         
     }
-    
 }
