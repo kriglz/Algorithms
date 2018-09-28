@@ -22,6 +22,10 @@
 		8916D1F6215DA1EA007816C6 /* LineLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D1F5215DA1EA007816C6 /* LineLayer.swift */; };
 		8916D21F215ED821007816C6 /* LineSweepController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D21E215ED821007816C6 /* LineSweepController.swift */; };
 		8916D221215ED82E007816C6 /* LineSweepAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D220215ED82E007816C6 /* LineSweepAlgorithm.swift */; };
+		8916D224215EDCA0007816C6 /* LineState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D223215EDCA0007816C6 /* LineState.swift */; };
+		8916D226215EDCE0007816C6 /* EventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D225215EDCE0007816C6 /* EventQueue.swift */; };
+		8916D228215EDD33007816C6 /* EventPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D227215EDD33007816C6 /* EventPoint.swift */; };
+		8916D22A215EDE95007816C6 /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D229215EDE95007816C6 /* LineSegment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		8916D1F5215DA1EA007816C6 /* LineLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineLayer.swift; sourceTree = "<group>"; };
 		8916D21E215ED821007816C6 /* LineSweepController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSweepController.swift; sourceTree = "<group>"; };
 		8916D220215ED82E007816C6 /* LineSweepAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSweepAlgorithm.swift; sourceTree = "<group>"; };
+		8916D223215EDCA0007816C6 /* LineState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineState.swift; sourceTree = "<group>"; };
+		8916D225215EDCE0007816C6 /* EventQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventQueue.swift; sourceTree = "<group>"; };
+		8916D227215EDD33007816C6 /* EventPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPoint.swift; sourceTree = "<group>"; };
+		8916D229215EDE95007816C6 /* LineSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSegment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +122,10 @@
 			children = (
 				8916D21E215ED821007816C6 /* LineSweepController.swift */,
 				8916D220215ED82E007816C6 /* LineSweepAlgorithm.swift */,
+				8916D223215EDCA0007816C6 /* LineState.swift */,
+				8916D229215EDE95007816C6 /* LineSegment.swift */,
+				8916D225215EDCE0007816C6 /* EventQueue.swift */,
+				8916D227215EDD33007816C6 /* EventPoint.swift */,
 			);
 			path = LineSweep;
 			sourceTree = "<group>";
@@ -190,13 +202,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8916D1D6215C6207007816C6 /* MainViewController.swift in Sources */,
+				8916D226215EDCE0007816C6 /* EventQueue.swift in Sources */,
+				8916D224215EDCA0007816C6 /* LineState.swift in Sources */,
 				8916D1D4215C6207007816C6 /* AppDelegate.swift in Sources */,
 				8916D221215ED82E007816C6 /* LineSweepAlgorithm.swift in Sources */,
 				8916D1EB215C65D1007816C6 /* ConvexHullScanAlgorithm.swift in Sources */,
+				8916D228215EDD33007816C6 /* EventPoint.swift in Sources */,
 				8916D21F215ED821007816C6 /* LineSweepController.swift in Sources */,
 				8916D1E9215C641C007816C6 /* UIView+Extension.swift in Sources */,
 				8916D1F2215D82AF007816C6 /* LineDrawingAction.swift in Sources */,
 				8916D1F6215DA1EA007816C6 /* LineLayer.swift in Sources */,
+				8916D22A215EDE95007816C6 /* LineSegment.swift in Sources */,
 				8916D1EF215D4E51007816C6 /* ConvexHull.swift in Sources */,
 				8916D1F4215D8BE1007816C6 /* Line.swift in Sources */,
 				8916D1ED215C6625007816C6 /* ConvexHullScanController.swift in Sources */,
