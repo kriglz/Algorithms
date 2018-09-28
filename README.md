@@ -50,4 +50,5 @@
 
 # Computational Geometry Algorithms:
 
-- Convex Hull Scan
+- Convex Hull Scan  
+![](./PreviewGIFs/ConvexHulll.gif)
