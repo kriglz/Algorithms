@@ -10,4 +10,15 @@ import UIKit
 
 class LineState {
     
+    func leftNeighbourSegment(for eventPoint: EventPoint) -> LineSegment? {
+        return LineSegment(startPoint: .zero, endPoint: .zero)
+    }
+    
+    func rightNeighbourSegment(for eventPoint: EventPoint) -> LineSegment? {
+        return LineSegment(startPoint: .zero, endPoint: .zero)
+    }
+    
+    func determineIntersecting(eventPoint: EventPoint, leftSegment: LineSegment?, rightSegment: LineSegment?) {
+        
+    }
 }

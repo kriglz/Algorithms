@@ -14,6 +14,18 @@ class EventPoint: Equatable {
     private var upperLineSegment: LineSegment?
     private var lowerLineSegment: LineSegment?
 
+    var intersectingSegments: [LineSegment] {
+        return []
+    }
+    
+    var upperEndPointSegments: [LineSegment] {
+        return []
+    }
+    
+    var lowerEndPointSegments: [LineSegment] {
+        return []
+    }
+    
     init(_ point: CGPoint) {
         self.point = point
     }
