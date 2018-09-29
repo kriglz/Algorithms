@@ -17,4 +17,8 @@ class LineSegment {
         self.start = startPoint
         self.end = endPoint
     }
+    
+    func intersectionPoint(with lineSegment: LineSegment) -> CGPoint? {
+        return .zero
+    }
 }
