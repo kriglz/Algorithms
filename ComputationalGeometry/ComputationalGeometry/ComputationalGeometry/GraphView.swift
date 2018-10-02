@@ -36,7 +36,7 @@ class GraphView: UIView {
         }
     }
     
-    func draw(line points: [CGPoint]) {
+    func draw(lineFrom points: [CGPoint]) {
         guard points.count > 2 else {
             NSLog("Line has less than two points")
             return
@@ -55,6 +55,8 @@ class GraphView: UIView {
         shapeLayer.strokeColor = UIColor.lightGray.cgColor
         layer.addSublayer(shapeLayer)
     }
+    
+    // MARK: - Drawing animation actions
     
     func perform(lineDrawingActions: [LineDrawingAction]) {
         let duration = 0.3
