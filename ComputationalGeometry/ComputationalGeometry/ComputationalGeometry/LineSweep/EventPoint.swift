@@ -15,11 +15,7 @@ class EventPoint {
     private(set) var point: CGPoint
     private(set) var upperLineSegments = [LineSegment]()
     private(set) var lowerLineSegments = [LineSegment]()
-
-    var intersectingSegments: [LineSegment] {
-        // MARK: - TODO
-        return []
-    }
+    private(set) var intersectingLineSegments = [LineSegment]()
 
     // MARK: - Initialization
     
@@ -30,11 +26,15 @@ class EventPoint {
     // MARK: - Segment managements
     
     func addUpperLineSegment(_ segment: LineSegment) {
-        self.upperLineSegments.append(segment)
+        upperLineSegments.append(segment)
     }
     
     func addLowerLineSegment(_ segment: LineSegment) {
-        self.lowerLineSegments.append(segment)
+        lowerLineSegments.append(segment)
+    }
+    
+    func addIntersectingLineSegment(_ segment: LineSegment) {
+        intersectingLineSegments.append(segment)
     }
 }
 
