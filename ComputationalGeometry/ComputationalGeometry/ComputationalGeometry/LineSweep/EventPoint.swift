@@ -8,37 +8,39 @@
 
 import UIKit
 
-class EventPoint: Equatable {
+class EventPoint {
+    
+    // MARK: - Properties
     
     private(set) var point: CGPoint
-    private var upperLineSegment: LineSegment?
-    private var lowerLineSegment: LineSegment?
+    private(set) var upperLineSegments = [LineSegment]()
+    private(set) var lowerLineSegments = [LineSegment]()
 
     var intersectingSegments: [LineSegment] {
+        // MARK: - TODO
         return []
     }
-    
-    var upperEndPointSegments: [LineSegment] {
-        return []
-    }
-    
-    var lowerEndPointSegments: [LineSegment] {
-        return []
-    }
+
+    // MARK: - Initialization
     
     init(_ point: CGPoint) {
         self.point = point
     }
     
-    static func == (lhs: EventPoint, rhs: EventPoint) -> Bool {
-        return false
-    }
+    // MARK: - Segment managements
     
     func addUpperLineSegment(_ segment: LineSegment) {
-        self.upperLineSegment = segment
+        self.upperLineSegments.append(segment)
     }
     
     func addLowerLineSegment(_ segment: LineSegment) {
-        self.lowerLineSegment = segment
+        self.lowerLineSegments.append(segment)
+    }
+}
+
+extension EventPoint: Equatable {
+    
+    static func == (lhs: EventPoint, rhs: EventPoint) -> Bool {
+        return lhs.point == rhs.point
     }
 }
