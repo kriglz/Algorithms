@@ -15,7 +15,8 @@ class MainViewController: UIViewController {
     private let graphView = GraphView()
     
     private let convexHullScanButton = UIButton(type: .system)
-    
+    private let lineSweepButton = UIButton(type: .system)
+
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -32,6 +33,9 @@ class MainViewController: UIViewController {
         
         convexHullScanButton.setTitle("Convex Hull Scan", for: .normal)
         convexHullScanButton.addTarget(self, action: #selector(startConvexHullScanAction), for: .touchDown)
+        
+        lineSweepButton.setTitle("Line Sweep", for: .normal)
+        lineSweepButton.addTarget(self, action: #selector(startLineSweepAction), for: .touchDown)
         
         view.addSubview(convexHullScanButton)
         convexHullScanButton.translatesAutoresizingMaskIntoConstraints = false
@@ -57,5 +61,10 @@ class MainViewController: UIViewController {
         let actions = controller.convexHullScanActions
         graphView.perform(lineDrawingActions: actions)
     }
-}
+    
+    @objc private func startLineSweepAction(_ sender: UIButton) {
+        graphView.reset()
 
+        let controller = LineSweepController(lineCount: 5, in: view.frame)
+    }
+}
