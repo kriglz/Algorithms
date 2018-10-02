@@ -124,8 +124,8 @@
 				8916D220215ED82E007816C6 /* LineSweepAlgorithm.swift */,
 				8916D223215EDCA0007816C6 /* LineState.swift */,
 				8916D229215EDE95007816C6 /* LineSegment.swift */,
-				8916D225215EDCE0007816C6 /* EventQueue.swift */,
 				8916D227215EDD33007816C6 /* EventPoint.swift */,
+				8916D225215EDCE0007816C6 /* EventQueue.swift */,
 			);
 			path = LineSweep;
 			sourceTree = "<group>";

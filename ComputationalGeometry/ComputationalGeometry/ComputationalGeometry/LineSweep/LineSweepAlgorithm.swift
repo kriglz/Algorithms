@@ -21,7 +21,6 @@ class LineSweepAlgorithm {
         // Construct queue from segments. Ensure that only unique points appear by combining all information as it is discovered.
         for segment in lineSegments {
             var eventPoint = EventPoint(segment.start)
-            
             let oldStartEventPoint = queue.event(for: eventPoint)
             if oldStartEventPoint == nil {
                 queue.push(eventPoint)
@@ -64,8 +63,8 @@ class LineSweepAlgorithm {
         lineState.determineIntersecting(eventPoint: eventPoint, leftSegment: leftSegment, rightSegment: rightSegment)
         
         let interseptions = eventPoint.intersectingSegments
-        let upperSegments = eventPoint.upperEndPointSegments
-        let lowerSegments = eventPoint.lowerEndPointSegments
+        let upperSegments = eventPoint.upperLineSegments
+        let lowerSegments = eventPoint.lowerLineSegments
         
         if interseptions.count + upperSegments.count + lowerSegments.count > 1 {
             record(eventPoint: eventPoint, interseptions: interseptions, upperEndPointSegments: upperSegments, lowerEndPointSegments: lowerSegments)

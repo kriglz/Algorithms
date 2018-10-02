@@ -73,5 +73,7 @@ class MainViewController: UIViewController {
         
         let controller = LineSweepController(lineCount: 15, in: view.frame)
         graphView.draw(lines: controller.lineSegments)
+        
+        controller.compute()
     }
 }
