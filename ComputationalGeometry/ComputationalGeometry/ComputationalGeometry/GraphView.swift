@@ -56,9 +56,11 @@ class GraphView: UIView {
         layer.addSublayer(shapeLayer)
     }
     
-    func draw(lines: [Line]) {
+    func draw(lines: [LineSegment]) {
         for line in lines {
-            let lineLayer = LineLayer(from: line.cgPath, color: UIColor.white.cgColor, opacity: 0.6, with: line.uuid)
+            let lineLayer = CAShapeLayer()
+            lineLayer.path = line.cgPath
+            lineLayer.strokeColor = UIColor.white.cgColor
             lineLayer.lineWidth = 1
             layer.addSublayer(lineLayer)
         }

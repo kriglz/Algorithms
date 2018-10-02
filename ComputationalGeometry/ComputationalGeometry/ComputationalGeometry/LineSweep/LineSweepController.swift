@@ -10,7 +10,8 @@ import UIKit
 
 class LineSweepController {
     
-    private(set) var lines = [Line]()
+    private(set) var lineSegments = [LineSegment]()
+    private let algorithm = LineSweepAlgorithm()
     
     // MARK: - Initialization
     
@@ -18,8 +19,14 @@ class LineSweepController {
         for _ in 0...lineCount {
             let start = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
             let end = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
-            let newLine = Line(startPoint: start, endPoint: end)
-            lines.append(newLine)
+            let newLine = LineSegment(startPoint: start, endPoint: end)
+            lineSegments.append(newLine)
         }
+    }
+    
+    // MARK: - Compute methods
+    
+    @discardableResult func compute() -> [CGPoint] {
+        return algorithm.intersections(for: lineSegments)
     }
 }

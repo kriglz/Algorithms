@@ -72,6 +72,6 @@ class MainViewController: UIViewController {
         graphView.backgroundColor = .black
         
         let controller = LineSweepController(lineCount: 15, in: view.frame)
-        graphView.draw(lines: controller.lines)
+        graphView.draw(lines: controller.lineSegments)
     }
 }

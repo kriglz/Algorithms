@@ -13,6 +13,13 @@ class LineSegment {
     private(set) var start: CGPoint
     private(set) var end: CGPoint
     
+    var cgPath: CGPath {
+        let path = UIBezierPath()
+        path.move(to: start)
+        path.addLine(to: end)
+        return path.cgPath
+    }
+    
     init(startPoint: CGPoint, endPoint: CGPoint) {
         self.start = startPoint
         self.end = endPoint
