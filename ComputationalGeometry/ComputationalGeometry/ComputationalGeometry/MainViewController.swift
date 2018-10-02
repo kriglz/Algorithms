@@ -42,6 +42,10 @@ class MainViewController: UIViewController {
         convexHullScanButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
         convexHullScanButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
         
+        view.addSubview(lineSweepButton)
+        lineSweepButton.translatesAutoresizingMaskIntoConstraints = false
+        lineSweepButton.bottomAnchor.constraint(equalTo: convexHullScanButton.topAnchor, constant: -20).isActive = true
+        lineSweepButton.trailingAnchor.constraint(equalTo: convexHullScanButton.trailingAnchor).isActive = true
     }
     
     // MARK: - Actionw
@@ -65,6 +69,9 @@ class MainViewController: UIViewController {
     @objc private func startLineSweepAction(_ sender: UIButton) {
         graphView.reset()
 
-        let controller = LineSweepController(lineCount: 5, in: view.frame)
+        graphView.backgroundColor = .black
+        
+        let controller = LineSweepController(lineCount: 15, in: view.frame)
+        graphView.draw(lines: controller.lines)
     }
 }

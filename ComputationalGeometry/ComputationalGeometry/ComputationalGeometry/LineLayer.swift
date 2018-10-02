@@ -12,7 +12,7 @@ class LineLayer: CAShapeLayer {
     
     private(set) var uuid: String!
     
-    convenience init(from path: CGPath, color: CGColor = UIColor.white.cgColor, with uuid: String) {
+    convenience init(from path: CGPath, color: CGColor = UIColor.white.cgColor, opacity: Float = 0, with uuid: String) {
         self.init()
         
         self.uuid = uuid
@@ -20,6 +20,6 @@ class LineLayer: CAShapeLayer {
         self.path = path
         self.strokeColor = color
         self.lineWidth = 3
-        self.opacity = 0
+        self.opacity = opacity
     }
 }

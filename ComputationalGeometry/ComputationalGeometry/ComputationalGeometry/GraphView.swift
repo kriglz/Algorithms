@@ -56,6 +56,14 @@ class GraphView: UIView {
         layer.addSublayer(shapeLayer)
     }
     
+    func draw(lines: [Line]) {
+        for line in lines {
+            let lineLayer = LineLayer(from: line.cgPath, color: UIColor.white.cgColor, opacity: 0.6, with: line.uuid)
+            lineLayer.lineWidth = 1
+            layer.addSublayer(lineLayer)
+        }
+    }
+    
     // MARK: - Drawing animation actions
     
     func perform(lineDrawingActions: [LineDrawingAction]) {
