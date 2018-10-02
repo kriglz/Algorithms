@@ -62,7 +62,7 @@ class LineSweepAlgorithm {
         // Determine intersections from neighbouring line segments and get upper and lower segments for this event point. An intersection exist if > 1 segment is assosiated with event point.
         lineState.determineIntersecting(eventPoint: eventPoint, leftSegment: leftSegment, rightSegment: rightSegment)
         
-        let interseptions = eventPoint.intersectingSegments
+        let interseptions = eventPoint.intersectingLineSegments
         let upperSegments = eventPoint.upperLineSegments
         let lowerSegments = eventPoint.lowerLineSegments
         
@@ -70,7 +70,7 @@ class LineSweepAlgorithm {
             record(eventPoint: eventPoint, interseptions: interseptions, upperEndPointSegments: upperSegments, lowerEndPointSegments: lowerSegments)
         }
         
-        // Delete everything after left until left's suvessor is right. Then update the sweep point, so insertion will be ordered. Only upper and intersection segments are interesting because they are still active.
+        // Delete everything after left until left's sucessor is right. Then update the sweep point, so insertion will be ordered. Only upper and intersection segments are interesting because they are still active.
         lineState.deleteSegmentRange(left: leftSegment, right: rightSegment)
         lineState.setSweetPoint(eventPoint.point)
         
@@ -92,12 +92,12 @@ class LineSweepAlgorithm {
             return
         }
         
-        if let left = leftSegment {
-            updateQueue(leftSegment: left, rightSegment: lineState.successor(for: left))
+        if let left = leftSegment, let right = lineState.successor(for: left) {
+            updateQueue(leftSegment: left, rightSegment: right)
         }
         
-        if let right = rightSegment {
-            updateQueue(leftSegment: lineState.predecessor(for: right), rightSegment: right)
+        if let right = rightSegment, let left = lineState.predecessor(for: right) {
+            updateQueue(leftSegment: left, rightSegment: right)
         }
     }
     

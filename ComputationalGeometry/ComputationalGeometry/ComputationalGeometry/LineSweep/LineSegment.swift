@@ -29,3 +29,10 @@ class LineSegment {
         return .zero
     }
 }
+
+extension LineSegment: Equatable {
+    
+    static func == (lhs: LineSegment, rhs: LineSegment) -> Bool {
+        return lhs.start == rhs.start && lhs.end == rhs.end
+    }
+}

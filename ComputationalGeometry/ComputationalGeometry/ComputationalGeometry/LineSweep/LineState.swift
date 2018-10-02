@@ -10,22 +10,35 @@ import UIKit
 
 class LineState {
     
+    // MARK: - Properties
+
     private(set) var sweepPoint: CGPoint!
+    private var states = [LineSegment]()
     
-    func successor(for lineSegment: LineSegment) -> LineSegment {
-        return LineSegment(startPoint: .zero, endPoint: .zero)
-    }
-    
-    func predecessor(for lineSegment: LineSegment) -> LineSegment {
-        return LineSegment(startPoint: .zero, endPoint: .zero)
-    }
+    // MARK: - Sweep point update
     
     func setSweetPoint(_ point: CGPoint) {
         self.sweepPoint = point
     }
     
+    // MARK: - Line segment update
+    
     func insertSegment(_ segments: [LineSegment]) {
-        
+        states.append(contentsOf: segments)
+    }
+    
+    func successor(for lineSegment: LineSegment) -> LineSegment? {
+        if let lineSegmentIndex = states.firstIndex(where: { $0 == lineSegment }), (0..<states.count).contains(lineSegmentIndex + 1) {
+            return states[lineSegmentIndex + 1]
+        }
+        return nil
+    }
+    
+    func predecessor(for lineSegment: LineSegment) -> LineSegment? {
+        if let lineSegmentIndex = states.firstIndex(where: { $0 == lineSegment }), (0..<states.count).contains(lineSegmentIndex - 1) {
+            return states[lineSegmentIndex - 1]
+        }
+        return nil
     }
     
     func leftNeighbourSegment(for eventPoint: EventPoint) -> LineSegment? {
@@ -36,6 +49,8 @@ class LineState {
         return LineSegment(startPoint: .zero, endPoint: .zero)
     }
     
+    // MARK: - Intersection point evaluation
+
     func determineIntersecting(eventPoint: EventPoint, leftSegment: LineSegment?, rightSegment: LineSegment?) {
         
     }
