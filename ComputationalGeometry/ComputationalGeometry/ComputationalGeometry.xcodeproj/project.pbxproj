@@ -26,6 +26,8 @@
 		8916D226215EDCE0007816C6 /* EventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D225215EDCE0007816C6 /* EventQueue.swift */; };
 		8916D228215EDD33007816C6 /* EventPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D227215EDD33007816C6 /* EventPoint.swift */; };
 		8916D22A215EDE95007816C6 /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D229215EDE95007816C6 /* LineSegment.swift */; };
+		89E39B9A2165245E00960ADE /* AugmentedBalancedTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E39B992165245E00960ADE /* AugmentedBalancedTree.swift */; };
+		89E39B9E21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E39B9D21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		8916D225215EDCE0007816C6 /* EventQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventQueue.swift; sourceTree = "<group>"; };
 		8916D227215EDD33007816C6 /* EventPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPoint.swift; sourceTree = "<group>"; };
 		8916D229215EDE95007816C6 /* LineSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSegment.swift; sourceTree = "<group>"; };
+		89E39B992165245E00960ADE /* AugmentedBalancedTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedBalancedTree.swift; sourceTree = "<group>"; };
+		89E39B9D21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedBalancedBinaryNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,8 @@
 				8916D229215EDE95007816C6 /* LineSegment.swift */,
 				8916D227215EDD33007816C6 /* EventPoint.swift */,
 				8916D225215EDCE0007816C6 /* EventQueue.swift */,
+				89E39B992165245E00960ADE /* AugmentedBalancedTree.swift */,
+				89E39B9D21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift */,
 			);
 			path = LineSweep;
 			sourceTree = "<group>";
@@ -207,12 +213,14 @@
 				8916D1D4215C6207007816C6 /* AppDelegate.swift in Sources */,
 				8916D221215ED82E007816C6 /* LineSweepAlgorithm.swift in Sources */,
 				8916D1EB215C65D1007816C6 /* ConvexHullScanAlgorithm.swift in Sources */,
+				89E39B9A2165245E00960ADE /* AugmentedBalancedTree.swift in Sources */,
 				8916D228215EDD33007816C6 /* EventPoint.swift in Sources */,
 				8916D21F215ED821007816C6 /* LineSweepController.swift in Sources */,
 				8916D1E9215C641C007816C6 /* UIView+Extension.swift in Sources */,
 				8916D1F2215D82AF007816C6 /* LineDrawingAction.swift in Sources */,
 				8916D1F6215DA1EA007816C6 /* LineLayer.swift in Sources */,
 				8916D22A215EDE95007816C6 /* LineSegment.swift in Sources */,
+				89E39B9E21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift in Sources */,
 				8916D1EF215D4E51007816C6 /* ConvexHull.swift in Sources */,
 				8916D1F4215D8BE1007816C6 /* Line.swift in Sources */,
 				8916D1ED215C6625007816C6 /* ConvexHullScanController.swift in Sources */,
