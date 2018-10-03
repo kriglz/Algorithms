@@ -59,11 +59,11 @@ class LineSweepAlgorithm {
     /// Process events by updating line state and reporting intersections.
     private func handleEventPoint(_ eventPoint: EventPoint) {
         // Find segments, if they exist, to left (and right) of event point in line state. Intersections can only happen between neighboring segments. Start with nearest ones because as line sweeps down we will find any other intersections that (for now) we put off.
-        let leftSegment = lineState.leftNeighbourSegment(for: eventPoint)
-        let rightSegment = lineState.rightNeighbourSegment(for: eventPoint)
+        let left = lineState.leftNeighbour(for: eventPoint)
+        let right = lineState.rightNeighbour(for: eventPoint)
 
         // Determine intersections from neighbouring line segments and get upper and lower segments for this event point. An intersection exist if > 1 segment is assosiated with event point.
-        lineState.determineIntersecting(eventPoint: eventPoint, leftSegment: leftSegment, rightSegment: rightSegment)
+        lineState.determineIntersecting(eventPoint: eventPoint, left: left, right: right)
         
         let interseptions = eventPoint.intersectingLineSegments
         let upperSegments = eventPoint.upperLineSegments
@@ -74,7 +74,7 @@ class LineSweepAlgorithm {
         }
         
         // Delete everything after left until left's sucessor is right. Then update the sweep point, so insertion will be ordered. Only upper and intersection segments are interesting because they are still active.
-        lineState.deleteSegmentRange(left: leftSegment, right: rightSegment)
+        lineState.deleteSegmentRange(left: left, right: right)
         lineState.setSweetPoint(eventPoint.point)
         
         var update = false
@@ -90,17 +90,17 @@ class LineSweepAlgorithm {
         }
     
         // If state shows no intersection at this event point, see if left and right segments intersect below sweep line, and update event queue properly. Otherwise, if there was an intersection, the order of segments between left and right have switched so we check two specific ranges, namely, left and its (new) successor, and right and its (new) predecessor.
-        if !update, let left = leftSegment, let right = rightSegment {
-            updateQueue(leftSegment: left, rightSegment: right)
+        if !update, let left = left, let right = right {
+            updateQueue(left: left, right: right)
             return
         }
         
-        if let left = leftSegment, let right = lineState.successor(for: left) {
-            updateQueue(leftSegment: left, rightSegment: right)
+        if let left = left, let right = lineState.successor(for: left) {
+            updateQueue(left: left, right: right)
         }
         
-        if let right = rightSegment, let left = lineState.predecessor(for: right) {
-            updateQueue(leftSegment: left, rightSegment: right)
+        if let right = right, let left = lineState.predecessor(for: right) {
+            updateQueue(left: left, right: right)
         }
     }
     
@@ -109,9 +109,9 @@ class LineSweepAlgorithm {
     }
     
     /// Any intersections below sweep line are inserted as event points.
-    private func updateQueue(leftSegment: LineSegment, rightSegment: LineSegment) {
+    private func updateQueue(left: AugmentedBalancedBinaryNode, right: AugmentedBalancedBinaryNode) {
         // Determine if the two neighboring line segments intersect. Make sure that new intersection point is below the sweep line and not added twice.
-        guard let point = leftSegment.intersectionPoint(with: rightSegment), point.y > lineState.sweepPoint.y else {
+        guard let point = left.key.intersectionPoint(with: right.key), point.y > lineState.sweepPoint.y else {
             NSLog("Segments do not intersect.")
             return
         }

@@ -10,16 +10,16 @@ import UIKit
 
 class AugmentedBalancedBinaryNode {
     
-    private(set) var max: CGPoint
-    private(set) var min: CGPoint
+    private(set) var max: LineSegment
+    private(set) var min: LineSegment
     
     private(set) var parent: AugmentedBalancedBinaryNode
     
     private(set) var right: AugmentedBalancedBinaryNode? = nil
     private(set) var left: AugmentedBalancedBinaryNode? = nil
     
-    private(set) var key: CGPoint
-    private(set) var value: CGPoint
+    private(set) var key: LineSegment
+    private(set) var value: LineSegment?
     
     private var color = Color.black
     
@@ -28,7 +28,7 @@ class AugmentedBalancedBinaryNode {
         case black
     }
     
-    init(key: CGPoint, value: CGPoint, parent: AugmentedBalancedBinaryNode) {
+    init(key: LineSegment, value: LineSegment, parent: AugmentedBalancedBinaryNode) {
         self.key = key
         self.value = value
         self.parent = parent
@@ -53,15 +53,15 @@ class AugmentedBalancedBinaryNode {
         self.parent = node
     }
     
-    func update(value: CGPoint) {
+    func update(value: LineSegment) {
         self.value = value
     }
     
-    func update(max value: CGPoint) {
+    func update(max value: LineSegment) {
         self.max = value
     }
     
-    func update(min value: CGPoint) {
+    func update(min value: LineSegment) {
         self.min = value
     }
 }
