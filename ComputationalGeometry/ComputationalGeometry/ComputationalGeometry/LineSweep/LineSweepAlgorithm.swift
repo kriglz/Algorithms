@@ -16,6 +16,9 @@ class LineSweepAlgorithm {
     /// Stores event queue.
     var queue = EventQueue()
     
+    /// Interception point list.
+    var interceptions = [CGPoint]()
+    
     /// Computes the intersection of all segments from the array of segments.
     func intersections(for lineSegments: [LineSegment]) -> [CGPoint] {
         // Construct queue from segments. Ensure that only unique points appear by combining all information as it is discovered.
@@ -50,7 +53,7 @@ class LineSweepAlgorithm {
         }
         
         // Return the report of all computed intersections.
-        return []
+        return interceptions
     }
     
     /// Process events by updating line state and reporting intersections.
@@ -102,7 +105,7 @@ class LineSweepAlgorithm {
     }
     
     private func record(eventPoint: EventPoint, interseptions: [LineSegment], upperEndPointSegments: [LineSegment], lowerEndPointSegments: [LineSegment]) {
-        // MARK: - TODO
+        self.interceptions.append(eventPoint.point)
     }
     
     /// Any intersections below sweep line are inserted as event points.
