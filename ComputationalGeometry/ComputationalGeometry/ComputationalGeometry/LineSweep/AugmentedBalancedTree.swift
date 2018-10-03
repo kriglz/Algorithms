@@ -45,4 +45,7 @@ class AugmentedBalancedTree {
         
     }
     
+    func delete(node: AugmentedBalancedBinaryNode) {
+        
+    }
 }

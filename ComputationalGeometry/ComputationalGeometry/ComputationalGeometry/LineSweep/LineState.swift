@@ -45,6 +45,7 @@ class LineState {
     
     // MARK: - Neighbor node finding
     
+    /// Return successor leaf in the tree. We can be guaranteed to be called with a LEAF node, since interior nodes are only guiding the process.
     func successor(for node: AugmentedBalancedBinaryNode) -> AugmentedBalancedBinaryNode? {
         var successor = node
         
@@ -72,6 +73,7 @@ class LineState {
         return successor
     }
     
+    /// Return predecessor leaf in the tree. We can be guaranteed to be called with a LEAF node, since interior nodes are only guiding the process.
     func predecessor(for node: AugmentedBalancedBinaryNode) -> AugmentedBalancedBinaryNode? {
         var predecessor = node
         
@@ -99,7 +101,7 @@ class LineState {
         return predecessor
     }
     
-    // Find node within the state that is the closest neighbor (on the left) to the given event point. Make a line from the given point to the x-intersection on the sweep line. If we find multiple with same point, we have to keep on going to the left. Specifically, if compare returns 0, we keep going to the left.
+    /// Find node within the state that is the closest neighbor (on the left) to the given event point. Make a line from the given point to the x-intersection on the sweep line. If we find multiple with same point, we have to keep on going to the left. Specifically, if compare returns 0, we keep going to the left.
     func leftNeighbour(for eventPoint: EventPoint) -> AugmentedBalancedBinaryNode? {
         guard var node = state.root else {
             return nil
@@ -120,7 +122,7 @@ class LineState {
         return nil
     }
     
-    // Find segment within the state that is the closest neighbor (on the right) to the given event point. If we find multiple with same point, we have to keep on going to the right. Specifically, if compare returns 0, we keep going to the right.
+    /// Find segment within the state that is the closest neighbor (on the right) to the given event point. If we find multiple with same point, we have to keep on going to the right. Specifically, if compare returns 0, we keep going to the right.
     func rightNeighbour(for eventPoint: EventPoint) -> AugmentedBalancedBinaryNode? {
         guard var node = state.root else {
             return nil
@@ -143,7 +145,7 @@ class LineState {
     
     // MARK: - Intersection point evaluation
 
-    // Only intersections are allowed with neighboring segments in the line state. Thus we check from the successor of left, right through (but not including) right. These left and right are the first segments that match.
+    /// Only intersections are allowed with neighboring segments in the line state. Thus we check from the successor of left, right through (but not including) right. These left and right are the first segments that match.
     func determineIntersecting(eventPoint: EventPoint, left: AugmentedBalancedBinaryNode?, right: AugmentedBalancedBinaryNode?) {
         guard sweepPoint != nil else {
             return
@@ -171,7 +173,26 @@ class LineState {
         }
     }
     
-    func deleteSegmentRange(left: AugmentedBalancedBinaryNode?, right: AugmentedBalancedBinaryNode?) {
+    func deleteRange(left: AugmentedBalancedBinaryNode?, right: AugmentedBalancedBinaryNode?) {
+        var node: AugmentedBalancedBinaryNode?
         
+        if let leftNode = left {
+            node = successor(for: leftNode)
+        } else {
+            node = minimumInTree
+        }
+        
+        while node != right {
+            if let nodeToDelete = node {
+                state.delete(node: nodeToDelete)
+            }
+            
+            // Note: We always go back to the original spot, since we want to drain everything in between. Note that 'left' never leaves the tree.
+            if let leftNode = left {
+                node = successor(for: leftNode)
+            } else {
+                node = minimumInTree
+            }
+        }
     }
 }

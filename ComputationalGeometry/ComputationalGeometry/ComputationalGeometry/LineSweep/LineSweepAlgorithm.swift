@@ -74,7 +74,7 @@ class LineSweepAlgorithm {
         }
         
         // Delete everything after left until left's sucessor is right. Then update the sweep point, so insertion will be ordered. Only upper and intersection segments are interesting because they are still active.
-        lineState.deleteSegmentRange(left: left, right: right)
+        lineState.deleteRange(left: left, right: right)
         lineState.setSweetPoint(eventPoint.point)
         
         var update = false
