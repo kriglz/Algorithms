@@ -15,6 +15,20 @@ class LineState {
     private(set) var sweepPoint: CGPoint!
     private var state = AugmentedBalancedTree()
     
+    /// Return minimum node in state tree (or null if state tree is empty).
+    var minimumInTree: AugmentedBalancedBinaryNode? {
+        guard var node = state.root else {
+            NSLog("Root is nil.")
+            return nil
+        }
+        
+        while node.left != nil {
+            node = node.left!
+        }
+        
+        return node
+    }
+    
     // MARK: - Sweep point update
     
     func setSweetPoint(_ point: CGPoint) {
@@ -28,6 +42,8 @@ class LineState {
             state.insert(lineSegment: $0)
         }
     }
+    
+    // MARK: - Neighbor node finding
     
     func successor(for node: AugmentedBalancedBinaryNode) -> AugmentedBalancedBinaryNode? {
         var successor = node
@@ -127,8 +143,32 @@ class LineState {
     
     // MARK: - Intersection point evaluation
 
+    // Only intersections are allowed with neighboring segments in the line state. Thus we check from the successor of left, right through (but not including) right. These left and right are the first segments that match.
     func determineIntersecting(eventPoint: EventPoint, left: AugmentedBalancedBinaryNode?, right: AugmentedBalancedBinaryNode?) {
+        guard sweepPoint != nil else {
+            return
+        }
         
+        var leftNode = left
+        
+        if let left = left {
+            leftNode = successor(for: left)
+        } else {
+            leftNode = minimumInTree
+        }
+        
+        while leftNode != right {
+            // Can ignore start and end because those intersection types are already handled.
+            if let leftLineSegment = leftNode?.key, !leftLineSegment.start.equalTo(eventPoint.point), !leftLineSegment.end.equalTo(eventPoint.point) {
+                eventPoint.addIntersectingLineSegment(leftLineSegment)
+            }
+            
+            if leftNode != nil {
+                leftNode = successor(for: leftNode!)
+            } else {
+                return
+            }
+        }
     }
     
     func deleteSegmentRange(left: AugmentedBalancedBinaryNode?, right: AugmentedBalancedBinaryNode?) {
