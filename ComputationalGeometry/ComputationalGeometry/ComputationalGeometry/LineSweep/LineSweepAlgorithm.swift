@@ -111,7 +111,7 @@ class LineSweepAlgorithm {
     /// Any intersections below sweep line are inserted as event points.
     private func updateQueue(left: AugmentedBalancedBinaryNode, right: AugmentedBalancedBinaryNode) {
         // Determine if the two neighboring line segments intersect. Make sure that new intersection point is below the sweep line and not added twice.
-        guard let point = left.key.intersectionPoint(with: right.key), point.y > lineState.sweepPoint.y else {
+        guard let rightKey = right.key, let point = left.key?.intersectionPoint(with: rightKey), point.y > lineState.sweepPoint.y else {
             NSLog("Segments do not intersect.")
             return
         }

@@ -41,5 +41,8 @@ class AugmentedBalancedTree {
 //        return nil
 //    }
     
+    func insert(lineSegment: LineSegment) {
+        
+    }
     
 }

@@ -28,6 +28,16 @@ class LineSegment {
     func intersectionPoint(with lineSegment: LineSegment) -> CGPoint? {
         return .zero
     }
+    
+    /// Determine if the given point is to the right of the line segment, if we view the line segment from the lower (end) point to the upper (start) point.
+    func pointOnRight(of point: CGPoint) -> Bool {
+        return false
+    }
+    
+    /// Determine if the given point is to the left of the line segment, if we view the line segment from the lower (end) point to the upper (start) point.
+    func pointOnLeft(of point: CGPoint) -> Bool {
+        return false
+    }
 }
 
 extension LineSegment: Equatable {

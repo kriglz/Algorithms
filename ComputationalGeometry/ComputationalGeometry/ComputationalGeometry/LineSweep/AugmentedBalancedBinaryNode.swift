@@ -18,7 +18,7 @@ class AugmentedBalancedBinaryNode {
     private(set) var right: AugmentedBalancedBinaryNode? = nil
     private(set) var left: AugmentedBalancedBinaryNode? = nil
     
-    private(set) var key: LineSegment
+    private(set) var key: LineSegment?
     private(set) var value: LineSegment?
     
     private var color = Color.black

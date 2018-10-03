@@ -24,7 +24,9 @@ class LineState {
     // MARK: - Line segment update
     
     func insertSegment(_ segments: [LineSegment]) {
-
+        segments.forEach {
+            state.insert(lineSegment: $0)
+        }
     }
     
     func successor(for node: AugmentedBalancedBinaryNode) -> AugmentedBalancedBinaryNode? {
@@ -81,11 +83,45 @@ class LineState {
         return predecessor
     }
     
+    // Find node within the state that is the closest neighbor (on the left) to the given event point. Make a line from the given point to the x-intersection on the sweep line. If we find multiple with same point, we have to keep on going to the left. Specifically, if compare returns 0, we keep going to the left.
     func leftNeighbour(for eventPoint: EventPoint) -> AugmentedBalancedBinaryNode? {
+        guard var node = state.root else {
+            return nil
+        }
+        
+        while node.key == nil {
+            if let right = node.right, right.min.pointOnRight(of: eventPoint.point) {
+                node = right
+            } else if let left = node.left {
+                node = left
+            }
+        }
+        
+        if let key = node.key, key.pointOnRight(of: eventPoint.point) {
+            return node
+        }
+        
         return nil
     }
     
+    // Find segment within the state that is the closest neighbor (on the right) to the given event point. If we find multiple with same point, we have to keep on going to the right. Specifically, if compare returns 0, we keep going to the right.
     func rightNeighbour(for eventPoint: EventPoint) -> AugmentedBalancedBinaryNode? {
+        guard var node = state.root else {
+            return nil
+        }
+        
+        while node.key == nil {
+            if let left = node.left, left.max.pointOnLeft(of: eventPoint.point) {
+                node = left
+            } else if let right = node.right {
+                node = right
+            }
+        }
+        
+        if let key = node.key, key.pointOnLeft(of: eventPoint.point) {
+            return node
+        }
+
         return nil
     }
     
