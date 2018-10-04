@@ -57,8 +57,52 @@ class LineSegment {
         
     }
     
+    /**
+     * Computer the intersection point with the given line segment.
+     *
+     * If no such intersection, return null.
+     */
+    
     func intersectionPoint(with lineSegment: LineSegment) -> CGPoint? {
-        return .zero
+        let x1 = start.x
+        let y1 = start.y
+        
+        let x2 = end.x
+        let y2 = end.y
+        
+        let x3 = lineSegment.start.x
+        let y3 = lineSegment.start.y
+        
+        let x4 = lineSegment.end.x
+        let y4 = lineSegment.end.y
+       
+        // Common denominator.
+        let da = (y4 - y3) * (x2 - x1)
+        let db = (x4 - x3) * (y2 - y1)
+        let denom = da - db
+        
+        guard denom != 0 else {
+            NSLog("Parallel line segment or coincident.")
+            return nil
+        }
+        
+        // Numerators
+        var ux = (x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)
+        var uy = (x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)
+        
+        ux = ux / denom
+        uy = uy / denom
+    
+        // Line segment intersections are between 0 and 1. Both must be true; special care must be paid to both boundaries w/ floating point issues.
+        if ux >= 0, (ux - 1) <= 0, uy >= 0, (uy - 1) <= 0 {
+            let ix = x1 + ux * (x2 - x1)
+            let iy = y1 + ux * (y2 - y1)
+
+            return CGPoint(x: ix, y: iy)
+        }
+        
+        // No intersection
+        return nil
     }
     
     /**
