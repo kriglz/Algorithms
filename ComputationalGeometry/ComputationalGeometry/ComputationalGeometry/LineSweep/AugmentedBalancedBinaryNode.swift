@@ -40,15 +40,15 @@ class AugmentedBalancedBinaryNode {
         self.color = color
     }
     
-    func update(right node: AugmentedBalancedBinaryNode) {
+    func update(right node: AugmentedBalancedBinaryNode?) {
         self.right = node
     }
     
-    func update(left node: AugmentedBalancedBinaryNode) {
+    func update(left node: AugmentedBalancedBinaryNode?) {
         self.left = node
     }
     
-    func update(parent node: AugmentedBalancedBinaryNode) {
+    func update(parent node: AugmentedBalancedBinaryNode?) {
         self.parent = node
     }
     

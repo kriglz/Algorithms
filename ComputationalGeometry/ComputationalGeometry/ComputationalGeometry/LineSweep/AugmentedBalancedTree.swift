@@ -268,7 +268,65 @@ class AugmentedBalancedTree {
         }
     }
     
+    /**
+     * Because we are using leaf nodes only to store the segments, we can be
+     * guaranteed that the node is going to be a leaf node. If this is
+     * not the case, then we will encounter problems.
+     *
+     * We can casually throw away interior nodes of the tree, since they
+     * don't actually store anything.
+     */
+    
     func delete(node: AugmentedBalancedBinaryNode) {
+        // If node is the root, it is also a leaf, which means it is the last one in the tree.
+        if node == root {
+            root = nil
+            size -= 1
+            return
+        }
         
+        // Note that node's children all still have proper min/max set, so we must go to node's current grandparent, to ensure that min/max is properly dealt with.
+        let nodeToDelete = node
+        let parentToDelete = node.parent
+        var otherSiblings: AugmentedBalancedBinaryNode?
+        
+        if nodeToDelete == nodeToDelete.parent?.left {
+            otherSiblings = nodeToDelete.parent?.right
+        } else {
+            otherSiblings = nodeToDelete.parent?.left
+        }
+        
+        // We could be one of TWO children directly below the root. Since we are
+        // also a leaf, then we know that our sibling will now become the root.
+        // handle now. MAKE SURE YOU CHANGE COLOR to BLACK for maintaining RED/BLACK
+        // invariant.  See CLR algorithm. No need to modify min/max, since already
+        // properly set for the other sibling.
+        if nodeToDelete.parent == root {
+            // detach to make root!
+            otherSiblings?.update(parent: nil)
+            otherSiblings?.update(color: .black)
+            root = otherSiblings
+            // we delete two nodes [node and p]
+            size -= 1
+            return
+        }
+
+        // Now we do the dirty work.
+        let grandparentOfNodeToDelete = parentToDelete?.parent
+        
+        // snip out appropriately [we are deleting p after all, right?]
+        otherSiblings?.update(parent: grandparentOfNodeToDelete)
+        
+        if node.parent == grandparentOfNodeToDelete?.left {
+            grandparentOfNodeToDelete?.update(left: otherSiblings)
+        } else {
+            grandparentOfNodeToDelete?.update(right: otherSiblings)
+        }
+        
+        if let otherSiblingsParent = otherSiblings?.parent {
+            propagate(node: otherSiblingsParent)
+        }
+        
+        size -= 2;  // have deleted two nodes [node and p]
     }
 }

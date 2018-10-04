@@ -68,12 +68,13 @@ class MainViewController: UIViewController {
     
     @objc private func startLineSweepAction(_ sender: UIButton) {
         graphView.reset()
-
-        graphView.backgroundColor = .black
         
         let controller = LineSweepController(lineCount: 15, in: view.frame)
         graphView.draw(lines: controller.lineSegments)
         
-        controller.compute()
+        let inersectionPoints = controller.compute()
+
+//        print(controller.lineSegments)
+        print(inersectionPoints)
     }
 }

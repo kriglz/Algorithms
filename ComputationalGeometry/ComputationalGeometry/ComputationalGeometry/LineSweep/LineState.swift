@@ -23,7 +23,7 @@ class LineState {
     /// Return minimum node in state tree (or null if state tree is empty).
     var minimumInTree: AugmentedBalancedBinaryNode? {
         guard var node = state.root else {
-            NSLog("Root is nil.")
+            NSLog("minimumInTree = nil. Root is nil.")
             return nil
         }
         
@@ -217,24 +217,31 @@ class LineState {
     }
     
     func deleteRange(left: AugmentedBalancedBinaryNode?, right: AugmentedBalancedBinaryNode?) {
-        var node: AugmentedBalancedBinaryNode?
+        var nodeToDelete: AugmentedBalancedBinaryNode?
         
         if let leftNode = left {
-            node = successor(for: leftNode)
+            nodeToDelete = successor(for: leftNode)
         } else {
-            node = minimumInTree
+            nodeToDelete = minimumInTree
         }
         
-        while node != right {
-            if let nodeToDelete = node {
+        if right == nil {
+            if let nodeToDelete = nodeToDelete {
+                state.delete(node: nodeToDelete)
+            }
+            return
+        }
+        
+        while nodeToDelete != right {
+            if let nodeToDelete = nodeToDelete {
                 state.delete(node: nodeToDelete)
             }
             
             // Note: We always go back to the original spot, since we want to drain everything in between. Note that 'left' never leaves the tree.
             if let leftNode = left {
-                node = successor(for: leftNode)
+                nodeToDelete = successor(for: leftNode)
             } else {
-                node = minimumInTree
+                nodeToDelete = minimumInTree
             }
         }
     }
