@@ -10,25 +10,24 @@ import UIKit
 
 class AugmentedBalancedBinaryNode {
     
-    private(set) var max: LineSegment
-    private(set) var min: LineSegment
+    private(set) var max: LineSegment?
+    private(set) var min: LineSegment?
     
-    private(set) var parent: AugmentedBalancedBinaryNode
-    
+    private(set) var parent: AugmentedBalancedBinaryNode? = nil
     private(set) var right: AugmentedBalancedBinaryNode? = nil
     private(set) var left: AugmentedBalancedBinaryNode? = nil
     
     private(set) var key: LineSegment?
     private(set) var value: LineSegment?
     
-    private var color = Color.black
+    private(set) var color = Color.black
     
     enum Color {
         case red
         case black
     }
     
-    init(key: LineSegment, value: LineSegment, parent: AugmentedBalancedBinaryNode) {
+    init(key: LineSegment?, value: LineSegment?, parent: AugmentedBalancedBinaryNode?) {
         self.key = key
         self.value = value
         self.parent = parent

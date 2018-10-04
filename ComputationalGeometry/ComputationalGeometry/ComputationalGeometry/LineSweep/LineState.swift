@@ -50,8 +50,8 @@ class LineState {
         var successor = node
         
         // If we are the right-child of a node, must go back.
-        while successor != state.root, successor == successor.parent.right {
-            successor = successor.parent
+        while successor != state.root, successor == successor.parent?.right, successor.parent != nil {
+            successor = successor.parent!
         }
         
         // Now we have reached a node by whose parent we are not the right. If we are indeed at the root, then no successor.
@@ -60,7 +60,7 @@ class LineState {
         }
         
         // Otherwise go to the right, and find the left-most child. This node is the successor.
-        guard let right = successor.parent.right else {
+        guard let right = successor.parent?.right else {
             return nil
         }
         
@@ -78,8 +78,8 @@ class LineState {
         var predecessor = node
         
         // If we are the left-child of a node, must go back.
-        while predecessor != state.root, predecessor == predecessor.parent.left {
-            predecessor = predecessor.parent
+        while predecessor != state.root, predecessor == predecessor.parent?.left, predecessor.parent != nil {
+            predecessor = predecessor.parent!
         }
         
         // Now we have reached a node by whose parent we are not the right. If we are indeed at the root, then no successor.
@@ -88,7 +88,7 @@ class LineState {
         }
         
         // Otherwise go to the left, and find the right-most child. This node is the pred
-        guard let left = predecessor.parent.left else {
+        guard let left = predecessor.parent?.left else {
             return nil
         }
         
@@ -108,7 +108,7 @@ class LineState {
         }
         
         while node.key == nil {
-            if let right = node.right, right.min.pointOnRight(of: eventPoint.point) {
+            if let right = node.right, let rightValue = right.min, rightValue.pointOnRight(of: eventPoint.point) {
                 node = right
             } else if let left = node.left {
                 node = left
@@ -129,7 +129,7 @@ class LineState {
         }
         
         while node.key == nil {
-            if let left = node.left, left.max.pointOnLeft(of: eventPoint.point) {
+            if let left = node.left, let leftValue = left.max, leftValue.pointOnLeft(of: eventPoint.point) {
                 node = left
             } else if let right = node.right {
                 node = right
