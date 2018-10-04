@@ -13,6 +13,16 @@ class AugmentedBalancedTree {
     private(set) var root: AugmentedBalancedBinaryNode?
     private var size = 0
 
+    private var comparator: (LineSegment, LineSegment) -> Int
+    
+    init(comparator: @escaping (LineSegment, LineSegment) -> Int) {
+        self.comparator = comparator
+    }
+    
+    func update(comparator: @escaping (LineSegment, LineSegment) -> Int) {
+        self.comparator = comparator
+    }
+    
     /// Must make sure that interior nodes contain no segments; rather, only the leaves do.
     func insert(lineSegment key: LineSegment) {
         var node = root
@@ -26,7 +36,7 @@ class AugmentedBalancedTree {
         // Not a root. Find where it should go. Use interior nodes (i.e., whose value is null) to guide the location.
         while node?.value == nil {
             guard let rightNodeValue = node?.right?.min else { break }
-            if compare(rightNodeValue, key) > 0 {
+            if comparator(rightNodeValue, key) > 0 {
                 node = node?.left
             } else {
                 node = node?.right
@@ -49,7 +59,7 @@ class AugmentedBalancedTree {
         node?.update(parent: newParent)
 
         // Sort out which is left and right child
-        if let nodeValue = node?.value, compare(nodeValue, key) > 0, let newRightNode = node {
+        if let nodeValue = node?.value, comparator(nodeValue, key) > 0, let newRightNode = node {
             // Node is the right children.
             newParent.update(right: newRightNode)
             newParent.update(left: newNode)
@@ -260,38 +270,5 @@ class AugmentedBalancedTree {
     
     func delete(node: AugmentedBalancedBinaryNode) {
         
-    }
-    
-    func compare(_ firstLineSegment: LineSegment, _ secondLineSegment: LineSegment) -> Int {
-//        public int compare(ILineSegment o1, ILineSegment o2) {
-//            IPoint p = o1.intersection(o2);
-//            if (p == null) {
-//                // we know that the sweepPt is on o2, so we simply determine
-//                // the side that o1 falls upon. We know this since we are only
-//                // invoked by the insert method where o1 already exists in the tree
-//                // and o2 is the newly added segment.
-//                if (o1.pointOnRight(sweepPt)) { return -1; }
-//                if (o1.pointOnLeft(sweepPt)) { return +1; }
-//                return 0;
-//            }
-//
-//            // Does intersection occur above sweep point? If so, then reverse standard
-//            // left-to-right ordering; if intersection is below the sweep line, then
-//            // use standard left-to-right ordering
-//            if (EventPoint.pointSorter.compare(p, sweepPt) > 0) {
-//                if (o1.pointOnRight(o2.getStart())) {
-//                    return -1;
-//                } else {
-//                    return +1;
-//                }
-//            } else {
-//                if (o1.pointOnRight(o2.getEnd())) {
-//                    return -1;
-//                } else {
-//                    return +1;
-//                }
-//            }
-//        }
-        return 0
     }
 }

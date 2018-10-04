@@ -12,8 +12,13 @@ class LineState {
     
     // MARK: - Properties
 
-    private(set) var sweepPoint: CGPoint!
-    private var state = AugmentedBalancedTree()
+    private(set) var sweepPoint: CGPoint! {
+        didSet {
+            self.state.update(comparator: compare)
+        }
+    }
+    
+    private var state: AugmentedBalancedTree!
     
     /// Return minimum node in state tree (or null if state tree is empty).
     var minimumInTree: AugmentedBalancedBinaryNode? {
@@ -27,6 +32,10 @@ class LineState {
         }
         
         return node
+    }
+    
+    init() {
+        self.state = AugmentedBalancedTree(comparator: compare)
     }
     
     // MARK: - Sweep point update
@@ -141,6 +150,40 @@ class LineState {
         }
 
         return nil
+    }
+    
+    func compare(_ firstLineSegment: LineSegment, _ secondLineSegment: LineSegment) -> Int {
+        let intersectionPoint = firstLineSegment.intersectionPoint(with: secondLineSegment)
+        
+        if intersectionPoint == nil {
+            // We know that the sweepPt is on o2, so we simply determine the side that o1 falls upon. We know this since we are only invoked by the insert method where o1 already exists in the tree and o2 is the newly added segment.
+            if firstLineSegment.pointOnRight(of: sweepPoint) {
+                return -1
+            }
+            
+            if firstLineSegment.pointOnLeft(of: sweepPoint) {
+                return 1
+            }
+            
+            return 0
+        }
+        
+        // Does intersection occur above sweep point? If so, then reverse standard
+        // left-to-right ordering; if intersection is below the sweep line, then
+        // use standard left-to-right ordering
+        if let point = intersectionPoint, PointSorter.compare(point, sweepPoint) > 0 {
+            if firstLineSegment.pointOnRight(of: secondLineSegment.start) {
+                return -1
+            } else {
+                return 1
+            }
+        } else {
+            if firstLineSegment.pointOnRight(of: secondLineSegment.end) {
+                return -1
+            } else {
+                return 1
+            }
+        }
     }
     
     // MARK: - Intersection point evaluation
