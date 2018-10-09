@@ -16,14 +16,19 @@ class LineSweepController {
     // MARK: - Initialization
     
     init(lineCount: Int, in rect: CGRect) {
-        let end = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
-        let first = LineSegment(startPoint: .zero, endPoint: end)
+//        let end = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
+        let first = LineSegment(startPoint: .zero, endPoint: CGPoint(x: rect.maxX, y: rect.maxY))
         
-        let endTwo = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
-        let second = LineSegment(startPoint: .zero, endPoint: endTwo)
+//        let endTwo = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
+//        let second = LineSegment(startPoint: .zero, endPoint: endTwo)
+        
+        let startThree = CGPoint(x: 0, y: rect.size.height / 2)
+        let endThree = CGPoint(x: rect.size.width, y: rect.size.height / 2)
+        let third = LineSegment(startPoint: startThree, endPoint: endThree)
         
         lineSegments.append(first)
-        lineSegments.append(second)
+//        lineSegments.append(second)
+        lineSegments.append(third)
         
 //        for _ in 0...lineCount {
 //            let start = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
