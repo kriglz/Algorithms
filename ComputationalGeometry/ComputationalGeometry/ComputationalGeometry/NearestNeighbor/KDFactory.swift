@@ -51,10 +51,13 @@ class KDFactory {
         // Median point becomes the parent.
         let parentNode = KDNode(from: points[left + medium - 1])
         
-        let leftNode = generateKDNode(left: left, right: left + medium - 2)
-        let rightNode = generateKDNode(left: left + medium, right: right)
-        parentNode.update(right: rightNode)
-        parentNode.update(left: leftNode)
+        if let leftNode = generateKDNode(left: left, right: left + medium - 2) {
+            parentNode.update(left: leftNode)
+        }
+        
+        if let rightNode = generateKDNode(left: left + medium, right: right) {
+            parentNode.update(right: rightNode)
+        }
         
         return parentNode
     }

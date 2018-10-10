@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     
     private let convexHullScanButton = UIButton(type: .system)
     private let lineSweepButton = UIButton(type: .system)
+    private let nearestNeighborButton = UIButton(type: .system)
 
     override var prefersStatusBarHidden: Bool {
         return true
@@ -37,6 +38,9 @@ class MainViewController: UIViewController {
         lineSweepButton.setTitle("Line Sweep", for: .normal)
         lineSweepButton.addTarget(self, action: #selector(startLineSweepAction), for: .touchDown)
         
+        nearestNeighborButton.setTitle("Nearest Neighbor", for: .normal)
+        nearestNeighborButton.addTarget(self, action: #selector(startNearestNeighborAction), for: .touchDown)
+
         view.addSubview(convexHullScanButton)
         convexHullScanButton.translatesAutoresizingMaskIntoConstraints = false
         convexHullScanButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
@@ -46,6 +50,11 @@ class MainViewController: UIViewController {
         lineSweepButton.translatesAutoresizingMaskIntoConstraints = false
         lineSweepButton.bottomAnchor.constraint(equalTo: convexHullScanButton.topAnchor, constant: -20).isActive = true
         lineSweepButton.trailingAnchor.constraint(equalTo: convexHullScanButton.trailingAnchor).isActive = true
+        
+        view.addSubview(nearestNeighborButton)
+        nearestNeighborButton.translatesAutoresizingMaskIntoConstraints = false
+        nearestNeighborButton.bottomAnchor.constraint(equalTo: lineSweepButton.topAnchor, constant: -20).isActive = true
+        nearestNeighborButton.trailingAnchor.constraint(equalTo: convexHullScanButton.trailingAnchor).isActive = true
     }
     
     // MARK: - Actionw
@@ -76,5 +85,14 @@ class MainViewController: UIViewController {
 
 //        print(controller.lineSegments)
         print(inersectionPoints)
+    }
+    
+    @objc private func startNearestNeighborAction(_ sender: UIButton) {
+        graphView.reset()
+
+        let controller = NearestNeighborController(pointCount: 3, in: view.frame)
+        graphView.draw(points: controller.points)
+
+        
     }
 }
