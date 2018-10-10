@@ -10,13 +10,13 @@ import UIKit
 
 class QuicksortSortingAlgorithm {
     
-    private var sortingArray: [CGPoint]
+    private(set) var sortingArray: [CGPoint]
     
     init(sortingArray: [CGPoint]) {
         self.sortingArray = sortingArray
     }
     
-    func select(mediumIndex: Int, leftIndex: Int, rightIndex: Int) -> CGPoint {
+    @discardableResult func select(mediumIndex: Int, leftIndex: Int, rightIndex: Int) -> CGPoint {
         var left = leftIndex
         var right = rightIndex
         var medium = mediumIndex

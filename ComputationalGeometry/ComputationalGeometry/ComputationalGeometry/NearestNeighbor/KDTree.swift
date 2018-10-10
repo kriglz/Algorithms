@@ -12,7 +12,7 @@ class KDTree {
     
     private(set) var root: KDNode?
     
-    func updateRoot(to node: KDNode) {
+    func update(root node: KDNode) {
         self.root = node
     }
 }
