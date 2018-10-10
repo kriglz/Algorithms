@@ -90,9 +90,10 @@ class MainViewController: UIViewController {
     @objc private func startNearestNeighborAction(_ sender: UIButton) {
         graphView.reset()
 
-        let controller = NearestNeighborController(pointCount: 3, in: view.frame)
+        let controller = NearestNeighborController(pointCount: 8, in: view.frame)
         graphView.draw(points: controller.points)
 
-        
+        let tree = KDTree(from: controller.points)
+        print(tree)
     }
 }
