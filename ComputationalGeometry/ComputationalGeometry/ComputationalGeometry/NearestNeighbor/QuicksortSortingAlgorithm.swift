@@ -22,6 +22,10 @@ class QuicksortSortingAlgorithm {
         var medium = mediumIndex
         
         while true {
+            if left == right {
+                return sortingArray[left]
+            }
+            
             let randomPivotIndex = mediumOfThree(leftIndex: left, rightIndex: right)
             let pivotIndex = partition(leftIndex: left, rightIndex: right, pivotIndex: randomPivotIndex)
             
@@ -63,7 +67,7 @@ class QuicksortSortingAlgorithm {
             sortingArray.swapAt(rightIndex, storeIndex)
         }
         
-        return storeIndex
+        return storeIndex   
     }
     
     func mediumOfThree(leftIndex: Int, rightIndex: Int) -> Int {
@@ -80,7 +84,7 @@ class QuicksortSortingAlgorithm {
     }
     
     func compare(i: (CGPoint), j: (CGPoint)) -> Int {
-        if i.y > i.y, i.x > j.x {
+        if i.x > j.x {
             return 1
         }
         
