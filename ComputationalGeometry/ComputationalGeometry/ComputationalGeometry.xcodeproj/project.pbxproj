@@ -29,8 +29,9 @@
 		89906585216D73470050F8CE /* NearestNeighborAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89906584216D73470050F8CE /* NearestNeighborAlgorithm.swift */; };
 		89906587216D73610050F8CE /* NearestNeighborController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89906586216D73610050F8CE /* NearestNeighborController.swift */; };
 		8990658A216D73860050F8CE /* KDTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89906589216D73860050F8CE /* KDTree.swift */; };
-		8990658C216D73AE0050F8CE /* DimensionalNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8990658B216D73AE0050F8CE /* DimensionalNode.swift */; };
+		8990658C216D73AE0050F8CE /* KDNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8990658B216D73AE0050F8CE /* KDNode.swift */; };
 		8990658E216D73C60050F8CE /* QuicksortSortingAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8990658D216D73C60050F8CE /* QuicksortSortingAlgorithm.swift */; };
+		89906590216D744F0050F8CE /* KDFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8990658F216D744F0050F8CE /* KDFactory.swift */; };
 		89E39B9A2165245E00960ADE /* AugmentedBalancedTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E39B992165245E00960ADE /* AugmentedBalancedTree.swift */; };
 		89E39B9E21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E39B9D21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift */; };
 /* End PBXBuildFile section */
@@ -60,8 +61,9 @@
 		89906584216D73470050F8CE /* NearestNeighborAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborAlgorithm.swift; sourceTree = "<group>"; };
 		89906586216D73610050F8CE /* NearestNeighborController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborController.swift; sourceTree = "<group>"; };
 		89906589216D73860050F8CE /* KDTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDTree.swift; sourceTree = "<group>"; };
-		8990658B216D73AE0050F8CE /* DimensionalNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionalNode.swift; sourceTree = "<group>"; };
+		8990658B216D73AE0050F8CE /* KDNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDNode.swift; sourceTree = "<group>"; };
 		8990658D216D73C60050F8CE /* QuicksortSortingAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuicksortSortingAlgorithm.swift; sourceTree = "<group>"; };
+		8990658F216D744F0050F8CE /* KDFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDFactory.swift; sourceTree = "<group>"; };
 		89E39B992165245E00960ADE /* AugmentedBalancedTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedBalancedTree.swift; sourceTree = "<group>"; };
 		89E39B9D21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedBalancedBinaryNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,7 +155,8 @@
 				89906586216D73610050F8CE /* NearestNeighborController.swift */,
 				89906584216D73470050F8CE /* NearestNeighborAlgorithm.swift */,
 				89906589216D73860050F8CE /* KDTree.swift */,
-				8990658B216D73AE0050F8CE /* DimensionalNode.swift */,
+				8990658F216D744F0050F8CE /* KDFactory.swift */,
+				8990658B216D73AE0050F8CE /* KDNode.swift */,
 				8990658D216D73C60050F8CE /* QuicksortSortingAlgorithm.swift */,
 			);
 			path = NearestNeighbor;
@@ -247,12 +250,13 @@
 				89906585216D73470050F8CE /* NearestNeighborAlgorithm.swift in Sources */,
 				8916D22A215EDE95007816C6 /* LineSegment.swift in Sources */,
 				89E39B9E21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift in Sources */,
+				89906590216D744F0050F8CE /* KDFactory.swift in Sources */,
 				8916D1EF215D4E51007816C6 /* ConvexHull.swift in Sources */,
 				8916D1F4215D8BE1007816C6 /* Line.swift in Sources */,
 				8916D1ED215C6625007816C6 /* ConvexHullScanController.swift in Sources */,
 				89906587216D73610050F8CE /* NearestNeighborController.swift in Sources */,
 				8916D1E7215C63C2007816C6 /* GraphView.swift in Sources */,
-				8990658C216D73AE0050F8CE /* DimensionalNode.swift in Sources */,
+				8990658C216D73AE0050F8CE /* KDNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
