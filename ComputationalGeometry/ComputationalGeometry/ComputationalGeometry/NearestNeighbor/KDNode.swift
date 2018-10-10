@@ -11,8 +11,8 @@ import UIKit
 class KDNode {
     
     private var point: CGPoint
-    private var left: KDNode?
-    private var right: KDNode?
+    private(set) var left: KDNode?
+    private(set) var right: KDNode?
     
     init(from point: CGPoint) {
         self.point = point
@@ -24,5 +24,9 @@ class KDNode {
     
     func update(left node: KDNode) {
         self.left = node
+    }
+    
+    func isLeft(of neighborPoint: CGPoint) -> Bool {
+        return neighborPoint.x > point.x
     }
 }

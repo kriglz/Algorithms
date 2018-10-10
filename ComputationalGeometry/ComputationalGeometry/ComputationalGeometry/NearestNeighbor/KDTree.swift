@@ -10,9 +10,13 @@ import UIKit
 
 class KDTree {
     
+    // MARK: - Properties
+    
     private(set) var root: KDNode?
     private var points: [CGPoint]!
 
+    // MARK: - Initialization
+    
     /// Recursively construct kd tree using median methods on input point.
     init(from points: [CGPoint]) {
         guard !points.isEmpty else {
@@ -30,7 +34,9 @@ class KDTree {
         self.root = rootNode
     }
     
-    /// Gets a medium value recursively.
+    // MARK: - KD node initialization
+    
+    /// KDNode recursive genration for the KDTree.
     private func generateKDNode(left: Int, right: Int) -> KDNode? {
         guard right >= left else {
             NSLog("Wrong range - right < left")
@@ -44,9 +50,8 @@ class KDTree {
         // Order the array of points so the mth element will be the median and the elements prior to it will be all <=, though they won't be sorted; similarly, the elements after will be all >=.
         let medium = 1 + (right - left) / 2
         let algorithm = QuicksortSortingAlgorithm(sortingArray: points)
-//        algorithm.select(mediumIndex: medium, leftIndex: 0, rightIndex: points.count - 1)
-        
         algorithm.select(mediumIndex: medium, leftIndex: left, rightIndex: right)
+        
         points = algorithm.sortingArray
         
         // Median point becomes the parent.
@@ -62,4 +67,44 @@ class KDTree {
         
         return parentNode
     }
+    
+    // MARK: - Nearest node finding
+    
+    private func parent(for point: CGPoint) -> KDNode? {
+        guard let root = self.root else {
+            NSLog("No parent detected.")
+            return nil
+        }
+        
+        // Go through tree iteratively, varying from vertical to horizontal.
+        var parent: KDNode? = root
+        
+        while true {
+            // If point is left node, search that branch.
+            if parent!.isLeft(of: point), let leftNode = parent?.left {
+                parent = leftNode
+                
+            // If point is right node, search that branch.
+            } else if !parent!.isLeft(of: point), let rightNode = parent?.right {
+                parent = rightNode
+                
+            // Last node, return parent.
+            } else {
+                return parent
+            }
+        }
+    }
+    
+    func nearestNeighbor(point: CGPoint) -> CGPoint? {
+        guard let root = root else {
+            NSLog("No neighbors detected.")
+            return nil
+        }
+        
+        // Find parent node to which neighbor would have been inserted. This is our best shot at locating the closest point. Compute best distance.
+        let parent =
+        
+        return nil
+    }
+
 }
