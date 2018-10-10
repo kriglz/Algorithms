@@ -1,5 +1,5 @@
 //
-//  DimensionalNode.swift
+//  KDNode.swift
 //  ComputationalGeometry
 //
 //  Created by Kristina Gelzinyte on 10/9/18.
@@ -8,6 +8,11 @@
 
 import UIKit
 
-class DimensionalNode {
+class KDNode {
     
+    private var point: CGPoint
+    
+    init(from point: CGPoint) {
+        self.point = point
+    }
 }
