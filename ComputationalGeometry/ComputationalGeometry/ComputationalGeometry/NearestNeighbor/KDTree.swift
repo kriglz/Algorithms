@@ -81,11 +81,11 @@ class KDTree {
         
         while true {
             // If point is left node, search that branch.
-            if parent!.isLeft(of: point), let leftNode = parent?.left {
+            if parent!.isLeft(point), let leftNode = parent?.left {
                 parent = leftNode
                 
             // If point is right node, search that branch.
-            } else if !parent!.isLeft(of: point), let rightNode = parent?.right {
+            } else if !parent!.isLeft(point), let rightNode = parent?.right {
                 parent = rightNode
                 
             // Last node, return parent.
@@ -102,18 +102,20 @@ class KDTree {
         }
         
         var smallestDistance = CGFloat.infinity
+        var nearestNeighborPoint: CGPoint?
         
         // Find parent node to which neighbor would have been inserted. This is our best shot at locating the closest point. Compute best distance.
         if let parentNodePoint = parent(for: point)?.point {
             smallestDistance = point.distance(to: parentNodePoint)
+            nearestNeighborPoint = parentNodePoint
         }
         
         // Check all rectangles that potentially overlap this smallest distance. If better is found, return it.
         if let closerPoint = root.nearestPoint(to: point, closerThan: smallestDistance) {
-            return closerPoint
+            nearestNeighborPoint = closerPoint
         }
         
-        return nil
+        return nearestNeighborPoint
     }
 
 }
