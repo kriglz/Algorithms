@@ -26,8 +26,12 @@ class KDNode {
         self.left = node
     }
     
-    func isLeft(of neighborPoint: CGPoint) -> Bool {
-        return neighborPoint.x > point.x
+    func isLeft(_ neighborPoint: CGPoint) -> Bool {
+        if let leftNode = left {
+            return neighborPoint.x < leftNode.point.x
+        }
+        
+        return false
     }
     
     /// In sub-tree rooted at node, see if one of its descendants is closer to rawTarget than min[0].
