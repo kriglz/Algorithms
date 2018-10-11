@@ -95,14 +95,23 @@ class KDTree {
         }
     }
     
-    func nearestNeighbor(point: CGPoint) -> CGPoint? {
+    func nearestNeighbor(for point: CGPoint) -> CGPoint? {
         guard let root = root else {
             NSLog("No neighbors detected.")
             return nil
         }
         
+        var smallestDistance = CGFloat.infinity
+        
         // Find parent node to which neighbor would have been inserted. This is our best shot at locating the closest point. Compute best distance.
-        let parent =
+        if let parentNodePoint = parent(for: point)?.point {
+            smallestDistance = point.distance(to: parentNodePoint)
+        }
+        
+        // Check all rectangles that potentially overlap this smallest distance. If better is found, return it.
+        if let closerPoint = root.nearestPoint(to: point, closerThan: smallestDistance) {
+            return closerPoint
+        }
         
         return nil
     }

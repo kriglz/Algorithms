@@ -26,6 +26,7 @@
 		8916D226215EDCE0007816C6 /* EventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D225215EDCE0007816C6 /* EventQueue.swift */; };
 		8916D228215EDD33007816C6 /* EventPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D227215EDD33007816C6 /* EventPoint.swift */; };
 		8916D22A215EDE95007816C6 /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8916D229215EDE95007816C6 /* LineSegment.swift */; };
+		897321F6216EC08400ED6144 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897321F5216EC08400ED6144 /* CGPoint+Extension.swift */; };
 		89906585216D73470050F8CE /* NearestNeighborAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89906584216D73470050F8CE /* NearestNeighborAlgorithm.swift */; };
 		89906587216D73610050F8CE /* NearestNeighborController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89906586216D73610050F8CE /* NearestNeighborController.swift */; };
 		8990658A216D73860050F8CE /* KDTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89906589216D73860050F8CE /* KDTree.swift */; };
@@ -57,6 +58,7 @@
 		8916D225215EDCE0007816C6 /* EventQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventQueue.swift; sourceTree = "<group>"; };
 		8916D227215EDD33007816C6 /* EventPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPoint.swift; sourceTree = "<group>"; };
 		8916D229215EDE95007816C6 /* LineSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSegment.swift; sourceTree = "<group>"; };
+		897321F5216EC08400ED6144 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		89906584216D73470050F8CE /* NearestNeighborAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborAlgorithm.swift; sourceTree = "<group>"; };
 		89906586216D73610050F8CE /* NearestNeighborController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestNeighborController.swift; sourceTree = "<group>"; };
 		89906589216D73860050F8CE /* KDTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDTree.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				8916D222215ED833007816C6 /* LineSweep */,
 				8916D1F0215D7D33007816C6 /* ConvexHull */,
 				8916D1E8215C641C007816C6 /* UIView+Extension.swift */,
+				897321F5216EC08400ED6144 /* CGPoint+Extension.swift */,
 				8916D1E5215C6231007816C6 /* SupportingFiles */,
 				8916D1DF215C620C007816C6 /* Info.plist */,
 			);
@@ -244,6 +247,7 @@
 				8916D1F2215D82AF007816C6 /* LineDrawingAction.swift in Sources */,
 				8916D1F6215DA1EA007816C6 /* LineLayer.swift in Sources */,
 				8990658E216D73C60050F8CE /* QuicksortSortingAlgorithm.swift in Sources */,
+				897321F6216EC08400ED6144 /* CGPoint+Extension.swift in Sources */,
 				89906585216D73470050F8CE /* NearestNeighborAlgorithm.swift in Sources */,
 				8916D22A215EDE95007816C6 /* LineSegment.swift in Sources */,
 				89E39B9E21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift in Sources */,
