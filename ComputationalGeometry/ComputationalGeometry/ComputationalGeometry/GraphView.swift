@@ -24,8 +24,7 @@ class GraphView: UIView {
 
     // MARK: - Draw methods
     
-    func draw(points: [CGPoint], color: CGColor = UIColor.darkGray.cgColor) {
-        let pointSize = CGSize(width: 9, height: 9)
+    func draw(points: [CGPoint], color: CGColor = UIColor.darkGray.cgColor, pointSize: CGSize = CGSize(width: 9, height: 9)) {
         points.forEach { pointPosition in
             let pointRectangle = CGRect(origin: CGPoint(x: pointPosition.x - pointSize.width / 2, y: pointPosition.y - pointSize.height / 2), size: pointSize)
             let circle = CGPath(ellipseIn: pointRectangle, transform: nil)

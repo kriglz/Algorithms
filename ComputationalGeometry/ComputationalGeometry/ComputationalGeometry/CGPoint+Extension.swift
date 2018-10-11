@@ -15,4 +15,8 @@ extension CGPoint {
         let yDelta = (self.y - point.y)
         return sqrt(pow(xDelta, 2) + pow(yDelta, 2))
     }
+    
+    static func random(in closedRange: ClosedRange<CGFloat>) -> CGPoint {
+        return CGPoint(x: CGFloat.random(in: closedRange), y: CGFloat.random(in: closedRange))
+    }
 }
