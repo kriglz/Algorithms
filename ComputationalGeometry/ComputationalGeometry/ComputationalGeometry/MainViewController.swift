@@ -95,12 +95,16 @@ class MainViewController: UIViewController {
                           width: graphView.frame.size.width / 2,
                           height: graphView.frame.size.height / 2)
         
-        let controller = NearestNeighborController(pointCount: 5, in: rect)
+        let controller = NearestNeighborController(pointCount: 6, in: rect)
         graphView.draw(points: controller.points)
         
         let targetPoint = CGPoint.random(in: rect.minX...rect.maxX)
         graphView.draw(points: [targetPoint], color: UIColor.blue.cgColor)
 
+//        for point in controller.points {
+//            print(targetPoint.distance(to: point))
+//        }
+        
         if let nearest = controller.nearestNeighbor(for: targetPoint) {
             graphView.draw(points: [nearest], color: UIColor.white.cgColor, pointSize: CGSize(width: 19, height: 19))
         }

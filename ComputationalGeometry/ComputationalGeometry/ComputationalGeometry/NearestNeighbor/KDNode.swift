@@ -51,11 +51,11 @@ class KDNode {
         // If perpendicular distance is smaller than the smallest known distance, check both branches.
         if perpendicularDistance < minimumDistance {
             // Return closer one.
-            if let rightPoint = self.right?.nearestPoint(to: point, closerThan: minimumDistance) {
+            if let rightPoint = self.right?.nearestPoint(to: target, closerThan: minimumDistance) {
                 closestPoint = rightPoint
             }
             
-            if let leftPoint = self.left?.nearestPoint(to: point, closerThan: minimumDistance) {
+            if let leftPoint = self.left?.nearestPoint(to: target, closerThan: minimumDistance) {
                 closestPoint = leftPoint
             }
             

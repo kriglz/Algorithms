@@ -57,12 +57,12 @@ class KDTree {
         // Median point becomes the parent.
         let parentNode = KDNode(from: points[left + medium - 1])
         
-        if let leftNode = generateKDNode(left: left, right: left + medium - 2) {
-            parentNode.update(left: leftNode)
-        }
-        
         if let rightNode = generateKDNode(left: left + medium, right: right) {
             parentNode.update(right: rightNode)
+        }
+        
+        if let leftNode = generateKDNode(left: left, right: left + medium - 2) {
+            parentNode.update(left: leftNode)
         }
         
         return parentNode
