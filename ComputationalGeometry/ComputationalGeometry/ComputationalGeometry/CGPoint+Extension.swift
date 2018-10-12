@@ -9,14 +9,23 @@
 import UIKit
 
 extension CGPoint {
+
+    static func random(in closedRange: ClosedRange<CGFloat>) -> CGPoint {
+        return CGPoint(x: CGFloat.random(in: closedRange), y: CGFloat.random(in: closedRange))
+    }
     
     func distance(to point: CGPoint) -> CGFloat {
         let xDelta = (self.x - point.x)
         let yDelta = (self.y - point.y)
         return sqrt(pow(xDelta, 2) + pow(yDelta, 2))
     }
-    
-    static func random(in closedRange: ClosedRange<CGFloat>) -> CGPoint {
-        return CGPoint(x: CGFloat.random(in: closedRange), y: CGFloat.random(in: closedRange))
+
+    func value(for dimension: Int) -> CGFloat {
+        switch dimension {
+        case 1:
+            return x
+        default:
+            return y
+        }
     }
 }
