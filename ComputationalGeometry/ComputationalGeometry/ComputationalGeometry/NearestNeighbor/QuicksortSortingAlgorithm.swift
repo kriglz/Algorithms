@@ -11,9 +11,11 @@ import UIKit
 class QuicksortSortingAlgorithm {
     
     private(set) var sortingArray: [CGPoint]
+    private let dimension: Int
     
-    init(sortingArray: [CGPoint]) {
+    init(sortingArray: [CGPoint], dimension: Int) {
         self.sortingArray = sortingArray
+        self.dimension = dimension
     }
     
     @discardableResult func select(mediumIndex: Int, leftIndex: Int, rightIndex: Int) -> CGPoint {
@@ -45,7 +47,7 @@ class QuicksortSortingAlgorithm {
         }
     }
     
-    func partition(leftIndex: Int, rightIndex: Int, pivotIndex: Int) -> Int {
+    private func partition(leftIndex: Int, rightIndex: Int, pivotIndex: Int) -> Int {
         let pivot = sortingArray[pivotIndex]
         
         // Move pivot index number to the end of the range.
@@ -70,7 +72,7 @@ class QuicksortSortingAlgorithm {
         return storeIndex   
     }
     
-    func mediumOfThree(leftIndex: Int, rightIndex: Int) -> Int {
+    private func mediumOfThree(leftIndex: Int, rightIndex: Int) -> Int {
         var randomElements: [Int] = []
         for _ in 0..<3 {
             randomElements.append(randomIndex(leftIndex: leftIndex, rightIndex: rightIndex))
@@ -79,15 +81,23 @@ class QuicksortSortingAlgorithm {
         return randomElements[1]
     }
     
-    func randomIndex(leftIndex: Int, rightIndex: Int) -> Int {
+    private func randomIndex(leftIndex: Int, rightIndex: Int) -> Int {
         return Int.random(in: leftIndex..<rightIndex)
     }
     
-    func compare(i: (CGPoint), j: (CGPoint)) -> Int {
-        if i.x > j.x {
-            return 1
-        }
-        
-        return 0
+    private func compare(i: (CGPoint), j: (CGPoint)) -> Int {
+        switch dimension {
+        case 1:
+            if i.x > j.x {
+                return 1
+            }
+            return 0
+
+        default:
+            if i.y > j.y {
+                return 1
+            }
+            return 0
+        }        
     }
 }
