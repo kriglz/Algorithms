@@ -14,19 +14,21 @@ class KDTree {
     
     private(set) var root: KDNode?
     private var points: [CGPoint]!
-
+    private var maxDimension: Int!
+    
     // MARK: - Initialization
     
     /// Recursively construct kd tree using median methods on input point.
-    init(from points: [CGPoint]) {
+    init(maxDimension: Int, from points: [CGPoint]) {
         guard !points.isEmpty else {
             NSLog("0 points.")
             return
         }
         
+        self.maxDimension = maxDimension
         self.points = points
         
-        guard let rootNode = generateKDNode(left: 0, right: points.count - 1) else {
+        guard let rootNode = generateKDNode(dimension: 1, left: 0, right: points.count - 1) else {
             NSLog("No node available.")
             return
         }
@@ -37,14 +39,14 @@ class KDTree {
     // MARK: - KD node initialization
     
     /// KDNode recursive genration for the KDTree.
-    private func generateKDNode(left: Int, right: Int) -> KDNode? {
+    private func generateKDNode(dimension: Int, left: Int, right: Int) -> KDNode? {
         guard right >= left else {
             NSLog("Wrong range - right < left")
             return nil
         }
         
         if right == left {
-            return KDNode(from: points[left])
+            return KDNode(dimension: dimension, point: points[left])
         }
         
         // Order the array of points so the mth element will be the median and the elements prior to it will be all <=, though they won't be sorted; similarly, the elements after will be all >=.
@@ -55,13 +57,20 @@ class KDTree {
         points = algorithm.sortingArray
         
         // Median point becomes the parent.
-        let parentNode = KDNode(from: points[left + medium - 1])
+        let parentNode = KDNode(dimension: dimension, point: points[left + medium - 1])
         
-        if let rightNode = generateKDNode(left: left + medium, right: right) {
+        // Update the next dimesnion or reset back to 1.
+        
+        var updatedDimension = dimension + 1
+        if updatedDimension > maxDimension {
+            updatedDimension = 1
+        }
+        
+        if let rightNode = generateKDNode(dimension: updatedDimension, left: left + medium, right: right) {
             parentNode.update(right: rightNode)
         }
         
-        if let leftNode = generateKDNode(left: left, right: left + medium - 2) {
+        if let leftNode = generateKDNode(dimension: updatedDimension, left: left, right: left + medium - 2) {
             parentNode.update(left: leftNode)
         }
         

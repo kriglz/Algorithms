@@ -15,7 +15,7 @@ class NearestNeighborAlgorithm {
     
     init(points: [CGPoint]) {
         self.points = points
-        self.tree = KDTree(from: points)
+        self.tree = KDTree(maxDimension: 2, from: points)
     }
     
     func nearestNeighbor(for point: CGPoint) -> CGPoint? {

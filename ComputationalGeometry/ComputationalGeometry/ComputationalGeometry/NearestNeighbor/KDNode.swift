@@ -13,8 +13,10 @@ class KDNode {
     private(set) var point: CGPoint
     private(set) var left: KDNode?
     private(set) var right: KDNode?
+    private var dimension: Int
     
-    init(from point: CGPoint) {
+    init(dimension: Int, point: CGPoint) {
+        self.dimension = dimension
         self.point = point
     }
     
