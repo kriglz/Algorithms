@@ -51,9 +51,9 @@ class KDTree {
         
         // Order the array of points so the mth element will be the median and the elements prior to it will be all <=, though they won't be sorted; similarly, the elements after will be all >=.
         let medium = 1 + (right - left) / 2
-        let algorithm = QuicksortSortingAlgorithm(sortingArray: points)
-        algorithm.select(mediumIndex: medium, leftIndex: left, rightIndex: right)
         
+        let algorithm = QuicksortSortingAlgorithm(sortingArray: points, dimension: dimension)
+        algorithm.select(mediumIndex: medium, leftIndex: left, rightIndex: right)
         points = algorithm.sortingArray
         
         // Median point becomes the parent.
@@ -94,7 +94,7 @@ class KDTree {
                 parent = leftNode
                 
             // If point is right node, search that branch.
-            } else if !parent!.isLeft(point), let rightNode = parent?.right {
+            } else if parent!.isRight(point), let rightNode = parent?.right {
                 parent = rightNode
                 
             // Last node, return parent.

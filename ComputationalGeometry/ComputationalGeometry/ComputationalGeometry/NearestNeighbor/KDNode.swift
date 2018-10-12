@@ -15,6 +15,15 @@ class KDNode {
     private(set) var right: KDNode?
     private var dimension: Int
     
+    private var coordinate: CGFloat {
+        switch dimension {
+        case 1:
+            return point.x
+        default:
+            return point.y
+        }
+    }
+    
     init(dimension: Int, point: CGPoint) {
         self.dimension = dimension
         self.point = point
@@ -29,8 +38,30 @@ class KDNode {
     }
     
     func isLeft(_ neighborPoint: CGPoint) -> Bool {
-        if let leftNode = left {
-            return neighborPoint.x < leftNode.point.x
+        switch dimension {
+        case 1:
+            if let leftNode = left {
+                return neighborPoint.x < leftNode.point.x
+            }
+        default:
+            if let leftNode = left {
+                return neighborPoint.y < leftNode.point.y
+            }
+        }
+        
+        return false
+    }
+    
+    func isRight(_ neighborPoint: CGPoint) -> Bool {
+        switch dimension {
+        case 1:
+            if let rightNode = right {
+                return neighborPoint.x > rightNode.point.x
+            }
+        default:
+            if let rightNode = right {
+                return neighborPoint.y > rightNode.point.y
+            }
         }
         
         return false
@@ -44,30 +75,29 @@ class KDNode {
         let newDistance = target.distance(to: point)
         if distance > newDistance {
             closestPoint = point
-            minimumDistance = distance - newDistance
+            minimumDistance = newDistance
         }
         
         // Evaluate if perpendicular distance to the axis along which node separates the plane needs to be computed for subtree nodes.
-        let perpendicularDistance = abs(point.x - target.x)
+        let perpendicularDistance = abs(coordinate - target.value(for: dimension))
         
         // If perpendicular distance is smaller than the smallest known distance, check both branches.
         if perpendicularDistance < minimumDistance {
             // Return closer one.
-            if let rightPoint = self.right?.nearestPoint(to: target, closerThan: minimumDistance) {
+            if let rightPoint = self.right?.nearestPoint(to: target, closerThan: minimumDistance), rightPoint.distance(to: target) < minimumDistance {
                 closestPoint = rightPoint
             }
             
-            if let leftPoint = self.left?.nearestPoint(to: target, closerThan: minimumDistance) {
+            if let leftPoint = self.left?.nearestPoint(to: target, closerThan: minimumDistance), leftPoint.distance(to: target) < minimumDistance {
                 closestPoint = leftPoint
             }
             
         } else {
             // Determine which branch to go.
-            if point.x > target.x, let leftPoint = self.left?.nearestPoint(to: target, closerThan: minimumDistance) {
+            if coordinate > target.value(for: dimension), let leftPoint = self.left?.nearestPoint(to: target, closerThan: minimumDistance), leftPoint.distance(to: target) < minimumDistance {
                 closestPoint = leftPoint
-            }
-            
-            if point.x <= target.x, let rightPoint = self.right?.nearestPoint(to: target, closerThan: minimumDistance) {
+                
+            } else if coordinate <= target.value(for: dimension), let rightPoint = self.right?.nearestPoint(to: target, closerThan: minimumDistance), rightPoint.distance(to: target) < minimumDistance {
                 closestPoint = rightPoint
             }
         }
