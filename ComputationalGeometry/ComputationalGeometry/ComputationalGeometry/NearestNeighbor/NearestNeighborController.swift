@@ -15,6 +15,10 @@ class NearestNeighborController {
     private(set) var points: [CGPoint]
     private let algorithm: NearestNeighborAlgorithm
 
+    var treeActionBuffer: [TreeLineDrawingAction] {
+        return algorithm.treeActionBuffer
+    }
+    
     // MARK: - Initialization
     
     init(pointCount: Int, in rect: CGRect) {

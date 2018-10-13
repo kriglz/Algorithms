@@ -12,6 +12,8 @@ class KDTree {
     
     // MARK: - Properties
     
+    weak var delegate: KDTreeDelegate? = nil
+    
     private(set) var root: KDNode?
     private var points: [CGPoint]!
     private var maxDimension: Int!
@@ -27,7 +29,9 @@ class KDTree {
         
         self.maxDimension = maxDimension
         self.points = points
-        
+    }
+    
+    func generate() {
         guard let rootNode = generateKDNode(dimension: 1, left: 0, right: points.count - 1) else {
             NSLog("No node available.")
             return
@@ -46,7 +50,9 @@ class KDTree {
         }
         
         if right == left {
-            return KDNode(dimension: dimension, point: points[left])
+            let node = KDNode(dimension: dimension, point: points[left])
+            delegate?.kdTree(self, didAdd: node)
+            return node
         }
         
         // Order the array of points so the mth element will be the median and the elements prior to it will be all <=, though they won't be sorted; similarly, the elements after will be all >=.
@@ -67,13 +73,16 @@ class KDTree {
         }
         
         if let rightNode = generateKDNode(dimension: updatedDimension, left: left + medium, right: right) {
+            rightNode.update(parent: parentNode.point)
             parentNode.update(right: rightNode)
         }
         
         if let leftNode = generateKDNode(dimension: updatedDimension, left: left, right: left + medium - 2) {
+            leftNode.update(parent: parentNode.point)
             parentNode.update(left: leftNode)
         }
         
+        delegate?.kdTree(self, didAdd: parentNode)
         return parentNode
     }
     
@@ -126,5 +135,9 @@ class KDTree {
         
         return nearestNeighborPoint
     }
+}
 
+protocol KDTreeDelegate: class {
+    
+    func kdTree(_ tree: KDTree, didAdd node: KDNode)
 }

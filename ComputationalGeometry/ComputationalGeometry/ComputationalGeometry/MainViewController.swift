@@ -117,5 +117,6 @@ class MainViewController: UIViewController {
         
         graphView.draw(points: [posibleNeighbour], color: UIColor.white.cgColor, pointSize: CGSize(width: 2, height: 2))
 
+        print(controller.treeActionBuffer)
     }
 }
