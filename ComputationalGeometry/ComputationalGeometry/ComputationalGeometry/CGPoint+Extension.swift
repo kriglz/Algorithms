@@ -10,8 +10,14 @@ import UIKit
 
 extension CGPoint {
 
-    static func random(in closedRange: ClosedRange<CGFloat>) -> CGPoint {
-        return CGPoint(x: CGFloat.random(in: closedRange), y: CGFloat.random(in: closedRange))
+    static func random(in rect: CGRect) -> CGPoint {
+        let min = rect.min
+        let max = rect.max
+        
+        let randomX = CGFloat.random(in: min.x...max.x)
+        let randomY = CGFloat.random(in: min.y...max.y)
+        
+        return CGPoint(x: randomX, y: randomY)
     }
     
     func distance(to point: CGPoint) -> CGFloat {

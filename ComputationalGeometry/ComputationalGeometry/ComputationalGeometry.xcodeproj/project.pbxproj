@@ -33,6 +33,7 @@
 		8990658C216D73AE0050F8CE /* KDNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8990658B216D73AE0050F8CE /* KDNode.swift */; };
 		8990658E216D73C60050F8CE /* QuicksortSortingAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8990658D216D73C60050F8CE /* QuicksortSortingAlgorithm.swift */; };
 		89A1544921716E99004013D7 /* TreeLineDrawingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1544821716E99004013D7 /* TreeLineDrawingAction.swift */; };
+		89A1544B21717B2B004013D7 /* CGRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1544A21717B2B004013D7 /* CGRect+Extension.swift */; };
 		89E39B9A2165245E00960ADE /* AugmentedBalancedTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E39B992165245E00960ADE /* AugmentedBalancedTree.swift */; };
 		89E39B9E21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E39B9D21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,7 @@
 		8990658B216D73AE0050F8CE /* KDNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDNode.swift; sourceTree = "<group>"; };
 		8990658D216D73C60050F8CE /* QuicksortSortingAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuicksortSortingAlgorithm.swift; sourceTree = "<group>"; };
 		89A1544821716E99004013D7 /* TreeLineDrawingAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeLineDrawingAction.swift; sourceTree = "<group>"; };
+		89A1544A21717B2B004013D7 /* CGRect+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extension.swift"; sourceTree = "<group>"; };
 		89E39B992165245E00960ADE /* AugmentedBalancedTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedBalancedTree.swift; sourceTree = "<group>"; };
 		89E39B9D21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedBalancedBinaryNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,6 +112,7 @@
 				8916D1F0215D7D33007816C6 /* ConvexHull */,
 				8916D1E8215C641C007816C6 /* UIView+Extension.swift */,
 				897321F5216EC08400ED6144 /* CGPoint+Extension.swift */,
+				89A1544A21717B2B004013D7 /* CGRect+Extension.swift */,
 				8916D1E5215C6231007816C6 /* SupportingFiles */,
 				8916D1DF215C620C007816C6 /* Info.plist */,
 			);
@@ -253,6 +256,7 @@
 				8990658E216D73C60050F8CE /* QuicksortSortingAlgorithm.swift in Sources */,
 				897321F6216EC08400ED6144 /* CGPoint+Extension.swift in Sources */,
 				89906585216D73470050F8CE /* NearestNeighborAlgorithm.swift in Sources */,
+				89A1544B21717B2B004013D7 /* CGRect+Extension.swift in Sources */,
 				8916D22A215EDE95007816C6 /* LineSegment.swift in Sources */,
 				89E39B9E21652E4E00960ADE /* AugmentedBalancedBinaryNode.swift in Sources */,
 				8916D1EF215D4E51007816C6 /* ConvexHull.swift in Sources */,
