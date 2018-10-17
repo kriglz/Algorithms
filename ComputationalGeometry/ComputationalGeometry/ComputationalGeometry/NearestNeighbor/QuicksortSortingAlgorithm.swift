@@ -28,8 +28,8 @@ class QuicksortSortingAlgorithm {
                 return sortingArray[left]
             }
             
-            let randomPivotIndex = pivot(leftIndex: left, rightIndex: right)
-            let pivotIndex = partition(leftIndex: left, rightIndex: right, pivotIndex: randomPivotIndex)
+            let pivotIndexOfThree = pivot(leftIndex: left, rightIndex: right)
+            let pivotIndex = partition(leftIndex: left, rightIndex: right, pivotIndex: pivotIndexOfThree)
             
             if left + medium - 1 == pivotIndex {
                 return sortingArray[pivotIndex]

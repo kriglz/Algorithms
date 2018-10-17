@@ -95,12 +95,7 @@ class MainViewController: UIViewController {
                           width: graphView.frame.size.width / 2,
                           height: graphView.frame.size.height / 2)
         
-        let frameView = UIView(frame: rect)
-        frameView.layer.borderColor = UIColor.red.cgColor
-        frameView.layer.borderWidth = 1
-        view.addSubview(frameView)
-        
-        let controller = NearestNeighborController(pointCount: 7, in: rect)
+        let controller = NearestNeighborController(pointCount: 5, in: rect)
         graphView.draw(points: controller.points)
 
         let targetPoint = CGPoint.random(in: rect)
@@ -117,10 +112,10 @@ class MainViewController: UIViewController {
         }
         
         if let nearest = controller.nearestNeighbor(for: targetPoint) {
-            graphView.draw(points: [nearest], color: UIColor.blue.cgColor, pointSize: CGSize(width: 19, height: 19))
+            let color = posibleNeighbour == nearest ? UIColor.blue.cgColor : UIColor.red.cgColor
+            graphView.draw(points: [nearest], color: color, pointSize: CGSize(width: 19, height: 19))
         }
         
-        graphView.draw(points: [posibleNeighbour], color: UIColor.white.cgColor, pointSize: CGSize(width: 2, height: 2))
         graphView.perform(lineDrawingActions: controller.treeActionBuffer)
     }
 }

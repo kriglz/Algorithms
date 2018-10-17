@@ -68,7 +68,7 @@ class GraphView: UIView {
     // MARK: - Drawing animation actions
     
     func perform(lineDrawingActions: [LineDrawingAction]) {
-        let duration = 0.5
+        let duration = 0.3
         let initialTime = CACurrentMediaTime()
         
         for action in lineDrawingActions {
