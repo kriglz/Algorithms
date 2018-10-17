@@ -28,7 +28,7 @@ class QuicksortSortingAlgorithm {
                 return sortingArray[left]
             }
             
-            let randomPivotIndex = mediumOfThree(leftIndex: left, rightIndex: right)
+            let randomPivotIndex = pivot(leftIndex: left, rightIndex: right)
             let pivotIndex = partition(leftIndex: left, rightIndex: right, pivotIndex: randomPivotIndex)
             
             if left + medium - 1 == pivotIndex {
@@ -56,7 +56,7 @@ class QuicksortSortingAlgorithm {
         var storeIndex = leftIndex
         
         for index in leftIndex..<rightIndex {
-            if compare(i: sortingArray[index], j: pivot) <= 0 {
+            if compare(sortingArray[index], pivot) <= 0 {
                 
                 if index != storeIndex {
                     sortingArray.swapAt(index, storeIndex)
@@ -72,32 +72,51 @@ class QuicksortSortingAlgorithm {
         return storeIndex   
     }
     
-    private func mediumOfThree(leftIndex: Int, rightIndex: Int) -> Int {
-        var randomElements: [Int] = []
-        for _ in 0..<3 {
-            randomElements.append(randomIndex(leftIndex: leftIndex, rightIndex: rightIndex))
+    private func pivot(leftIndex: Int, rightIndex: Int) -> Int {
+        var midIndex = (leftIndex + rightIndex) / 2
+        var lowerBound = leftIndex
+        
+        if compare(sortingArray[lowerBound], sortingArray[midIndex]) > 0 {
+            lowerBound = midIndex
+            midIndex = leftIndex
         }
-        randomElements.sort()
-        return randomElements[1]
+        
+        // Select middle of [low, mid] and sortingArray[right]
+        if compare(sortingArray[rightIndex], sortingArray[lowerBound]) < 0 {
+            // right .. low .. mid
+            return lowerBound
+            
+        }
+        
+        if compare(sortingArray[rightIndex], sortingArray[midIndex]) < 0 {
+            // low .. right .. mid
+            return rightIndex
+        }
+        
+        return midIndex
     }
     
     private func randomIndex(leftIndex: Int, rightIndex: Int) -> Int {
         return Int.random(in: leftIndex..<rightIndex)
     }
     
-    private func compare(i: (CGPoint), j: (CGPoint)) -> Int {
+    private func compare(_ i: (CGPoint), _ j: (CGPoint)) -> Int {
         switch dimension {
         case 1:
             if i.x > j.x {
                 return 1
+            } else if i.x == j.x {
+                return 0
             }
-            return 0
+            return -1
 
         default:
             if i.y > j.y {
                 return 1
+            } else if i.y == j.y {
+                return 0
             }
-            return 0
+            return -1
         }        
     }
 }
