@@ -13,7 +13,7 @@ class KDNode {
     private(set) var point: CGPoint
     private(set) var left: KDNode?
     private(set) var right: KDNode?
-    private(set) var parentPoint: CGPoint?
+    private(set) var parent: KDNode?
     
     private(set) var dimension: Int
     
@@ -39,8 +39,8 @@ class KDNode {
         self.left = node
     }
     
-    func update(parent point: CGPoint) {
-        self.parentPoint = point
+    func update(parent: KDNode) {
+        self.parent = parent
     }
     
     func isLeft(_ neighborPoint: CGPoint) -> Bool {

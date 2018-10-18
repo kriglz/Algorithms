@@ -51,7 +51,6 @@ class KDTree {
         
         if right == left {
             let node = KDNode(dimension: dimension, point: points[left])
-            delegate?.kdTree(self, didAdd: node)
             return node
         }
         
@@ -73,13 +72,16 @@ class KDTree {
         }
         
         if let rightNode = generateKDNode(dimension: updatedDimension, left: left + medium, right: right) {
-            rightNode.update(parent: parentNode.point)
+            rightNode.update(parent: parentNode)
             parentNode.update(right: rightNode)
+            delegate?.kdTree(self, didAdd: rightNode)
         }
         
         if let leftNode = generateKDNode(dimension: updatedDimension, left: left, right: left + medium - 2) {
-            leftNode.update(parent: parentNode.point)
+            leftNode.update(parent: parentNode)
             parentNode.update(left: leftNode)
+            delegate?.kdTree(self, didAdd: leftNode)
+
         }
         
         delegate?.kdTree(self, didAdd: parentNode)

@@ -95,7 +95,7 @@ class MainViewController: UIViewController {
                           width: graphView.frame.size.width / 2,
                           height: graphView.frame.size.height / 2)
         
-        let controller = NearestNeighborController(pointCount: 5, in: rect)
+        let controller = NearestNeighborController(pointCount: 10, in: rect)
         graphView.draw(points: controller.points)
 
         let targetPoint = CGPoint.random(in: rect)
