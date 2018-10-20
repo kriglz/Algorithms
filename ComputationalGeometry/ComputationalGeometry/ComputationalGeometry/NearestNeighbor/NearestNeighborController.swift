@@ -38,71 +38,90 @@ class NearestNeighborController {
                     startPoint.x = frame.minX
                     endPoint.x = frame.maxX
                 }
+                
+            } else if parent?.parent == nil {
+                endPoint = parent!.point
+
+                switch action.node.dimension {
+                case 1:
+                    endPoint.x = action.node.point.x
+                    
+                    if endPoint.y < action.node.point.y {
+                        startPoint.y = frame.maxY
+                    } else {
+                        startPoint.y = frame.minY
+                    }
+                default:
+                    endPoint.y = action.node.point.y
+
+                    if endPoint.x < action.node.point.x {
+                        startPoint.x = frame.maxX
+                    } else {
+                        startPoint.x = frame.minX
+                    }
+                }
+                
+          
+            
+            
             } else {
                 endPoint = parent!.point
                 
                 switch action.node.dimension {
                 case 1:
                     endPoint.x = action.node.point.x
+//                    while parent != nil {
 
-//                    if parent?.parent == nil {
-//                        if endPoint.y < action.node.point.y {
-//                            startPoint.y = frame.maxY
-//                        } else {
-//                            startPoint.y = frame.minY
-//                        }
-//                    }
-                    
-                    while parent != nil {
-
-                        if parent?.parent == nil {
-                            if endPoint.y < action.node.point.y {
+                        if let grandGrandParent = parent?.parent?.parent {
+                            if startPoint.y < endPoint.y, startPoint.y > grandGrandParent.point.y {
+                                startPoint.y = grandGrandParent.point.y
+                            } else if startPoint.y > endPoint.y, startPoint.y < grandGrandParent.point.y {
+                                startPoint.y = grandGrandParent.point.y
+                            } else {
+                                if startPoint.y > endPoint.y {
+                                    startPoint.y = frame.maxY
+                                } else {
+                                    startPoint.y = frame.minY
+                                }
+                            }
+                        } else {
+                            if startPoint.y > endPoint.y {
                                 startPoint.y = frame.maxY
                             } else {
                                 startPoint.y = frame.minY
                             }
                         }
-                        
-                        if let parentParent = parent?.parent {
-                            if startPoint.y < parent!.point.y, startPoint.y > parentParent.point.y {
-                                startPoint.y = parentParent.point.y
-                            } else if startPoint.y > parent!.point.y, startPoint.y < parentParent.point.y {
-                                startPoint.y = parentParent.point.y
-                            }
-                        }
                     
-                        parent = parent?.parent
-                    }
-                    
+//                        parent = parent?.parent
+//                    }
+                
                 default:
                     endPoint.y = action.node.point.y
                     
-                    if parent?.parent == nil, endPoint.x < action.node.point.x {
-                        startPoint.x = frame.maxX
-                    } else if parent?.parent == nil, endPoint.x > action.node.point.x {
-                        startPoint.x = frame.minX
-                    }
+//                    while parent != nil {
                     
-                    while parent != nil {
-//                        if parent?.parent == nil {
-//                            if endPoint.x < action.node.point.x, startPoint.x < parent!.point.x {
-//                                startPoint.x = parent!.point.x //frame.maxX
-//                            } else if endPoint.x > action.node.point.x, startPoint.x > parent!.point.x {
-//                                startPoint.x = parent!.point.x //frame.minX
-//                            }
-//                        }
-                        
-                        
-                        if let parentParent = parent?.parent {
-                            if startPoint.x < parent!.point.x, startPoint.x > parentParent.point.x {
-                                startPoint.x = parentParent.point.x
-                            } else if startPoint.x > parent!.point.x, startPoint.x < parentParent.point.x {
-                                startPoint.x = parentParent.point.x
+                        if let grandGrandParent = parent?.parent?.parent {
+                            if startPoint.x < endPoint.x, startPoint.x > grandGrandParent.point.x {
+                                startPoint.x = grandGrandParent.point.x
+                            } else if startPoint.x > endPoint.x, startPoint.x < grandGrandParent.point.x {
+                                startPoint.x = grandGrandParent.point.x
+                            } else {
+                                if startPoint.x > endPoint.x {
+                                    startPoint.x = frame.maxX
+                                } else {
+                                    startPoint.x = frame.minX
+                                }
+                            }
+                        } else {
+                            if startPoint.x > endPoint.x {
+                                startPoint.x = frame.maxX
+                            } else {
+                                startPoint.x = frame.minX
                             }
                         }
                         
-                        parent = parent?.parent
-                    }
+//                        parent = parent?.parent
+//                    }
                 }
             }
             
