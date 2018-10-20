@@ -51,6 +51,7 @@ class KDTree {
         
         if right == left {
             let node = KDNode(dimension: dimension, point: points[left])
+            delegate?.kdTree(self, didAdd: node)
             return node
         }
         
@@ -63,7 +64,8 @@ class KDTree {
         
         // Median point becomes the parent.
         let parentNode = KDNode(dimension: dimension, point: points[left + medium - 1])
-        
+        delegate?.kdTree(self, didAdd: parentNode)
+
         // Update the next dimesnion or reset back to 1.
         
         var updatedDimension = dimension + 1
@@ -74,17 +76,13 @@ class KDTree {
         if let rightNode = generateKDNode(dimension: updatedDimension, left: left + medium, right: right) {
             rightNode.update(parent: parentNode)
             parentNode.update(right: rightNode)
-            delegate?.kdTree(self, didAdd: rightNode)
         }
         
         if let leftNode = generateKDNode(dimension: updatedDimension, left: left, right: left + medium - 2) {
             leftNode.update(parent: parentNode)
             parentNode.update(left: leftNode)
-            delegate?.kdTree(self, didAdd: leftNode)
-
         }
         
-        delegate?.kdTree(self, didAdd: parentNode)
         return parentNode
     }
     
