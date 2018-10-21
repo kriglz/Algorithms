@@ -17,6 +17,9 @@ class KDNode {
     
     private(set) var dimension: Int
     
+    private var startPoint: CGPoint?
+    private var endPoint: CGPoint?
+    
     private var coordinate: CGFloat {
         switch dimension {
         case 1:
@@ -26,16 +29,35 @@ class KDNode {
         }
     }
     
-    var lineStartPoint: CGPoint? {
-        return startPoint
+    var lineMinPoint: CGPoint? {
+        switch dimension {
+        case 1:
+            if startPoint!.y < endPoint!.y {
+                return startPoint
+            }
+            return endPoint
+        default:
+            if startPoint!.x < endPoint!.x {
+                return startPoint
+            }
+            return endPoint
+        }
     }
     
-    var lineEndPoint: CGPoint? {
-        return endPoint
+    var lineMaxPoint: CGPoint? {
+        switch dimension {
+        case 1:
+            if startPoint!.y > endPoint!.y {
+                return startPoint
+            }
+            return endPoint
+        default:
+            if startPoint!.x > endPoint!.x {
+                return startPoint
+            }
+            return endPoint
+        }
     }
-    
-    private var startPoint: CGPoint?
-    private var endPoint: CGPoint?
 
     @discardableResult func line(in frame: CGRect) -> Line {
         startPoint = point
@@ -44,11 +66,11 @@ class KDNode {
         guard let parent = self.parent else {
             switch dimension {
             case 1:
-                startPoint?.y = frame.minY
-                endPoint?.y = frame.maxY
+                startPoint?.y = frame.maxY
+                endPoint?.y = frame.minY
             default:
-                startPoint?.x = frame.minX
-                endPoint?.x = frame.maxX
+                startPoint?.x = frame.maxX
+                endPoint?.x = frame.minX
             }
             
             return Line(startPoint: startPoint ?? point, endPoint: endPoint ?? point)
@@ -81,53 +103,22 @@ class KDNode {
         switch dimension {
         case 1:
             endPoint?.x = point.x
-//            startPoint?.y = grandparent.lineStartPoint?.y ?? point.y
 
-//        if let grandGrandParent = parent?.parent?.parent {
-//                if startPoint.y < endPoint.y, startPoint.y > grandGrandParent.point.y {
-//                    startPoint.y = grandGrandParent.point.y
-//                } else if startPoint.y > endPoint.y, startPoint.y < grandGrandParent.point.y {
-//                    startPoint.y = grandGrandParent.point.y
-//                } else {
-//                    if startPoint.y > endPoint.y {
-//                        startPoint.y = frame.maxY
-//                    } else {
-//                        startPoint.y = frame.minY
-//                    }
-//                }
-//            } else {
-//                if startPoint.y > endPoint.y {
-//                    startPoint.y = frame.maxY
-//                } else {
-//                    startPoint.y = frame.minY
-//                }
-//            }
+            if startPoint!.y < parent.point.y {
+                startPoint?.y = grandparent.lineMinPoint?.y ?? point.y
+            } else {
+                startPoint?.y = grandparent.lineMaxPoint?.y ?? point.y
+            }
+            
         default:
             endPoint?.y = point.y
-//            startPoint?.x = grandparent.lineStartPoint?.x ?? point.x
 
-//
-//            if let grandGrandParent = parent?.parent?.parent {
-//                if startPoint.x < endPoint.x, startPoint.x > grandGrandParent.point.x {
-//                    startPoint.x = grandGrandParent.point.x
-//                } else if startPoint.x > endPoint.x, startPoint.x < grandGrandParent.point.x {
-//                    startPoint.x = grandGrandParent.point.x
-//                } else {
-//                    if startPoint.x > endPoint.x {
-//                        startPoint.x = frame.maxX
-//                    } else {
-//                        startPoint.x = frame.minX
-//                    }
-//                }
-//            } else {
-//                if startPoint.x > endPoint.x {
-//                    startPoint.x = frame.maxX
-//                } else {
-//                    startPoint.x = frame.minX
-//                }
-//            }
+            if startPoint!.x < parent.point.x {
+                startPoint?.x = grandparent.lineMinPoint?.x ?? point.x
+            } else {
+                startPoint?.x = grandparent.lineMaxPoint?.x ?? point.x
+            }
         }
-        
         
         return Line(startPoint: startPoint ?? point, endPoint: endPoint ?? point)
     }
