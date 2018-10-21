@@ -52,3 +52,6 @@
 
 - Convex Hull Scan  
 ![](./PreviewGIFs/ConvexHull.gif)
+
+- Nearest Neighbor Search
+![](./PreviewGIFs/NearestNeighbor.gif)

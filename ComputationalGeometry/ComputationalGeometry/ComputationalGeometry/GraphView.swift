@@ -81,7 +81,6 @@ class GraphView: UIView {
     }
     
     private func addLine(with action: LineDrawingAction, beginTime: TimeInterval, duration: Double) {
-//        let color = UIColor(red: 0, green: 0, blue: CGFloat.random(in: 0...1), alpha: 1).cgColor
         let lineLayer = LineLayer(from: action.line.cgPath, with: action.line.uuid)
         layer.addSublayer(lineLayer)
         
