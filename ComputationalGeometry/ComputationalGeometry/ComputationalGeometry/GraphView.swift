@@ -67,8 +67,7 @@ class GraphView: UIView {
     
     // MARK: - Drawing animation actions
     
-    func perform(lineDrawingActions: [LineDrawingAction]) {
-        let duration = 0.3
+    func perform(lineDrawingActions: [LineDrawingAction], duration: Double = 0.3) {
         let initialTime = CACurrentMediaTime()
         
         for action in lineDrawingActions {
@@ -82,6 +81,7 @@ class GraphView: UIView {
     }
     
     private func addLine(with action: LineDrawingAction, beginTime: TimeInterval, duration: Double) {
+//        let color = UIColor(red: 0, green: 0, blue: CGFloat.random(in: 0...1), alpha: 1).cgColor
         let lineLayer = LineLayer(from: action.line.cgPath, with: action.line.uuid)
         layer.addSublayer(lineLayer)
         

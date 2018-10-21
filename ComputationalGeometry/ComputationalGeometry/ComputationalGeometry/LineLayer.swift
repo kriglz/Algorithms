@@ -19,7 +19,7 @@ class LineLayer: CAShapeLayer {
         
         self.path = path
         self.strokeColor = color
-        self.lineWidth = 3
+        self.lineWidth = 1
         self.opacity = opacity
     }
 }

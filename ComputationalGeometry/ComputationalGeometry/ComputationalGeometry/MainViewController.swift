@@ -89,11 +89,16 @@ class MainViewController: UIViewController {
     
     @objc private func startNearestNeighborAction(_ sender: UIButton) {
         graphView.reset()
-
-        let rect = CGRect(x: 0,
-                          y: graphView.frame.size.height / 4,
-                          width: graphView.frame.size.width,
+        
+        let rect = CGRect(x: graphView.frame.size.width / 4,
+                          y: graphView.frame.size.width / 4,
+                          width: graphView.frame.size.width / 2,
                           height: graphView.frame.size.height / 2)
+        
+//        let rect = CGRect(x: 0,
+//                          y: 0,
+//                          width: graphView.frame.size.width / 2,
+//                          height: graphView.frame.size.height / 2)
         
 //        let rect = CGRect(x: graphView.frame.size.width / 4,
 //                          y: graphView.frame.size.height / 4,
@@ -105,8 +110,8 @@ class MainViewController: UIViewController {
 //                          width: graphView.frame.size.width - 40,
 //                          height: graphView.frame.size.height - 40)
         
-        let controller = NearestNeighborController(pointCount: 20, in: rect)
-        graphView.draw(points: controller.points)
+        let controller = NearestNeighborController(pointCount: 200, in: rect)
+        graphView.draw(points: controller.points, color: UIColor.white.cgColor, pointSize: CGSize(width: 2, height: 2))
 
         let targetPoint = CGPoint.random(in: rect)
         graphView.draw(points: [targetPoint], color: UIColor.white.cgColor, pointSize: CGSize(width: 19, height: 19))
@@ -121,11 +126,14 @@ class MainViewController: UIViewController {
             }
         }
         
+        graphView.perform(lineDrawingActions: controller.treeActionBuffer, duration: 0.1)
+        
         if let nearest = controller.nearestNeighbor(for: targetPoint) {
             let color = posibleNeighbour == nearest ? UIColor.blue.cgColor : UIColor.red.cgColor
-            graphView.draw(points: [nearest], color: color, pointSize: CGSize(width: 19, height: 19))
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(controller.treeActionBuffer.count) * 0.3) { [weak self] in
+                self?.graphView.draw(points: [nearest], color: color, pointSize: CGSize(width: 19, height: 19))
+            }
         }
-        
-        graphView.perform(lineDrawingActions: controller.treeActionBuffer)
     }
 }
