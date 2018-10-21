@@ -90,15 +90,20 @@ class MainViewController: UIViewController {
     @objc private func startNearestNeighborAction(_ sender: UIButton) {
         graphView.reset()
 
+        let rect = CGRect(x: 0,
+                          y: graphView.frame.size.height / 4,
+                          width: graphView.frame.size.width,
+                          height: graphView.frame.size.height / 2)
+        
 //        let rect = CGRect(x: graphView.frame.size.width / 4,
 //                          y: graphView.frame.size.height / 4,
 //                          width: graphView.frame.size.width / 2,
 //                          height: graphView.frame.size.height / 2)
         
-        let rect = CGRect(x: 20,
-                          y: 20,
-                          width: graphView.frame.size.width - 40,
-                          height: graphView.frame.size.height - 40)
+//        let rect = CGRect(x: 20,
+//                          y: 20,
+//                          width: graphView.frame.size.width - 40,
+//                          height: graphView.frame.size.height - 40)
         
         let controller = NearestNeighborController(pointCount: 20, in: rect)
         graphView.draw(points: controller.points)
