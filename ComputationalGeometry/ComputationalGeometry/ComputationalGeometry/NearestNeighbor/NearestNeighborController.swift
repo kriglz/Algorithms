@@ -44,9 +44,10 @@ class NearestNeighborController {
         }
         
 //        for x in 1...pointCount / 2 {
-//            let xx = x * 20
+//            let xx = CGFloat(x) * (rect.height / CGFloat(pointCount / 2))
+//
 //            for y in 1...pointCount / 2 {
-//                let yy = y * 20
+//                let yy = CGFloat(y) * (rect.width / CGFloat(pointCount / 2))
 //                let newPoint = CGPoint(x: yy, y: xx)
 //                points.append(newPoint)
 //            }
